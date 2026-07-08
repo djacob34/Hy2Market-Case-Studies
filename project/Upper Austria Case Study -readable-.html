@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// GENERATED from dc-runtime/src/*.ts — do not edit. Rebuild with `cd dc-runtime && bun run build`.
+"use strict";
+(() => {
+  var __defProp = Object.defineProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+
+  // src/react.ts
+  function getReact() {
+    const R = window.React;
+    if (!R) throw new Error("dc-runtime: window.React is not available yet");
+    return R;
+  }
+  function getReactDOM() {
+    const RD = window.ReactDOM;
+    if (!RD) throw new Error("dc-runtime: window.ReactDOM is not available yet");
+    return RD;
+  }
+  var h = ((...args) => getReact().createElement(
+    ...args
+  ));
+
+  // src/parse.ts
+  function parseDcDocument(doc) {
+    const dc = doc.querySelector("x-dc");
+    if (!dc) return null;
+    const scriptEl = doc.querySelector("script[data-dc-script]");
+    const { props, preview } = parseDataProps(
+      scriptEl?.getAttribute("data-props") ?? null
+    );
+    return {
+      template: dc.innerHTML,
+      js: scriptEl ? scriptEl.textContent || "" : "",
+      props,
+      preview
+    };
+  }
+  function parseDcText(src) {
+    const openMatch = /<x-dc(?:\s[^>]*)?>/.exec(src);
+    if (!openMatch) return null;
+    const close = src.lastIndexOf("</x-dc>");
+    if (close === -1 || close < openMatch.index) return null;
+    const template = src.slice(openMatch.index + openMatch[0].length, close);
+    const doc = new DOMParser().parseFromString(src, "text/html");
+    const scriptEl = doc.querySelector("script[data-dc-script]");
+    const { props, preview } = parseDataProps(
+      scriptEl?.getAttribute("data-props") ?? null
+    );
+    return {
+      template,
+      js: scriptEl ? scriptEl.textContent || "" : "",
+      props,
+      preview
+    };
+  }
+  function parseDataProps(raw) {
+    if (!raw) return { props: null, preview: null };
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      return { props: null, preview: null };
+    }
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return { props: null, preview: null };
+    }
+    const obj = parsed;
+    const preview = obj.$preview && typeof obj.$preview === "object" ? obj.$preview : null;
+    const rest = {};
+    for (const k of Object.keys(obj)) {
+      if (k[0] !== "$") rest[k] = obj[k];
+    }
+    return { props: Object.keys(rest).length ? rest : null, preview };
+  }
+  function dcNameFromPath(pathname) {
+    let p = pathname || "";
+    try {
+      p = decodeURIComponent(p);
+    } catch {
+    }
+    const base = p.split("/").pop() || "Root";
+    return base.replace(/\.dc\.html$/, "").replace(/\.html?$/, "") || "Root";
+  }
+
+  // src/boot.ts
+  var BASE_CSS = `
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts \u2014 keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  `;
+  var FULL_PAGE_CSS = "html,body{height:100%;margin:0}#dc-root,#dc-root>.sc-host{height:100%}";
+  function rootNameForDocument(doc, loc) {
+    let bootPath = loc.pathname || "";
+    if (!/\.dc\.html?$/i.test(safeDecode(bootPath))) {
+      try {
+        bootPath = new URL(doc.baseURI || "/").pathname;
+      } catch {
+      }
+    }
+    return dcNameFromPath(bootPath);
+  }
+  function safeDecode(s) {
+    try {
+      return decodeURIComponent(s);
+    } catch {
+      return s;
+    }
+  }
+  function boot(runtime, doc = document) {
+    const parsed = parseDcDocument(doc);
+    if (!parsed) return null;
+    const React = getReact();
+    const rootName = rootNameForDocument(doc, location);
+    runtime.markFetched(rootName);
+    runtime.setRootName(rootName);
+    runtime.adoptParsed(rootName, parsed);
+    fetch(location.href).then((res) => res.ok ? res.text() : "").then((t) => {
+      const raw = t ? parseDcText(t) : null;
+      if (raw?.template) runtime.updateHtml(rootName, raw.template);
+    }).catch(() => {
+    });
+    const dc = doc.querySelector("x-dc");
+    const hostEl = doc.createElement("div");
+    hostEl.id = "dc-root";
+    dc.replaceWith(hostEl);
+    if (!parsed.preview) {
+      const s = doc.createElement("style");
+      s.textContent = FULL_PAGE_CSS;
+      doc.head.appendChild(s);
+    }
+    const Root = runtime.getDC(rootName);
+    const entry = runtime.registry.get(rootName);
+    function StandaloneRoot() {
+      const [, setTick] = React.useState(0);
+      React.useEffect(() => {
+        const sub = () => setTick((n) => n + 1);
+        entry.subs.add(sub);
+        return () => {
+          entry.subs.delete(sub);
+        };
+      }, []);
+      const defaults = React.useMemo(() => {
+        const d = {};
+        for (const k in entry.propsMeta || {}) {
+          const v = entry.propsMeta?.[k]?.default;
+          if (v !== void 0) d[k] = v;
+        }
+        return d;
+      }, [entry.propsMeta]);
+      return h(Root, { ...defaults, ...entry.propOverrides || {} });
+    }
+    const ReactDOM = getReactDOM();
+    if (ReactDOM.createRoot)
+      ReactDOM.createRoot(hostEl).render(h(StandaloneRoot));
+    else ReactDOM.render(h(StandaloneRoot), hostEl);
+    return rootName;
+  }
+
+  // src/expr.ts
+  var IDENT_RE = /^[A-Za-z_$][A-Za-z0-9_$]*/;
+  var NUMBER_RE = /^-?\d+(\.\d+)?$/;
+  function resolve(vals, src) {
+    const expr = String(src).trim();
+    if (!expr) return void 0;
+    if (expr[0] === "(" && expr[expr.length - 1] === ")" && parensWrapWhole(expr)) {
+      return resolve(vals, expr.slice(1, -1));
+    }
+    const eq = findTopLevelEquality(expr);
+    if (eq) {
+      const lv = resolve(vals, expr.slice(0, eq.index));
+      const rv = resolve(vals, expr.slice(eq.index + eq.op.length));
+      switch (eq.op) {
+        case "===":
+          return lv === rv;
+        case "!==":
+          return lv !== rv;
+        case "==":
+          return lv == rv;
+        default:
+          return lv != rv;
+      }
+    }
+    if (expr[0] === "!") return !resolve(vals, expr.slice(1));
+    if (expr === "true") return true;
+    if (expr === "false") return false;
+    if (expr === "null") return null;
+    if (expr === "undefined") return void 0;
+    if (NUMBER_RE.test(expr)) return Number(expr);
+    if (expr.length >= 2 && (expr[0] === '"' || expr[0] === "'") && expr[expr.length - 1] === expr[0]) {
+      return expr.slice(1, -1);
+    }
+    return resolvePath(vals, expr);
+  }
+  function parensWrapWhole(expr) {
+    let depth = 0;
+    for (let i = 0; i < expr.length - 1; i++) {
+      if (expr[i] === "(") depth++;
+      else if (expr[i] === ")") {
+        depth--;
+        if (depth === 0) return false;
+      }
+    }
+    return true;
+  }
+  function findTopLevelEquality(expr) {
+    let depth = 0;
+    for (let i = 0; i < expr.length; i++) {
+      const c = expr[i];
+      if (c === "[" || c === "(") depth++;
+      else if (c === "]" || c === ")") depth--;
+      else if (depth === 0 && (c === "=" || c === "!") && expr[i + 1] === "=") {
+        if (i > 0 && (expr[i - 1] === "=" || expr[i - 1] === "!")) continue;
+        if (!expr.slice(0, i).trim()) continue;
+        const op = expr[i + 2] === "=" ? c + "==" : c + "=";
+        return { index: i, op };
+      }
+    }
+    return null;
+  }
+  function resolvePath(vals, expr) {
+    const head = expr.match(IDENT_RE);
+    if (!head) return void 0;
+    let cur = vals == null ? void 0 : vals[head[0]];
+    let i = head[0].length;
+    while (i < expr.length) {
+      if (expr[i] === ".") {
+        const m = expr.slice(i + 1).match(IDENT_RE) || expr.slice(i + 1).match(/^\d+/);
+        if (!m) return void 0;
+        cur = cur == null ? void 0 : cur[m[0]];
+        i += 1 + m[0].length;
+      } else if (expr[i] === "[") {
+        let depth = 1;
+        let j = i + 1;
+        while (j < expr.length && depth > 0) {
+          if (expr[j] === "[") depth++;
+          else if (expr[j] === "]") {
+            depth--;
+            if (depth === 0) break;
+          }
+          j++;
+        }
+        if (depth !== 0) return void 0;
+        const key = resolve(vals, expr.slice(i + 1, j));
+        cur = cur == null ? void 0 : cur[key];
+        i = j + 1;
+      } else {
+        return void 0;
+      }
+    }
+    return cur;
+  }
+
+  // src/encode.ts
+  var CAMEL_ATTR = "sc-camel-";
+  var INLINE_TEXT_TAGS = new Set(
+    "a abbr b bdi bdo br cite code del dfn em i ins kbd mark q s samp small span strike strong sub sup u var wbr".split(
+      " "
+    )
+  );
+  var RAW_WRAP = {
+    select: "sc-raw-select",
+    table: "sc-raw-table",
+    tbody: "sc-raw-tbody",
+    thead: "sc-raw-thead",
+    tfoot: "sc-raw-tfoot",
+    tr: "sc-raw-tr",
+    td: "sc-raw-td",
+    th: "sc-raw-th",
+    caption: "sc-raw-caption"
+  };
+  var RAW_UNWRAP = Object.fromEntries(
+    Object.entries(RAW_WRAP).map(([k, v]) => [v, k])
+  );
+  var EVENT_MAP = {
+    onclick: "onClick",
+    onchange: "onChange",
+    oninput: "onInput",
+    onsubmit: "onSubmit",
+    onkeydown: "onKeyDown",
+    onkeyup: "onKeyUp",
+    onkeypress: "onKeyPress",
+    onmousedown: "onMouseDown",
+    onmouseup: "onMouseUp",
+    onmouseenter: "onMouseEnter",
+    onmouseleave: "onMouseLeave",
+    onfocus: "onFocus",
+    onblur: "onBlur",
+    ondoubleclick: "onDoubleClick",
+    oncontextmenu: "onContextMenu"
+  };
+  var ATTRS = `(?:[^>"']|"[^"]*"|'[^']*')*`;
+  var IMPORT_SELF_CLOSE_RE = new RegExp(
+    "<(x-import|dc-import)(" + ATTRS + ")/>",
+    "gi"
+  );
+  var CAMEL_ATTR_RE = /(\s)([a-z]+[A-Z][A-Za-z0-9]*)(\s*=)/g;
+  function encodeCase(html) {
+    html = html.replace(
+      IMPORT_SELF_CLOSE_RE,
+      (_, t, a) => "<" + t + a + "></" + t + ">"
+    );
+    html = html.replace(/<helmet(\s|>)/gi, "<sc-helmet$1");
+    html = html.replace(/<\/helmet\s*>/gi, "</sc-helmet>");
+    html = html.replace(
+      CAMEL_ATTR_RE,
+      (_, sp, name, eq) => sp + CAMEL_ATTR + name.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase()) + eq
+    );
+    for (const [real, alias] of Object.entries(RAW_WRAP)) {
+      html = html.replace(
+        new RegExp("(</?)" + real + "(?=[\\s>])", "gi"),
+        "$1" + alias
+      );
+    }
+    return html;
+  }
+  function kebabToCamel(s) {
+    return s.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+  }
+  function cssToObj(css) {
+    const o = {};
+    for (const decl of css.split(";")) {
+      const i = decl.indexOf(":");
+      if (i < 0) continue;
+      const prop = decl.slice(0, i).trim();
+      o[prop.startsWith("--") ? prop : kebabToCamel(prop)] = decl.slice(i + 1).trim();
+    }
+    return o;
+  }
+  function compileAttr(raw) {
+    const whole = raw.match(/^\s*\{\{([\s\S]+?)\}\}\s*$/);
+    if (whole) {
+      const path = whole[1];
+      return (vals) => resolve(vals, path);
+    }
+    if (raw.includes("{{")) {
+      const parts = raw.split(/\{\{([\s\S]+?)\}\}/g);
+      return (vals) => parts.map((s, i) => i & 1 ? resolve(vals, s) ?? "" : s).join("");
+    }
+    return () => raw;
+  }
+
+  // src/compile.ts
+  function collectProps(node, kind, host) {
+    const propGetters = [];
+    const pseudoClasses = [];
+    let hintSize = null;
+    for (const { name, value } of [...node.attributes]) {
+      if (name === "sc-name" || name === "data-dc-tpl") continue;
+      let key = name;
+      if (key.startsWith(CAMEL_ATTR))
+        key = kebabToCamel(key.slice(CAMEL_ATTR.length));
+      if (key === "hint-size") {
+        hintSize = value;
+        continue;
+      }
+      if (key.startsWith("style-")) {
+        pseudoClasses.push(host.pseudoClass(key.slice(6), value));
+        continue;
+      }
+      if (kind !== "dom") {
+        if (key.includes("-") && !(kind === "x-import" && (key.startsWith("aria-") || key.startsWith("data-"))))
+          key = kebabToCamel(key);
+      } else {
+        if (key === "class") key = "className";
+        else if (key === "for") key = "htmlFor";
+        else if (key.startsWith("on"))
+          key = EVENT_MAP[key] || "on" + key[2].toUpperCase() + key.slice(3);
+      }
+      propGetters.push([key, compileAttr(value)]);
+    }
+    return { propGetters, pseudoClasses, hintSize };
+  }
+  var HOST_STYLE_PROPS = /* @__PURE__ */ new Set([
+    "position",
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "inset",
+    "width",
+    "height",
+    "z-index",
+    "transform"
+  ]);
+  function hostPositionStyle(style) {
+    const all = typeof style === "string" ? cssToObj(style) : style != null && typeof style === "object" ? style : null;
+    if (!all) return void 0;
+    const out = {};
+    for (const [k, v] of Object.entries(all)) {
+      const kebab = k.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase());
+      if (HOST_STYLE_PROPS.has(kebab)) out[k] = v;
+    }
+    return Object.keys(out).length ? out : void 0;
+  }
+  function compileTemplate(html, host) {
+    const tpl = document.createElement("template");
+    //! nosemgrep: direct-inner-html-assignment
+    tpl.innerHTML = encodeCase(html);
+    let tplN = 0;
+    (function stamp(node) {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        node.setAttribute("data-dc-tpl", String(tplN++));
+      }
+      for (const c of node.childNodes) stamp(c);
+    })(tpl.content);
+    const builders = walkChildren(tpl.content, host);
+    const render = ((vals, ctx) => builders.map((b, i) => b(vals || {}, ctx, i)));
+    render.__annotated = tpl.innerHTML;
+    return render;
+  }
+  function walkChildren(node, host) {
+    return [...node.childNodes].map((c) => walk(c, host)).filter((b) => b != null);
+  }
+  function walk(node, host) {
+    if (node.nodeType === Node.TEXT_NODE) return walkText(node);
+    if (node.nodeType !== Node.ELEMENT_NODE) return null;
+    const el = node;
+    const tag = el.tagName.toLowerCase();
+    if (tag === "sc-for") return walkFor(el, host);
+    if (tag === "sc-if") return walkIf(el, host);
+    if (tag === "x-import") return walkXImport(el, host);
+    if (tag === "sc-helmet") return host.helmet(el);
+    if (tag === "dc-import") return walkComponent(el, host);
+    return walkElement(el, host);
+  }
+  var warnedHoles = /* @__PURE__ */ new Set();
+  function warnUnresolved(ctx, what) {
+    const key = (ctx?.__name || "?") + "\0" + what;
+    if (warnedHoles.has(key)) return;
+    warnedHoles.add(key);
+    console.warn("[dc-runtime] " + (ctx?.__name || "template") + ": " + what);
+  }
+  function walkText(node) {
+    const txt = node.nodeValue ?? "";
+    if (!txt.includes("{{")) {
+      if (!txt.trim() && !txt.includes(" ")) return null;
+      return () => txt;
+    }
+    const parts = txt.split(/\{\{([\s\S]+?)\}\}/g);
+    return (vals, ctx, key) => h(
+      getReact().Fragment,
+      { key },
+      ...parts.map((p, i) => {
+        if (!(i & 1)) return p;
+        const v = resolve(vals, p);
+        if (v === void 0) {
+          if (!ctx?.__streamingNow) {
+            if (document.body?.hasAttribute("data-dc-editor-on")) {
+              return h(
+                "span",
+                { key: i, className: "sc-interp sc-unresolved" },
+                "{{ " + p.trim() + " }}"
+              );
+            }
+            warnUnresolved(
+              ctx,
+              "{{ " + p.trim() + " }} never resolved \u2014 rendered as empty"
+            );
+            return null;
+          }
+          return h(
+            "span",
+            { key: i, className: "sc-interp sc-missing" },
+            p.trim()
+          );
+        }
+        if (getReact().isValidElement(v) || Array.isArray(v)) {
+          return h(getReact().Fragment, { key: i }, v);
+        }
+        if (v === null || typeof v === "boolean") return null;
+        return h("span", { key: i, className: "sc-interp" }, String(v));
+      })
+    );
+  }
+  function walkFor(el, host) {
+    const listGet = compileAttr(el.getAttribute("list") || "");
+    const asName = el.getAttribute("as") || "item";
+    const hintN = parseInt(el.getAttribute("hint-placeholder-count") || "0", 10);
+    const kids = walkChildren(el, host);
+    const listSrc = el.getAttribute("list") || "";
+    return (vals, ctx, key) => {
+      let list = listGet(vals);
+      if (!Array.isArray(list)) {
+        if (!ctx?.__streamingNow) {
+          if (list !== void 0 && list !== null) {
+            warnUnresolved(
+              ctx,
+              'sc-for list="' + listSrc + '" is not an array (' + typeof list + ")"
+            );
+          }
+          list = [];
+        } else {
+          list = hintN > 0 ? Array(hintN).fill(void 0) : [];
+        }
+      }
+      return h(
+        getReact().Fragment,
+        { key },
+        list.map((item, i) => {
+          const sub = { ...vals, [asName]: item, $index: i };
+          return h(
+            getReact().Fragment,
+            { key: i },
+            kids.map((b, j) => b(sub, ctx, j))
+          );
+        })
+      );
+    };
+  }
+  function walkIf(el, host) {
+    const valGet = compileAttr(el.getAttribute("value") || "");
+    const hintRaw = el.getAttribute("hint-placeholder-val");
+    const hintGet = hintRaw != null ? compileAttr(hintRaw) : null;
+    const kids = walkChildren(el, host);
+    return (vals, ctx, key) => {
+      let v = valGet(vals);
+      if (v === void 0 && hintGet && ctx?.__streamingNow) v = hintGet(vals);
+      return v ? h(
+        getReact().Fragment,
+        { key },
+        kids.map((b, j) => b(vals, ctx, j))
+      ) : null;
+    };
+  }
+  function walkComponent(el, host) {
+    const name = el.getAttribute("name") || el.getAttribute("component") || "";
+    el.removeAttribute("name");
+    el.removeAttribute("component");
+    const tplId = el.getAttribute("data-dc-tpl");
+    const styleRaw = el.getAttribute("style");
+    el.removeAttribute("style");
+    const styleGet = styleRaw != null ? compileAttr(styleRaw) : null;
+    const { propGetters, hintSize } = collectProps(el, "dc-import", host);
+    const kids = walkChildren(el, host);
+    return (vals, ctx, key) => {
+      const props = {
+        key,
+        __hintSize: hintSize,
+        __tplId: tplId,
+        __hostStyle: styleGet ? hostPositionStyle(styleGet(vals)) : void 0
+      };
+      for (const [k, g] of propGetters) {
+        const v = g(vals);
+        if (k === "dcProps") {
+          if (v && typeof v === "object") Object.assign(props, v);
+          continue;
+        }
+        props[k] = v;
+      }
+      if (kids.length) props.children = kids.map((b, j) => b(vals, ctx, j));
+      return h(host.component(name), props);
+    };
+  }
+  function walkXImport(el, host) {
+    const globalNameGet = compileAttr(
+      el.getAttribute("component-from-global-scope") || ""
+    );
+    const exportNameGet = compileAttr(
+      el.getAttribute("component") || el.getAttribute("name") || ""
+    );
+    const fromRaw = el.getAttribute("from") || el.getAttribute("src") || el.getAttribute("import") || "";
+    const urls = fromRaw.trim() ? fromRaw.trim().split(/\s+/) : [];
+    const url = urls.length ? urls[urls.length - 1] : "";
+    const kindOf = (u) => /\.(jsx|tsx)(\?|#|$)/i.test(u) ? "jsx" : "js";
+    const tplId = el.getAttribute("data-dc-tpl");
+    const styleRaw = el.getAttribute("style");
+    el.removeAttribute("style");
+    const styleGet = styleRaw != null ? compileAttr(styleRaw) : null;
+    const wrap = tplId != null || styleGet != null;
+    const { propGetters, hintSize } = collectProps(el, "x-import", host);
+    const hasContent = el.children.length > 0 || !!(el.textContent || "").trim();
+    const kids = hasContent ? walkChildren(el, host) : [];
+    const urlBindable = fromRaw.includes("{{");
+    if (urls.length && !urlBindable) {
+      let prev;
+      for (const u of urls) prev = host.loadExternal(kindOf(u), u, prev);
+    }
+    const evalName = (g, vals) => {
+      const v = g(vals);
+      const s = v == null ? "" : String(v);
+      return s.includes("{{") ? "" : s;
+    };
+    return (vals, ctx, key) => {
+      const globalName = evalName(globalNameGet, vals);
+      const name = globalName || evalName(exportNameGet, vals);
+      const C = !name || urlBindable ? null : globalName ? host.resolveExternalGlobal(url, globalName) : host.resolveExternal(url, name);
+      const hostStyle = styleGet ? hostPositionStyle(styleGet(vals)) : void 0;
+      const wrapper = wrap ? {
+        key,
+        className: "sc-host-x",
+        "data-dc-tpl": tplId,
+        style: hostStyle || { display: "contents" }
+      } : null;
+      if (!C) {
+        const error = urlBindable ? "x-import `from` cannot contain {{ \u2026 }} \u2014 module URLs are resolved at parse time; use a literal URL" : host.resolveExternalError(url, name);
+        const ph = host.placeholder({
+          key: wrapper ? void 0 : key,
+          name,
+          hintSize,
+          error
+        });
+        return wrapper ? h("div", wrapper, ph) : ph;
+      }
+      const props = wrapper ? {} : { key };
+      let unresolvedHole = false;
+      for (const [k, g] of propGetters) {
+        if (k === "component" || k === "componentFromGlobalScope" || k === "from") {
+          continue;
+        }
+        const v = g(vals);
+        if (v === void 0) unresolvedHole = true;
+        if (k === "dcProps") {
+          if (v && typeof v === "object") Object.assign(props, v);
+          continue;
+        }
+        props[k] = v;
+      }
+      if (unresolvedHole && ctx?.__htmlStreamingNow) {
+        const ph = host.placeholder({
+          key: wrapper ? void 0 : key,
+          name,
+          hintSize,
+          error: null
+        });
+        return wrapper ? h("div", wrapper, ph) : ph;
+      }
+      if (kids.length) props.children = kids.map((b, j) => b(vals, ctx, j));
+      return wrapper ? h("div", wrapper, h(C, props)) : h(C, props);
+    };
+  }
+  function contentKey(el) {
+    const clone = el.cloneNode(true);
+    for (const d of clone.querySelectorAll("*")) {
+      while (d.attributes.length) d.removeAttribute(d.attributes[0].name);
+    }
+    const s = clone.innerHTML;
+    let h2 = 5381;
+    for (let i = 0; i < s.length; i++) h2 = (h2 << 5) + h2 + s.charCodeAt(i) | 0;
+    return s.length + "." + (h2 >>> 0).toString(36);
+  }
+  var NEVER_CONTENT_KEYED = new Set(
+    "script style textarea option title select canvas iframe video audio".split(
+      " "
+    )
+  );
+  var NOT_INLINE_SELECTOR = ":not(" + [...INLINE_TEXT_TAGS].join(",") + ")";
+  function walkElement(el, host) {
+    const realTag = RAW_UNWRAP[el.localName] || el.localName;
+    const tplId = el.getAttribute("data-dc-tpl");
+    const inlineOnly = el.childNodes.length > 0 && !NEVER_CONTENT_KEYED.has(realTag) && el.querySelector(NOT_INLINE_SELECTOR) === null;
+    const keySuffix = inlineOnly ? "|" + contentKey(el) : "";
+    const { propGetters, pseudoClasses } = collectProps(el, "dom", host);
+    const kids = walkChildren(el, host);
+    return (vals, ctx, key) => {
+      const props = {
+        key: key + keySuffix,
+        "data-dc-tpl": tplId
+      };
+      for (const [k, g] of propGetters) {
+        let v = g(vals);
+        if (k === "style" && typeof v === "string") v = cssToObj(v);
+        if ((k === "value" || k === "checked") && v === void 0) {
+          v = k === "checked" ? false : "";
+        }
+        props[k] = v;
+      }
+      if (pseudoClasses.length) {
+        props.className = [props.className, ...pseudoClasses].filter(Boolean).join(" ");
+      }
+      return h(realTag, props, ...kids.map((b, j) => b(vals, ctx, j)));
+    };
+  }
+
+  // src/logic.ts
+  var StreamableLogic = class {
+    constructor(props) {
+      __publicField(this, "props");
+      __publicField(this, "state", {});
+      /** Back-pointer to the wrapper component, installed after construction. */
+      __publicField(this, "__host");
+      this.props = props || {};
+    }
+    setState(update, cb) {
+      this.__host && this.__host.__setLogicState(update, cb);
+    }
+    forceUpdate() {
+      this.__host && this.__host.forceUpdate();
+    }
+    componentDidMount() {
+    }
+    componentDidUpdate(_prevProps) {
+    }
+    componentWillUnmount() {
+    }
+    /** The flat object the template renders against (merged over props). */
+    renderVals() {
+      return {};
+    }
+  };
+  function evalDcLogic(src) {
+    //! nosemgrep: eval-and-function-constructor
+    const fn = new Function(
+      "DCLogic",
+      "StreamableLogic",
+      "React",
+      src + '\n;return (typeof Component!=="undefined"&&Component)||undefined;'
+    );
+    return fn(StreamableLogic, StreamableLogic, getReact());
+  }
+
+  // src/component.ts
+  function shallowEqual(a, b) {
+    if (!b) return false;
+    const ak = Object.keys(a).filter((k) => k !== "children");
+    const bk = Object.keys(b).filter((k) => k !== "children");
+    if (ak.length !== bk.length) return false;
+    for (const k of ak) if (a[k] !== b[k]) return false;
+    return true;
+  }
+  function Placeholder({
+    name,
+    hintSize,
+    streaming,
+    error
+  }) {
+    const [w, hgt] = (hintSize || "100%,60px").split(",");
+    return h(
+      "div",
+      {
+        className: "sc-placeholder" + (streaming ? " sc-streaming" : ""),
+        style: { width: w.trim(), height: hgt && hgt.trim() },
+        title: name
+      },
+      error ? h(
+        "div",
+        { className: "sc-placeholder-error" },
+        (name ? name + ": " : "") + error
+      ) : null
+    );
+  }
+  function hintToMin(hint) {
+    if (!hint) return void 0;
+    const [w, hgt] = hint.split(",");
+    return { minWidth: w.trim(), minHeight: hgt && hgt.trim() };
+  }
+  function createComponentFactory(registry, ensureFetched) {
+    const React = getReact();
+    const AncestorContext = React.createContext([]);
+    class StreamableComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        __publicField(this, "__name");
+        __publicField(this, "__sub");
+        __publicField(this, "__needsDidMount", false);
+        /** Snapshot of the registry's streaming flags taken at render time —
+         *  builders read it off the RenderCtx (this) to pick placeholder vs
+         *  render-nothing for unresolved values. */
+        __publicField(this, "__streamingNow", false);
+        __publicField(this, "__htmlStreamingNow", false);
+        /** When a construct throws, remember the (class, registry.ver, props)
+         *  triple so render-time reconcile doesn't re-attempt it on every parent
+         *  re-render. A registry bump (new class, template, external module
+         *  resolving via bumpAll) changes `ver` and breaks the memo so an
+         *  env-dependent constructor can self-heal. */
+        __publicField(this, "__failedLogic", null);
+        __publicField(this, "__failedUserProps", null);
+        __publicField(this, "__failedVer", -1);
+        /** Per-instance constructor error — kept here (not on the registry entry)
+         *  so one instance's successful construct can't hide a sibling's failure,
+         *  and a construct can never wipe an eval error `updateJs` recorded on
+         *  `r.logicError`. */
+        __publicField(this, "__ctorError", null);
+        __publicField(this, "logic");
+        this.__name = props.__name;
+        this.state = { __v: 0, __err: null };
+        this.__sub = () => {
+          if (this.state.__err) this.setState({ __err: null });
+          this.forceUpdate();
+        };
+        this.__makeLogic(registry.get(this.__name).Logic, null);
+        ensureFetched(this.__name);
+      }
+      /** Error-boundary hook: a render crash anywhere in this DC's subtree
+       *  (its own template, an x-import'd component, a child DC without its
+       *  own deeper boundary) lands here instead of unmounting the page. */
+      static getDerivedStateFromError(e) {
+        return { __err: e instanceof Error && e.message ? e.message : String(e) };
+      }
+      componentDidCatch(e, info) {
+        console.error(
+          "[dc-runtime] render error in <" + this.__name + ">:",
+          e,
+          info?.componentStack || ""
+        );
+      }
+      /** Instantiate the logic class (or the no-op base) and adopt `prevState`
+       *  over its initial state — used both at mount and on hot-swap. */
+      __makeLogic(Logic, prevState) {
+        const L = Logic || StreamableLogic;
+        try {
+          this.logic = new L(this.__userProps());
+          this.__failedLogic = null;
+          this.__failedUserProps = null;
+          this.__ctorError = null;
+        } catch (e) {
+          console.error(e);
+          this.__failedLogic = Logic;
+          this.__failedUserProps = this.__userProps();
+          this.__failedVer = registry.get(this.__name).ver;
+          this.__ctorError = this.__name + ": " + (e instanceof Error && e.message ? e.message : String(e));
+          this.logic = new StreamableLogic(
+            this.__userProps()
+          );
+        }
+        this.logic.__host = this;
+        if (prevState)
+          this.logic.state = { ...this.logic.state || {}, ...prevState };
+      }
+      /** The props the author's logic + template see — internal __-prefixed
+       *  wiring stripped. */
+      __userProps() {
+        const { __name, __hintSize, __tplId, __hostStyle, ...rest } = this.props;
+        return rest;
+      }
+      __setLogicState(update, cb) {
+        const prev = this.logic.state;
+        const patch = typeof update === "function" ? update(prev) : update;
+        this.logic.state = { ...prev, ...patch };
+        this.setState((s) => ({ __v: s.__v + 1 }), cb);
+      }
+      /** Swap the logic instance when the registry's Logic class changed
+       *  (streaming completion, hot reload). State carries over; didMount
+       *  re-fires after the swap commits so refs exist. */
+      __reconcileLogic() {
+        const r = registry.get(this.__name);
+        const Next = r.Logic;
+        const Cur = this.logic.constructor;
+        if (Next === Cur || !Next && Cur === StreamableLogic || Next === this.__failedLogic && r.ver === this.__failedVer && shallowEqual(this.__userProps(), this.__failedUserProps)) {
+          return;
+        }
+        if (!this.__needsDidMount) {
+          try {
+            this.logic.componentWillUnmount();
+          } catch (e) {
+            console.error(e);
+          }
+        }
+        this.__makeLogic(Next, this.logic.state);
+        this.__needsDidMount = true;
+      }
+      componentDidMount() {
+        registry.get(this.__name).subs.add(this.__sub);
+        try {
+          this.logic.componentDidMount();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      componentDidUpdate(prevProps) {
+        this.logic.props = this.__userProps();
+        if (this.__needsDidMount) {
+          if (this.state.__err || !registry.get(this.__name).tpl) return;
+          this.__needsDidMount = false;
+          try {
+            this.logic.componentDidMount();
+          } catch (e) {
+            console.error(e);
+          }
+        } else {
+          try {
+            this.logic.componentDidUpdate(prevProps);
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      }
+      componentWillUnmount() {
+        registry.get(this.__name).subs.delete(this.__sub);
+        if (!this.__needsDidMount) {
+          try {
+            this.logic.componentWillUnmount();
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      }
+      render() {
+        const r = registry.get(this.__name);
+        const cls = "sc-host" + (r.htmlStreaming ? " sc-streaming-html" : "") + (r.jsStreaming ? " sc-streaming-js" : "");
+        const hintStyle = r.htmlStreaming ? hintToMin(this.props.__hintSize) : void 0;
+        const hostStyle = this.props.__hostStyle || hintStyle ? { ...hintStyle || {}, ...this.props.__hostStyle || {} } : void 0;
+        const hostBase = {
+          className: cls,
+          style: hostStyle,
+          "data-sc-name": this.__name,
+          "data-dc-tpl": this.props.__tplId
+        };
+        const chain = Array.isArray(this.context) ? this.context : [];
+        if (chain.includes(this.__name)) {
+          const cycle = [
+            ...chain.slice(chain.indexOf(this.__name)),
+            this.__name
+          ].join(" \u2192 ");
+          return h(
+            "div",
+            { ...hostBase, className: cls + " sc-has-error" },
+            h(Placeholder, {
+              name: this.__name,
+              hintSize: this.props.__hintSize,
+              error: "circular import: " + cycle
+            })
+          );
+        }
+        if (this.state.__err) {
+          return h(
+            "div",
+            { ...hostBase, className: cls + " sc-has-error" },
+            h(
+              "div",
+              { className: "sc-logic-error", "data-omelette-chrome": "" },
+              this.__name + ": " + this.state.__err
+            ),
+            h(Placeholder, {
+              name: this.__name,
+              hintSize: this.props.__hintSize,
+              error: this.state.__err
+            })
+          );
+        }
+        this.__reconcileLogic();
+        if (!r.tpl) {
+          return h(
+            "div",
+            hostBase,
+            h(Placeholder, { name: this.__name, hintSize: this.props.__hintSize })
+          );
+        }
+        const userProps = this.__userProps();
+        this.logic.props = userProps;
+        let vals = userProps;
+        let renderErr = r.logicError || this.__ctorError;
+        try {
+          vals = { ...userProps, ...this.logic.renderVals() || {} };
+        } catch (e) {
+          console.error(e);
+          renderErr = this.__name + ".renderVals(): " + (e instanceof Error && e.message ? e.message : String(e));
+        }
+        this.__streamingNow = !!(r.htmlStreaming || r.jsStreaming);
+        this.__htmlStreamingNow = !!r.htmlStreaming;
+        return h(
+          "div",
+          { ...hostBase, className: cls + (renderErr ? " sc-has-error" : "") },
+          renderErr && h(
+            "div",
+            { className: "sc-logic-error", "data-omelette-chrome": "" },
+            renderErr
+          ),
+          h(
+            AncestorContext.Provider,
+            { value: [...chain, this.__name] },
+            r.tpl(vals, this)
+          )
+        );
+      }
+    }
+    __publicField(StreamableComponent, "contextType", AncestorContext);
+    const named = /* @__PURE__ */ new Map();
+    function getDC(name) {
+      const hit = named.get(name);
+      if (hit) return hit;
+      function Dispatcher(p) {
+        const [, setTick] = React.useState(0);
+        React.useEffect(() => {
+          const sub = () => setTick((n) => n + 1);
+          registry.get(name).subs.add(sub);
+          return () => {
+            registry.get(name).subs.delete(sub);
+          };
+        }, []);
+        ensureFetched(name);
+        return h(StreamableComponent, { ...p, __name: name });
+      }
+      Dispatcher.displayName = name;
+      named.set(name, Dispatcher);
+      return Dispatcher;
+    }
+    return {
+      getDC,
+      StreamableComponent
+    };
+  }
+
+  // src/external.ts
+  var isCustomElementName = (n) => !n.includes(".") && n.includes("-");
+  function isRenderableType(g) {
+    if (typeof g === "function") return !isElementClass(g);
+    return typeof g === "object" && g !== null && typeof g.$$typeof === "symbol";
+  }
+  function resolveDottedPath(root, name) {
+    let cur = root;
+    for (const seg of name.split(".")) {
+      if (cur == null) return void 0;
+      cur = cur[seg];
+    }
+    return cur;
+  }
+  var BABEL_URL = "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js";
+  var BABEL_SRI = "sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y";
+  var GLOBAL_POLL_INTERVAL_MS = 50;
+  var GLOBAL_POLL_TIMEOUT_MS = 3e4;
+  function createExternalModules(onResolved) {
+    const cache = /* @__PURE__ */ new Map();
+    let babelLoading = null;
+    const reportedMissing = /* @__PURE__ */ new Map();
+    const polling = /* @__PURE__ */ new Set();
+    function ensureBabel() {
+      if (window.Babel) return Promise.resolve();
+      if (babelLoading) return babelLoading;
+      babelLoading = new Promise((res, rej) => {
+        const s = document.createElement("script");
+        s.src = BABEL_URL;
+        s.integrity = BABEL_SRI;
+        s.crossOrigin = "anonymous";
+        s.onload = () => res();
+        s.onerror = rej;
+        document.head.appendChild(s);
+      });
+      return babelLoading;
+    }
+    const pending = /* @__PURE__ */ new Map();
+    function load(kind, url, after) {
+      const existing = pending.get(url);
+      if (existing) return existing;
+      cache.set(url, null);
+      console.info("[dc-runtime] x-import: loading", url, "(" + kind + ")");
+      const ready = Promise.all([
+        kind === "jsx" ? ensureBabel() : Promise.resolve(),
+        after ?? Promise.resolve()
+      ]);
+      const p = ready.then(() => fetch(url)).then((r) => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+      }).then((src) => {
+        const code = kind === "jsx" ? window.Babel.transform(src, {
+          filename: url,
+          presets: ["react", "typescript"]
+        }).code : src;
+        const module = { exports: {} };
+        const before = new Set(Object.keys(window));
+        //! nosemgrep: eval-and-function-constructor
+        new Function("React", "module", "exports", "require", code)(
+          getReact(),
+          module,
+          module.exports,
+          () => ({})
+        );
+        const globals = {};
+        for (const k of Object.keys(window)) {
+          if (!before.has(k) && typeof window[k] === "function") {
+            globals[k] = window[k];
+          }
+        }
+        cache.set(url, { mod: module.exports, globals });
+        console.info(
+          "[dc-runtime] x-import: loaded",
+          url,
+          "\u2014 exports:",
+          Object.keys(module.exports),
+          "window globals:",
+          Object.keys(globals)
+        );
+        onResolved();
+      }).catch((e) => {
+        cache.set(url, {
+          mod: {},
+          globals: {},
+          error: "failed to load: " + (e instanceof Error && e.message ? e.message : String(e))
+        });
+        console.error(
+          "[dc-runtime] x-import: FAILED to load",
+          url,
+          "(" + kind + ")",
+          e
+        );
+        onResolved();
+      });
+      pending.set(url, p);
+      return p;
+    }
+    function resolve2(url, name) {
+      const entry = cache.get(url);
+      if (!entry) return null;
+      const { mod, globals } = entry;
+      const C = mod && mod[name] || globals && globals[name] || typeof window !== "undefined" && window[name] || mod && mod.default;
+      if (typeof C === "function") return C;
+      const key = url + "\0" + name;
+      if (!reportedMissing.has(key)) {
+        reportedMissing.set(
+          key,
+          entry.error || 'no export named "' + name + '" (has: ' + Object.keys(mod).join(", ") + ")"
+        );
+        console.error(
+          "[dc-runtime] x-import: module",
+          url,
+          "loaded but has no component named",
+          JSON.stringify(name),
+          "\u2014 available exports:",
+          Object.keys(mod),
+          "window globals:",
+          Object.keys(globals),
+          ". The module must `module.exports = {" + name + "}` or set `window." + name + "`."
+        );
+      }
+      return null;
+    }
+    function waitForGlobal(name) {
+      if (polling.has(name)) return;
+      polling.add(name);
+      const started = Date.now();
+      const isCE = isCustomElementName(name);
+      const tick = () => {
+        const found = isCE ? customElements.get(name) : isRenderableType(resolveDottedPath(window, name));
+        if (found) {
+          polling.delete(name);
+          onResolved();
+          return;
+        }
+        if (Date.now() - started >= GLOBAL_POLL_TIMEOUT_MS) {
+          console.warn(
+            "[dc-runtime] x-import: global",
+            JSON.stringify(name),
+            "never appeared on window after " + GLOBAL_POLL_TIMEOUT_MS + "ms"
+          );
+          return;
+        }
+        setTimeout(tick, GLOBAL_POLL_INTERVAL_MS);
+      };
+      setTimeout(tick, GLOBAL_POLL_INTERVAL_MS);
+    }
+    function resolveGlobal(url, name) {
+      const isCE = isCustomElementName(name);
+      if (!url) {
+        if (isCE) {
+          if (customElements.get(name)) return name;
+          waitForGlobal(name);
+          return null;
+        }
+        const g2 = resolveDottedPath(window, name);
+        if (isRenderableType(g2)) return g2;
+        waitForGlobal(name);
+        return null;
+      }
+      const entry = cache.get(url);
+      if (!entry) return null;
+      if (isCE && customElements.get(name)) return name;
+      const g = entry.globals[name] ?? resolveDottedPath(window, name);
+      if (isRenderableType(g)) return g;
+      if (name.includes(".")) return null;
+      const key = url + "\0global\0" + name;
+      if (!reportedMissing.has(key)) {
+        reportedMissing.set(key, null);
+        if (isCE && !customElements.get(name)) {
+          console.warn(
+            "[dc-runtime] x-import:",
+            url,
+            "loaded but no custom element",
+            JSON.stringify(name),
+            "is registered and window." + name + " is not a function \u2014 rendering <" + name + "> as an unknown element."
+          );
+        }
+      }
+      return name;
+    }
+    function getError(url, name) {
+      const entry = cache.get(url);
+      if (entry?.error) return entry.error;
+      return reportedMissing.get(url + "\0" + name) || null;
+    }
+    return { load, resolve: resolve2, resolveGlobal, getError };
+  }
+  function isElementClass(g) {
+    try {
+      return typeof g === "function" && typeof HTMLElement !== "undefined" && g.prototype instanceof HTMLElement;
+    } catch {
+      return false;
+    }
+  }
+
+  // src/atomics.ts
+  var ATOMIC_CSS = (
+    // layout
+    ".fx{display:flex}.col{display:flex;flex-direction:column}.grid{display:grid}.ac{align-items:center}.jc{justify-content:center}.jb{justify-content:space-between}.f1{flex:1}.noshrink{flex-shrink:0}.wrap{flex-wrap:wrap}.fw5{font-weight:500}.fw6{font-weight:600}.fw7{font-weight:700}.fw8{font-weight:800}.fs11{font-size:11px}.fs12{font-size:12px}.fs13{font-size:13px}.fs14{font-size:14px}.fs15{font-size:15px}.fs16{font-size:16px}.fs20{font-size:20px}.fs22{font-size:22px}.upper{text-transform:uppercase}.tc{text-align:center}.nowrap{white-space:nowrap}.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}.gap24{gap:24px}.m0{margin:0}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}.posrel{position:relative}.posabs{position:absolute}.round{border-radius:50%}.ohide{overflow:hidden}.bbox{box-sizing:border-box}.pointer{cursor:pointer}.w100{width:100%}.b0{border:none}"
+  );
+
+  // src/helmet.ts
+  var DESIGN_DOC_MODE_RE = /<meta\b[^>]*\bname\s*=\s*["']design_doc_mode["'][^>]*\b(?:content|value)\s*=\s*["'](\w+)["']/i;
+  var CANVAS_BG_LIGHT = "#f0eee6";
+  var CANVAS_BG_DARK = "#2e2c26";
+  function createHelmetManager(doc, isStreaming) {
+    const mounted = /* @__PURE__ */ new Set();
+    const live = /* @__PURE__ */ new Map();
+    let designDocMode = null;
+    let canvasStyleEl = null;
+    let appTheme = "light";
+    try {
+      const ds = doc.documentElement.dataset.theme;
+      appTheme = ds === "dark" || ds === "light" ? ds : new URLSearchParams(doc.defaultView?.location.search ?? "").get(
+        "theme"
+      ) === "dark" ? "dark" : "light";
+    } catch {
+    }
+    function applyCanvasBg() {
+      if (!canvasStyleEl) return;
+      const bg = appTheme === "dark" ? CANVAS_BG_DARK : CANVAS_BG_LIGHT;
+      canvasStyleEl.textContent = `html,body{background:${bg}}#dc-root>.sc-host{position:relative}`;
+    }
+    function postDesignMode(mode) {
+      if (window.parent === window) return;
+      try {
+        window.parent.postMessage({ type: "__dc_design_mode", mode }, "*");
+      } catch {
+      }
+    }
+    function setDesignDocMode(mode) {
+      if (mode === designDocMode) return;
+      designDocMode = mode;
+      postDesignMode(mode);
+      if (mode === "canvas") {
+        doc.documentElement.setAttribute("data-dc-canvas", "");
+        canvasStyleEl = doc.createElement("style");
+        canvasStyleEl.setAttribute("data-dc-canvas", "");
+        applyCanvasBg();
+        doc.head.appendChild(canvasStyleEl);
+      } else {
+        doc.documentElement.removeAttribute("data-dc-canvas");
+        canvasStyleEl?.remove();
+        canvasStyleEl = null;
+      }
+    }
+    window.addEventListener("message", (e) => {
+      const type = e.data && e.data.type;
+      if (type === "__dc_theme") {
+        const t = e.data.theme;
+        if (t === "light" || t === "dark") {
+          appTheme = t;
+          doc.documentElement.dataset.theme = t;
+          applyCanvasBg();
+        }
+        return;
+      }
+      if (!designDocMode || type !== "__dc_probe") return;
+      postDesignMode(designDocMode);
+    });
+    function compile(node) {
+      const raw = [...node.children];
+      const helmetClosed = node.nextSibling != null || node.parentNode?.nextSibling != null;
+      if (node.hasAttribute("data-dc-atomics") && !mounted.has("__dc-atomics")) {
+        mounted.add("__dc-atomics");
+        const el = doc.createElement("style");
+        el.id = "__dc-atomics";
+        el.textContent = ATOMIC_CSS;
+        doc.head.appendChild(el);
+      }
+      return (_vals, ctx) => {
+        const name = ctx && ctx.__name || "";
+        const streaming = !!(name && isStreaming(name));
+        for (let i = 0; i < raw.length; i++) {
+          const child = raw[i];
+          const tag = child.tagName;
+          const mayBePartial = streaming && !helmetClosed && i === raw.length - 1;
+          if (tag === "SCRIPT") {
+            if (mayBePartial) continue;
+            const key = "SCRIPT|" + (child.getAttribute("src") || child.textContent || "");
+            if (mounted.has(key)) continue;
+            mounted.add(key);
+            const el = doc.createElement("script");
+            for (const { name: an, value } of [...child.attributes])
+              el.setAttribute(an, value);
+            if (child.textContent) el.textContent = child.textContent;
+            doc.head.appendChild(el);
+          } else if (tag === "LINK" || tag === "META") {
+            if (mayBePartial) continue;
+            const key = tag + "|" + (child.getAttribute("href") || child.getAttribute("src") || child.outerHTML);
+            if (mounted.has(key)) continue;
+            mounted.add(key);
+            doc.head.appendChild(child.cloneNode(true));
+          } else {
+            const key = name + "|" + i;
+            let el = live.get(key);
+            if (!el || el.tagName !== tag) {
+              if (el) el.remove();
+              el = doc.createElement(tag.toLowerCase());
+              live.set(key, el);
+              doc.head.appendChild(el);
+            }
+            for (const { name: an, value } of [...child.attributes]) {
+              if (el.getAttribute(an) !== value) el.setAttribute(an, value);
+            }
+            if (el.textContent !== child.textContent)
+              el.textContent = child.textContent;
+          }
+        }
+        return null;
+      };
+    }
+    return { compile, setDesignDocMode };
+  }
+
+  // src/pseudo.ts
+  function createPseudoSheet(doc) {
+    let el = null;
+    const cache = /* @__PURE__ */ new Map();
+    let n = 0;
+    return (pseudo, css) => {
+      const k = pseudo + "|" + css;
+      const hit = cache.get(k);
+      if (hit) return hit;
+      if (!el) {
+        el = doc.createElement("style");
+        doc.head.appendChild(el);
+      }
+      const cls = "scp" + (n++).toString(36);
+      const sel = pseudo === "before" || pseudo === "after" ? "." + cls + "::" + pseudo : "." + cls + ":" + pseudo;
+      el.sheet.insertRule(sel + "{" + css + "}", el.sheet.cssRules.length);
+      cache.set(k, cls);
+      return cls;
+    };
+  }
+
+  // src/registry.ts
+  function createRegistry() {
+    const entries = /* @__PURE__ */ Object.create(null);
+    function get(name) {
+      return entries[name] || (entries[name] = {
+        html: "",
+        tpl: null,
+        Logic: null,
+        jsStreaming: false,
+        htmlStreaming: false,
+        ver: 0,
+        subs: /* @__PURE__ */ new Set(),
+        fetched: false
+      });
+    }
+    function bump(name) {
+      const r = get(name);
+      r.ver++;
+      for (const fn of r.subs) fn();
+    }
+    return {
+      entries,
+      get,
+      bump,
+      bumpAll() {
+        for (const n in entries) bump(n);
+      }
+    };
+  }
+
+  // src/runtime.ts
+  var COMPONENT_DIR = ".";
+  function createRuntime(doc = document) {
+    const registry = createRegistry();
+    const pseudoClass = createPseudoSheet(doc);
+    const helmet = createHelmetManager(
+      doc,
+      (name) => registry.get(name).htmlStreaming
+    );
+    const external = createExternalModules(() => registry.bumpAll());
+    const factory = createComponentFactory(registry, ensureFetched);
+    const host = {
+      component: (name) => factory.getDC(name),
+      placeholder: (props) => h(Placeholder, props),
+      helmet: (node) => helmet.compile(node),
+      loadExternal: (kind, url, after) => external.load(kind, url, after),
+      resolveExternal: (url, name) => external.resolve(url, name),
+      resolveExternalGlobal: (url, name) => external.resolveGlobal(url, name),
+      resolveExternalError: (url, name) => external.getError(url, name),
+      pseudoClass
+    };
+    function ensureFetched(name) {
+      const r = registry.get(name);
+      if (r.fetched) return;
+      r.fetched = true;
+      const url = COMPONENT_DIR + "/" + encodeURIComponent(name) + ".dc.html";
+      fetch(url).then((res) => {
+        if (!res.ok) {
+          console.error(
+            "[dc-runtime] sibling fetch for <" + name + "/> failed:",
+            url,
+            "returned",
+            res.status,
+            "\u2014 the reference renders as an empty placeholder."
+          );
+          return "";
+        }
+        return res.text();
+      }).then((t) => {
+        if (!t) return;
+        const parsed = parseDcText(t);
+        if (!parsed) {
+          console.error(
+            "[dc-runtime] sibling fetch for <" + name + "/>:",
+            url,
+            "has no <x-dc> block \u2014 not a Design Component."
+          );
+          return;
+        }
+        if (parsed.props) r.propsMeta = parsed.props;
+        if (parsed.preview) r.preview = parsed.preview;
+        if (parsed.template && !r.html) updateHtml(name, parsed.template);
+        if (parsed.js && !r.Logic) updateJs(name, parsed.js);
+      }).catch(
+        (e) => console.error(
+          "[dc-runtime] sibling fetch for <" + name + "/> threw:",
+          url,
+          e
+        )
+      );
+    }
+    let rootName = null;
+    function updateHtml(name, html) {
+      const r = registry.get(name);
+      r.html = html;
+      if (name === rootName) {
+        const mode = DESIGN_DOC_MODE_RE.exec(html)?.[1] ?? null;
+        if (mode || !r.htmlStreaming) helmet.setDesignDocMode(mode);
+      }
+      try {
+        r.tpl = compileTemplate(html, host);
+      } catch (e) {
+        console.error("[dc-runtime] template compile FAILED for", name, e);
+      }
+      registry.bump(name);
+    }
+    function updateJs(name, src) {
+      const r = registry.get(name);
+      const seq = r.jsSeq = (r.jsSeq || 0) + 1;
+      try {
+        const Cls = evalDcLogic(src);
+        if (r.jsSeq !== seq) return;
+        if (typeof Cls !== "function") {
+          r.logicError = name + ".dc.html: <script data-dc-script> must define `class Component extends DCLogic`";
+        } else {
+          r.logicError = null;
+          r.Logic = Cls;
+        }
+      } catch (e) {
+        if (r.jsSeq !== seq) return;
+        console.error(
+          "[dc-runtime] logic class eval FAILED for",
+          name,
+          "\u2014 the template renders with props only.",
+          e
+        );
+        r.logicError = name + ": " + (e instanceof Error && e.message ? e.message : String(e));
+      }
+      registry.bump(name);
+    }
+    function setStreaming(name, kind, on) {
+      const r = registry.get(name);
+      if (kind === "html") r.htmlStreaming = !!on;
+      else r.jsStreaming = !!on;
+      let any = false;
+      for (const n in registry.entries) {
+        const e = registry.entries[n];
+        if (e && (e.htmlStreaming || e.jsStreaming)) {
+          any = true;
+          break;
+        }
+      }
+      doc.documentElement.classList.toggle("sc-dc-streaming", any);
+      registry.bump(name);
+    }
+    function dcUpdate(name, kind, content, streaming) {
+      if (streaming) registry.get(name).fetched = true;
+      if (kind === "html") {
+        setStreaming(name, "html", !!streaming);
+        updateHtml(name, content);
+      } else if (kind === "js") {
+        setStreaming(name, "js", !!streaming);
+        if (!streaming) updateJs(name, content);
+      } else if (kind === "props") {
+        const { props, preview } = parseDataProps(content);
+        const r = registry.get(name);
+        r.propsMeta = props ?? void 0;
+        r.preview = preview;
+        registry.bump(name);
+      }
+    }
+    function setProps(name, overrides) {
+      registry.get(name).propOverrides = overrides && typeof overrides === "object" ? { ...overrides } : null;
+      registry.bump(name);
+    }
+    function adoptParsed(name, parsed) {
+      if (!parsed) return;
+      const r = registry.get(name);
+      if (parsed.props) r.propsMeta = parsed.props;
+      if (parsed.preview) r.preview = parsed.preview;
+      if (parsed.template) updateHtml(name, parsed.template);
+      if (parsed.js) updateJs(name, parsed.js);
+    }
+    return {
+      registry,
+      getDC: factory.getDC,
+      updateHtml,
+      updateJs,
+      dcUpdate,
+      setProps,
+      adoptParsed,
+      setRootName: (name) => {
+        rootName = name;
+      },
+      markFetched: (name) => {
+        registry.get(name).fetched = true;
+      },
+      annotatedTemplate: (name) => {
+        const r = registry.get(name);
+        return r.tpl && r.tpl.__annotated || null;
+      },
+      templateSource: (name) => registry.get(name).html || null,
+      StreamableLogic
+    };
+  }
+
+  // src/index.ts
+  var REACT_URL = "https://unpkg.com/react@18.3.1/umd/react.production.min.js";
+  var REACT_SRI = "sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z";
+  var REACT_DOM_URL = "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js";
+  var REACT_DOM_SRI = "sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1";
+  function hideRawTemplate() {
+    const s = document.createElement("style");
+    s.textContent = "x-dc{display:none!important}";
+    document.head.appendChild(s);
+  }
+  function loadScript(src, integrity) {
+    return new Promise((resolve2, reject) => {
+      //! nosemgrep: create-script-element
+      const s = document.createElement("script");
+      s.src = src;
+      s.integrity = integrity;
+      s.crossOrigin = "anonymous";
+      s.async = false;
+      s.onload = () => resolve2();
+      s.onerror = () => reject(new Error(`failed to load ${src}`));
+      document.head.appendChild(s);
+    });
+  }
+  function loadReactUmd() {
+    const w = window;
+    if (w.React && w.ReactDOM) return Promise.resolve();
+    return Promise.all([
+      loadScript(REACT_URL, REACT_SRI),
+      loadScript(REACT_DOM_URL, REACT_DOM_SRI)
+    ]).then(() => void 0);
+  }
+  function init() {
+    const runtime = createRuntime(document);
+    let rootName = "Root";
+    const baseCss = document.createElement("style");
+    baseCss.textContent = BASE_CSS;
+    document.head.prepend(baseCss);
+    const notifyHost = () => {
+      if (window.parent === window) return;
+      const r = runtime.registry.entries[rootName];
+      try {
+        window.parent.postMessage(
+          {
+            type: "__dc_booted",
+            rootName,
+            propsMeta: r && r.propsMeta || null,
+            preview: r && r.preview || null
+          },
+          "*"
+        );
+      } catch {
+      }
+    };
+    const api = {
+      __dcUpdate: (name, kind, content, streaming) => {
+        runtime.dcUpdate(name, kind, content, streaming);
+        if (name === rootName && !streaming && kind === "props") notifyHost();
+      },
+      __dcSetProps: (name, overrides) => runtime.setProps(name, overrides),
+      /** Name of the component currently mounted as the page root — DC tools
+       *  push their template-stream here when targeting "the open page". */
+      __dcRootName: () => rootName,
+      /** Editor bridge — the encoded, `data-dc-tpl`-annotated template source.
+       *  The host editor parses this into its own template DOM so it can map a
+       *  rendered node (carrying the same `data-dc-tpl`) back to the source
+       *  node that emitted it. Returns the encoded form (`<sc-comp>`,
+       *  `sc-camel-*` attrs); the editor decodes on serialize. */
+      __dcAnnotatedTemplate: (name) => runtime.annotatedTemplate(name),
+      /** Editor bridge — the *original* (decoded) template source. */
+      __dcTemplateSource: (name) => runtime.templateSource(name),
+      __dcBoot: () => {
+        rootName = boot(runtime, document) ?? rootName;
+        notifyHost();
+      },
+      __dcRegistry: runtime.registry.entries,
+      getDC: (name) => runtime.getDC(name),
+      // `DCLogic` is the documented base class name; `StreamableLogic` is the
+      // implementation alias kept for any project that already references it.
+      DCLogic: runtime.StreamableLogic,
+      StreamableLogic: runtime.StreamableLogic
+    };
+    Object.assign(window, api);
+    window.__dcContentKeyed = true;
+    if (document.readyState !== "loading") api.__dcBoot();
+    else document.addEventListener("DOMContentLoaded", () => api.__dcBoot());
+  }
+  hideRawTemplate();
+  loadReactUmd().then(init).catch((err) => {
+    console.error("[dc] failed to load React or boot:", err);
+    throw err;
+  });
+})();
+
+</script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#000000">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#000000"/>
+    <path d="M250 620 A370 370 0 0 1 620 250" fill="none" stroke="#FFED00" stroke-width="14"/>
+    <text x="600" y="430" text-anchor="middle" font-family="Inter Tight, system-ui, sans-serif" font-weight="600" font-size="150" letter-spacing="-4" fill="#ffffff">Hy2<tspan fill="#FFED00">Market</tspan></text>
+    <text x="600" y="510" text-anchor="middle" font-family="Inter Tight, system-ui, sans-serif" font-weight="500" font-size="42" letter-spacing="6" fill="rgba(255,255,255,0.6)">UPPER AUSTRIA</text>
+  </svg>
+</template>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; font-family:'Inter Tight',system-ui,sans-serif; background:#fff; color:#000; -webkit-font-smoothing:antialiased; letter-spacing:-0.01em; }
+  ::selection{ background:#FFED00; color:#000; }
+  @keyframes arcDraw{ from{ stroke-dashoffset:1200; } to{ stroke-dashoffset:0; } }
+</style>
+</helmet>
+
+<div style="width:100%; background:#fff;">
+
+  <!-- ================= HERO ================= -->
+  <header style="position:relative; background:#fff; color:#000; padding:0; border-bottom:2px solid #000;">
+    <!-- corner arc decoration (top-left, brand motif) -->
+    <svg viewBox="0 0 300 300" style="position:absolute; top:-70px; left:-70px; width:240px; height:240px; z-index:1; pointer-events:none;" fill="none">
+      <path d="M290,10 A280,280 0 0 0 10,290" stroke="#FFED00" stroke-width="3" stroke-dasharray="1200" style="animation:arcDraw 1.8s ease-out forwards;"/>
+      <path d="M250,10 A240,240 0 0 0 10,250" stroke="rgba(255,237,0,0.4)" stroke-width="1.5"/>
+    </svg>
+    <div style="display:grid; grid-template-columns:1.05fr 0.95fr; min-height:640px;">
+      <!-- left text panel -->
+      <div style="padding:56px 56px 48px; display:flex; flex-direction:column; justify-content:space-between; position:relative; z-index:2;">
+        <div style="display:flex; align-items:center; gap:11px; font-weight:600; font-size:13px; letter-spacing:0.14em;">
+          <span style="display:inline-block; width:20px; height:2px; background:#000;"></span>
+          PRODUCTION&nbsp;·&nbsp;UPPER AUSTRIA
+        </div>
+        <div style="margin:32px 0 0;">
+          <h1 style="font-weight:600; font-size:62px; line-height:0.98; letter-spacing:-0.012em; margin:0; max-width:13ch;">From Steel to Green: Building Austria's End-to-End <span style="position:relative; white-space:nowrap;">Hydrogen<span style="position:absolute; left:0; right:0; bottom:4px; height:12px; background:#FFED00; z-index:-1;"></span></span> Value Chain</h1>
+          <p style="font-size:20px; line-height:1.28; letter-spacing:-0.01em; max-width:46ch; margin:26px 0 0; font-weight:400;">Upper Austria isn't promising a hydrogen future — it's already built one. Around Europe's largest industrial green-hydrogen pilot in Linz, Hy2Market is extending a working electrolyser into a complete value chain: compression, purification, storage and distribution.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:28px;">
+            <span style="font-size:13px; font-weight:500; border:1px solid #000; border-radius:999px; padding:6px 13px;">Green hydrogen</span>
+            <span style="font-size:13px; font-weight:500; border:1px solid #000; border-radius:999px; padding:6px 13px;">Electrolysis</span>
+            <span style="font-size:13px; font-weight:500; border:1px solid #000; border-radius:999px; padding:6px 13px;">Industrial decarbonisation</span>
+            <span style="font-size:13px; font-weight:500; border:1px solid #000; border-radius:999px; padding:6px 13px;">Steel</span>
+            <span style="font-size:13px; font-weight:500; border:1px solid #000; border-radius:999px; padding:6px 13px;">Storage</span>
+            <span style="font-size:13px; font-weight:500; border:1px solid #000; border-radius:999px; padding:6px 13px;">Production</span>
+          </div>
+        </div>
+      </div>
+      <!-- right image panel -->
+      <div style="position:relative; background:linear-gradient(135deg,#1a1d22 0%,#2c3138 55%,#15171b 100%); overflow:hidden;">
+        <div style="position:absolute; inset:0; background:repeating-linear-gradient(115deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 26px), repeating-linear-gradient(25deg, rgba(0,0,0,0.25) 0 1px, transparent 1px 60px);"></div>
+        <div style="position:absolute; left:34px; bottom:34px; right:34px; display:flex; align-items:flex-end; justify-content:space-between; gap:16px;">
+          <span style="color:rgba(255,255,255,0.55); font-size:12px; letter-spacing:0.04em;">voestalpine steel plant · Linz · H2FUTURE electrolyser</span>
+        </div>
+        <!-- wordmark top-right -->
+        <div style="position:absolute; top:26px; right:30px; z-index:3; color:#fff; font-weight:600; font-size:19px; letter-spacing:-0.01em;">Hy2<span style="color:#FFED00;">Market</span></div>
+        <!-- arc motif -->
+        <svg viewBox="0 0 420 420" style="position:absolute; top:-90px; right:-90px; width:340px; height:340px; z-index:2; pointer-events:none;" fill="none">
+          <path d="M10,410 A400,400 0 0 1 410,10" stroke="#FFED00" stroke-width="2.5" stroke-dasharray="1200" style="animation:arcDraw 1.8s ease-out forwards;"/>
+          <path d="M70,410 A340,340 0 0 1 410,70" stroke="rgba(255,237,0,0.35)" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+    <!-- stat strip across hero bottom -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid #e3e3e0; position:relative; z-index:2;">
+      <div style="padding:28px 56px; border-right:1px solid #eee;">
+        <div style="width:30px; height:4px; background:#FFED00; margin-bottom:14px;"></div>
+        <div style="font-size:46px; font-weight:600; line-height:0.95; letter-spacing:-0.02em;">6 MW</div>
+        <div style="font-size:14px; font-weight:500; margin-top:8px; color:#555;">PEM electrolyser, operational since 2019</div>
+      </div>
+      <div style="padding:28px 40px; border-right:1px solid #eee;">
+        <div style="width:30px; height:4px; background:#FFED00; margin-bottom:14px;"></div>
+        <div style="font-size:46px; font-weight:600; line-height:0.95; letter-spacing:-0.02em;">1,200 m³/h</div>
+        <div style="font-size:14px; font-weight:500; margin-top:8px; color:#555;">green hydrogen output</div>
+      </div>
+      <div style="padding:28px 40px;">
+        <div style="width:30px; height:4px; background:#FFED00; margin-bottom:14px;"></div>
+        <div style="font-size:46px; font-weight:600; line-height:0.95; letter-spacing:-0.02em;">World-first</div>
+        <div style="font-size:14px; font-weight:500; margin-top:8px; color:#555;">geological underground H₂ storage · Gampern</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= PARTNER LOGO BAND ================= -->
+  <section style="background:#000; color:#fff; padding:28px 56px;">
+    <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap; justify-content:space-between;">
+      <span style="font-size:12px; letter-spacing:0.14em; font-weight:600; color:rgba(255,255,255,0.55); white-space:nowrap;">PROJECT PARTNERS</span>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; flex:1; justify-content:flex-end;">
+        <!-- voestalpine -->
+        <div style="background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:8px; height:54px; padding:0 18px; display:flex; align-items:center; gap:8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 4l9 16 9-16" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-weight:600; font-size:16px; color:#1a1a1a; letter-spacing:-0.02em;">voestalpine</span>
+        </div>
+        <!-- VERBUND -->
+        <div style="background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:8px; height:54px; padding:0 18px; display:flex; align-items:center; gap:9px;">
+          <svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M8 0L16 18H0z" fill="#0a5c46"/></svg>
+          <span style="font-weight:700; font-size:15px; color:#0a5c46; letter-spacing:0.06em;">VERBUND</span>
+        </div>
+        <!-- Siemens Energy -->
+        <div style="background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:8px; height:54px; padding:0 18px; display:flex; flex-direction:column; justify-content:center; line-height:1;">
+          <span style="font-weight:700; font-size:15px; color:#1a1a1a; letter-spacing:0.04em;">SIEMENS</span>
+          <span style="font-weight:500; font-size:11px; color:#009999; letter-spacing:0.16em; margin-top:2px;">ENERGY</span>
+        </div>
+        <!-- K1-MET -->
+        <div style="background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:8px; height:54px; padding:0 18px; display:flex; align-items:center; gap:2px;">
+          <span style="font-weight:700; font-size:18px; color:#c8102e; letter-spacing:-0.03em;">K1</span>
+          <span style="font-weight:700; font-size:18px; color:#1a1a1a; letter-spacing:-0.03em;">·MET</span>
+        </div>
+        <!-- RAG Austria -->
+        <div style="background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:8px; height:54px; padding:0 18px; display:flex; align-items:center; gap:8px;">
+          <span style="font-weight:800; font-size:19px; color:#e2001a; letter-spacing:-0.02em;">RAG</span>
+          <span style="font-weight:500; font-size:11px; color:#666; letter-spacing:0.1em; text-transform:uppercase;">Austria</span>
+        </div>
+        <!-- WIVA P&G -->
+        <div style="background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:8px; height:54px; padding:0 18px; display:flex; align-items:center; gap:7px;">
+          <span style="display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#0072bc; color:#fff; font-weight:700; font-size:13px;">H₂</span>
+          <span style="font-weight:700; font-size:15px; color:#1a1a1a; letter-spacing:0.02em;">WIVA <span style="color:#0072bc;">P&G</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TWO-COLUMN BODY ================= -->
+  <div style="max-width:1720px; margin:0 auto; padding:0 56px;">
+    <div style="display:grid; grid-template-columns:282px 1fr; gap:64px; align-items:start;">
+
+      <!-- STICKY SIDEBAR -->
+      <aside style="position:sticky; top:24px; padding:36px 0 60px;">
+        <div style="border:1px solid #e6e6e6; border-radius:14px; padding:24px 20px; background:#fff;">
+          <div style="font-size:11px; letter-spacing:0.13em; font-weight:600; color:#9a9a9a; margin:0 4px 14px;">ON THIS PAGE</div>
+          <nav style="display:flex; flex-direction:column;">
+            <a href="#toc-overview" data-toc-link="toc-overview" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>Overview</span></a>
+            <a href="#toc-region" data-toc-link="toc-region" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>The region</span></a>
+            <a href="#toc-opportunity" data-toc-link="toc-opportunity" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>The opportunity</span></a>
+            <a href="#toc-solutions" data-toc-link="toc-solutions" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>The solutions</span></a>
+            <a href="#toc-system" data-toc-link="toc-system" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>How it works as one system</span></a>
+            <a href="#toc-process" data-toc-link="toc-process" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>The process</span></a>
+            <a href="#toc-lessons" data-toc-link="toc-lessons" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>Lessons learned</span></a>
+            <a href="#toc-outcomes" data-toc-link="toc-outcomes" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>The outcomes</span></a>
+            <a href="#toc-knowledge" data-toc-link="toc-knowledge" style="display:flex; align-items:center; gap:13px; text-decoration:none; color:#9a9a9a; font-size:14px; font-weight:500; line-height:1.25; padding:8px 4px; transition:color .2s ease;" style-hover="color:#000;"><span data-toc-bar style="flex-shrink:0; width:3px; height:14px; border-radius:2px; background:#e6e6e6; transition:all .2s ease;"></span><span>Knowledge exchange</span></a>
+          </nav>
+          <div style="height:1px; background:#ececec; margin:18px 0;"></div>
+          <div style="font-size:11px; letter-spacing:0.13em; font-weight:600; color:#9a9a9a; margin-bottom:12px;">SHARE</div>
+          <div style="display:flex; gap:8px;">
+            <a href="https://www.linkedin.com" target="_blank" style="width:38px; height:38px; border:1px solid #e0e0e0; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#000; text-decoration:none; font-weight:700; font-size:13px;" style-hover="background:#FFED00; border-color:#000;">in</a>
+            <a href="https://x.com" target="_blank" style="width:38px; height:38px; border:1px solid #e0e0e0; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#000; text-decoration:none; font-weight:700; font-size:14px;" style-hover="background:#FFED00; border-color:#000;">X</a>
+            <button onClick="{{ copyLink }}" style="width:38px; height:38px; border:1px solid #e0e0e0; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; background:#fff;" style-hover="background:#FFED00; border-color:#000;" title="Copy link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+            </button>
+          </div>
+          <a href="#" style="margin-top:22px; display:flex; align-items:center; justify-content:center; gap:9px; background:#FFED00; color:#000; text-decoration:none; font-weight:600; font-size:15px; padding:15px; border-radius:4px;" style-hover="background:#fff89b;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download case study
+          </a>
+        </div>
+      </aside>
+
+      <!-- MAIN NARRATIVE -->
+      <main style="padding:40px 0 80px; min-width:0;">
+
+        <!-- SUMMARY BOX -->
+        <section id="toc-overview" data-reveal style="scroll-margin-top:28px; opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; background:#f6f6f4; border-radius:16px; padding:36px; display:grid; grid-template-columns:repeat(3,1fr); gap:30px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.1em; font-weight:600; color:#000; margin-bottom:12px;"><span style="width:8px; height:8px; background:#000; border-radius:50%;"></span>THE CHALLENGE</div>
+            <p style="font-size:15px; line-height:1.45; margin:0; font-weight:400; color:#222;">A 6 MW electrolyser was already producing green hydrogen for steelmaking in Linz, but the output was locked to a single industrial use: low-pressure, single-offtaker, no way to reach mobility or other industries.</p>
+          </div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.1em; font-weight:600; color:#000; margin-bottom:12px;"><span style="width:8px; height:8px; background:#FFED00; border-radius:50%; box-shadow:0 0 0 1px #000;"></span>THE INNOVATION</div>
+            <p style="font-size:15px; line-height:1.45; margin:0; font-weight:400; color:#222;">Hy2Market funded the missing links in the chain — multi-stage compression, purification to Grade 5.0, and a Renewable Hydrogen Station with trailer distribution — turning a captive supply into a regional hydrogen network.</p>
+          </div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.1em; font-weight:600; color:#000; margin-bottom:12px;"><span style="width:8px; height:8px; background:#000; border-radius:50%;"></span>THE OUTCOME</div>
+            <p style="font-size:15px; line-height:1.45; margin:0; font-weight:400; color:#222;">A replicable, end-to-end production blueprint: from renewable electrons to certified hydrogen delivered across Austria, with TRL raised from 6–7 to 9.</p>
+          </div>
+        </section>
+
+        <!-- VIDEO -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease .05s, transform .7s ease .05s; margin-top:48px;">
+          <div style="position:relative; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:linear-gradient(135deg,#15171b,#2c3138); display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; inset:0; background:repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 30px);"></div>
+            <button style="position:relative; z-index:2; width:74px; height:74px; border-radius:50%; background:#FFED00; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;" style-hover="transform:scale(1.06);">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+          <p style="font-size:14px; color:#7a7a7a; margin:14px 0 0; font-weight:500;">Gregor Offenthaler, Senior Project Manager, WIVA P&amp;G — on building Austria's hydrogen value chain.</p>
+        </section>
+
+        <!-- BODY 1 — THE REGION -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; margin-top:120px;">
+          <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:24px;">
+            <div style="display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; background:#FFED00; border-radius:50%; box-shadow:0 0 0 1px #000;"></span><h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; margin:0; scroll-margin-top:28px;" id="toc-region">The region</h2></div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 0.9fr; gap:40px; align-items:start;">
+            <div>
+              <p style="font-size:18px; line-height:1.5; font-weight:400; margin:0 0 18px; color:#1a1a1a;">Upper Austria is one of Europe's most advanced hydrogen regions and the industrial heartland of the country. Its economy is anchored by heavy industry around <strong style="font-weight:600;">Linz</strong>, where voestalpine — one of Europe's largest steelmakers — operates as the region's flagship asset and the original driver of hydrogen demand.</p>
+              <p style="font-size:18px; line-height:1.5; font-weight:400; margin:0; color:#1a1a1a;">Activity now spreads across the region: <strong style="font-weight:600;">Linz</strong> for production, <strong style="font-weight:600;">Gampern</strong> for world-first geological underground storage, and <strong style="font-weight:600;">Leoben</strong> for methanation research. Together they form a compact, end-to-end hydrogen corridor inside a single federal state.</p>
+            </div>
+            <!-- MAP -->
+            <div style="position:relative; aspect-ratio:4/3.4; background:#f1f1ee; border:1px solid #e3e3e0; border-radius:14px; overflow:hidden;">
+              <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(0,0,0,0.035) 0 1px, transparent 1px 34px), repeating-linear-gradient(90deg, rgba(0,0,0,0.035) 0 1px, transparent 1px 34px);"></div>
+              <svg viewBox="0 0 100 86" style="position:absolute; inset:0; width:100%; height:100%;" fill="none" preserveAspectRatio="none">
+                <path d="M14,40 C24,24 44,18 58,24 C70,29 84,26 90,40 C94,52 82,62 70,60 C60,58 50,70 38,66 C24,61 8,54 14,40 Z" fill="rgba(255,237,0,0.16)" stroke="#cfcfca" stroke-width="0.5"/>
+                <path d="M28,50 L52,42 L74,48" stroke="#000" stroke-width="0.5" stroke-dasharray="2 2"/>
+              </svg>
+              <!-- pins -->
+              <div style="position:absolute; left:26%; top:54%;">
+                <span style="display:block; width:13px; height:13px; background:#000; border-radius:50%; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.3);"></span>
+                <span style="position:absolute; left:18px; top:-2px; font-size:12px; font-weight:600; white-space:nowrap;">Linz <span style="color:#8a8a8a; font-weight:400;">· production</span></span>
+              </div>
+              <div style="position:absolute; left:50%; top:43%;">
+                <span style="display:block; width:13px; height:13px; background:#FFED00; border-radius:50%; border:2px solid #000; box-shadow:0 1px 4px rgba(0,0,0,0.3);"></span>
+                <span style="position:absolute; left:18px; top:-2px; font-size:12px; font-weight:600; white-space:nowrap;">Gampern <span style="color:#8a8a8a; font-weight:400;">· storage</span></span>
+              </div>
+              <div style="position:absolute; left:72%; top:52%;">
+                <span style="display:block; width:13px; height:13px; background:#000; border-radius:50%; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.3);"></span>
+                <span style="position:absolute; right:18px; top:-2px; font-size:12px; font-weight:600; white-space:nowrap; text-align:right;"><span style="color:#8a8a8a; font-weight:400;">methanation · </span>Leoben</span>
+              </div>
+              <span style="position:absolute; left:14px; bottom:12px; font-size:11px; color:#9a9a9a; font-weight:500;">Upper Austria · hydrogen corridor</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- BODY 2 — THE OPPORTUNITY -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; margin-top:120px;">
+          <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:24px;">
+            <div style="display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; background:#FFED00; border-radius:50%; box-shadow:0 0 0 1px #000;"></span><h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; margin:0; scroll-margin-top:28px;" id="toc-opportunity">The opportunity</h2></div>
+          </div>
+          <div style="display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:start;">
+            <div>
+              <p style="font-size:22px; line-height:1.38; font-weight:500; letter-spacing:-0.01em; margin:0 0 20px; color:#000;">Upper Austria's advantage is that it is <span style="background:#FFED00; padding:0 4px;">expanding what already exists</span> rather than starting from scratch.</p>
+              <p style="font-size:18px; line-height:1.5; font-weight:400; margin:0; color:#1a1a1a;">The H2FUTURE pilot — coordinated by VERBUND with voestalpine, Siemens Energy, K1-MET, Austrian Power Grid and TNO — gave the region a working electrolyser and more than 500 tonnes of green-hydrogen operating experience. Hy2Market's role is to unlock that proven supply for the wider economy.</p>
+            </div>
+            <div style="background:#000; color:#fff; border-radius:14px; padding:28px;">
+              <div style="font-size:11px; letter-spacing:0.13em; font-weight:600; color:#FFED00; margin-bottom:18px;">STARTING POSITION</div>
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <div><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">500+ t</div><div style="font-size:13px; color:rgba(255,255,255,0.6);">green hydrogen produced in H2FUTURE</div></div>
+                <div style="height:1px; background:rgba(255,255,255,0.14);"></div>
+                <div><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">Working asset</div><div style="font-size:13px; color:rgba(255,255,255,0.6);">6 MW electrolyser live since 2019</div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BODY 3 — THE SOLUTIONS (accordions) -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; margin-top:120px;">
+          <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; background:#FFED00; border-radius:50%; box-shadow:0 0 0 1px #000;"></span><h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; margin:0; scroll-margin-top:28px;" id="toc-solutions">The solutions</h2></div>
+          </div>
+          <p style="font-size:18px; line-height:1.5; color:#1a1a1a; margin:0 0 28px; max-width:60ch;">Hy2Market funded three missing links that turn a captive industrial supply into a regional network. Open each to see the detail.</p>
+
+          <!-- Drawer 1: Compression -->
+          <div style="border:1px solid #e3e3e0; border-radius:14px; overflow:hidden; margin-bottom:14px;">
+            <button onClick="{{ toggle0 }}" style="width:100%; display:flex; align-items:center; gap:20px; padding:20px; background:#fff; border:none; cursor:pointer; text-align:left;" style-hover="background:#fafaf8;">
+              <div style="width:64px; height:64px; border-radius:10px; flex-shrink:0; background:linear-gradient(135deg,#2c3138,#15171b); position:relative; overflow:hidden;"><div style="position:absolute; inset:0; background:repeating-linear-gradient(120deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);"></div></div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:20px; font-weight:600; letter-spacing:-0.01em;">Compression</div>
+                <div style="font-size:14px; color:#7a7a7a; margin-top:3px;">Lifting low-pressure hydrogen to usable, transportable pressures.</div>
+              </div>
+              <span style="width:32px; height:32px; flex-shrink:0; border-radius:50%; background:#FFED00; display:flex; align-items:center; justify-content:center; transition:transform .3s ease; transform:{{ rot0 }};"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <sc-if value="{{ open0 }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 20px 24px 20px;">
+                <div style="height:200px; border-radius:12px; background:linear-gradient(135deg,#2c3138,#15171b); position:relative; overflow:hidden; margin-bottom:20px;"><div style="position:absolute; inset:0; background:repeating-linear-gradient(120deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 22px);"></div><span style="position:absolute; left:16px; bottom:14px; color:rgba(255,255,255,0.55); font-size:12px;">Compressor station · tube-trailer charging</span></div>
+                <p style="font-size:17px; line-height:1.5; color:#1a1a1a; margin:0 0 22px; max-width:62ch;">The electrolyser outputs hydrogen at low pressure. Multi-stage compressor stations fill medium-pressure storage tanks and charge tube trailers up to 700 bar, with VERBUND as infrastructure partner alongside voestalpine.</p>
+                <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                  <div style="flex:1; min-width:180px; border:1px solid #e3e3e0; border-radius:12px; padding:18px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">700 bar</div><div style="font-size:13px; color:#7a7a7a; margin-top:4px;">trailer-fill pressure</div></div>
+                  <div style="flex:1; min-width:180px; border:1px solid #e3e3e0; border-radius:12px; padding:18px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">Multi-stage</div><div style="font-size:13px; color:#7a7a7a; margin-top:4px;">compression <span style="color:#b0b0b0;">(capacity to confirm)</span></div></div>
+                </div>
+                <a href="#" style="display:inline-flex; align-items:center; gap:9px; margin-top:22px; font-size:15px; font-weight:600; color:#fff; text-decoration:none; background:#333; border-radius:64px; padding:14px 26px;" style-hover="background:#555;">Read the compression deliverable <span style="font-size:17px;">→</span></a>
+              </div>
+            </sc-if>
+          </div>
+
+          <!-- Drawer 2: Purification -->
+          <div style="border:1px solid #e3e3e0; border-radius:14px; overflow:hidden; margin-bottom:14px;">
+            <button onClick="{{ toggle1 }}" style="width:100%; display:flex; align-items:center; gap:20px; padding:20px; background:#fff; border:none; cursor:pointer; text-align:left;" style-hover="background:#fafaf8;">
+              <div style="width:64px; height:64px; border-radius:10px; flex-shrink:0; background:linear-gradient(135deg,#3a4048,#1c2026); position:relative; overflow:hidden;"><div style="position:absolute; inset:0; background:repeating-linear-gradient(60deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);"></div></div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:20px; font-weight:600; letter-spacing:-0.01em;">Purification</div>
+                <div style="font-size:14px; color:#7a7a7a; margin-top:3px;">From industrial-grade to mobility-grade hydrogen.</div>
+              </div>
+              <span style="width:32px; height:32px; flex-shrink:0; border-radius:50%; background:#FFED00; display:flex; align-items:center; justify-content:center; transition:transform .3s ease; transform:{{ rot1 }};"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <sc-if value="{{ open1 }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 20px 24px 20px;">
+                <div style="height:200px; border-radius:12px; background:linear-gradient(135deg,#3a4048,#1c2026); position:relative; overflow:hidden; margin-bottom:20px;"><div style="position:absolute; inset:0; background:repeating-linear-gradient(60deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 22px);"></div><span style="position:absolute; left:16px; bottom:14px; color:rgba(255,255,255,0.55); font-size:12px;">Purification skid · Grade 5.0 polishing</span></div>
+                <p style="font-size:17px; line-height:1.5; color:#1a1a1a; margin:0 0 22px; max-width:62ch;">Purification upgrades the hydrogen to <strong style="font-weight:600;">Grade 5.0 (99.999%)</strong>, the quality required for fuel-cell mobility and sensitive industrial uses — opening offtake markets the raw electrolyser output could never serve.</p>
+                <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                  <div style="flex:1; min-width:180px; border:1px solid #e3e3e0; border-radius:12px; padding:18px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">99.999%</div><div style="font-size:13px; color:#7a7a7a; margin-top:4px;">purity (Grade 5.0)</div></div>
+                  <div style="flex:1; min-width:180px; border:1px solid #e3e3e0; border-radius:12px; padding:18px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">New markets</div><div style="font-size:13px; color:#7a7a7a; margin-top:4px;">mobility + industry</div></div>
+                </div>
+                <a href="#" style="display:inline-flex; align-items:center; gap:9px; margin-top:22px; font-size:15px; font-weight:600; color:#fff; text-decoration:none; background:#333; border-radius:64px; padding:14px 26px;" style-hover="background:#555;">What Grade 5.0 unlocks <span style="font-size:17px;">→</span></a>
+              </div>
+            </sc-if>
+          </div>
+
+          <!-- Drawer 3: Refuelling & distribution -->
+          <div style="border:1px solid #e3e3e0; border-radius:14px; overflow:hidden; margin-bottom:14px;">
+            <button onClick="{{ toggle2 }}" style="width:100%; display:flex; align-items:center; gap:20px; padding:20px; background:#fff; border:none; cursor:pointer; text-align:left;" style-hover="background:#fafaf8;">
+              <div style="width:64px; height:64px; border-radius:10px; flex-shrink:0; background:linear-gradient(135deg,#26424a,#11272d); position:relative; overflow:hidden;"><div style="position:absolute; inset:0; background:repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);"></div></div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:20px; font-weight:600; letter-spacing:-0.01em;">Refuelling &amp; distribution</div>
+                <div style="font-size:14px; color:#7a7a7a; margin-top:3px;">A Renewable Hydrogen Station and a fleet of trailers.</div>
+              </div>
+              <span style="width:32px; height:32px; flex-shrink:0; border-radius:50%; background:#FFED00; display:flex; align-items:center; justify-content:center; transition:transform .3s ease; transform:{{ rot2 }};"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <sc-if value="{{ open2 }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 20px 24px 20px;">
+                <div style="height:200px; border-radius:12px; background:linear-gradient(135deg,#26424a,#11272d); position:relative; overflow:hidden; margin-bottom:20px;"><div style="position:absolute; inset:0; background:repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 22px);"></div><span style="position:absolute; left:16px; bottom:14px; color:rgba(255,255,255,0.55); font-size:12px;">Renewable Hydrogen Station · tube-trailer fleet</span></div>
+                <p style="font-size:17px; line-height:1.5; color:#1a1a1a; margin:0 0 22px; max-width:62ch;">The Renewable Hydrogen Station (RHS) enables on-site refuelling, while tube trailers distribute hydrogen to offtakers across Austria and beyond — converting a single plant into a distribution hub.</p>
+                <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                  <div style="flex:1; min-width:180px; border:1px solid #e3e3e0; border-radius:12px; padding:18px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">RHS</div><div style="font-size:13px; color:#7a7a7a; margin-top:4px;">on-site refuelling</div></div>
+                  <div style="flex:1; min-width:180px; border:1px solid #e3e3e0; border-radius:12px; padding:18px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">Tube-trailer</div><div style="font-size:13px; color:#7a7a7a; margin-top:4px;">regional distribution <span style="color:#b0b0b0;">(offtaker count to confirm)</span></div></div>
+                </div>
+                <a href="#" style="display:inline-flex; align-items:center; gap:9px; margin-top:22px; font-size:15px; font-weight:600; color:#fff; text-decoration:none; background:#333; border-radius:64px; padding:14px 26px;" style-hover="background:#555;">Explore the distribution model <span style="font-size:17px;">→</span></a>
+              </div>
+            </sc-if>
+          </div>
+        </section>
+
+        <!-- BODY 4 — INTEGRATION DIAGRAM -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; margin-top:120px;">
+          <div style="background:#000; color:#fff; border-radius:18px; padding:40px;">
+            <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+              <div style="display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; background:#FFED00; border-radius:50%;"></span><h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; margin:0; color:#fff; scroll-margin-top:28px;" id="toc-system">How it works as one system</h2></div>
+            </div>
+            <p style="font-size:16px; color:rgba(255,255,255,0.6); margin:0 0 32px; max-width:60ch;">From renewable electrons to seven offtakes. Hover any node to highlight it, click to open the detail.</p>
+
+            <!-- sequential chain -->
+            <div style="display:flex; align-items:stretch; gap:10px; flex-wrap:wrap;">
+              <button onClick="{{ openPower }}" title="Renewable hydro + wind feeds the electrolyser" style="flex:1; min-width:150px; text-align:left; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:18px; color:#fff;" style-hover="background:rgba(255,237,0,0.12); border-color:#FFED00;">
+                <div style="font-size:11px; letter-spacing:0.1em; color:rgba(255,255,255,0.5); margin-bottom:8px;">INPUT</div>
+                <div style="font-size:17px; font-weight:600;">Renewable power</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.55); margin-top:4px;">Hydro + wind</div>
+              </button>
+              <div style="display:flex; align-items:center; color:#FFED00; font-size:22px; font-weight:600;">→</div>
+              <button onClick="{{ openElectrolyser }}" title="6 MW PEM, Siemens Energy, live since 2019" style="flex:1.2; min-width:170px; text-align:left; cursor:pointer; background:#FFED00; border:1px solid #FFED00; border-radius:12px; padding:18px; color:#000;" style-hover="transform:translateY(-2px);">
+                <div style="font-size:11px; letter-spacing:0.1em; color:rgba(0,0,0,0.5); margin-bottom:8px;">CORE</div>
+                <div style="font-size:17px; font-weight:600;">6 MW PEM electrolyser</div>
+                <div style="font-size:12px; color:rgba(0,0,0,0.6); margin-top:4px;">up to 1,200 m³/h</div>
+              </button>
+              <div style="display:flex; align-items:center; color:#FFED00; font-size:22px; font-weight:600;">→</div>
+              <button onClick="{{ openCompression }}" title="Multi-stage compression up to 700 bar" style="flex:1; min-width:150px; text-align:left; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:18px; color:#fff;" style-hover="background:rgba(255,237,0,0.12); border-color:#FFED00;">
+                <div style="font-size:11px; letter-spacing:0.1em; color:rgba(255,255,255,0.5); margin-bottom:8px;">STEP</div>
+                <div style="font-size:17px; font-weight:600;">Compression</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.55); margin-top:4px;">to 700 bar</div>
+              </button>
+              <div style="display:flex; align-items:center; color:#FFED00; font-size:22px; font-weight:600;">→</div>
+              <button onClick="{{ openPurification }}" title="Upgraded to Grade 5.0 (99.999%)" style="flex:1; min-width:150px; text-align:left; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:18px; color:#fff;" style-hover="background:rgba(255,237,0,0.12); border-color:#FFED00;">
+                <div style="font-size:11px; letter-spacing:0.1em; color:rgba(255,255,255,0.5); margin-bottom:8px;">STEP</div>
+                <div style="font-size:17px; font-weight:600;">Purification</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.55); margin-top:4px;">Grade 5.0</div>
+              </button>
+            </div>
+
+            <!-- branch label -->
+            <div style="display:flex; align-items:center; gap:14px; margin:30px 0 18px;">
+              <span style="width:9px; height:9px; background:#FFED00; border-radius:50%;"></span>
+              <span style="font-size:12px; letter-spacing:0.14em; font-weight:600; color:rgba(255,255,255,0.55);">BRANCHES TO</span>
+              <span style="flex:1; height:1px; background:rgba(255,255,255,0.14);"></span>
+            </div>
+
+            <!-- branches grid -->
+            <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px;">
+              <button onClick="{{ openStorage }}" title="World-first geological storage, Gampern" style="text-align:left; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:16px; color:#fff; min-height:108px;" style-hover="background:rgba(255,237,0,0.12); border-color:#FFED00;">
+                <div style="font-size:15px; font-weight:600; line-height:1.15;">Underground storage</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.55); margin-top:6px;">RAG · Gampern</div>
+              </button>
+              <button onClick="{{ openRhs }}" title="On-site refuelling + tube-trailer distribution" style="text-align:left; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:16px; color:#fff; min-height:108px;" style-hover="background:rgba(255,237,0,0.12); border-color:#FFED00;">
+                <div style="font-size:15px; font-weight:600; line-height:1.15;">RHS &amp; tube trailers</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.55); margin-top:6px;">Distribution hub</div>
+              </button>
+              <button onClick="{{ openSteel }}" title="Green H₂ for steelmaking" style="text-align:left; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:16px; color:#fff; min-height:108px;" style-hover="background:rgba(255,237,0,0.12); border-color:#FFED00;">
+                <div style="font-size:15px; font-weight:600; line-height:1.15;">Steel decarbonisation</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.55); margin-top:6px;">voestalpine</div>
+              </button>
+              <button onClick="{{ openMobility }}" title="Fuel-cell vehicles & buses" style="text-align:left; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:16px; color:#fff; min-height:108px;" style-hover="background:rgba(255,237,0,0.12); border-color:#FFED00;">
+                <div style="font-size:15px; font-weight:600; line-height:1.15;">Mobility</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.55); margin-top:6px;">FC vehicles, buses</div>
+              </button>
+              <button onClick="{{ openMethanation }}" title="H₂ to synthetic methane research" style="text-align:left; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:16px; color:#fff; min-height:108px;" style-hover="background:rgba(255,237,0,0.12); border-color:#FFED00;">
+                <div style="font-size:15px; font-weight:600; line-height:1.15;">Methanation research</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.55); margin-top:6px;">K1-MET / TU Leoben</div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- BODY 5 — THE PROCESS (carousel) -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; margin-top:120px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:30px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:baseline; gap:14px;">
+              <div style="display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; background:#FFED00; border-radius:50%; box-shadow:0 0 0 1px #000;"></span><h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; margin:0; scroll-margin-top:28px;" id="toc-process">The process</h2></div>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button onClick="{{ scrollPrev }}" aria-label="Previous" style="width:46px; height:46px; border-radius:50%; border:1.5px solid #000; background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;" style-hover="background:#FFED00;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <button onClick="{{ scrollNext }}" aria-label="Next" style="width:46px; height:46px; border-radius:50%; border:1.5px solid #000; background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;" style-hover="background:#FFED00;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
+          </div>
+          <div id="process-carousel" style="overflow-x:auto; padding:8px 0 18px; scrollbar-width:none;">
+            <div style="position:relative; min-width:1620px; display:grid; grid-template-columns:repeat(6,1fr);">
+              <!-- connecting line -->
+              <div style="position:absolute; left:13px; right:13px; top:12px; height:2px; background:#e3e3e0;"></div>
+              <div style="position:absolute; left:13px; top:12px; height:2px; background:#000; width:83.4%;"></div>
+              <!-- 2018 -->
+              <div style="position:relative; padding:0 34px 0 0;">
+                <span style="display:block; width:26px; height:26px; border-radius:50%; background:#000;"></span>
+                <div style="font-size:20px; font-weight:600; margin-top:22px; color:#FFED00; background:#000; display:inline-block; padding:3px 12px; border-radius:6px;">2018</div>
+                <p style="font-size:18px; line-height:1.42; color:#1a1a1a; margin:16px 0 0; font-weight:400;">Green light for the world's largest industrial hydrogen pilot in Linz.</p>
+              </div>
+              <!-- Nov 2019 -->
+              <div style="position:relative; padding:0 34px 0 0;">
+                <span style="display:block; width:26px; height:26px; border-radius:50%; background:#000;"></span>
+                <div style="font-size:20px; font-weight:600; margin-top:22px;">Nov 2019</div>
+                <p style="font-size:18px; line-height:1.42; color:#1a1a1a; margin:16px 0 0; font-weight:400;">6 MW PEM electrolyser comes online; H2FUTURE production begins.</p>
+              </div>
+              <!-- 2021–22 -->
+              <div style="position:relative; padding:0 34px 0 0;">
+                <span style="display:block; width:26px; height:26px; border-radius:50%; background:#000;"></span>
+                <div style="font-size:20px; font-weight:600; margin-top:22px;">2021–22</div>
+                <p style="font-size:18px; line-height:1.42; color:#1a1a1a; margin:16px 0 0; font-weight:400;">500+ tonnes of green hydrogen produced; offtake proven for steel.</p>
+              </div>
+              <!-- 2023 -->
+              <div style="position:relative; padding:0 34px 0 0;">
+                <span style="display:block; width:26px; height:26px; border-radius:50%; background:#000;"></span>
+                <div style="font-size:20px; font-weight:600; margin-top:22px;">2023</div>
+                <p style="font-size:18px; line-height:1.42; color:#1a1a1a; margin:16px 0 0; font-weight:400;">World-first geological underground hydrogen storage demonstrated at Gampern.</p>
+              </div>
+              <!-- 2023–25 -->
+              <div style="position:relative; padding:0 34px 0 0;">
+                <span style="display:block; width:26px; height:26px; border-radius:50%; background:#000;"></span>
+                <div style="font-size:20px; font-weight:600; margin-top:22px;">2023–25 <span style="color:#888; font-weight:500;">· Hy2Market</span></div>
+                <p style="font-size:18px; line-height:1.42; color:#1a1a1a; margin:16px 0 0; font-weight:400;">Compression, purification and RHS built out; value chain extended.</p>
+              </div>
+              <!-- 2026 you are here -->
+              <div style="position:relative; padding:0 0 0 0;">
+                <span style="display:block; width:30px; height:30px; border-radius:50%; background:#FFED00; border:4px solid #000; margin-top:-2px; box-shadow:0 0 0 5px rgba(255,237,0,0.3);"></span>
+                <div style="display:inline-flex; align-items:center; gap:6px; font-size:20px; font-weight:600; margin-top:20px; background:#FFED00; padding:4px 13px; border-radius:6px; border:1.5px solid #000;">2026 · You are here</div>
+                <p style="font-size:18px; line-height:1.42; color:#1a1a1a; margin:16px 0 0; font-weight:400;">End-to-end chain operational; TRL reaches 9; blueprint shared with peer regions.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BODY 6 — LESSONS LEARNED -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; margin-top:120px;">
+          <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:24px;">
+            <div style="display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; background:#FFED00; border-radius:50%; box-shadow:0 0 0 1px #000;"></span><h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; margin:0; scroll-margin-top:28px;" id="toc-lessons">Lessons learned</h2></div>
+          </div>
+          <div style="max-width:76ch;">
+            <p style="font-size:22px; line-height:1.38; font-weight:500; letter-spacing:-0.01em; margin:0 0 20px;">As a "more developed" region, Upper Austria's central lesson is blunt: <span style="background:#FFED00; padding:0 4px;">identify your offtakers before you build infrastructure.</span></p>
+            <p style="font-size:18px; line-height:1.5; color:#1a1a1a; margin:0;">WIVA P&amp;G advised Constanța (Romania) on feasibility studies for a Danube hydrogen hub, steering them to confirm demand first. Knowledge flows both ways — Upper Austria is learning mobility demonstration from Médio Tejo (Portugal) while offering production and renewable-capacity expertise in return.</p>
+          </div>
+        </section>
+
+        <!-- BODY 7 — THE OUTCOMES -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; margin:120px 0 0;">
+          <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:24px;">
+            <div style="display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; background:#FFED00; border-radius:50%; box-shadow:0 0 0 1px #000;"></span><h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; margin:0; scroll-margin-top:28px;" id="toc-outcomes">The outcomes</h2></div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px;">
+            <div style="background:#FFED00; border-radius:14px; padding:22px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em; line-height:1;">TRL 6–7 → 9</div><div style="font-size:13px; font-weight:500; margin-top:8px;">across production technologies</div></div>
+            <div style="background:#f6f6f4; border-radius:14px; padding:22px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em; line-height:1;">500+ t</div><div style="font-size:13px; color:#555; margin-top:8px;">green hydrogen produced to date</div></div>
+            <div style="background:#f6f6f4; border-radius:14px; padding:22px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em; line-height:1;">Grade 5.0</div><div style="font-size:13px; color:#555; margin-top:8px;">now reaching mobility + new offtakers</div></div>
+            <div style="background:#000; color:#fff; border-radius:14px; padding:22px;"><div style="font-size:30px; font-weight:600; letter-spacing:-0.02em; line-height:1; color:#FFED00;">World-first</div><div style="font-size:13px; color:rgba(255,255,255,0.65); margin-top:8px;">underground storage securing resilience</div></div>
+          </div>
+          <p style="font-size:20px; line-height:1.45; font-weight:400; margin:0 0 24px; max-width:64ch;">Upper Austria now offers Europe a working, replicable model for turning a single industrial electrolyser into a regional hydrogen economy — and a playbook other Hy2Market regions can follow.</p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:200px; border:1px dashed #d0d0cc; border-radius:12px; padding:18px; background:#fafaf8;"><div style="font-size:22px; font-weight:600; color:#b0b0b0;">— t</div><div style="font-size:12px; color:#a0a0a0; margin-top:6px;">Volumes distributed <span style="font-style:italic;">(pending confirmation)</span></div></div>
+            <div style="flex:1; min-width:200px; border:1px dashed #d0d0cc; border-radius:12px; padding:18px; background:#fafaf8;"><div style="font-size:22px; font-weight:600; color:#b0b0b0;">—</div><div style="font-size:12px; color:#a0a0a0; margin-top:6px;">Number of offtakers <span style="font-style:italic;">(pending)</span></div></div>
+            <div style="flex:1; min-width:200px; border:1px dashed #d0d0cc; border-radius:12px; padding:18px; background:#fafaf8;"><div style="font-size:22px; font-weight:600; color:#b0b0b0;">— t CO₂</div><div style="font-size:12px; color:#a0a0a0; margin-top:6px;">CO₂ avoided <span style="font-style:italic;">(pending)</span></div></div>
+          </div>
+        </section>
+
+        <!-- KNOWLEDGE EXCHANGE (closing) -->
+        <section data-reveal style="opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; margin:120px 0 0;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;"><span style="width:9px; height:9px; background:#FFED00; border-radius:50%; box-shadow:0 0 0 1px #000;"></span><h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; margin:0; scroll-margin-top:28px;" id="toc-knowledge">Knowledge exchange</h2></div>
+          <p style="font-size:18px; line-height:1.5; color:#1a1a1a; margin:0 0 28px; max-width:60ch;">As a "more developed" region, Upper Austria both shares hard-won expertise and learns from its peers — knowledge flows in both directions across the Hy2Market network.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div style="border:1px solid #e3e3e0; border-radius:16px; padding:28px;">
+              <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;"><span style="width:38px; height:38px; border-radius:50%; background:#FFED00; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:600;">→</span><div style="font-size:11px; letter-spacing:0.13em; font-weight:600; color:#9a9a9a;">SHARING TO</div></div>
+              <div style="font-size:22px; font-weight:600; letter-spacing:-0.01em;">Constanța <span style="color:#9a9a9a; font-weight:500;">· Romania</span></div>
+              <p style="font-size:16px; line-height:1.45; color:#444; margin:10px 0 0;">WIVA P&amp;G advised on feasibility studies for a Danube hydrogen hub — steering the region to confirm demand before building infrastructure.</p>
+            </div>
+            <div style="border:1px solid #e3e3e0; border-radius:16px; padding:28px;">
+              <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;"><span style="width:38px; height:38px; border-radius:50%; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:600;">←</span><div style="font-size:11px; letter-spacing:0.13em; font-weight:600; color:#9a9a9a;">LEARNING FROM</div></div>
+              <div style="font-size:22px; font-weight:600; letter-spacing:-0.01em;">Médio Tejo <span style="color:#9a9a9a; font-weight:500;">· Portugal</span></div>
+              <p style="font-size:16px; line-height:1.45; color:#444; margin:10px 0 0;">Mobility demonstration know-how — in exchange for Upper Austria's production and renewable-capacity expertise.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- NODE MODAL -->
+        <sc-if value="{{ showModal }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ closeNode }}" style="position:fixed; inset:0; z-index:90; background:rgba(0,0,0,0.55); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:24px;">
+            <div style="background:#fff; border-radius:18px; max-width:520px; width:100%; padding:34px; position:relative; box-shadow:0 24px 70px rgba(0,0,0,0.4);">
+              <button onClick="{{ closeNode }}" style="position:absolute; top:18px; right:18px; width:34px; height:34px; border-radius:50%; border:1px solid #e3e3e0; background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;" style-hover="background:#FFED00; border-color:#000;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+              <div style="display:inline-flex; align-items:center; gap:8px; font-size:11px; letter-spacing:0.12em; font-weight:600; color:#000; background:#FFED00; padding:4px 10px; border-radius:5px; margin-bottom:18px;">SYSTEM NODE</div>
+              <h3 style="font-size:26px; font-weight:600; letter-spacing:-0.015em; margin:0 0 6px;">{{ modalTitle }}</h3>
+              <div style="font-size:14px; font-weight:500; color:#7a7a7a; margin-bottom:18px;">{{ modalTag }}</div>
+              <p style="font-size:16px; line-height:1.55; color:#1a1a1a; margin:0;">{{ modalBody }}</p>
+            </div>
+          </div>
+        </sc-if>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ================= NEXT CASE STUDY ================= -->
+  <section style="background:#000; color:#fff; padding:80px 56px 88px; border-top:2px solid #FFED00;">
+    <div style="max-width:1720px; margin:0 auto;">
+      <div style="display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:34px;">
+        <div style="display:flex; align-items:center; gap:11px; font-weight:600; font-size:13px; letter-spacing:0.14em; color:#FFED00;">
+          <span style="display:inline-block; width:20px; height:2px; background:#FFED00;"></span>
+          CONTINUE THE STORY
+        </div>
+        <a href="#" style="display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:rgba(255,255,255,0.7); text-decoration:none;" style-hover="color:#fff;">All case studies <span style="font-size:16px;">→</span></a>
+      </div>
+
+      <!-- featured next -->
+      <a href="#" style="display:grid; grid-template-columns:1.05fr 0.95fr; min-height:380px; border:1px solid rgba(255,255,255,0.14); border-radius:20px; overflow:hidden; text-decoration:none; color:#fff; transition:border-color .3s ease, transform .3s ease;" style-hover="border-color:#FFED00; transform:translateY(-4px);">
+        <!-- text panel -->
+        <div style="padding:46px 48px; display:flex; flex-direction:column; justify-content:space-between; gap:28px;">
+          <div style="display:flex; align-items:center; gap:10px; font-size:11px; letter-spacing:0.13em; font-weight:600; color:#FFED00;">
+            <span style="width:8px; height:8px; border-radius:50%; background:#FFED00;"></span>NEXT CASE STUDY · PRODUCTION
+          </div>
+          <div>
+            <h2 style="font-size:46px; font-weight:600; line-height:1.0; letter-spacing:-0.015em; margin:0; max-width:14ch;">Asturias: scaling green hydrogen in Spain's industrial north</h2>
+            <p style="font-size:17px; line-height:1.45; color:rgba(255,255,255,0.65); margin:20px 0 0; max-width:48ch; font-weight:400;">Upper Austria's sister production region. See how Asturias pairs heavy industry with large-scale electrolysis to decarbonise steel, fertiliser and refining.</p>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <span style="font-size:12px; font-weight:500; border:1px solid rgba(255,255,255,0.22); border-radius:999px; padding:5px 12px;">Spain</span>
+              <span style="font-size:12px; font-weight:500; border:1px solid rgba(255,255,255,0.22); border-radius:999px; padding:5px 12px;">Electrolysis</span>
+              <span style="font-size:12px; font-weight:500; border:1px solid rgba(255,255,255,0.22); border-radius:999px; padding:5px 12px;">Steel</span>
+            </div>
+            <span style="display:inline-flex; align-items:center; gap:10px; font-size:16px; font-weight:600; color:#FFED00;">Read case study <span style="display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:#FFED00; color:#000; font-size:18px;">→</span></span>
+          </div>
+        </div>
+        <!-- image panel -->
+        <div style="position:relative; background:linear-gradient(135deg,#1a1d22 0%,#2c3138 55%,#15171b 100%); overflow:hidden;">
+          <div style="position:absolute; inset:0; background:repeating-linear-gradient(115deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 26px), repeating-linear-gradient(25deg, rgba(0,0,0,0.25) 0 1px, transparent 1px 60px);"></div>
+          <svg viewBox="0 0 420 420" style="position:absolute; bottom:-90px; left:-90px; width:340px; height:340px; pointer-events:none;" fill="none">
+            <path d="M410,10 A400,400 0 0 1 10,410" stroke="#FFED00" stroke-width="2.5"/>
+            <path d="M410,70 A340,340 0 0 1 70,410" stroke="rgba(255,237,0,0.35)" stroke-width="1.5"/>
+          </svg>
+          <span style="position:absolute; left:30px; bottom:30px; color:rgba(255,255,255,0.55); font-size:12px; letter-spacing:0.04em;">Asturias · Spain · industrial electrolysis</span>
+        </div>
+      </a>
+
+      <!-- other regions -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px;">
+        <a href="#" style="display:flex; flex-direction:column; gap:10px; padding:24px; border:1px solid rgba(255,255,255,0.14); border-radius:14px; text-decoration:none; color:#fff; transition:border-color .3s ease, background .3s ease;" style-hover="border-color:#FFED00; background:rgba(255,237,0,0.06);">
+          <div style="font-size:11px; letter-spacing:0.12em; font-weight:600; color:rgba(255,255,255,0.5);">STORAGE</div>
+          <div style="font-size:19px; font-weight:600; letter-spacing:-0.01em;">Gampern <span style="color:rgba(255,255,255,0.5); font-weight:400;">· Austria</span></div>
+          <div style="font-size:14px; color:rgba(255,255,255,0.6); line-height:1.4;">World-first geological underground hydrogen storage.</div>
+          <span style="margin-top:auto; font-size:14px; font-weight:600; color:#FFED00;">Read →</span>
+        </a>
+        <a href="#" style="display:flex; flex-direction:column; gap:10px; padding:24px; border:1px solid rgba(255,255,255,0.14); border-radius:14px; text-decoration:none; color:#fff; transition:border-color .3s ease, background .3s ease;" style-hover="border-color:#FFED00; background:rgba(255,237,0,0.06);">
+          <div style="font-size:11px; letter-spacing:0.12em; font-weight:600; color:rgba(255,255,255,0.5);">MOBILITY</div>
+          <div style="font-size:19px; font-weight:600; letter-spacing:-0.01em;">Médio Tejo <span style="color:rgba(255,255,255,0.5); font-weight:400;">· Portugal</span></div>
+          <div style="font-size:14px; color:rgba(255,255,255,0.6); line-height:1.4;">Fuel-cell mobility demonstration and refuelling.</div>
+          <span style="margin-top:auto; font-size:14px; font-weight:600; color:#FFED00;">Read →</span>
+        </a>
+        <a href="#" style="display:flex; flex-direction:column; gap:10px; padding:24px; border:1px solid rgba(255,255,255,0.14); border-radius:14px; text-decoration:none; color:#fff; transition:border-color .3s ease, background .3s ease;" style-hover="border-color:#FFED00; background:rgba(255,237,0,0.06);">
+          <div style="font-size:11px; letter-spacing:0.12em; font-weight:600; color:rgba(255,255,255,0.5);">DISTRIBUTION</div>
+          <div style="font-size:19px; font-weight:600; letter-spacing:-0.01em;">Constanța <span style="color:rgba(255,255,255,0.5); font-weight:400;">· Romania</span></div>
+          <div style="font-size:14px; color:rgba(255,255,255,0.6); line-height:1.4;">Building a Danube hydrogen hub from feasibility up.</div>
+          <span style="margin-top:auto; font-size:14px; font-weight:600; color:#FFED00;">Read →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { drawer: null, node: null };
+  carouselRef = React.createRef();
+
+  nodeData = {
+    power: { title: 'Renewable power', tag: 'Hydro + wind · Austrian grid', body: 'Renewable electricity from Austria\u2019s hydro and wind capacity feeds the electrolyser, making the hydrogen genuinely green from the first electron.' },
+    electrolyser: { title: '6 MW PEM electrolyser', tag: 'Siemens Energy · Linz · since Nov 2019', body: 'A 6 MW PEM electrolyser supplied by Siemens Energy, operational at the voestalpine steel plant in Linz since November 2019. Produces up to 1,200 m\u00b3/h of green hydrogen; more than 500 tonnes were produced during the H2FUTURE pilot.' },
+    compression: { title: 'Multi-stage compression', tag: 'VERBUND + voestalpine', body: 'Multi-stage compressor stations lift low-pressure electrolyser output to medium-pressure storage and charge tube trailers up to 700 bar \u2014 the step that makes the hydrogen transportable.' },
+    purification: { title: 'Purification \u2014 Grade 5.0', tag: '99.999% purity', body: 'Purification upgrades the hydrogen to Grade 5.0 (99.999%), the quality required for fuel-cell mobility and sensitive industrial uses, unlocking offtake markets the raw output could never serve.' },
+    storage: { title: 'Underground storage', tag: 'RAG · Gampern, Upper Austria', body: 'The world\u2019s first geological hydrogen storage in porous sandstone, at Gampern (RAG, Underground Sun Storage 2030). Around 500,000 m\u00b3 stored across full cycles at injection-grade purity \u2014 seasonal resilience for the whole system.' },
+    rhs: { title: 'Renewable Hydrogen Station & trailers', tag: 'On-site refuelling + regional distribution', body: 'The Renewable Hydrogen Station enables on-site refuelling, while tube trailers distribute hydrogen to offtakers across Austria and beyond \u2014 converting a single plant into a distribution hub.' },
+    steel: { title: 'Steel decarbonisation', tag: 'voestalpine', body: 'Green hydrogen substitutes for fossil reductants in steelmaking, the original anchor offtake that proved the electrolyser at industrial scale.' },
+    mobility: { title: 'Mobility', tag: 'Fuel-cell vehicles & buses', body: 'Grade 5.0 hydrogen at 700 bar fuels fuel-cell vehicles and buses \u2014 a new offtake market opened by purification and compression.' },
+    methanation: { title: 'Methanation research', tag: 'K1-MET / TU Leoben', body: 'K1-MET and TU Leoben use the hydrogen for methanation research, converting H\u2082 into synthetic methane for hard-to-electrify uses.' }
+  };
+
+  componentDidMount() {
+    if (typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    requestAnimationFrame(() => {
+      document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+    });
+
+    // ---- Table-of-contents scroll spy ----
+    const links = {};
+    document.querySelectorAll('[data-toc-link]').forEach((a) => { links[a.dataset.tocLink] = a; });
+    const setActive = (id) => {
+      Object.keys(links).forEach((k) => {
+        const a = links[k];
+        const on = k === id;
+        a.style.color = on ? '#000' : '#9a9a9a';
+        a.style.fontWeight = on ? '600' : '500';
+        const bar = a.querySelector('[data-toc-bar]');
+        if (bar) {
+          bar.style.background = on ? '#FFED00' : '#e6e6e6';
+          bar.style.boxShadow = on ? '0 0 0 1px #000' : 'none';
+          bar.style.height = on ? '22px' : '14px';
+        }
+      });
+    };
+    const ids = ['toc-overview','toc-region','toc-opportunity','toc-solutions','toc-system','toc-process','toc-lessons','toc-outcomes','toc-knowledge'];
+    let activeId = 'toc-overview';
+    setActive(activeId);
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { activeId = e.target.id; setActive(activeId); } });
+    }, { rootMargin: '-48% 0px -48% 0px', threshold: 0 });
+    requestAnimationFrame(() => {
+      ids.forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+    });
+  }
+
+  renderVals() {
+    const tg = (i) => () => this.setState((s) => ({ drawer: s.drawer === i ? null : i }));
+    const nd = (id) => () => this.setState({ node: id });
+    const m = this.state.node ? this.nodeData[this.state.node] : null;
+    return {
+      open0: this.state.drawer === 0,
+      open1: this.state.drawer === 1,
+      open2: this.state.drawer === 2,
+      rot0: this.state.drawer === 0 ? 'rotate(45deg)' : 'rotate(0deg)',
+      rot1: this.state.drawer === 1 ? 'rotate(45deg)' : 'rotate(0deg)',
+      rot2: this.state.drawer === 2 ? 'rotate(45deg)' : 'rotate(0deg)',
+      toggle0: tg(0), toggle1: tg(1), toggle2: tg(2),
+      openPower: nd('power'), openElectrolyser: nd('electrolyser'), openCompression: nd('compression'),
+      openPurification: nd('purification'), openStorage: nd('storage'), openRhs: nd('rhs'),
+      openSteel: nd('steel'), openMobility: nd('mobility'), openMethanation: nd('methanation'),
+      showModal: !!m,
+      modalTitle: m ? m.title : '',
+      modalTag: m ? m.tag : '',
+      modalBody: m ? m.body : '',
+      closeNode: () => this.setState({ node: null }),
+      scrollPrev: () => { const el = document.getElementById('process-carousel'); if (!el) return; const t = el.firstElementChild; const step = t ? t.getBoundingClientRect().width / 6 : 270; el.scrollBy({ left: -step, behavior: 'smooth' }); },
+      scrollNext: () => { const el = document.getElementById('process-carousel'); if (!el) return; const t = el.firstElementChild; const step = t ? t.getBoundingClientRect().width / 6 : 270; el.scrollBy({ left: step, behavior: 'smooth' }); },
+      copyLink: () => { try { navigator.clipboard.writeText(location.href); } catch (e) {} }
+    };
+  }
+}
+</script>
+</body>
+</html>
