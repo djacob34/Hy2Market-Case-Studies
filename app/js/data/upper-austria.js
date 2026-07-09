@@ -253,7 +253,7 @@
       },
       others: [
         { href: '#', k: 'STORAGE', region: 'Gampern', country: '· Austria', d: 'World-first geological underground hydrogen storage.' },
-        { href: '#', k: 'MOBILITY', region: 'Médio Tejo', country: '· Portugal', d: 'Fuel-cell mobility demonstration and refuelling.' },
+        { href: './case-study.html?region=medio-tejo', k: 'MOBILITY', region: 'Médio Tejo'}, country: '· Portugal', d: 'Fuel-cell mobility demonstration and refuelling.' },
         { href: '#', k: 'DISTRIBUTION', region: 'Constanța', country: '· Romania', d: 'Building a Danube hydrogen hub from feasibility up.' }
       ]
     },
