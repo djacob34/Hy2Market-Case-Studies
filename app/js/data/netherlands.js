@@ -1,260 +1,239 @@
-/* =========================================================================
-   Netherlands (Deventer) case-study content — Transport spotlight.
-   SoluForce x Firan flexible composite hydrogen pipeline.
-   Same content model as upper-austria.js: one object per region.
-   NOTE: figures marked "(confirm)" are not yet verified against a partner
-   source — see the Production Notes in the source brief.
-   ========================================================================= */
+/* Hy2Market case study data — Transport spotlight: SoluForce flexible composite pipe in the Netherlands
+   Two deployments woven together: the Deventer distribution connector (with Firan) and the Delfzijl
+   H2-hub pipeline (HyEnergy TransStore / Green Planet) — a first-of-its-kind line pulled beneath a
+   canal AND a ProRail railway.
+   Registered as window.CASE_STUDIES['netherlands'] — view at case-study.html?region=netherlands
+   Mirrors the exact schema used by js/data/upper-austria.js. Every section is populated.
+   Figures wrapped in <span class="tc">…</span> are not yet partner-verified. */
 (function (root) {
   var data = {
-    slug: 'netherlands',
-    // Optional landing-card overrides (otherwise derived from hero/breadcrumb).
-    card: { title: 'Deventer, Netherlands' },
-    breadcrumb: { label: 'Case studies', href: './index.html', here: 'Netherlands' },
+  slug: `netherlands`,
+  breadcrumb: { label: `Case studies`, href: `./index.html`, here: `Netherlands` },
 
-    hero: {
-      eyebrow: 'TRANSPORT · NETHERLANDS',
-      titleHtml: 'Off the Spool, Into the Ground: A Flexible Hydrogen <span class="hl">Pipeline</span> for Deventer',
-      lead: 'Everyone argues about how to make green hydrogen — but someone has to move the molecule. In Deventer, network developer Firan and pipe maker SoluForce put a fully-certified, entirely non-metallic hydrogen pipeline into the ground in about two months: phase zero of an open hydrogen distribution grid.',
-      tags: ['Hydrogen transport', 'Flexible composite pipe', 'Reinforced thermoplastic (RTP)', 'Distribution grid', 'Non-metallic', 'Transport'],
-      mediaCaption: 'SoluForce flexible composite pipe · laid from 400 m spools · Deventer',
-      stats: [
-        { num: '42 bar', label: 'certified max operating pressure · fully non-metallic pipe' },
-        { num: '2 × 120 m', label: 'flexible composite pipeline installed, laid from 400 m spools' },
-        { num: '~2 months', label: 'from go-decision to hydrogen pipe in the ground' }
-      ]
-    },
+  hero: {
+    eyebrow: `TRANSPORT · NETHERLANDS`,
+    titleHtml: `Off the Spool, Under the Rails: Flexible <span class="hl">Hydrogen</span> Pipelines for the Netherlands`,
+    lead: `Everyone argues about how to make green hydrogen — but someone has to move the molecule. In the Netherlands, SoluForce's non-metallic flexible pipe is doing exactly that: a distribution connector laid with Firan in Deventer in about two months, and a first-of-its-kind hub line in Delfzijl pulled beneath a canal and a national railway.`,
+    tags: [`Hydrogen transport`, `Flexible composite pipe`, `Reinforced thermoplastic`, `First-of-its-kind crossing`, `Distribution grid`, `Transport`],
+    mediaCaption: `SoluForce flexible composite pipe · Delfzijl canal & rail crossing · Deventer grid`,
+    stats: [
+      { num: `World-first`, label: `hydrogen pipeline pulled under a canal AND a railway (Delfzijl)` },
+      { num: `42 bar`, label: `certified hydrogen MOP · fully non-metallic pipe` },
+      { num: `~2 months`, label: `Deventer connector: from go-decision to pipe in the ground` }
+    ]
+  },
 
-    partners: [
-      {
-        id: 'soluforce', name: 'SoluForce',
-        role: 'Flexible composite pipe · manufacturer',
-        body: 'SoluForce makes the non-metallic reinforced thermoplastic pipe (RTP) at the heart of the pilot — certified for hydrogen to a maximum operating pressure of 42 bar, delivered on 400 m spools and joined without welding. Deventer is the live demonstrator the company was looking for.',
-        logoHtml: '<span style="font-weight:700;font-size:15px;color:#e2001a;letter-spacing:-0.01em;">Solu</span><span style="font-weight:700;font-size:15px;color:#1a1a1a;letter-spacing:-0.01em;">Force</span>'
-      },
-      {
-        id: 'firan', name: 'Firan',
-        role: 'Hydrogen network operator · Alliander group',
-        body: 'Firan — a subsidiary of Alliander and sister company of DSO Liander — develops, builds and operates infrastructure for heat, cooling, renewable energy and, increasingly, hydrogen. In Deventer it designs the network and, once built, exploits the grid.',
-        logoHtml: '<span style="font-weight:800;font-size:16px;color:#0072bc;letter-spacing:-0.01em;">Firan</span>'
-      },
-      {
-        id: 'nec', name: 'New Energy Coalition',
-        role: 'Project coordinator',
-        body: 'New Energy Coalition coordinates the Hy2Market project overall, connecting the consortium partners and work packages across the participating regions.',
-        col: true,
-        logoHtml: '<span style="font-weight:700;font-size:13px;color:#1a1a1a;letter-spacing:0.01em;">New Energy</span><span style="font-weight:500;font-size:11px;color:#0a8f5c;letter-spacing:0.06em;margin-top:2px;">COALITION</span>'
-      },
-      {
-        id: 'nefit', name: 'Nefit Bosch',
-        role: 'Off-taker · Deventer',
-        body: 'Nefit Bosch is the anchor off-taker: its local test facility takes the hydrogen delivered by the phase-zero connector at 9.5 bar.',
-        gap: '7px',
-        logoHtml: '<span style="font-weight:700;font-size:15px;color:#1a1a1a;">Nefit</span><span style="font-weight:600;font-size:13px;color:#e2001a;">Bosch</span>'
-      },
-      {
-        id: 'grohw', name: 'GROHW',
-        role: 'Regional hydrogen programme',
-        body: 'The regional GROHW hydrogen programme frames the wider Deventer effort, including the hydrogen receiving station at Nefit Bosch.',
-        logoHtml: '<span style="font-weight:800;font-size:17px;color:#0072bc;letter-spacing:0.02em;">GROHW</span>'
-      },
-      {
-        id: 'alliander', name: 'Alliander',
-        role: 'Parent DSO group',
-        body: 'Alliander is the Dutch distribution group behind Firan and DSO Liander — the corporate context in which a future hydrogen network operator can standardise and scale distribution infrastructure.',
-        logoHtml: '<span style="font-weight:700;font-size:15px;color:#e30613;letter-spacing:-0.01em;">alliander</span>'
-      }
+  partners: [
+    { id: `soluforce`, name: `SoluForce`, role: `Flexible composite pipe`, body: `Manufacturer of the non-metallic reinforced thermoplastic pipe (RTP) certified for hydrogen — the material in both the Deventer and Delfzijl deployments.`, logoHtml: `<span class="logo-word">SoluForce</span>` },
+    { id: `firan`, name: `Firan`, role: `Network developer (Alliander group)`, body: `A subsidiary of Alliander and sister of the DSO Liander; a future hydrogen network operator that develops, builds and operates the Deventer distribution grid.`, logoHtml: `<span class="logo-word">Firan</span>` },
+    { id: `hts`, name: `HyEnergy TransStore`, role: `Delfzijl asset owner`, body: `The Hy2Market partner that owns the Delfzijl H2 hub and pipeline; part of Green Planet Corporate.`, logoHtml: `<span class="logo-word">HyEnergy TransStore</span>` },
+    { id: `green-planet`, name: `Green Planet`, role: `Energy-station operator`, body: `Mobile-energy and energy-station operator; owner of HyEnergy TransStore and HyPlanet, which runs the Delfzijl bulk trailer-filling station.`, logoHtml: `<span class="logo-word">Green Planet</span>` },
+    { id: `nec`, name: `New Energy Coalition`, role: `Project coordinator`, body: `Coordinator of the Hy2Market project, based in the Northern Netherlands.`, logoHtml: `<span class="logo-word">New Energy Coalition</span>` },
+    { id: `nefit-bosch`, name: `Nefit Bosch`, role: `Deventer off-taker`, body: `Deventer test facility that receives the hydrogen delivered by the Firan × SoluForce connector at 9.5 bar.`, logoHtml: `<span class="logo-word">Nefit Bosch</span>` }
+  ],
+
+  toc: [
+    { id: `toc-overview`, label: `Overview` },
+    { id: `toc-region`, label: `The region` },
+    { id: `toc-opportunity`, label: `The opportunity` },
+    { id: `toc-solutions`, label: `The solutions` },
+    { id: `toc-system`, label: `How it works as one system` },
+    { id: `toc-process`, label: `The process` },
+    { id: `toc-lessons`, label: `Lessons learned` },
+    { id: `toc-outcomes`, label: `The outcomes` },
+    { id: `toc-knowledge`, label: `Knowledge exchange` }
+  ],
+
+  downloadHref: `#`,
+
+  overview: [
+    { tone: `yellow`, label: `THE INNOVATION`, text: `One material, two deployments. SoluForce's non-metallic reinforced thermoplastic pipe — certified for hydrogen, laid from 400 m spools, joined without welding — is used both as a distribution connector in Deventer (built as phase zero of an open grid with Firan) and, in Delfzijl, pulled beneath a canal and a ProRail railway in a first-of-its-kind dual crossing for the HyEnergy TransStore hydrogen hub.` },
+    { tone: `black`, label: `THE OUTCOME`, text: `In Deventer, a hydrogen line from production to off-taker Nefit Bosch, in the ground in roughly two months. In Delfzijl, a hub pipeline crossing infrastructure no hydrogen line had crossed before — proving flexible composite pipe as a fast, low-cost, embrittlement-free building block for the Dutch hydrogen network.` }
+  ],
+
+  video: {
+    caption: `Benjamin Pilzer, Senior Business Developer Hydrogen, Firan, and Peter Cloos, Technical Manager, SoluForce — on building a local hydrogen grid in Deventer.`
+  },
+
+  region: {
+    title: `The region`,
+    paragraphs: [
+      `The Netherlands is one of Europe's most committed hydrogen markets, and its network operators are already moving the molecule at regional scale. In Deventer, Firan — a subsidiary of Alliander and sister of the DSO Liander — is standardising a future hydrogen distribution grid, with Nefit Bosch as the anchor off-taker and New Energy Coalition coordinating Hy2Market.`,
+      `Some 200 km north-east, in the industrial cluster around Delfzijl, HyEnergy TransStore (part of Green Planet) is building a hydrogen hub fed in part by chlor-alkali by-product hydrogen from Nobian. Both projects run on the same SoluForce flexible composite pipe — which is what makes the Delfzijl crossing beneath a canal and a national railway possible in the first place.`
     ],
-
-    toc: [
-      { id: 'toc-overview', label: 'Overview' },
-      { id: 'toc-region', label: 'The region' },
-      { id: 'toc-opportunity', label: 'The opportunity' },
-      { id: 'toc-solutions', label: 'The solutions' },
-      { id: 'toc-system', label: 'How it works as one system' },
-      { id: 'toc-process', label: 'The process' },
-      { id: 'toc-lessons', label: 'Lessons learned' },
-      { id: 'toc-outcomes', label: 'The outcomes' }
-    ],
-    downloadHref: '#',
-
-    overview: [
-      { tone: 'yellow', label: 'THE CHALLENGE', text: 'Green hydrogen is only useful if it can travel from where it is made to where it is used. Conventional steel pipelines are slow to permit, expensive to weld and lay, and vulnerable to hydrogen embrittlement — a poor fit for the short, distributed connections a local hydrogen grid actually needs.' },
-      { tone: 'black', label: 'THE INNOVATION', text: 'Hy2Market paired an operator with a material: Firan, a future hydrogen network operator, and SoluForce, whose non-metallic reinforced thermoplastic pipe is certified for hydrogen, laid from 400 m spools and joined without welding — built as phase zero of an open distribution grid.' },
-      { tone: 'black', label: 'THE OUTCOME', text: 'A working hydrogen line from the production point to industrial off-taker Nefit Bosch, in the ground in roughly two months — proving that flexible composite pipe is a fast, low-cost, embrittlement-free building block for regional hydrogen distribution.' }
-    ],
-
-    video: { caption: 'Benjamin Pilzer, Senior Business Developer Hydrogen, Firan, and Peter Cloos, Technical Manager, SoluForce — on building a local hydrogen grid in Deventer.' },
-
-    region: {
-      title: 'The region',
-      paragraphs: [
-        'The Netherlands is one of Europe’s most committed hydrogen markets, and its distribution network operators are already preparing to move the molecule at regional scale. <strong>Firan</strong> — a subsidiary of <strong>Alliander</strong> and sister company of the Dutch distribution system operator <strong>Liander</strong> — develops, builds and operates infrastructure for heat, cooling, renewable energy and, increasingly, hydrogen.',
-        'The pilot sits in <strong>Deventer</strong>, where Firan is standardising what a future hydrogen distribution grid should look like. The anchor off-taker is <strong>Nefit Bosch</strong>, whose local test facility takes the hydrogen; the wider effort is coordinated through the regional <strong>GROHW</strong> hydrogen programme, with New Energy Coalition coordinating Hy2Market overall.'
-      ],
-      map: {
-        caption: 'Netherlands · Deventer pilot',
-        pins: [
-          { left: '30%', top: '52%', color: 'black', label: 'Supply', sub: '· tube-trailer / electrolyser' },
-          { left: '54%', top: '44%', color: 'yellow', label: 'Deventer', sub: '· phase-0 line' },
-          { left: '74%', top: '54%', color: 'black', label: 'Nefit Bosch', sub: 'off-take · ', right: true }
-        ]
-      }
-    },
-
-    opportunity: {
-      title: 'The opportunity',
-      leadHtml: 'Firan and SoluForce were never supposed to work together — what connected them was the insight that transport is the <span class="mark">missing middle</span> of the hydrogen value chain.',
-      body: 'Inside Hy2Market the two sat in different work packages: one an infrastructure operator, the other a materials manufacturer. In an early consortium meeting it became clear that more demonstrators were needed to prove reinforced thermoplastic pipe (RTP) for hydrogen — and Firan offered its Deventer site. For SoluForce it was the live demonstrator it was looking for; for Firan, RTP was a new material to test against its own safety, pressure and maintenance standards before trusting it in a grid meant to last decades.',
-      startLabel: 'STARTING POSITION',
-      startStats: [
-        { num: 'Certified', sub: 'RTP pipe already rated for hydrogen to 42 bar' },
-        { num: 'Deventer site', sub: 'real infrastructure need — a place to prove it' }
+    map: {
+      caption: `Netherlands · two SoluForce deployments`,
+      pins: [
+        { left: `44%`, top: `48%`, color: `black`, label: `Deventer`, sub: `· connector` },
+        { left: `46%`, top: `57%`, color: `yellow`, label: `Nefit Bosch`, sub: `· off-take` },
+        { left: `54%`, top: `16%`, color: `black`, label: `Delfzijl`, sub: `hub · crossing · `, right: true }
       ]
-    },
-
-    solutions: {
-      title: 'The solutions',
-      intro: 'Three things had to come together to make a hydrogen line this fast. Open each to see the detail.',
-      drawers: [
-        {
-          title: 'The material',
-          subtitle: 'A non-metallic pipe built for hydrogen.',
-          thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
-          photoCaption: 'SoluForce flexible composite pipe · fully non-metallic',
-          body: 'SoluForce’s flexible composite pipe (FCP), a reinforced thermoplastic pipe, is entirely non-metallic — hydrogen never touches metal, eliminating the embrittlement risk that dogs steel. It is certified for hydrogen up to a maximum operating pressure of <strong>42 bar</strong>, at temperatures up to 65 °C, in 4″ and 6″ diameters, and is hydrogen-tight (permeation-free). Its cradle-to-grave carbon footprint is at least 75% lower than steel.',
-          stats: [
-            { n: '42 bar', l: 'certified hydrogen MOP' },
-            { n: '≥75%', l: 'lower carbon footprint vs. steel' }
-          ],
-          cta: { label: 'How SoluForce certifies pipe for hydrogen', href: '#' }
-        },
-        {
-          title: 'The installation',
-          subtitle: 'Laid from a spool, joined without welding.',
-          thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
-          photoCaption: 'Electrofusion joints · weld-free installation',
-          body: 'The pipe is delivered on <strong>400-metre spools</strong> and installed in long continuous sections, so there are far fewer joints than a welded steel line. Connections use <strong>electrofusion</strong> rather than welding, with SoluForce training local contractors through its academy. The result is roughly <strong>70% lower installation cost</strong>, smaller crews, fewer permits, and a line that flexes through difficult terrain and confined spaces.',
-          stats: [
-            { n: '~70%', l: 'lower installation cost' },
-            { n: '400 m', l: 'continuous spool lengths' }
-          ],
-          cta: { label: 'Why weld-free installation matters for hydrogen', href: '#' }
-        },
-        {
-          title: 'The connection',
-          subtitle: 'Production to off-take, and a grid to come.',
-          thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
-          photoCaption: 'Phase 0 · 2 × 120 m connector, Deventer',
-          body: 'The Deventer pilot lays <strong>2 × 120 m</strong> of pipe, connecting a tube-trailer bay and a future 2.5 MW electrolyser <span class="tc">(status to confirm)</span> to the <strong>Nefit Bosch</strong> test facility at 9.5 bar, with a planned local hydrogen grid running at 16 bar for wider industrial off-takers. This connector is deliberately scoped as <strong>phase zero</strong> of a larger open grid.',
-          stats: [
-            { n: '2 × 120 m', l: 'flexible composite line installed' },
-            { n: '9.5 / 16 bar', l: 'off-take &amp; grid pressures' }
-          ],
-          cta: { label: 'Explore the open distribution grid', href: '#' }
-        }
-      ]
-    },
-
-    system: {
-      title: 'How it works as one system',
-      intro: 'From renewable power to an open grid. Hover any node to highlight it, click to open the detail.',
-      chain: [
-        { id: 'power', kicker: 'INPUT', name: 'Renewable power', sub: 'wind + solar', title: 'Renewable power feeds the future electrolyser' },
-        { id: 'supply', kicker: 'SUPPLY', name: 'Electrolyser + trailer', sub: 'future 2.5 MW · tube-trailer', title: 'Future 2.5 MW electrolyser + tube-trailer supply' },
-        { id: 'pipe', kicker: 'CORE', name: 'Flexible composite pipe', sub: 'phase 0 · 2 × 120 m', core: true, title: 'SoluForce FCP — non-metallic, certified to 42 bar' }
-      ],
-      branches: [
-        { id: 'offtake', name: 'Nefit Bosch off-take', sub: 'test facility · 9.5 bar', title: 'Nefit Bosch off-take at 9.5 bar' },
-        { id: 'grid', name: 'Open distribution grid', sub: 'phase 1 · 16 bar', title: 'Open 16 bar distribution grid (in development)' },
-        { id: 'wider', name: 'Wider off-takers', sub: 'Deventer region', title: 'Wider industrial off-takers connect to the grid' }
-      ],
-      nodeData: {
-        power: { title: 'Renewable power', tag: 'Wind + solar', body: 'Renewable electricity is the intended input to the future electrolyser, making the hydrogen genuinely green from the first electron.' },
-        supply: { title: 'Electrolyser + tube-trailer supply', tag: 'Future 2.5 MW · trailer bay', body: 'A future 2.5 MW electrolyser and a tube-trailer bay supply hydrogen to the connector. The electrolyser is described as future in the source article — status to confirm.' },
-        pipe: { title: 'SoluForce flexible composite pipe', tag: 'Phase 0 · 2 × 120 m · MOP 42 bar', body: 'Non-metallic reinforced thermoplastic pipe, certified for hydrogen to a maximum operating pressure of 42 bar; delivered on 400 m spools; electrofusion joints; permeation-free; installed as 2 × 120 m in Deventer — the demonstrator that proves RTP in live hydrogen service.' },
-        offtake: { title: 'Nefit Bosch off-take', tag: 'Test facility · 9.5 bar', body: 'The phase-zero connector links the supply point to the Nefit Bosch off-take at 9.5 bar — the anchor demand that makes the pilot a working line rather than a test loop.' },
-        grid: { title: 'Open distribution grid (phase 1)', tag: '16 bar · in development, pre-FID', body: 'An open 16 bar distribution grid that other companies can connect to; in development ahead of a final investment decision, targeted to be operational within roughly one year of the go-decision (timing to confirm).' },
-        wider: { title: 'Wider industrial off-takers', tag: 'Deventer region', body: 'Once the open grid is live, wider industrial off-takers across the Deventer region can connect — turning phase zero into regional hydrogen distribution.' }
-      }
-    },
-
-    process: {
-      title: 'The process',
-      fillPercent: '78%',
-      steps: [
-        { date: 'Consortium start', text: 'Firan and SoluForce enter Hy2Market in different work packages.' },
-        { date: 'First meetings', text: 'Need for additional RTP demonstrators identified; Firan offers its Deventer site.' },
-        { date: '~2 months', dateMuted: '· confirm dates', text: 'Permitting, location and financials sorted; construction begins.' },
-        { date: 'Phase 0', text: '2 × 120 m flexible composite line laid; production-to-Nefit-Bosch connector complete.' },
-        { date: '2026 · You are here', current: true, text: 'Phase 1 open distribution grid in development, right before a final investment decision.' },
-        { date: 'Next', dateMuted: '· confirm', text: 'Grid targeted to be operational within roughly one year of the investment decision.' }
-      ]
-    },
-
-    lessons: {
-      title: 'Lessons learned',
-      leadHtml: 'The pilot’s hardest lessons were organisational, not technical: <span class="mark">agree exactly who is responsible for what</span> before the pipe goes in.',
-      body: 'Because RTP was a new material for Firan, both partners had to keep an open mind and share knowledge in both directions — Firan learning the material’s safety envelope, pressure ranges and maintenance needs; SoluForce learning how Dutch contractors and permitting work. The clearest takeaway was about contracts and scope of work — knowing precisely who is responsible for what. The transferable lesson is the partnership itself: a network operator and a materials manufacturer, from different work packages, aligning technically, organisationally and financially fast enough to get a pipe in the ground in two months.'
-    },
-
-    outcomes: {
-      title: 'The outcomes',
-      stats: [
-        { tone: 'yellow', n: '2 × 120 m', l: 'hydrogen pipeline in the ground' },
-        { tone: 'grey', n: '42 bar', l: 'certified, fully non-metallic — no embrittlement' },
-        { tone: 'grey', n: '~2 months', l: 'from decision to operational connector' },
-        { tone: 'black', n: 'Phase 1', l: 'open distribution grid now in development (pre-FID)' }
-      ],
-      narrative: 'The Deventer pilot turns a promising material into a proven building block. By pairing SoluForce’s flexible composite pipe with Firan’s role as a future hydrogen network operator, Hy2Market showed that regional hydrogen distribution doesn’t have to wait on slow, costly steel — and that phase zero of a real grid can be laid in weeks, not years. It is a replicable transport playbook other Hy2Market regions can follow as they connect their own producers to their own off-takers.',
-      pending: [
-        { n: '— t', l: 'H₂ volumes moved <em>(pending confirmation)</em>' },
-        { n: '—', l: 'Connected off-takers <em>(pending)</em>' },
-        { n: '— TRL', l: 'Transport-technology TRL change <em>(pending)</em>' }
-      ]
-    },
-
-    quotesEyebrow: 'IN THEIR WORDS',
-    quotes: [
-      { text: 'For us it is crucial that a network is safe, reliable, and that it will work for tens of years. That’s what we stand for at Firan.', name: 'Benjamin Pilzer', role: 'Senior Business Developer Hydrogen, Firan' },
-      { text: 'When the idea came on the table to actually realise it, it went really fast — within two months there was already construction work going on. Everything was sorted out, and now there’s a pipeline in the ground. It’s just perfect, like out of the book.', name: 'Peter Cloos', role: 'Technical Manager, SoluForce' },
-      { text: 'At Firan we’re a distribution company. Our goal is to connect A with B: producer and off-take of hydrogen. And SoluForce is a producer of material for distribution pipelines. That’s where our roles come together.', name: 'Benjamin Pilzer', role: 'Firan' }
-    ],
-
-    next: {
-      eyebrow: 'CONTINUE THE STORY',
-      allHref: './index.html',
-      featured: {
-        href: './case-study.html?region=upper-austria',
-        kicker: 'CASE STUDY · PRODUCTION',
-        title: 'Upper Austria: from steel to a green hydrogen value chain',
-        lead: 'Where the molecule is made. See how Hy2Market extended a working 6 MW electrolyser in Linz into a complete value chain — compression, purification, storage and distribution.',
-        chips: ['Austria', 'Electrolysis', 'Steel'],
-        caption: 'voestalpine steel plant · Linz · H2FUTURE electrolyser'
-      },
-      others: [
-        { href: './case-study.html?region=upper-austria', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'A working electrolyser extended into a regional hydrogen network.' },
-        { href: './index.html', k: 'ALL', region: 'Every region', country: '', d: 'Browse the full set of Hy2Market case studies.' }
-      ]
-    },
-
-    footer: {
-      cofunded: 'Co-funded by<br>the European Union',
-      cols: [
-        { h: 'Visiting address:', html: 'Nijenborgh 6<br>9747 AG Groningen<br>The Netherlands' },
-        { h: 'Postal address:', html: 'P.O. Box 70017<br>9704 AA Groningen<br>The Netherlands' }
-      ],
-      contact: {
-        h: 'Contact:',
-        phone: '+31 88 11 66 800',
-        email: 'info@hy2market.eu',
-        links: [
-          { label: 'Privacy statement', href: '#' },
-          { label: 'Cookie Statement', href: '#' },
-          { label: 'Disclaimer', href: '#' }
-        ]
-      }
     }
+  },
+
+  opportunity: {
+    title: `The opportunity`,
+    leadHtml: `Green hydrogen is only useful if it can travel — and steel is a <span class="hl">slow, costly, embrittlement-prone</span> way to move it over short, awkward routes.`,
+    body: `SoluForce's non-metallic pipe changes that calculus, and Hy2Market gave it two live proving grounds. In Deventer, Firan and SoluForce — originally in different work packages — came together when the consortium flagged the need for RTP demonstrators. In Delfzijl, the same pipe is the enabling technology for a hydrogen hub whose route has to pass under a canal and a ProRail railway, a crossing that would be daunting for rigid steel but routine for a flexible line pulled through a bore.`,
+    startLabel: `STARTING POSITION`,
+    startStats: [
+      { num: `2 sites`, sub: `Deventer distribution + Delfzijl hub, one shared material` },
+      { num: `World-first`, sub: `dual canal-and-railway crossing at Delfzijl` }
+    ]
+  },
+
+  solutions: {
+    title: `The solutions`,
+    intro: `Three things make this work: a hydrogen-ready material, an installation method that goes where steel can't, and two real deployments proving it.`,
+    drawers: [
+      {
+        title: `A pipe built for hydrogen`,
+        subtitle: `From steel's embrittlement problem to a fully composite line.`,
+        thumbGrad: `linear-gradient(135deg,#2c3138,#15171b)`,
+        tex: 120,
+        photoCaption: `SoluForce reinforced thermoplastic pipe`,
+        body: `SoluForce's flexible composite pipe is entirely non-metallic — hydrogen never touches metal, eliminating the embrittlement that dogs steel. It is certified for hydrogen to a maximum operating pressure of 42 bar (up to 65 °C), in 4″ and 6″ diameters, with a polymer core wrapped in high-strength reinforcement, and is hydrogen-tight (permeation-free).`,
+        stats: [
+          { n: `42 bar`, l: `certified hydrogen MOP` },
+          { n: `≥75%`, l: `lower carbon footprint vs. steel` }
+        ],
+        cta: { label: `How SoluForce certifies pipe for hydrogen`, href: `#` }
+      },
+      {
+        title: `Laid from a spool — and pulled under obstacles`,
+        subtitle: `Weld-free installation that goes where steel can't.`,
+        thumbGrad: `linear-gradient(135deg,#3a3320,#17140b)`,
+        tex: 120,
+        photoCaption: `400 m spool · bore-pull under canal & railway`,
+        body: `The pipe is delivered on 400-metre spools and installed in long continuous sections joined by electrofusion, not welding — smaller crews, fewer permits, ~70% lower installation cost. Because it is flexible and comes in continuous lengths, it can also be pulled through a pre-made bore: in Delfzijl, a single length is drawn beneath both a canal and a ProRail railway, a first-of-its-kind hydrogen crossing that rigid steel could not make so cleanly.`,
+        stats: [
+          { n: `World-first`, l: `pipeline pulled under a canal AND a railway` },
+          { n: `~70%`, l: `lower installation cost vs. steel` }
+        ],
+        cta: { label: `Why weld-free, flexible pipe unlocks hard routes`, href: `#` }
+      },
+      {
+        title: `Two deployments, one material`,
+        subtitle: `A distribution connector in Deventer, a hub pipeline in Delfzijl.`,
+        thumbGrad: `linear-gradient(135deg,#20302c,#0b1714)`,
+        tex: 120,
+        photoCaption: `Deventer connector · Delfzijl H2 hub`,
+        body: `In Deventer, 2 × 120 m connects a tube-trailer bay and a future 2.5 MW electrolyser <span class="tc">(status to confirm)</span> to Nefit Bosch at 9.5 bar, with a planned 16 bar local grid — phase zero of an open network. In Delfzijl, the pipe links a hydrogen hub (fed partly by Nobian chlor-alkali by-product) to HyPlanet's bulk trailer-filling station, targeting an initial capacity above 2,000 kg/day and a scale-up toward 5,000–6,000 kg/day.`,
+        stats: [
+          { n: `2 × 120 m`, l: `Deventer connector installed` },
+          { n: `>2,000 kg/day`, l: `Delfzijl hub capacity (scaling to 5–6,000)` }
+        ],
+        cta: { label: `Explore both Dutch deployments`, href: `#` }
+      }
+    ]
+  },
+
+  system: {
+    title: `How it works as one system`,
+    intro: `The same SoluForce transport method — from hydrogen supply, through the flexible pipe, to the off-take — plays out in two Dutch deployments.`,
+    chain: [
+      { id: `supply`, kicker: `INPUT`, name: `Hydrogen supply`, sub: `Trailer · electrolyser · by-product`, title: `Trailers, a future electrolyser and Nobian by-product feed the lines` },
+      { id: `pipe`, kicker: `STEP`, name: `SoluForce FCP`, sub: `Non-metallic RTP`, title: `Flexible composite pipe carries the hydrogen` },
+      { id: `install`, kicker: `STEP`, name: `Spool & bore-pull`, sub: `Weld-free`, title: `Laid from 400 m spools; pulled through bores where needed` },
+      { id: `offtake`, kicker: `STEP`, name: `Off-take`, sub: `Nefit Bosch · HyPlanet`, title: `Delivered to industrial off-take and trailer filling` }
+    ],
+    branches: [
+      { id: `deventer`, name: `Deventer connector`, sub: `Firan · 9.5 / 16 bar`, title: `Phase-zero distribution connector (Deventer)` },
+      { id: `delfzijl`, name: `Delfzijl H2 hub`, sub: `HTS · >2,000 kg/day`, title: `Hydrogen hub pipeline (Delfzijl)` },
+      { id: `crossing`, name: `Canal + rail crossing`, sub: `First-of-its-kind`, title: `Pulled under a canal and a ProRail railway` },
+      { id: `operators`, name: `Firan · HTS`, sub: `Develop · realize · exploit`, title: `Operators that build and run the networks` },
+      { id: `replication`, name: `Replication`, sub: `Other regions`, title: `A transport blueprint others can copy` }
+    ],
+    nodeData: {
+      supply: { title: `Hydrogen supply`, tag: `Trailer · future electrolyser · Nobian by-product`, body: `Hydrogen enters from tube-trailer bays and a planned 2.5 MW electrolyser in Deventer, and in Delfzijl partly from Nobian chlor-alkali by-product hydrogen — local, scalable supply points for each deployment.` },
+      pipe: { title: `SoluForce flexible composite pipe`, tag: `Reinforced thermoplastic · MOP 42 bar`, body: `A fully non-metallic reinforced thermoplastic pipe certified for hydrogen to 42 bar. Hydrogen never touches metal, so there is no embrittlement risk, and the pipe is hydrogen-tight (permeation-free).` },
+      install: { title: `Spool & bore-pull installation`, tag: `Weld-free · 400 m spools`, body: `Delivered on 400 m spools and installed in long continuous runs with electrofusion joints instead of welding. Its flexibility lets a single length be pulled through a pre-made bore — how the Delfzijl line crosses beneath a canal and a railway.` },
+      offtake: { title: `Off-take`, tag: `Nefit Bosch · HyPlanet trailer filling`, body: `In Deventer the line delivers to the Nefit Bosch test facility at 9.5 bar; in Delfzijl it feeds HyPlanet's bulk hydrogen trailer-filling station at the hub.` },
+      deventer: { title: `Deventer connector`, tag: `Firan · phase 0 · 9.5 / 16 bar`, body: `2 × 120 m linking a tube-trailer bay and future electrolyser to Nefit Bosch at 9.5 bar, as phase zero of a planned 16 bar open distribution grid developed by Firan.` },
+      delfzijl: { title: `Delfzijl H2 hub`, tag: `HyEnergy TransStore · Green Planet`, body: `A hydrogen hub owned by HyEnergy TransStore (part of Green Planet), fed partly by Nobian by-product hydrogen, targeting >2,000 kg/day initially and 5,000–6,000 kg/day at scale-up.` },
+      crossing: { title: `First-of-its-kind crossing`, tag: `Under a canal AND a ProRail railway`, body: `The Delfzijl line is pulled beneath both a canal and a railway managed by ProRail — a dual crossing no hydrogen pipeline had made before, enabled by the pipe's flexibility and continuous length.` },
+      operators: { title: `Firan & HyEnergy TransStore`, tag: `Network operators`, body: `Firan is a future hydrogen distribution system operator in Deventer; HyEnergy TransStore owns and operates the Delfzijl hub asset. Both design, realise and then run their networks.` },
+      replication: { title: `A transport blueprint`, tag: `Other Hy2Market regions`, body: `A weld-free, low-cost, embrittlement-free way to connect a producer to an off-taker fast — even under canals and railways — a transport playbook other Hy2Market regions can copy.` }
+    }
+  },
+
+  process: {
+    title: `The process`,
+    fillPercent: `60%`,
+    steps: [
+      { date: `Hy2Market start`, badge: `HY2MARKET`, text: `Firan and SoluForce enter Hy2Market in different work packages; SoluForce's flexible pipe is earmarked for live Dutch deployments.` },
+      { date: `Deventer`, text: `A 2 × 120 m connector to Nefit Bosch is permitted, financed and laid in roughly two months — phase zero of an open grid. <span class="tc">(exact dates to confirm)</span>` },
+      { date: `Dec 2025`, text: `Construction begins on the Delfzijl hub pipeline — the SoluForce line is pulled beneath a canal and a ProRail railway in a first-of-its-kind dual crossing.` },
+      { date: `End 2026`, text: `Delfzijl hub pipeline commissioning targeted.` },
+      { date: `Now`, dateMuted: `in progress`, text: `Deventer's phase-1 open grid sits pre-final-investment-decision; the Delfzijl hub moves toward commissioning.` },
+      { date: `Q2 2027`, current: true, text: `Full operation of the Delfzijl hub expected — initial capacity >2,000 kg/day, scalable to 5,000–6,000 kg/day.` }
+    ]
+  },
+
+  lessons: {
+    title: `Lessons learned`,
+    leadHtml: `The hardest lessons were organisational, not technical — and the clearest was about <span class="hl">scope of work</span>.`,
+    body: `Because RTP was a new material for Firan, both partners had to keep an open mind and share knowledge in both directions — Firan learning the material's safety envelope, pressure ranges and maintenance needs; SoluForce learning Dutch contractors and permitting on its second or third installation in the country. Crossing live infrastructure at Delfzijl — a canal and a ProRail railway — adds another layer of coordination and permitting, which makes the same lesson sharper: define, in detail, who is responsible for what before you build. The transferable model is the partnership itself — operator and manufacturer aligning fast enough to lay pipe in weeks, even under obstacles.`
+  },
+
+  outcomes: {
+    title: `The outcomes`,
+    stats: [
+      { tone: `yellow`, n: `World-first`, l: `pipeline under a canal AND a railway (Delfzijl)` },
+      { tone: `grey`, n: `42 bar`, l: `certified, non-metallic — no embrittlement` },
+      { tone: `grey`, n: `>2,000 kg/day`, l: `Delfzijl hub capacity, scaling to 5–6,000` },
+      { tone: `black`, n: `2 × 120 m`, l: `Deventer connector in the ground` }
+    ],
+    narrative: `Across two deployments, the Dutch pilots turn a promising material into a proven building block. SoluForce's flexible composite pipe let Firan lay a distribution connector in Deventer in weeks, and let HyEnergy TransStore route a hub pipeline beneath a canal and a national railway in Delfzijl — a crossing steel could not make so cleanly. Together they show regional hydrogen transport doesn't have to wait on slow, costly infrastructure, and hand the consortium a replicable playbook for connecting producers to off-takers.`,
+    pending: [
+      { n: `—`, l: `Deventer construction dates <em>(pending confirmation)</em>` },
+      { n: `—`, l: `2.5 MW electrolyser status <em>(pending confirmation)</em>` },
+      { n: `—`, l: `Delfzijl final capacity & commissioning <em>(partner targets)</em>` }
+    ]
+  },
+
+  knowledge: {
+    title: `Knowledge exchange`,
+    intro: `What these Dutch deployments offer the consortium — and what the partners exchanged with each other.`,
+    cards: [
+      { dir: `out`, arrow: `→`, label: `SHARING WITH`, region: `Hy2Market regions`, country: `Europe`, text: `A weld-free, low-cost transport blueprint — including how to cross canals and railways — that other regions can copy to connect their own producers and off-takers.` },
+      { dir: `in`, arrow: `↔`, label: `EXCHANGED`, region: `Operators ↔ SoluForce`, country: `Netherlands`, text: `Firan and HyEnergy TransStore learned the pipe's safety, pressure and installation envelope; SoluForce learned Dutch permitting, contractors and infrastructure-crossing practice.` }
+    ]
+  },
+
+  quotesEyebrow: `IN THEIR WORDS`,
+  quotes: [
+    { text: `When the idea came on the table to actually realise it, it went really fast — within two months there was already construction work going on, and now there's a pipeline in the ground. It's just perfect, like out of the book.`, name: `Peter Cloos`, role: `Technical Manager, SoluForce` },
+    { text: `At Firan we're a distribution company — our goal is to connect A with B: producer and off-take of hydrogen. And SoluForce is a producer of material for distribution pipelines. That's where our roles come together.`, name: `Benjamin Pilzer`, role: `Senior Business Developer Hydrogen, Firan` },
+    { text: `It's very important to really look at the scope of work, so that we know exactly who is responsible for what. That was something we learned in the project.`, name: `Peter Cloos`, role: `Technical Manager, SoluForce` }
+  ],
+
+  next: {
+    eyebrow: `CONTINUE THE STORY`,
+    allHref: `./index.html`,
+    featured: {
+      href: `./case-study.html?region=upper-austria`,
+      kicker: `PRODUCTION · UPPER AUSTRIA`,
+      title: `From Steel to Green`,
+      lead: `How Upper Austria built an end-to-end hydrogen value chain around Europe's largest industrial green-hydrogen pilot.`,
+      chips: [`Production`, `Electrolysis`, `Storage`],
+      caption: `voestalpine · Linz`
+    },
+    others: [
+      { href: `./case-study.html?region=medio-tejo`, k: `MOBILITY`, region: `Médio Tejo`, country: `Portugal`, d: `A hydrogen bus in everyday public service.` },
+      { href: `./case-study.html?region=asturias`, k: `PRODUCTION`, region: `Asturias`, country: `Spain`, d: `Green hydrogen for industry and buses.` },
+      { href: `./case-study.html?region=aragon`, k: `MOBILITY`, region: `Aragon`, country: `Spain`, d: `Spain's first hydrogen taxi service.` }
+    ]
+  },
+
+  footer: {
+    cofunded: `Co-funded by<br>the European Union`,
+    cols: [
+      { h: `Visiting address:`, html: `Nijenborgh 6<br>9747 AG Groningen<br>The Netherlands` },
+      { h: `Postal address:`, html: `P.O. Box 70017<br>9704 AA Groningen<br>The Netherlands` }
+    ],
+    contact: { h: `Contact:`, phone: `+31 88 11 66 800`, email: `info@hy2market.eu`, links: [{ label: `Privacy statement`, href: `#` }] }
+  }
   };
 
   root.CASE_STUDIES = root.CASE_STUDIES || {};
