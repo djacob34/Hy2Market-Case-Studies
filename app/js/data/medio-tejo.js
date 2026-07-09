@@ -80,7 +80,8 @@
     downloadHref: '#',
 
     overview: [
-      { tone: 'yellow', label: 'THE INNOVATION', text: 'Hy2Market funded a nine-month, real-world deployment of a Caetano H2.City Gold hydrogen bus, coordinated by Médio Tejo 21 with IrRADIARE — proving hydrogen mobility across two different duty cycles on a single portable refuelling station.' },
+      { tone: 'yellow', label: 'THE CHALLENGE', text: 'Public transport drives 38% of Médio Tejo’s greenhouse gas emissions, the single largest source in the region. Long distances between towns and hilly terrain make battery-electric buses a poor fit — the region needed proof that hydrogen could work in daily service, not just in a lab.' },
+      { tone: 'black', label: 'THE INNOVATION', text: 'Hy2Market funded a nine-month, real-world deployment of a Caetano H2.City Gold hydrogen bus, coordinated by Médio Tejo 21 with IrRADIARE — proving hydrogen mobility across two different duty cycles on a single portable refuelling station.' },
       { tone: 'black', label: 'THE OUTCOME', text: 'A replicable proof point for rural and hilly regions: 30,769 km driven with zero technical issues, now feeding a permanent fleet transition at the regional operator.' }
     ],
 
