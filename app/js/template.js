@@ -479,6 +479,8 @@
     '</footer>';
   }
 
+  // Each body section renders only when its data key is present, so a case
+  // study can omit sections that don't apply to it (e.g. knowledge exchange).
   function renderCaseStudy(d) {
     return '' +
       hero(d) +
@@ -486,21 +488,21 @@
       '<div class="body-wrap"><div class="body-grid">' +
         sidebar(d) +
         '<main class="main">' +
-          overview(d) +
-          video(d) +
-          region(d) +
-          opportunity(d) +
-          solutions(d) +
-          system(d) +
-          process(d) +
-          lessons(d) +
-          outcomes(d) +
-          knowledge(d) +
+          (d.overview ? overview(d) : '') +
+          (d.video ? video(d) : '') +
+          (d.region ? region(d) : '') +
+          (d.opportunity ? opportunity(d) : '') +
+          (d.solutions ? solutions(d) : '') +
+          (d.system ? system(d) : '') +
+          (d.process ? process(d) : '') +
+          (d.lessons ? lessons(d) : '') +
+          (d.outcomes ? outcomes(d) : '') +
+          (d.knowledge ? knowledge(d) : '') +
           modals() +
         '</main>' +
       '</div></div>' +
-      quotes(d) +
-      next(d) +
+      (d.quotes ? quotes(d) : '') +
+      (d.next ? next(d) : '') +
       footer(d);
   }
 
