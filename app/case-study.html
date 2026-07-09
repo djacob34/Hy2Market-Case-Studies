@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hy2Market Case Study</title>
+  <meta name="description" content="A Hy2Market regional green-hydrogen case study.">
+
+  <!-- Brand typeface: Inter (falls back to system fonts offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <!--
+    Reusable case-study detail page. The region to render is chosen by the
+    ?region=<slug> query param, e.g. case-study.html?region=upper-austria.
+    Each region's content lives in one data file under js/data/. Register a new
+    region by adding its <script> below (and in index.html); it then becomes
+    selectable by slug and appears as a card on the landing page.
+  -->
+  <div id="case-study-root" aria-live="polite"></div>
+
+  <!-- ▼ region content — one file per region (keep in sync with index.html) -->
+  <script src="./js/data/upper-austria.js"></script>
+  <!-- ▲ region content -->
+
+  <!-- rendering + behavior -->
+  <script src="./js/template.js"></script>
+  <script src="./js/interactions.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

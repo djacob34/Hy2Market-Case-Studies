@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Upper Austria — From Steel to Green | Hy2Market Case Study</title>
-  <meta name="description" content="How Hy2Market extended a working 6 MW electrolyser in Linz into a complete green-hydrogen value chain: compression, purification, storage and distribution across Upper Austria.">
+  <title>Case Studies | Hy2Market</title>
+  <meta name="description" content="Hy2Market regional green-hydrogen case studies — how working value chains are being built across Europe, region by region.">
 
   <!-- Brand typeface: Inter (falls back to system fonts offline) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,20 +12,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/landing.css">
 </head>
-<body>
-  <!--
-    The page is rendered from a data object so the layout is reusable across all
-    ten regional case studies. Swap the data file below to render a different region.
-    See ../README implementation notes.
-  -->
-  <div id="case-study-root" aria-live="polite"></div>
+<body class="landing">
+  <header class="ls-topbar">
+    <span class="brand-lockup">Hy<span class="two">2</span>Market</span>
+    <nav class="ls-nav" aria-label="Primary">
+      <span class="ls-nav-here">Case studies</span>
+      <a href="https://hy2market.eu" target="_blank" rel="noopener">hy2market.eu ↗</a>
+    </nav>
+  </header>
 
-  <!-- content (one file per region) -->
+  <section class="ls-hero">
+    <p class="eyebrow ls-eyebrow"><span class="dash"></span>CASE STUDIES</p>
+    <h1 class="ls-title">Hydrogen value chains, <span class="hl">region by region</span></h1>
+    <p class="ls-lead">Across Europe, Hy2Market is turning working pilots into complete green-hydrogen value chains — production, compression, purification, storage and distribution. Explore how each region is building it.</p>
+  </section>
+
+  <main id="cs-grid" class="ls-grid" aria-live="polite">
+    <!-- case-study cards are injected by landing.js -->
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="brand-lockup">Hy<span class="two">2</span>Market</span>
+        <p style="margin:14px 0 0;max-width:32ch;">Building Europe’s green-hydrogen value chains, region by region.</p>
+      </div>
+      <div class="footer-col">
+        <div class="h">Explore</div>
+        <div class="footer-links">
+          <a href="./index.html">Case studies</a>
+          <a href="https://hy2market.eu" target="_blank" rel="noopener">hy2market.eu</a>
+        </div>
+      </div>
+      <div class="footer-col"></div>
+      <div class="footer-col">
+        <div class="h">Hy2Market</div>
+        <p style="margin:8px 0 0;">A European green-hydrogen initiative.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ▼ region content — one file per region (keep in sync with case-study.html) -->
   <script src="./js/data/upper-austria.js"></script>
-  <!-- rendering + behavior -->
-  <script src="./js/template.js"></script>
-  <script src="./js/interactions.js"></script>
-  <script src="./js/main.js"></script>
+  <!-- ▲ region content -->
+
+  <script src="./js/landing.js"></script>
 </body>
 </html>

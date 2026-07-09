@@ -1,0 +1,90 @@
+/* =========================================================================
+   landing.css — styles for the case-study index (index.html) only.
+   Reuses brand tokens and shared components (.brand-lockup, .tag, .hl,
+   .eyebrow, .footer) from styles.css; adds the top bar, hero and card grid.
+   ========================================================================= */
+
+.landing { background: var(--white); color: var(--black); }
+
+/* ---- top bar ---- */
+.ls-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px var(--gutter);
+  border-bottom: 1px solid var(--line); background: var(--white);
+  position: sticky; top: 0; z-index: 10;
+}
+.ls-nav { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 500; }
+.ls-nav-here { color: #000; font-weight: 600; }
+.ls-nav a { color: var(--muted-3); text-decoration: none; transition: color .2s ease; }
+.ls-nav a:hover { color: #000; }
+
+/* ---- hero / intro ---- */
+.ls-hero { max-width: var(--maxw); margin: 0 auto; padding: 72px var(--gutter) 40px; }
+.ls-eyebrow { color: #000; }
+.ls-title {
+  font-weight: 700; font-size: 56px; line-height: 1.03; letter-spacing: -0.015em;
+  margin: 20px 0 0; max-width: 18ch;
+}
+.ls-lead {
+  font-size: 20px; line-height: 1.35; letter-spacing: -0.01em;
+  max-width: 60ch; margin: 24px 0 0; color: var(--muted-3);
+}
+
+/* ---- card grid ---- */
+.ls-grid {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 24px var(--gutter) 96px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.cs-empty { color: var(--muted); font-size: 16px; padding: 20px 0; }
+
+/* ---- card ---- */
+.cs-card {
+  position: relative; display: flex; flex-direction: column;
+  padding: 30px 28px 26px; background: var(--white);
+  border: 1px solid var(--line-2); text-decoration: none; color: inherit;
+  overflow: hidden;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.cs-card:hover {
+  border-color: #000; background: var(--yellow-tint);
+  transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+}
+.cs-card-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--yellow); }
+.cs-card-kicker {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--muted-3); margin-top: 6px;
+}
+.cs-card-title {
+  font-weight: 700; font-size: 26px; line-height: 1.1; letter-spacing: -0.01em;
+  margin-top: 12px; color: #000;
+}
+.cs-card-blurb {
+  font-size: 15px; line-height: 1.5; color: var(--muted-3); margin-top: 14px;
+  flex: 1 1 auto;
+  display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+}
+.cs-card-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+.cs-card .tag { font-size: 12px; padding: 5px 11px; }
+.cs-card-cta {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 14px; font-weight: 600; color: #000; margin-top: 22px;
+}
+.cs-card-cta svg { transition: transform .2s ease; }
+.cs-card:hover .cs-card-cta svg { transform: translateX(4px); }
+
+/* ---- responsive ---- */
+@media (max-width: 1180px) {
+  .ls-grid { grid-template-columns: repeat(2, 1fr); }
+  .ls-title { font-size: 46px; }
+}
+@media (max-width: 760px) {
+  .ls-grid { grid-template-columns: 1fr; }
+  .ls-hero { padding: 48px var(--gutter) 28px; }
+  .ls-title { font-size: 36px; }
+  .ls-lead { font-size: 18px; }
+}
+@media (max-width: 560px) {
+  .ls-topbar { padding: 16px 22px; }
+  .ls-hero, .ls-grid { padding-left: 22px; padding-right: 22px; }
+}
