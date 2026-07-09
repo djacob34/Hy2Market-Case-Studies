@@ -228,8 +228,8 @@
 
     quotesEyebrow: 'IN THEIR WORDS',
     quotes: [
-      { text: 'We proved that in Médio Tejo, it’s feasible to use hydrogen buses — they are reliable. We had no technical issues during the whole demonstration period.', name: 'Inês Silva', role: 'IrRADIARE' },
-      { text: 'Médio Tejo, as a region, aims to promote the energy transition of the public bus sector using hydrogen. The distances between the cities are very big, the terrain is a bit hilly, so hydrogen becomes a better solution than electric vehicles.', name: 'Inês Silva', role: 'IrRADIARE' },
+      { text: 'With this demonstration we prove that in Médio Tejo, it’s feasible to use hydrogen buses, they are reliable. We had no technical issues during the whole demonstration period.', name: 'Inês Silva', role: 'IrRADIARE' },
+      { text: 'Médio Tejo, as a region, aims to promote the energy transition of the public bus sector using hydrogen. In the region, the distances between the cities are very big, the terrain is a bit hilly, so hydrogen becomes a better solution than electric vehicles.', name: 'Inês Silva', role: 'IrRADIARE' },
       { text: 'The learnings that we achieved here in the Hy2Market project, we would like to share with the industrial sector in the region.', name: 'Inês Silva', role: 'IrRADIARE' }
     ],
 
