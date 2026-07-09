@@ -244,7 +244,7 @@
       eyebrow: 'CONTINUE THE STORY',
       allHref: '#',
       featured: {
-        href: '#',
+        href: './case-study.html?region=asturias',
         kicker: 'NEXT CASE STUDY · PRODUCTION',
         title: 'Asturias: scaling green hydrogen in Spain’s industrial north',
         lead: 'Upper Austria’s sister production region. See how Asturias pairs heavy industry with large-scale electrolysis to decarbonise steel, fertiliser and refining.',
