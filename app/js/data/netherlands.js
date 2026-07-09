@@ -47,7 +47,8 @@
   downloadHref: `#`,
 
   overview: [
-    { tone: `yellow`, label: `THE INNOVATION`, text: `One material, two deployments. SoluForce's non-metallic reinforced thermoplastic pipe — certified for hydrogen, laid from 400 m spools, joined without welding — is used both as a distribution connector in Deventer (built as phase zero of an open grid with Firan) and, in Delfzijl, pulled beneath a canal and a ProRail railway in a first-of-its-kind dual crossing for the HyEnergy TransStore hydrogen hub.` },
+    { tone: `yellow`, label: `THE CHALLENGE`, text: `Green hydrogen is only useful if it can travel from where it is made to where it is used. Conventional steel pipelines are slow to permit, expensive to weld and lay, and vulnerable to hydrogen embrittlement — a poor fit for the short, distributed and obstacle-crossing routes a regional hydrogen network actually needs.` },
+    { tone: `black`, label: `THE INNOVATION`, text: `One material, two deployments. SoluForce's non-metallic reinforced thermoplastic pipe — certified for hydrogen, laid from 400 m spools, joined without welding — is used both as a distribution connector in Deventer (built as phase zero of an open grid with Firan) and, in Delfzijl, pulled beneath a canal and a ProRail railway in a first-of-its-kind dual crossing for the HyEnergy TransStore hydrogen hub.` },
     { tone: `black`, label: `THE OUTCOME`, text: `In Deventer, a hydrogen line from production to off-taker Nefit Bosch, in the ground in roughly two months. In Delfzijl, a hub pipeline crossing infrastructure no hydrogen line had crossed before — proving flexible composite pipe as a fast, low-cost, embrittlement-free building block for the Dutch hydrogen network.` }
   ],
 
