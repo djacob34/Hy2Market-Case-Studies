@@ -47,7 +47,8 @@
   downloadHref: `#`,
 
   overview: [
-    { tone: `yellow`, label: `THE INNOVATION`, text: `EDP is building the Asturias H2 Valley: a 150 MW green-hydrogen production hub next to the Aboño power plant near Gijón, sized from the start around real industrial offtake rather than production alone — and coupled to a retrofit that lets the Aboño boiler itself burn hydrogen in its fuel mix.` },
+    { tone: `yellow`, label: `THE CHALLENGE`, text: `Asturias is a coal-and-steel heartland that has to decarbonise without hollowing out the industry that built it. A standalone electrolyser risks producing hydrogen no one has committed to buy — and a working coal-era plant like Aboño is the kind of asset a just transition usually retires rather than repurposes.` },
+    { tone: `black`, label: `THE INNOVATION`, text: `EDP is building the Asturias H2 Valley: a 150 MW green-hydrogen production hub next to the Aboño power plant near Gijón, sized from the start around real industrial offtake rather than production alone — and coupled to a retrofit that lets the Aboño boiler itself burn hydrogen in its fuel mix.` },
     { tone: `black`, label: `THE OUTCOME`, text: `A full-stack production blueprint for coal regions in transition: an electrolyser, an anchor industrial consumer, and a feasibility path to scale from 150 MW toward 500 MW — with the permits already in hand and the build now going to tender.` }
   ],
 
