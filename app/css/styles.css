@@ -263,13 +263,30 @@ a:focus-visible, button:focus-visible {
 /* overview / summary box */
 .overview {
   scroll-margin-top: 28px; background: var(--panel); padding: 48px;
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px;
+  display: flex; flex-direction: column; gap: 34px;
+}
+/* challenge / innovation blocks — even columns, auto-fit to how many there are */
+.ov-leads {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 44px;
 }
 .ov-label { display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.1em; font-weight: 600; color: #000; margin-bottom: 16px; }
 .ov-dot { width: 8px; height: 8px; border-radius: 50%; }
 .ov-dot.yellow { background: var(--yellow); box-shadow: 0 0 0 1px #000; }
 .ov-dot.black { background: #000; }
 .ov-text { font-size: 18px; line-height: 1.5; margin: 0; font-weight: 400; color: var(--ink-strong); }
+
+/* the outcome, pulled out as a centered, highlighted callout */
+.ov-outcome {
+  position: relative; text-align: center; max-width: 760px; margin: 2px auto 0;
+  background: var(--white); border: 1px solid var(--line-2);
+  padding: 34px 46px 36px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+}
+.ov-outcome::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--yellow);
+}
+.ov-outcome .ov-label { justify-content: center; margin-bottom: 13px; }
+.ov-outcome .ov-text { font-size: 21px; line-height: 1.45; font-weight: 500; color: #000; }
 
 /* video */
 .video { margin-top: 48px; }
@@ -600,7 +617,9 @@ a:focus-visible, button:focus-visible {
   .partners-inner { justify-content: flex-start; }
   .partner-logos { justify-content: flex-start; }
 
-  .overview { grid-template-columns: 1fr; gap: 32px; padding: 32px; }
+  .overview { gap: 30px; padding: 32px; }
+  .ov-leads { grid-template-columns: 1fr; gap: 30px; }
+  .ov-outcome { padding: 30px 32px; }
   .region-grid, .opp-grid { grid-template-columns: 1fr; }
   .quote-grid { grid-template-columns: 1fr; gap: 12px; }
   .quote-mark { font-size: 90px; line-height: 0.5; }
@@ -623,6 +642,8 @@ a:focus-visible, button:focus-visible {
   .system, .quotes { padding-left: var(--gutter); padding-right: var(--gutter); }
   .system { padding: 28px 20px; }
   .overview { padding: 24px; }
+  .ov-outcome { padding: 26px 22px; }
+  .ov-outcome .ov-text { font-size: 19px; }
   .modal { padding: 26px; }
   .modal h3 { font-size: 22px; }
 }

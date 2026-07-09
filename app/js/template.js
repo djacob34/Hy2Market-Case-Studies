@@ -130,13 +130,31 @@
       '<h2 class="sec-title">' + esc(title) + '</h2></div></div>';
   }
 
-  /* ---- OVERVIEW ---- */
+  /* ---- OVERVIEW (summary box) ---- */
+  // The "outcome" block is pulled out and rendered as a centered, highlighted
+  // callout below the challenge/innovation blocks. It is identified by an
+  // OUTCOME label (falling back to the last block if none matches).
   function overview(d) {
-    var cols = d.overview.map(function (o) {
-      return '<div><div class="ov-label"><span class="ov-dot ' + (o.tone === 'black' ? 'black' : 'yellow') + '"></span>' +
-        esc(o.label) + '</div><p class="ov-text">' + esc(o.text) + '</p></div>';
-    }).join('');
-    return '<section id="toc-overview" class="overview" data-reveal>' + cols + '</section>';
+    var items = d.overview || [];
+    var outcome = null, leads = [];
+    items.forEach(function (o) {
+      if (!outcome && /outcome/i.test(o.label)) outcome = o;
+      else leads.push(o);
+    });
+    if (!outcome && items.length) { outcome = items[items.length - 1]; leads = items.slice(0, -1); }
+
+    function block(o) {
+      return '<div class="ov-block"><div class="ov-label"><span class="ov-dot ' +
+        (o.tone === 'black' ? 'black' : 'yellow') + '"></span>' + esc(o.label) + '</div>' +
+        '<p class="ov-text">' + esc(o.text) + '</p></div>';
+    }
+    var leadsHtml = leads.length
+      ? '<div class="ov-leads">' + leads.map(block).join('') + '</div>' : '';
+    var outcomeHtml = outcome
+      ? '<div class="ov-outcome"><div class="ov-label"><span class="ov-dot yellow"></span>' +
+          esc(outcome.label) + '</div><p class="ov-text">' + esc(outcome.text) + '</p></div>'
+      : '';
+    return '<section id="toc-overview" class="overview" data-reveal>' + leadsHtml + outcomeHtml + '</section>';
   }
 
   /* ---- VIDEO ---- */
