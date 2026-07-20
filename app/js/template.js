@@ -78,7 +78,7 @@
             : '<div class="media-grain"></div>' +
               '<div class="light-streak"></div><div class="light-streak thin"></div>') +
           '<div class="media-caption">' + esc(h.mediaCaption) + '</div>' +
-          ARC_TR +
+          (h.video ? '' : ARC_TR) +
         '</div>' +
       '</div>' +
       '<div class="hero-stats">' + stats + '</div>' +
