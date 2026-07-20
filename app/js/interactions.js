@@ -82,7 +82,9 @@
         var p = partnerData[btn.getAttribute('data-partner')];
         if (!p || !partnerOverlay) return;
         var logoEl = partnerOverlay.querySelector('[data-partner-logo]');
-        if (logoEl) logoEl.innerHTML = p.logoHtml || '';
+        if (logoEl) logoEl.innerHTML = p.logo
+          ? '<img class="logo-img" src="./assets/logos/' + p.logo + '" alt="' + (p.name || '') + '">'
+          : (p.logoHtml || '');
         partnerOverlay.querySelector('[data-partner-title]').textContent = p.name;
         partnerOverlay.querySelector('[data-partner-role]').textContent = p.role;
         var bodyEl = partnerOverlay.querySelector('[data-partner-body]');

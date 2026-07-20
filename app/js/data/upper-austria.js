@@ -30,7 +30,7 @@
     // fallback. Roster = official Hy2Market Austria partner presentation.
     partners: [
       {
-        id: 'voest', name: 'voestalpine',
+        id: 'voest', logo: 'voest.png', name: 'voestalpine',
         role: 'Electrolyser host · production chain (WP2)',
         body: 'voestalpine hosts and upgraded the 6 MW PEM electrolyser at its Linz site — adding purification, drying, compression to 500 bar, storage and a trailer filling station.',
         bodyHtml: '<p>voestalpine, a globally leading technology group, hosts the 6 MW PEM electrolyser at its Linz site.</p>' +
@@ -40,7 +40,7 @@
         logoHtml: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 4l9 16 9-16" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lg" style="font-weight:600;font-size:16px;color:#1a1a1a;">voestalpine</span>'
       },
       {
-        id: 'verbund', name: 'VERBUND',
+        id: 'verbund', logo: 'verbund.png', name: 'VERBUND',
         role: 'Electrolyser upgrade partner (Verbund Green Hydrogen)',
         body: 'VERBUND (through Verbund Green Hydrogen) partners with voestalpine to upgrade the H2FUTURE electrolyser — adding purification and drying, compression and storage.',
         bodyHtml: '<p>VERBUND coordinated the original H2FUTURE pilot and supplies renewable power to the electrolyser.</p>' +
@@ -54,7 +54,7 @@
         logoHtml: '<svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M8 0L16 18H0z" fill="#0a5c46"/></svg><span style="font-weight:700;font-size:15px;color:#0a5c46;letter-spacing:0.06em;">VERBUND</span>'
       },
       {
-        id: 'wiva', name: 'WIVA P&G',
+        id: 'wiva', logo: 'wiva.png', name: 'WIVA P&G',
         role: 'Coordinator · WP4 & WP6 lead',
         body: 'WIVA P&G coordinates all Austrian activities and leads WP4 (Industrial Use of Hydrogen) and WP6 (Knowledge Exchange).',
         bodyHtml: '<p>WIVA P&amp;G coordinates all Austrian activities in the project.</p>' +
@@ -66,7 +66,7 @@
         logoHtml: '<span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#0072bc;color:#fff;font-weight:700;font-size:13px;">H₂</span><span style="font-weight:700;font-size:15px;color:#1a1a1a;letter-spacing:0.02em;">WIVA <span style="color:#0072bc;">P&amp;G</span></span>'
       },
       {
-        id: 'k1met', name: 'K1-MET',
+        id: 'k1met', logo: 'k1met.png', name: 'K1-MET',
         role: 'Methanation pilot · WP4 · roll-out lead',
         body: 'K1-MET implements and operates a methanation pilot plant under real industrial conditions at an integrated steel mill.',
         bodyHtml: '<p>K1-MET’s main contribution is implementing and operating a methanation pilot plant under real industrial conditions at an integrated steel mill.</p>' +
@@ -77,7 +77,7 @@
         logoHtml: '<span style="font-weight:700;font-size:18px;color:#c8102e;letter-spacing:-0.03em;">K1</span><span style="font-weight:700;font-size:18px;color:#1a1a1a;letter-spacing:-0.03em;">·MET</span>'
       },
       {
-        id: 'mul', name: 'Montanuniversität Leoben',
+        id: 'mul', logo: 'mul.png', name: 'Montanuniversität Leoben',
         role: 'Methanation research · Leoben',
         body: 'Montanuniversität Leoben installed a 20 kW SNG pilot plant for catalytic methanation of CO₂ and green hydrogen at an integrated steel plant.',
         bodyHtml: '<p><strong>WP4 — Industrial Use of Hydrogen.</strong> Installation of a 20 kW<sub>SNG</sub> pilot plant for the catalytic methanation of CO₂ and hydrogen to synthetic natural gas (CH₄).</p>' +
@@ -86,7 +86,7 @@
         logoHtml: '<span class="logo-word">Montanuniversität Leoben</span>'
       },
       {
-        id: 'ait', name: 'Austrian Institute of Technology',
+        id: 'ait', logo: 'ait.png', name: 'Austrian Institute of Technology',
         role: 'Research · industrial hydrogen use cases',
         body: 'AIT develops 5–7 industrial use cases for hydrogen across steel, chemicals, polymers and fertilisers, with detailed techno-economic analysis.',
         bodyHtml: '<p><strong>WP4 — Industrial Use of Hydrogen:</strong> developing 5–7 industrial use cases for hydrogen in industry. Cases investigated by AIT include:</p>' +
@@ -102,7 +102,7 @@
         logoHtml: '<span class="logo-word">AIT</span>'
       },
       {
-        id: 'biz-ooe', name: 'Business Upper Austria',
+        id: 'biz-ooe', logo: 'biz-ooe.png', name: 'Business Upper Austria',
         role: 'Regional agency · knowledge exchange & events',
         body: 'Business Upper Austria runs knowledge-exchange webinars, dissemination materials and the final project conference in Linz.',
         bodyHtml: '<p><strong>WP6 — Knowledge Exchange webinars:</strong> organising and delivering five knowledge-exchange webinars for the public and consortium, each with three keynotes (consortium, Austrian and international speakers), disseminated through internal and project channels.</p>' +
@@ -112,7 +112,7 @@
         logoHtml: '<span class="logo-word">Business Upper Austria</span>'
       },
       {
-        id: 'prozess', name: 'Prozess Optimal',
+        id: 'prozess', logo: 'prozess.png', name: 'Prozess Optimal',
         role: 'Process simulation · WP2 & WP4',
         body: 'Prozess Optimal builds ASPEN simulation models of the methanation pilot and of e-fuel / CCU process chains for WP2 and WP4.',
         bodyHtml: '<p><strong>Simulation models for WP2 and WP4.</strong></p>' +

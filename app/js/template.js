@@ -81,13 +81,21 @@
     '</header>';
   }
 
+  // A partner's logo: an image file (p.logo) if provided, else the inline
+  // logoHtml lockup. Shared by the partner band and the modal.
+  function partnerLogo(p) {
+    return p.logo
+      ? '<img class="logo-img" src="./assets/logos/' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">'
+      : (p.logoHtml || '');
+  }
+
   /* ---- PARTNER BAND ---- */
   function partners(d) {
     var logos = d.partners.map(function (p) {
-      var cls = 'partner' + (p.col ? ' lg-col' : '');
+      var cls = 'partner' + (p.col ? ' lg-col' : '') + (p.logo ? ' has-img' : '');
       var style = p.gap ? ' style="gap:' + esc(p.gap) + ';"' : '';
       return '<button type="button" class="' + cls + '" data-partner="' + esc(p.id) + '"' + style + '>' +
-        p.logoHtml +
+        partnerLogo(p) +
         '<span class="partner-tip" role="tooltip">Click to learn about this partner’s role</span>' +
       '</button>';
     }).join('');

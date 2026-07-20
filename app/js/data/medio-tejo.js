@@ -26,14 +26,14 @@
 
     partners: [
       {
-        id: 'mt21', name: 'Médio Tejo 21',
+        id: 'mt21', logo: 'mt21.png', name: 'Médio Tejo 21',
         role: 'Coordinator · mobility work package',
         body: 'Médio Tejo 21 — the Agência Regional de Energia e Ambiente do Médio Tejo — coordinated the mobility demonstration across the 11 municipalities of the region, aligning the pilot with the HyTagus Valley hydrogen initiative.',
         gap: '5px',
         logoHtml: '<span style="font-weight:700;font-size:14px;color:#1a1a1a;">Médio Tejo</span><span style="font-weight:800;font-size:15px;color:#e2001a;">21</span>'
       },
       {
-        id: 'irradiare', name: 'IrRADIARE',
+        id: 'irradiare', logo: 'irradiare.png', name: 'IrRADIARE',
         role: 'Technical partner · pilot delivery',
         body: 'IrRADIARE supported the technical delivery of the pilot — sourcing the vehicle and refuelling infrastructure as a matched pair and helping run Portugal’s first hydrogen bus in daily public service. The CaetanoBus H2.City Gold (Toyota FC Stack Gen 2), operator Rodoviária do Tejo and the PRF – Gás Solutions portable refuelling station were the bus, fuel-cell and refuelling suppliers (not Hy2Market consortium partners).',
         logoHtml: '<span style="font-weight:700;font-size:15px;color:#0a8f5c;letter-spacing:0.01em;">IrRADIARE</span>'
