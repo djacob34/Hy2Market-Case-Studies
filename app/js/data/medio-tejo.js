@@ -134,7 +134,7 @@
           subtitle: 'Two duty cycles, one bus, nine months.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
           photoCaption: 'Urban circuit, Abrantes → inter-city, Tomar',
-          body: 'The bus averaged 200 km a day across circuits serving all 11 municipalities. Urban route based in <strong>Abrantes</strong> (Nov 2023–Apr 2024), then an inter-city route based in <strong>Tomar</strong> (Apr 2024 onward), deliberately including student-transport routes to help spread awareness of the technology.',
+          body: 'The bus averaged 200 km a day across circuits serving all 11 municipalities. Urban route based in <strong>Abrantes</strong> (Nov 2023–Apr 2024), then an inter-city route based in <strong>Tomar</strong> (Apr–Aug 2024), deliberately including student-transport routes to help spread awareness of the technology.',
           stats: [
             { n: '200 km', l: 'average daily distance' },
             { n: '11', l: 'municipalities served' }
@@ -176,7 +176,7 @@
         bus: { title: 'Caetano H2.City Gold', tag: 'Toyota FC Stack Gen 2 · 62 passengers', body: 'A 62-passenger fuel-cell bus built by CaetanoBus on Toyota FC Stack Generation 2 technology. Batteries, tanks and fuel cell sit on the roof; measured consumption averaged ~6.8 kg H₂ per 100 km.' },
         service: { title: 'Public route service', tag: '~200 km/day · 11 municipalities', body: 'The bus ran real public routes averaging ~200 km a day, serving all 11 municipalities over nine months and 30,769 km with zero technical issues.' },
         urban: { title: 'Urban route · Abrantes', tag: 'Nov 2023 – Apr 2024', body: 'The first duty cycle: a dense urban circuit based in Abrantes, refuelled at the Municipal Shipyard station.' },
-        intercity: { title: 'Inter-city route · Tomar', tag: 'Apr 2024 onward', body: 'The second duty cycle: a longer inter-city route based in Tomar, including student-transport routes to spread awareness of the technology.' },
+        intercity: { title: 'Inter-city route · Tomar', tag: 'Apr – Aug 2024', body: 'The second duty cycle: a longer inter-city route based in Tomar, including student-transport routes to spread awareness of the technology.' },
         fleet: { title: 'Fleet expansion', tag: 'Rodoviária Tejo · 3 buses', body: 'Convinced by nine fault-free months, Rodoviária Tejo is pursuing national funding for a three-bus fleet — the pilot doing the persuading a brochure could not.' },
         capacitation: { title: 'Capacitation project', tag: 'Regional industrial sector', body: 'A regional knowledge-sharing programme carrying the pilot’s learnings to Médio Tejo’s wider industrial sector. (Stated by IrRADIARE; not yet corroborated publicly.)' },
         exchange: { title: 'Knowledge exchange', tag: 'With Upper Austria', body: 'Médio Tejo shares mobility-demonstration know-how with Upper Austria — cited directly in Upper Austria’s own case study — and draws production and renewable-capacity expertise in return.' }
@@ -190,7 +190,7 @@
         { date: '2021', badge: true, text: 'Pego coal power plant closes; the HyTagus Valley hydrogen initiative launches.' },
         { date: '13 Nov 2023', text: 'Hydrogen bus pilot launches, based in Abrantes, coordinated by Médio Tejo 21 with IrRADIARE.' },
         { date: 'Apr 2024', text: 'Refuelling station relocates to Tomar; the bus shifts to the inter-city route.' },
-        { date: 'Jul–Aug 2024', dateMuted: '· end month to confirm', text: 'Nine-month demonstration concludes: 30,769 km driven, zero technical issues. <span class="tc">(exact end — July or August — to confirm with partners)</span>' },
+        { date: 'Aug 2024', text: 'Nine-month demonstration concludes: 30,769 km driven, zero technical issues.' },
         { date: 'Aug 2024', dateMuted: '· Hy2Market', text: 'Results published; Interreg Europe features the pilot as a good practice.' },
         { date: '2026 · You are here', current: true, text: 'Rodoviária Tejo pursues national funding for a 3-bus fleet expansion; capacitation project underway.' }
       ]
