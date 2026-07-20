@@ -25,47 +25,95 @@
       ]
     },
 
-    // Each partner: a bespoke logo lockup (logoHtml) + modal content.
+    // Each partner: logo lockup (logoHtml) + modal content. Rich per-partner
+    // contributions live in bodyHtml (scrollable in the popup); body is a short
+    // fallback. Roster = official Hy2Market Austria partner presentation.
     partners: [
       {
         id: 'voest', name: 'voestalpine',
-        role: 'Technology group · Linz · H2FUTURE host',
-        body: 'voestalpine, a globally leading technology group, hosts the 6 MW electrolyser at its Linz steel plant. It took part in the H2FUTURE pilot, which trialled green hydrogen in steelmaking processes.',
+        role: 'Electrolyser host · production chain (WP2)',
+        body: 'voestalpine hosts and upgraded the 6 MW PEM electrolyser at its Linz site — adding purification, drying, compression to 500 bar, storage and a trailer filling station.',
+        bodyHtml: '<p>voestalpine, a globally leading technology group, hosts the 6 MW PEM electrolyser at its Linz site.</p>' +
+          '<p><strong>Main contribution:</strong> upgrading the electrolyser with a purification and drying system for high-quality hydrogen, plus several compressors to pressurise hydrogen up to 500 bar.</p>' +
+          '<p><strong>WP2 — Green Hydrogen Production &amp; Management:</strong> installation and commissioning of compressors, a purification system, a storage system and a trailer filling station. Hydrogen is provided for pipeline supply and trailer distribution at 300, 380 and 500 bar — completing the production chain from production through pressurisation, purification, storage and filling, with an analysis system for quality control.</p>' +
+          '<p>Co-involved in T4.2 (hydrogen as feedstock) — supporting Montanuniversität Leoben and K1-MET to operate catalytic methanation at the voestalpine Linz power station — plus D4.5 (roll-out report) and the final-conference site tour.</p>',
         logoHtml: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 4l9 16 9-16" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lg" style="font-weight:600;font-size:16px;color:#1a1a1a;">voestalpine</span>'
       },
       {
         id: 'verbund', name: 'VERBUND',
-        role: 'Utility · project coordination & infrastructure',
-        body: 'VERBUND coordinated the H2FUTURE pilot and supplies renewable power to the electrolyser. As a project partner it supports the compression stage that lifts low-pressure output to transportable pressures.',
+        role: 'Utility · project partner',
+        body: 'VERBUND supplies renewable power to the electrolyser and is a project partner in the Austrian consortium.',
+        bodyHtml: '<p>VERBUND supplies renewable power to the electrolyser and is a project partner in the Austrian consortium.</p>' +
+          '<p><em>Detailed Hy2Market project contributions to be added.</em></p>',
         gap: '9px',
         logoHtml: '<svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M8 0L16 18H0z" fill="#0a5c46"/></svg><span style="font-weight:700;font-size:15px;color:#0a5c46;letter-spacing:0.06em;">VERBUND</span>'
       },
       {
-        id: 'siemens', name: 'Siemens Energy',
-        role: 'Technology supplier',
-        body: 'Siemens Energy supplied the 6 MW PEM electrolyser operating in Linz since November 2019 — the core technology producing up to 1,200 m³/h of green hydrogen.',
-        col: true,
-        logoHtml: '<span style="font-weight:700;font-size:15px;color:#1a1a1a;letter-spacing:0.04em;">SIEMENS</span><span style="font-weight:500;font-size:11px;color:#009999;letter-spacing:0.16em;margin-top:2px;">ENERGY</span>'
+        id: 'wiva', name: 'WIVA P&G',
+        role: 'Coordinator · WP4 & WP6 lead',
+        body: 'WIVA P&G coordinates all Austrian activities and leads WP4 (Industrial Use of Hydrogen) and WP6 (Knowledge Exchange).',
+        bodyHtml: '<p>WIVA P&amp;G coordinates all Austrian activities in the project.</p>' +
+          '<p><strong>WP4 lead — Industrial Use of Hydrogen:</strong> raising the TRL for hydrogen use in industry, both as an energy carrier and as feedstock, and translating industrial pilots into transferable role models.</p>' +
+          '<p><strong>WP6 lead — Knowledge Exchange:</strong> ensuring results, lessons learned and best practices from all value-chain work packages are collected, structured and shared across the consortium.</p>' +
+          '<p><strong>Task 6.2 — Standardisation &amp; Regulation:</strong> collecting and validating implementation-based evidence on how hydrogen standards, regulations and procedures affect deployment, and deriving transferable recommendations for faster, clearer projects.</p>' +
+          '<p>Also contributes to Task 6.3 (final training guidelines), the Learning Platform (best practices, challenges, lessons learned, technical results) and Deliverable 7.4 (final conference).</p>',
+        gap: '7px',
+        logoHtml: '<span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#0072bc;color:#fff;font-weight:700;font-size:13px;">H₂</span><span style="font-weight:700;font-size:15px;color:#1a1a1a;letter-spacing:0.02em;">WIVA <span style="color:#0072bc;">P&amp;G</span></span>'
       },
       {
         id: 'k1met', name: 'K1-MET',
-        role: 'Metallurgical research (with TU Leoben)',
-        body: 'K1-MET, together with TU Leoben, uses the hydrogen for methanation research — converting H₂ into synthetic methane for hard-to-electrify uses and advancing low-carbon metallurgy.',
+        role: 'Methanation pilot · WP4 · roll-out lead',
+        body: 'K1-MET implements and operates a methanation pilot plant under real industrial conditions at an integrated steel mill.',
+        bodyHtml: '<p>K1-MET’s main contribution is implementing and operating a methanation pilot plant under real industrial conditions at an integrated steel mill.</p>' +
+          '<p><strong>WP4 — Industrial Use of Hydrogen:</strong> testing how different parameters affect a 20 kW methanation plant, including load-flexible dynamic operation under industrial conditions.</p>' +
+          '<p><strong>Lead of Task 4.3 — Roll-out:</strong> evaluating potential roll-outs across Austria, Sicily, Asturias and Western Macedonia — analysing renewable energy sources, carbon-capture options, hydrogen production, gas infrastructure and challenges with public authorities.</p>' +
+          '<p>Co-involved in D4.2 (industrial use of H₂), D4.3 (CCU facility tests), D4.5 (roll-out report) and the final-conference site tour.</p>',
         gap: '2px',
         logoHtml: '<span style="font-weight:700;font-size:18px;color:#c8102e;letter-spacing:-0.03em;">K1</span><span style="font-weight:700;font-size:18px;color:#1a1a1a;letter-spacing:-0.03em;">·MET</span>'
       },
       {
-        id: 'rag', name: 'RAG Austria',
-        role: 'Underground storage · Gampern',
-        body: 'RAG Austria operates the world-first geological hydrogen storage in porous sandstone at Gampern (Underground Sun Storage 2030 / H2Stars) — an independent project, separate from H2FUTURE, that returns hydrogen at injection-grade purity and proves seasonal underground storage.',
-        logoHtml: '<span style="font-weight:800;font-size:19px;color:#e2001a;letter-spacing:-0.02em;">RAG</span><span style="font-weight:500;font-size:11px;color:#666;letter-spacing:0.1em;text-transform:uppercase;">Austria</span>'
+        id: 'mul', name: 'Montanuniversität Leoben',
+        role: 'Methanation research · Leoben',
+        body: 'Montanuniversität Leoben installed a 20 kW SNG pilot plant for catalytic methanation of CO₂ and green hydrogen at an integrated steel plant.',
+        bodyHtml: '<p><strong>WP4 — Industrial Use of Hydrogen.</strong> Installation of a 20 kW<sub>SNG</sub> pilot plant for the catalytic methanation of CO₂ and hydrogen to synthetic natural gas (CH₄).</p>' +
+          '<p>Demonstration of an originally TRL4 technology in a TRL6/7 environment at an integrated steel plant, using real process gases — CO₂ captured from power-plant exhaust and green H₂ produced with a PEM electrolyser.</p>' +
+          '<p>Experimental investigation of bulk and proprietary honeycomb-shaped catalysts for methanation under dynamic operating conditions, plus Aspen Plus® simulations of CCU process chains with green hydrogen (e.g. Fischer-Tropsch).</p>',
+        logoHtml: '<span class="logo-word">Montanuniversität Leoben</span>'
       },
       {
-        id: 'wiva', name: 'WIVA P&G',
-        role: 'Programme coordination & knowledge exchange',
-        body: 'WIVA P&G coordinates the regional programme and leads knowledge exchange — advising Constanța (Romania) on feasibility studies while learning mobility demonstration from Médio Tejo (Portugal).',
-        gap: '7px',
-        logoHtml: '<span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#0072bc;color:#fff;font-weight:700;font-size:13px;">H₂</span><span style="font-weight:700;font-size:15px;color:#1a1a1a;letter-spacing:0.02em;">WIVA <span style="color:#0072bc;">P&amp;G</span></span>'
+        id: 'ait', name: 'Austrian Institute of Technology',
+        role: 'Research · industrial hydrogen use cases',
+        body: 'AIT develops 5–7 industrial use cases for hydrogen across steel, chemicals, polymers and fertilisers, with detailed techno-economic analysis.',
+        bodyHtml: '<p><strong>WP4 — Industrial Use of Hydrogen:</strong> developing 5–7 industrial use cases for hydrogen in industry. Cases investigated by AIT include:</p>' +
+          '<ul>' +
+            '<li>Steel — hydrogen used directly as fuel in reheating furnaces</li>' +
+            '<li>Steel — hydrogen converted to synthetic natural gas for reheating furnaces</li>' +
+            '<li>Furnaces (steel, aluminium, ceramics) — hydrogen converted to ammonia (NH₃) as fuel</li>' +
+            '<li>Chemical — hydrogen as feedstock for carbon-neutral methanol</li>' +
+            '<li>Polymer — hydrogen as feedstock for carbon-neutral olefins</li>' +
+            '<li>Fertilisers, urea, polymer — hydrogen as feedstock for carbon-neutral ammonia</li>' +
+          '</ul>' +
+          '<p>Each case is analysed for the specifics of country, site, company and application, with processes and furnaces modelled in detail and techno-economic studies identifying the best decarbonisation concept. Results are summarised in Deliverable D4.8.</p>',
+        logoHtml: '<span class="logo-word">AIT</span>'
+      },
+      {
+        id: 'biz-ooe', name: 'Business Upper Austria',
+        role: 'Regional agency · knowledge exchange & events',
+        body: 'Business Upper Austria runs knowledge-exchange webinars, dissemination materials and the final project conference in Linz.',
+        bodyHtml: '<p><strong>WP6 — Knowledge Exchange webinars:</strong> organising and delivering five knowledge-exchange webinars for the public and consortium, each with three keynotes (consortium, Austrian and international speakers), disseminated through internal and project channels.</p>' +
+          '<p><strong>WP7 — Dissemination:</strong> developing a roll-up and factsheet promoting the project and the hydrogen sector, displayed at multiple locations in Linz.</p>' +
+          '<p><strong>Task 7.4 — Final Conference:</strong> planning and organising the final project conference (November 2026, Linz), run alongside the established annual H2Convention in Linz to expand reach.</p>' +
+          '<p><strong>Task 6.4 — Final training guidelines:</strong> a questionnaire assessing hydrogen knowledge needs and preferred learning formats, plus analysis of the results and desk research, compiled into an extended report and a white paper.</p>',
+        logoHtml: '<span class="logo-word">Business Upper Austria</span>'
+      },
+      {
+        id: 'prozess', name: 'Prozess Optimal',
+        role: 'Process simulation · WP2 & WP4',
+        body: 'Prozess Optimal builds ASPEN simulation models of the methanation pilot and of e-fuel / CCU process chains for WP2 and WP4.',
+        bodyHtml: '<p><strong>Simulation models for WP2 and WP4.</strong></p>' +
+          '<p><strong>Task 2.2 — Site Management &amp; Scale-up:</strong> a detailed ASPEN HYSYS model of the methanation pilot (CO₂ scrubber, CO₂ compression, electrolysis, H₂ compression, methanation reactor), with kinetic parameters calibrated to test-run results — usable for optimisation and to determine KPIs. Lead of D2.13 and D2.14.</p>' +
+          '<p><strong>Task 4.2 — Hydrogen as Feedstock:</strong> simulation models for CH₄ and NH₃ production with green hydrogen (characteristic energy demands); e-fuel models for methanol and jet fuel; a Fischer-Tropsch unit; and a comparison of the two power-to-liquid e-fuel methods on a 1 GW electrolyser sample case. Lead of D4.4; contributions to D4.9 and D4.10.</p>',
+        logoHtml: '<span class="logo-word">Prozess Optimal</span>'
       }
     ],
 

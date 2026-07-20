@@ -515,6 +515,9 @@ a:focus-visible, button:focus-visible {
 .modal-logo svg { display: block; }
 .modal-body p { margin: 0 0 12px; }
 .modal-body p:last-child { margin-bottom: 0; }
+.modal-body ul { margin: 0 0 12px; padding-left: 20px; }
+.modal-body li { margin: 0 0 5px; line-height: 1.5; }
+.modal-body strong { font-weight: 600; }
 .modal-close {
   position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; border-radius: 50%;
   border: 1px solid var(--line-3); background: #fff; cursor: pointer;
