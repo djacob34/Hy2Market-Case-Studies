@@ -17,7 +17,9 @@
       titleHtml: 'From Steel to Green: Building Austria’s End-to-End <span class="hl">Hydrogen</span> Value Chain',
       lead: 'Upper Austria isn’t promising a hydrogen future — it’s already built one. Around Europe’s largest industrial green-hydrogen pilot in Linz, Hy2Market is extending a working electrolyser into a complete value chain: compression, purification and distribution.',
       tags: ['Green hydrogen', 'Electrolysis', 'Industrial decarbonisation', 'Steel', 'Storage', 'Production'],
-      mediaCaption: 'voestalpine steel plant · Linz · H2FUTURE electrolyser',
+      // Cover animation of the voestalpine Linz site (muted, autoplay, looped)
+      video: 'https://cdn.voestalpine.com/asset-47186e19-9647-41ac-b81f-9ee9d798085a/AnimationReal%20Linz%20Neues%20Ending%20EN%2019-10-23.mp4',
+      mediaCaption: 'voestalpine Linz · Copyright: voestalpine AG, Source: voestalpine.com',
       stats: [
         { num: '6 MW', label: 'PEM electrolyser, operational since 2019' },
         { num: '1,200 m³/h', label: 'green hydrogen output' },

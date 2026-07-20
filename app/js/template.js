@@ -70,9 +70,13 @@
             '<div class="tags">' + tags + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="hero-media">' +
-          '<div class="media-grain"></div>' +
-          '<div class="light-streak"></div><div class="light-streak thin"></div>' +
+        '<div class="hero-media' + (h.video ? ' has-video' : '') + '">' +
+          (h.video
+            ? '<video class="hero-video" autoplay muted loop playsinline preload="auto"' +
+                (h.poster ? ' poster="' + esc(h.poster) + '"' : '') + '>' +
+                '<source src="' + esc(h.video) + '" type="video/mp4"></video>'
+            : '<div class="media-grain"></div>' +
+              '<div class="light-streak"></div><div class="light-streak thin"></div>') +
           '<div class="media-caption">' + esc(h.mediaCaption) + '</div>' +
           ARC_TR +
         '</div>' +
