@@ -24,12 +24,12 @@
   },
 
   partners: [
-    { id: `edp`, name: `EDP`, role: `Project lead · hub developer`, body: `EDP is developing the Asturias H2 Valley — the 150 MW green-hydrogen hub beside the Aboño power plant — and leads the retrofit that lets the Aboño boiler burn hydrogen in its fuel mix.`, logoHtml: `<span class="logo-word">EDP</span>` },
-    { id: `edpr`, name: `EDP Renewables`, role: `Renewable power supply`, body: `EDP Renewables backs the electrolyser with renewable generation, making the hydrogen green from the first electron.`, logoHtml: `<span class="logo-word">EDP Renewables</span>` },
-    { id: `alsa`, name: `ALSA`, role: `Mobility partner`, body: `Regional passenger-transport operator — a mobility pathway for hydrogen offtake in the Asturias ecosystem.`, logoHtml: `<span class="logo-word">ALSA</span>` },
-    { id: `faen`, name: `FAEN`, role: `Asturian Energy Foundation`, body: `The regional energy foundation supporting Asturias's energy transition and the local hydrogen ecosystem.`, logoHtml: `<span class="logo-word">FAEN</span>` },
-    { id: `hidritec`, name: `HIDRITEC`, role: `Hydrogen technology`, body: `Hydrogen-technology specialist contributing to the project's technical development.`, logoHtml: `<span class="logo-word">HIDRITEC</span>` },
-    { id: `innovfund`, name: `Innovation Fund (EU)`, role: `EU co-funding`, body: `The EU Innovation Fund mechanism part-funds the first phase of the Asturias H2 Valley.`, logoHtml: `<span class="logo-word">Innovation Fund</span>` }
+    { id: `edp`, name: `EDP Renováveis`, role: `Project lead · hub developer`, body: `Consortium lead for Asturias. EDP is developing the Asturias H2 Valley — the green-hydrogen hub beside the Aboño power plant — and the retrofit that lets the Aboño boiler burn hydrogen in its fuel mix. (WP4 content is carried by EDP España.)`, logoHtml: `<span class="logo-word">EDP Renováveis</span>` },
+    { id: `edpe`, name: `EDP España`, role: `WP4 · Aboño owner`, body: `Consortium partner and owner of the Aboño power plant, leading the boiler-retrofit engineering (the plant's Unit 2 burners are retrofitted for a hydrogen/natural-gas blend).`, logoHtml: `<span class="logo-word">EDP España</span>` },
+    { id: `age`, name: `Aboño Generaciones Eléctricas`, role: `Aboño plant operator`, body: `Affiliated entity (AGE) linked to the Aboño generation site, involved in the boiler-retrofit work at the plant.`, logoHtml: `<span class="logo-word">Aboño Generaciones Eléctricas</span>` },
+    { id: `alsa`, name: `ALSA`, role: `Mobility partner`, body: `Consortium partner and regional passenger-transport operator — a hydrogen-bus mobility pathway (its H2-bus test starts in Madrid and transfers to Asturias once fuelling is available).`, logoHtml: `<span class="logo-word">ALSA</span>` },
+    { id: `hidritec`, name: `HIDRITEC`, role: `Water treatment · electrolysis`, body: `Consortium partner developing and manufacturing a demineralised-water treatment container adapted for a large (≈100 MW-scale) electrolysis plant like the one foreseen at the EDP site.`, logoHtml: `<span class="logo-word">HIDRITEC</span>` },
+    { id: `faen`, name: `FAEN`, role: `Asturian Energy Foundation (associated)`, body: `Associated partner — the Fundación Asturiana de la Energía, supporting Asturias's energy transition and the local hydrogen ecosystem.`, logoHtml: `<span class="logo-word">FAEN</span>` }
   ],
 
   toc: [
@@ -119,7 +119,7 @@
         thumbGrad: `linear-gradient(135deg,#26424a,#11272d)`,
         tex: 90,
         photoCaption: `Aboño Unit 2 · hydrogen fuel-blend test`,
-        body: `At the Aboño power plant, EDP and the boiler's technology provider have tested burning gas fuel with hydrogen concentrations of <strong>up to 10%</strong>, replacing part of the natural gas in the Unit 2 boiler. It turns an existing coal-transition asset into a first, on-site consumer of the hub's own hydrogen.`,
+        body: `At the Aboño power plant, EDP and boiler-burner specialist Ansaldo Thomassen have tested burning gas fuel with hydrogen concentrations of <strong>up to 10%</strong>, replacing part of the natural gas in the Unit 2 boiler (whose burners are being developed for NG/H₂ blends up to 100% H₂). It turns an existing coal-transition asset into a first, on-site consumer of the hub's own hydrogen.`,
         stats: [
           { n: `Up to 10%`, l: `hydrogen in the boiler fuel mix` },
           { n: `Unit 2`, l: `retrofitted, not retired` }
@@ -150,7 +150,7 @@
       electrolyser: { title: `150 MW electrolyser`, tag: `Asturias H2 Valley · Aboño`, body: `The first-phase 150 MW green-hydrogen plant beside the Aboño site, part-funded by the EU Innovation Fund, designed to produce ~20,000 t/yr and cut emissions by 99.98% versus displaced fossil fuels.` },
       hydrogen: { title: `Green hydrogen`, tag: `~20,000 t/yr`, body: `Roughly 20,000 tonnes of renewable hydrogen per year — the hub's output, sized around real industrial demand rather than production alone.` },
       offtake: { title: `Industrial offtake`, tag: `Cluster + Aboño boiler`, body: `Hydrogen goes to nearby industrial companies — used directly or converted into methanol and ammonia — and to the Aboño Unit 2 boiler as a first on-site consumer.` },
-      abono: { title: `Aboño Unit 2 boiler`, tag: `Up to 10% H₂ in fuel mix`, body: `EDP and the boiler technologist have tested burning gas fuel with up to 10% hydrogen, replacing part of the natural gas in the Unit 2 boiler — a coal-transition asset becoming a hydrogen consumer.` },
+      abono: { title: `Aboño Unit 2 boiler`, tag: `Up to 10% H₂ in fuel mix`, body: `EDP and boiler-burner specialist Ansaldo Thomassen have tested burning gas fuel with up to 10% hydrogen, replacing part of the natural gas in the Unit 2 boiler — a coal-transition asset becoming a hydrogen consumer.` },
       carriers: { title: `Methanol & ammonia`, tag: `Industrial carriers`, body: `Industrial offtakers can convert the hydrogen into carriers such as methanol and ammonia — higher-value, easier-to-move forms for the cluster.` },
       cotransport: { title: `Co-transport`, tag: `H₂ · O₂ · NH₃ · heat`, body: `EDP is exploring co-transport of hydrogen, oxygen, ammonia and heat to customers — treating the whole industrial cluster, not a single plant, as the offtaker.` },
       scaleup: { title: `Scale-up toward 500 MW`, tag: `Feasibility study`, body: `A feasibility study is already looking past the first 150 MW toward 500 MW. <span class="tc">(scale figure to confirm)</span>` },
@@ -165,8 +165,8 @@
       { date: `20th century`, badge: `ERA`, text: `Aboño and Asturias built around coal, steel and heavy industry.` },
       { date: `Coal transition`, text: `EDP begins converting its Asturian generation away from coal, opening the door to a hydrogen anchor project.` },
       { date: `~2024`, dateMuted: `· permits`, text: `Main permits secured for the hydrogen hub: environmental, grid-access and urban-planning permits all granted. <span class="tc">(date inferred)</span>` },
-      { date: `Innovation Fund`, text: `Asturias H2 Valley admitted to the EU Innovation Fund mechanism (grant of ~€18.07M toward the first phase). <span class="tc">(figure to confirm)</span>` },
-      { date: `Boiler test`, text: `EDP and the boiler technologist report burning up to 10% hydrogen in the Aboño gas fuel.` },
+      { date: `Innovation Fund`, text: `EDP's Asturias H2 Valley admitted to the EU Innovation Fund (grant of ~€18.07M) — a separate EU stream from Hy2Market itself, which is funded by the EU I3 (Interregional Innovation Investments) instrument.` },
+      { date: `Boiler test`, text: `EDP and Ansaldo Thomassen report burning up to 10% hydrogen in the Aboño gas fuel.` },
       { date: `2026 · You are here`, current: true, text: `EPC contract out to tender; first 150 MW phase targeted to begin operations, with a feasibility study underway to scale toward 500 MW.` }
     ]
   },

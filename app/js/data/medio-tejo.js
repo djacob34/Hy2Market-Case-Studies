@@ -26,43 +26,17 @@
 
     partners: [
       {
-        id: 'irradiare', name: 'IrRADIARE',
-        role: 'Technical lead · pilot delivery',
-        body: 'IrRADIARE led the technical delivery of the pilot — sourcing the vehicle and refuelling infrastructure as a matched pair and running Portugal’s first hydrogen bus in daily public service.',
-        logoHtml: '<span style="font-weight:700;font-size:15px;color:#0a8f5c;letter-spacing:0.01em;">IrRADIARE</span>'
-      },
-      {
         id: 'mt21', name: 'Médio Tejo 21',
-        role: 'Regional coordinator',
-        body: 'Médio Tejo 21 coordinated the demonstration across the 11 municipalities of the region, aligning the pilot with the HyTagus Valley hydrogen initiative.',
+        role: 'Coordinator · mobility work package',
+        body: 'Médio Tejo 21 — the Agência Regional de Energia e Ambiente do Médio Tejo — coordinated the mobility demonstration across the 11 municipalities of the region, aligning the pilot with the HyTagus Valley hydrogen initiative.',
         gap: '5px',
         logoHtml: '<span style="font-weight:700;font-size:14px;color:#1a1a1a;">Médio Tejo</span><span style="font-weight:800;font-size:15px;color:#e2001a;">21</span>'
       },
       {
-        id: 'rodoviaria', name: 'Rodoviária Tejo',
-        role: 'Regional bus operator',
-        body: 'Rodoviária Tejo is the regional public-transport operator. Persuaded by nine months of fault-free service, it is now pursuing national funding for a three-bus fleet expansion.',
-        logoHtml: '<span style="font-weight:700;font-size:14px;color:#0072bc;letter-spacing:0.01em;">Rodoviária Tejo</span>'
-      },
-      {
-        id: 'caetano', name: 'CaetanoBus',
-        role: 'Bus manufacturer',
-        body: 'CaetanoBus builds the H2.City Gold fuel-cell bus used in the pilot — a 62-passenger vehicle developed with support from Portugal 2020 and the Recovery and Resilience Mechanism.',
-        col: true,
-        logoHtml: '<span style="font-weight:700;font-size:15px;color:#c8102e;">Caetano</span><span style="font-weight:600;font-size:15px;color:#1a1a1a;">Bus</span>'
-      },
-      {
-        id: 'toyota', name: 'Toyota',
-        role: 'Fuel-cell technology',
-        body: 'Toyota supplies the FC Stack Generation 2 fuel-cell technology at the heart of the H2.City Gold bus.',
-        logoHtml: '<span style="font-weight:700;font-size:15px;color:#eb0a1e;letter-spacing:0.03em;">TOYOTA</span>'
-      },
-      {
-        id: 'prf', name: 'PRF – Gas Solutions',
-        role: 'Portable refuelling station',
-        body: 'PRF – Gas Solutions provided the portable hydrogen refuelling station — relocated mid-pilot from Abrantes to Tomar, so neither site needed a permanent build.',
-        col: true,
-        logoHtml: '<span style="font-weight:800;font-size:16px;color:#1a1a1a;letter-spacing:0.02em;">PRF</span><span style="font-weight:500;font-size:10px;color:#666;letter-spacing:0.12em;text-transform:uppercase;margin-top:2px;">Gas Solutions</span>'
+        id: 'irradiare', name: 'IrRADIARE',
+        role: 'Technical partner · pilot delivery',
+        body: 'IrRADIARE supported the technical delivery of the pilot — sourcing the vehicle and refuelling infrastructure as a matched pair and helping run Portugal’s first hydrogen bus in daily public service. The CaetanoBus H2.City Gold (Toyota FC Stack Gen 2), operator Rodoviária do Tejo and the PRF – Gás Solutions portable refuelling station were the bus, fuel-cell and refuelling suppliers (not Hy2Market consortium partners).',
+        logoHtml: '<span style="font-weight:700;font-size:15px;color:#0a8f5c;letter-spacing:0.01em;">IrRADIARE</span>'
       }
     ],
 

@@ -41,10 +41,15 @@
       },
       {
         id: 'verbund', name: 'VERBUND',
-        role: 'Utility · project partner',
-        body: 'VERBUND supplies renewable power to the electrolyser and is a project partner in the Austrian consortium.',
-        bodyHtml: '<p>VERBUND supplies renewable power to the electrolyser and is a project partner in the Austrian consortium.</p>' +
-          '<p><em>Detailed Hy2Market project contributions to be added.</em></p>',
+        role: 'Electrolyser upgrade partner (Verbund Green Hydrogen)',
+        body: 'VERBUND (through Verbund Green Hydrogen) partners with voestalpine to upgrade the H2FUTURE electrolyser — adding purification and drying, compression and storage.',
+        bodyHtml: '<p>VERBUND coordinated the original H2FUTURE pilot and supplies renewable power to the electrolyser.</p>' +
+          '<p>Under Hy2Market, <strong>Verbund Green Hydrogen</strong> partners with voestalpine to upgrade the 6 MW PEM electrolyser system at voestalpine Linz:</p>' +
+          '<ul>' +
+            '<li>a purification and drying unit that reduces residual oxygen and moisture to below 1 ppmv, lifting the hydrogen to fuel cell quality (99.999%);</li>' +
+            '<li>compression (Hiperbaric technology) reaching up to 500 bar;</li>' +
+            '<li>storage tanks holding roughly one tonne of hydrogen in total.</li>' +
+          '</ul>',
         gap: '9px',
         logoHtml: '<svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M8 0L16 18H0z" fill="#0a5c46"/></svg><span style="font-weight:700;font-size:15px;color:#0a5c46;letter-spacing:0.06em;">VERBUND</span>'
       },
