@@ -496,8 +496,25 @@ a:focus-visible, button:focus-visible {
 .modal {
   background: #fff; max-width: 520px; width: 100%; padding: 34px; position: relative;
   box-shadow: 0 24px 70px rgba(0,0,0,0.4);
+  max-height: 86vh; overflow-y: auto;
 }
-.modal.partner { max-width: 560px; }
+/* partner modal: fixed header (kicker, logo, name, role) + scrollable body */
+.modal.modal-partner {
+  max-width: 560px; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.modal-partner .modal-head { flex: 0 0 auto; }
+.modal-partner .modal-body {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-right: 4px;
+}
+.modal-partner .modal-tag { margin-bottom: 16px; }
+.modal-logo {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  min-height: 30px; margin: 4px 0 12px;
+}
+.modal-logo svg { display: block; }
+.modal-body p { margin: 0 0 12px; }
+.modal-body p:last-child { margin-bottom: 0; }
 .modal-close {
   position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; border-radius: 50%;
   border: 1px solid var(--line-3); background: #fff; cursor: pointer;

@@ -393,12 +393,15 @@
       '</div>' +
     '</div>' +
     '<div class="modal-overlay" data-partner-overlay hidden>' +
-      '<div class="modal partner" role="dialog" aria-modal="true" aria-labelledby="partner-modal-title" tabindex="-1">' +
+      '<div class="modal modal-partner" role="dialog" aria-modal="true" aria-labelledby="partner-modal-title" tabindex="-1">' +
         closeBtn() +
-        '<div class="modal-kicker">PROJECT PARTNER</div>' +
-        '<h3 id="partner-modal-title" data-partner-title></h3>' +
-        '<div class="modal-tag" data-partner-role></div>' +
-        '<p class="modal-body" data-partner-body></p>' +
+        '<div class="modal-head">' +
+          '<div class="modal-kicker">PROJECT PARTNER</div>' +
+          '<div class="modal-logo" data-partner-logo aria-hidden="true"></div>' +
+          '<h3 id="partner-modal-title" data-partner-title></h3>' +
+          '<div class="modal-tag" data-partner-role></div>' +
+        '</div>' +
+        '<div class="modal-body" data-partner-body></div>' +
       '</div>' +
     '</div>';
   }

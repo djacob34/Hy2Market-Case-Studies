@@ -81,9 +81,14 @@
       btn.addEventListener('click', function () {
         var p = partnerData[btn.getAttribute('data-partner')];
         if (!p || !partnerOverlay) return;
+        var logoEl = partnerOverlay.querySelector('[data-partner-logo]');
+        if (logoEl) logoEl.innerHTML = p.logoHtml || '';
         partnerOverlay.querySelector('[data-partner-title]').textContent = p.name;
         partnerOverlay.querySelector('[data-partner-role]').textContent = p.role;
-        partnerOverlay.querySelector('[data-partner-body]').textContent = p.body;
+        var bodyEl = partnerOverlay.querySelector('[data-partner-body]');
+        // `bodyHtml` (rich, multi-paragraph) wins over plain `body` when present
+        if (p.bodyHtml) { bodyEl.innerHTML = p.bodyHtml; } else { bodyEl.textContent = p.body || ''; }
+        bodyEl.scrollTop = 0;
         openOverlay(partnerOverlay);
       });
     });

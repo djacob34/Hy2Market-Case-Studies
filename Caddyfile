@@ -1,6 +1,8 @@
 :8080 {
 	root * /srv
 	encode gzip
+	# Always revalidate so content updates show immediately (ETag makes this cheap).
+	header Cache-Control "no-cache"
 	try_files {path} {path}/ /index.html
 	file_server
 }
