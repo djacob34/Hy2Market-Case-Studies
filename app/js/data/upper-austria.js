@@ -258,8 +258,8 @@
 
     lessons: {
       title: 'Lessons learned',
-      leadHtml: 'As a "more developed" region, Upper Austria’s central lesson is blunt: <span class="mark">identify your offtakers before you build infrastructure.</span>',
-      body: 'WIVA P&G advised Constanța (Romania) on feasibility studies for a Danube hydrogen hub, steering them to confirm demand first. Knowledge flows both ways — Upper Austria is learning mobility demonstration from Médio Tejo (Portugal) while offering production and renewable-capacity expertise in return.'
+      leadHtml: 'As a "more developed" region, Upper Austria’s central lesson is blunt: <span class="mark">secure your offtakers before you build the infrastructure to serve them.</span>',
+      body: 'The wider takeaway is that you rarely need to start from a blank sheet — extending a working electrolyser into a full value chain proved faster, cheaper and far more replicable than a greenfield build. The electrolyser itself was the straightforward part; the project was made or broken by the missing links around it, where purification, compression and rigorous quality control are what turn raw output into the fuel-cell-grade hydrogen a mobility offtaker will actually accept. Storage need not be the bottleneck either: recovering hydrogen from porous underground rock at injection-grade purity showed that seasonal, large-scale storage is a practical option rather than a lab curiosity. The thread running through all of it is sequencing — prove each link before scaling the next.'
     },
 
     outcomes: {
