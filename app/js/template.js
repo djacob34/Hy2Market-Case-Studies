@@ -39,11 +39,14 @@
   /* ---- HERO ---- */
   function hero(d) {
     var h = d.hero;
-    var stats = h.stats.map(function (s) {
+    // stats is optional: a region with no confirmed figures yet (e.g. no
+    // hardware pilot of its own) can omit it rather than show padded tiles.
+    var hasStats = h.stats && h.stats.length;
+    var stats = hasStats ? h.stats.map(function (s) {
       return '<div class="hero-stat"><div class="stat-tick"></div>' +
         '<div class="stat-num">' + esc(s.num) + '</div>' +
         '<div class="stat-label">' + esc(s.label) + '</div></div>';
-    }).join('');
+    }).join('') : '';
     var tags = h.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('');
     var bc = d.breadcrumb;
     return '' +
@@ -93,9 +96,35 @@
       : (p.logoHtml || '');
   }
 
+  // A region with exactly one Hy2Market partner gets a single larger
+  // "regional partner" card instead of the multi-logo band (which is built
+  // for 6-8 logos and looks sparse/broken with just one). Reusable for any
+  // future single-partner region — driven purely by partners.length, no
+  // extra data field required. Click still opens the standard partner modal
+  // via the shared data-partner wiring in interactions.js.
+  function partnerSpotlight(p) {
+    var flag = p.dataNeeded ? '<div class="spotlight-flag">' + esc(p.dataNeeded) + '</div>' : '';
+    return '' +
+    '<section class="partners partner-spotlight" aria-label="Project partner">' +
+      '<div class="spotlight-inner">' +
+        '<span class="partners-label">PROJECT PARTNER</span>' +
+        '<button type="button" class="partner-spotlight-card" data-partner="' + esc(p.id) + '">' +
+          '<span class="spotlight-logo">' + partnerLogo(p) + '</span>' +
+          '<span class="spotlight-text">' +
+            '<span class="spotlight-headline">' + esc(p.role || p.name) + '</span>' +
+            flag +
+          '</span>' +
+          '<span class="spotlight-cta">Learn more<span class="arrow"> →</span></span>' +
+        '</button>' +
+      '</div>' +
+    '</section>';
+  }
+
   /* ---- PARTNER BAND ---- */
   function partners(d) {
-    var logos = d.partners.map(function (p) {
+    var list = d.partners || [];
+    if (list.length === 1) return partnerSpotlight(list[0]);
+    var logos = list.map(function (p) {
       var cls = 'partner' + (p.col ? ' lg-col' : '') + (p.logo ? ' has-img' : '');
       var style = p.gap ? ' style="gap:' + esc(p.gap) + ';"' : '';
       return '<button type="button" class="' + cls + '" data-partner="' + esc(p.id) + '"' + style + '>' +
@@ -245,7 +274,9 @@
     var drawers = s.drawers.map(function (dr, i) {
       var tex = 'repeating-linear-gradient(' + dr.tex + 'deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px)';
       var texBig = 'repeating-linear-gradient(' + dr.tex + 'deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 22px)';
-      var stats = dr.stats.map(function (st) {
+      // stats is optional — a contribution that isn't a metered technology
+      // (e.g. desk research, standards input) has no numeric tile to show.
+      var stats = (dr.stats || []).map(function (st) {
         return '<div class="stat-box"><div class="n">' + esc(st.n) + '</div><div class="l">' + st.l + '</div></div>';
       }).join('');
       var cta = dr.cta ? '<a class="cta-pill" href="' + esc(dr.cta.href) + '">' + esc(dr.cta.label) + ' <span class="arrow">→</span></a>' : '';
@@ -284,12 +315,21 @@
       return '<button type="button" class="' + cls + '" data-node="' + esc(n.id) + '" title="' + esc(n.title) + '">' +
         kicker + '<div class="nname">' + n.name + '</div><div class="nsub">' + n.sub + '</div></button>';
     }
+    // chain is optional: a region with no Hy2Market-built system (e.g. a
+    // map of a partner's regional context rather than a production chain)
+    // can supply only branches. The connecting "BRANCHES TO" divider only
+    // makes sense when there's a chain above it, so it's skipped otherwise;
+    // its label is also overridable per region (defaults to "BRANCHES TO").
+    var chainList = s.chain || [];
     var chain = [];
-    s.chain.forEach(function (n, i) {
+    chainList.forEach(function (n, i) {
       if (i > 0) chain.push('<div class="chain-arrow" aria-hidden="true">→</div>');
       chain.push(node(n));
     });
-    var branches = s.branches.map(function (n) { return node(n); }).join('');
+    var branches = (s.branches || []).map(function (n) { return node(n); }).join('');
+    var branchLabel = chainList.length
+      ? '<div class="branch-label"><span class="bdot"></span><span class="btxt">' + esc(s.branchLabel || 'BRANCHES TO') + '</span><span class="bline"></span></div>'
+      : '';
     return '' +
     '<section id="toc-system" class="section mt-block" data-reveal>' +
       '<div class="system">' +
@@ -297,7 +337,7 @@
           '<h2 class="sec-title">' + esc(s.title) + '</h2></div></div>' +
         '<p class="system-intro">' + esc(s.intro) + '</p>' +
         '<div class="chain">' + chain.join('') + '</div>' +
-        '<div class="branch-label"><span class="bdot"></span><span class="btxt">BRANCHES TO</span><span class="bline"></span></div>' +
+        branchLabel +
         '<div class="branches">' + branches + '</div>' +
       '</div>' +
     '</section>';
@@ -520,23 +560,40 @@
 
   // Each body section renders only when its data key is present, so a case
   // study can omit sections that don't apply to it (e.g. knowledge exchange).
+  var SECTION_RENDERERS = {
+    overview: function (d) { return d.overview ? overview(d) : ''; },
+    video: function (d) { return d.video ? video(d) : ''; },
+    region: function (d) { return d.region ? region(d) : ''; },
+    opportunity: function (d) { return d.opportunity ? opportunity(d) : ''; },
+    solutions: function (d) { return d.solutions ? solutions(d) : ''; },
+    system: function (d) { return d.system ? system(d) : ''; },
+    process: function (d) { return d.process ? process(d) : ''; },
+    lessons: function (d) { return d.lessons ? lessons(d) : ''; },
+    outcomes: function (d) { return d.outcomes ? outcomes(d) : ''; },
+    knowledge: function (d) { return d.knowledge ? knowledge(d) : ''; }
+  };
+  // The order every existing region renders in. A region whose story doesn't
+  // fit this flow (e.g. one that promotes knowledge exchange earlier, ahead
+  // of "the solutions") can override it with a `sectionOrder` array of these
+  // same keys — everything else about the section functions is unchanged.
+  var DEFAULT_SECTION_ORDER = [
+    'overview', 'video', 'region', 'opportunity', 'solutions',
+    'system', 'process', 'lessons', 'outcomes', 'knowledge'
+  ];
+
   function renderCaseStudy(d) {
+    var order = d.sectionOrder || DEFAULT_SECTION_ORDER;
+    var mainHtml = order.map(function (key) {
+      var render = SECTION_RENDERERS[key];
+      return render ? render(d) : '';
+    }).join('');
     return '' +
       hero(d) +
       partners(d) +
       '<div class="body-wrap"><div class="body-grid">' +
         sidebar(d) +
         '<main class="main">' +
-          (d.overview ? overview(d) : '') +
-          (d.video ? video(d) : '') +
-          (d.region ? region(d) : '') +
-          (d.opportunity ? opportunity(d) : '') +
-          (d.solutions ? solutions(d) : '') +
-          (d.system ? system(d) : '') +
-          (d.process ? process(d) : '') +
-          (d.lessons ? lessons(d) : '') +
-          (d.outcomes ? outcomes(d) : '') +
-          (d.knowledge ? knowledge(d) : '') +
+          mainHtml +
           modals() +
         '</main>' +
       '</div></div>' +

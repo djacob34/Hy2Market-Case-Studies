@@ -241,6 +241,29 @@ a:focus-visible, button:focus-visible {
 .logo-img { display: block; max-height: 52px; max-width: 210px; width: auto; height: auto; object-fit: contain; }
 .modal-logo .logo-img { max-height: 92px; max-width: 300px; margin: 2px 0; }
 
+/* single-partner "regional partner" card — used instead of the multi-logo
+   band when a region has exactly one Hy2Market partner (see partnerSpotlight
+   in template.js). Reusable by any future single-partner region. */
+.spotlight-inner { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.partner-spotlight-card {
+  flex: 1; min-width: 260px; display: flex; align-items: center; gap: 22px;
+  background: var(--white); border: 1px solid var(--line-2); padding: 16px 24px;
+  cursor: pointer; font-family: inherit; text-align: left;
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.partner-spotlight-card:hover { border-color: #000; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.10); }
+.spotlight-logo { flex-shrink: 0; display: flex; align-items: center; }
+.spotlight-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.spotlight-headline { font-size: 15px; line-height: 1.4; font-weight: 500; color: var(--ink); }
+.spotlight-cta { flex-shrink: 0; font-size: 14px; font-weight: 600; white-space: nowrap; }
+.spotlight-cta .arrow { display: inline-block; }
+
+/* inline flag for content still pending partner confirmation — used both in
+   flowing copy (as plain "[DATA NEEDED — ...]" text) and, where a field
+   already accepts markup, wrapped in this class for visibility. */
+.data-needed { color: #a13d1f; font-style: italic; font-weight: 500; }
+.spotlight-flag { font-size: 12px; font-style: italic; color: #a13d1f; }
+
 /* =========================================================================
    TWO-COLUMN BODY
    ========================================================================= */
@@ -669,6 +692,7 @@ a:focus-visible, button:focus-visible {
 
   .partners-inner { justify-content: flex-start; }
   .partner-logos { justify-content: flex-start; }
+  .partner-spotlight-card { flex-direction: column; align-items: flex-start; gap: 14px; }
 
   .overview { gap: 30px; padding: 32px; }
   .ov-leads { grid-template-columns: 1fr; gap: 30px; }
