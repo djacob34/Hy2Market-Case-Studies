@@ -330,6 +330,10 @@
     var branchLabel = chainList.length
       ? '<div class="branch-label"><span class="bdot"></span><span class="btxt">' + esc(s.branchLabel || 'BRANCHES TO') + '</span><span class="bline"></span></div>'
       : '';
+    // Optional single footnote below the diagram — e.g. one shared
+    // "not a Hy2Market output" credit referenced by an asterisk on each
+    // node label, instead of repeating the caveat on every node.
+    var disclaimer = s.disclaimer ? '<p class="system-disclaimer">' + esc(s.disclaimer) + '</p>' : '';
     return '' +
     '<section id="toc-system" class="section mt-block" data-reveal>' +
       '<div class="system">' +
@@ -339,6 +343,7 @@
         '<div class="chain">' + chain.join('') + '</div>' +
         branchLabel +
         '<div class="branches">' + branches + '</div>' +
+        disclaimer +
       '</div>' +
     '</section>';
   }
@@ -383,11 +388,17 @@
   /* ---- LESSONS ---- */
   function lessons(d) {
     var l = d.lessons;
+    // bullets is optional: a region with several distinct, unrelated
+    // takeaways can list them instead of folding them into one paragraph.
+    var bulletsHtml = (l.bullets && l.bullets.length)
+      ? '<ul class="lesson-list">' + l.bullets.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>'
+      : '';
+    var bodyHtml = (!bulletsHtml && l.body) ? '<p class="prose">' + esc(l.body) + '</p>' : '';
     return '' +
     '<section id="toc-lessons" class="section mt-block" data-reveal>' +
       secHead(l.title) +
       '<div class="measure"><p class="lead-para">' + l.leadHtml + '</p>' +
-        '<p class="prose">' + esc(l.body) + '</p></div>' +
+        bodyHtml + bulletsHtml + '</div>' +
     '</section>';
   }
 

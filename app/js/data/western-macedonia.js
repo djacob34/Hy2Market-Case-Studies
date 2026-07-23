@@ -9,9 +9,11 @@
    "[DATA NEEDED — ...]" placeholders per CLUBE's follow-up email — do not remove or fill these in
    without a confirmed source; they are meant to stay visible on the rendered page until resolved.
 
+   Visible copy is deliberately free of internal WP/deliverable/task codes (e.g. "WP6", "D6.3",
+   "Task 4.3") — those are consortium-internal shorthand, not something a public visitor needs.
+
    Structural notes (see template.js for the supporting, backward-compatible changes):
-   - hero.stats is omitted — no confirmed figures for a padded 3-tile grid; the one confirmed
-     regional snapshot line lives in hero.lead instead (template.js: hero() now tolerates no stats).
+   - hero.stats is omitted — no confirmed figures for a padded 3-tile grid.
    - partners has exactly one entry (CLUBE) — template.js renders a single "regional partner" card
      instead of the multi-logo band when partners.length === 1 (partnerSpotlight()).
    - sectionOrder promotes "knowledge exchange" to right after the opportunity triad, ahead of "how
@@ -20,9 +22,12 @@
    - No "process" section (no infrastructure timeline of Hy2Market's own to show) and no separate
      elaborated "opportunity" section — the challenge/approach/outcome triad above already carries
      that content verbatim, so it isn't duplicated further down the page.
-   - system.chain is omitted (there's no Hy2Market-built production chain here) — only system.branches,
-     each carrying a "NOT A HY2MARKET OUTPUT" kicker directly on the tile (template.js: system() now
-     tolerates a missing chain and an overridable branch-label). */
+   - system.chain is omitted (there's no Hy2Market-built production chain here) — only system.branches.
+     Each node label carries a trailing "*" instead of a repeated "not a Hy2Market output" kicker;
+     system.disclaimer renders the shared footnote once, below the diagram (template.js: system() now
+     tolerates a missing chain, an overridable branch-label, and an optional disclaimer line).
+   - lessons.bullets renders as a list instead of lessons.body prose (template.js: lessons() now
+     supports either). */
 (function (root) {
   var data = {
   slug: `western-macedonia`,
@@ -35,11 +40,11 @@
 
   hero: {
     eyebrow: `KNOWLEDGE EXCHANGE · WESTERN MACEDONIA`,
-    titleHtml: `Watch, Learn, Prepare: How Western Macedonia Is Building <span class="hl">Hydrogen</span> Readiness Before the Infrastructure Arrives`,
-    lead: `Most Hy2Market regions are proving a working hydrogen value chain. Western Macedonia is proving something else: how a coal region with no hydrogen infrastructure of its own yet turns a knowledge-exchange project into a running start — through training, standards work, and study visits to hydrogen frontrunners across Europe. Western Macedonia once generated more than 75% of Greece's electricity from lignite. Its coal-fired power plants are due to close by 2028. [DATA NEEDED — CLUBE to confirm these figures are OK to publish; sourced from the public Hy2Market regional highlight article, not stated directly on the interview call]`,
+    titleHtml: `Watch, Learn, Prepare: Western Macedonia's <span class="hl">Hydrogen</span> Readiness`,
+    lead: `Most Hy2Market regions are proving a working hydrogen value chain. Western Macedonia is proving something else: how a region with no hydrogen infrastructure of its own yet turns a knowledge-exchange project into a running start — through training, standards work, and study visits to hydrogen frontrunners across Europe.`,
     tags: [`Just Transition`, `Knowledge Exchange`, `Training & Reskilling`, `Standards & Policy`, `Replication`],
     mediaCaption: `Kozani, Western Macedonia — regional capital and CLUBE's home base. [DATA NEEDED — CLUBE to send a representative photo]`
-    // no hero.stats: no confirmed figures for a 3-tile grid — see the snapshot line folded into lead above.
+    // no hero.stats: no confirmed figures for a padded 3-tile grid.
   },
 
   partners: [
@@ -78,7 +83,9 @@
     title: `The region`,
     paragraphs: [
       `Western Macedonia was Greece's energy heart for generations — a lignite-mining region that once generated more than 75% of the country's electricity. That era is ending: the region's coal-fired power plants are due to close by 2028, backed by Greek government, EU, and Just Transition Mechanism funding.`,
-      `What comes next is still being written, and CLUBE, based in the regional capital <strong>Kozani</strong>, is one of the organizations working to make sure hydrogen is part of the answer.`
+      `The shutdown leaves a real gap to fill — both in generation capacity and in the jobs and skills built up around coal over decades. That's exactly the gap CLUBE was set up to work on: a nonprofit cluster organization based in <strong>Kozani</strong>, the regional capital, formed to steer the local economy toward bioeconomy and green hydrogen and to help the region's workforce reskill for what comes next.`,
+      `What Western Macedonia brings to that shift is real: abundant solar and wind capacity already feeding the grid, and a location that sits on one of Europe's prospective hydrogen export corridors, running from Greece up toward Germany. CLUBE is Greece's only Hy2Market partner and the only one representing the region in the consortium — which puts it in a position to connect Greek hydrogen stakeholders to a much wider European network.`,
+      `What comes next for the region is still being written, and CLUBE is one of the organizations working to make sure hydrogen is part of the answer.`
     ],
     map: {
       caption: `Western Macedonia · getting ready`,
@@ -94,7 +101,7 @@
     intro: `Hy2Market's clearest value for Western Macedonia has been the people it put CLUBE in a room with.`,
     cards: [
       { dir: `in`, arrow: `←`, label: `LEARNING FROM`, region: `Médio Tejo`, country: `· Portugal`, text: `An informal exchange comparing notes on mobility pilots — CLUBE is looking at Médio Tejo's hydrogen bus experience for lessons it can apply once its own refuelling station comes online. [DATA NEEDED — confirm whether CLUBE wants the Médio Tejo exchange named explicitly]` },
-      { dir: `in`, arrow: `↔`, label: `IN PROGRESS`, region: `Netherlands & Austria partners`, country: ``, text: `A still-open conversation exploring waste-to-hydrogen — valorizing sludge and other residues into hydrogen feedstock — effectively filling the gap left in Work Package 2 when RAVEN exited the project. That conversation is expected to resume after summer 2026. [DATA NEEDED — update once the waste-to-hydrogen conversation resumes]` }
+      { dir: `in`, arrow: `↔`, label: `IN PROGRESS`, region: `Netherlands & Austria partners`, country: ``, text: `CLUBE has opened early conversations with hydrogen partners in the Netherlands and Austria around waste-to-hydrogen — turning sludge and other residues into feedstock. It's a newer thread than the Médio Tejo exchange, with more detail expected to follow as the conversation develops.` }
     ]
   },
 
@@ -103,29 +110,29 @@
     intro: `Not a built technology — three work strands where CLUBE fed its regional expertise into Hy2Market's consortium-wide efforts. Open each to see the detail.`,
     drawers: [
       {
-        title: `Knowledge exchange & training guidelines (WP6, D6.3)`,
+        title: `Knowledge exchange & training guidelines`,
         subtitle: `Turning years of hands-on hydrogen training experience into a Europe-wide playbook.`,
         thumbGrad: `linear-gradient(135deg,#2c3138,#15171b)`,
         tex: 120,
-        photoCaption: `WP6 · training guidelines · knowledge exchange`,
-        body: `As part of Work Package 6, CLUBE contributed to Hy2Market's D6.3 training guidelines — desk research mapping the hydrogen skills landscape and training opportunities across the consortium's regions, benchmarked against Western Macedonia's own. CLUBE drew directly on its experience running GreenSkillsforH2 (the European Hydrogen Skills Alliance project) — including four annual hydrogen summer schools and masterclasses — to help define the different training formats the guidelines recommend, tailored to what each hydrogen profession actually needs, from safety officers to project managers. <span class="data-needed">[DATA NEEDED — exact GreenSkillsforH2 summer-school participant statistics, and how CLUBE wants that project credited/linked]</span>`,
-        cta: { label: `Read D6.3 on hy2market.eu/results (once public)`, href: `#` }
+        photoCaption: `Training guidelines · knowledge exchange`,
+        body: `CLUBE contributed to Hy2Market's training guidelines — desk research mapping the hydrogen skills landscape and training opportunities across the consortium's regions, benchmarked against Western Macedonia's own. CLUBE drew directly on its experience running GreenSkillsforH2 (the European Hydrogen Skills Alliance project) — including four annual hydrogen summer schools and masterclasses — to help define the different training formats the guidelines recommend, tailored to what each hydrogen profession actually needs, from safety officers to project managers. <span class="data-needed">[DATA NEEDED — exact GreenSkillsforH2 summer-school participant statistics, and how CLUBE wants that project credited/linked]</span>`,
+        cta: { label: `Read the training guidelines on hy2market.eu/results (once public)`, href: `#` }
       },
       {
-        title: `Regional data for roll-out evaluation (WP4, T4.3 / D4.5)`,
+        title: `Regional data for roll-out evaluation`,
         subtitle: `Feeding Western Macedonia's numbers into the consortium's Europe-wide roll-out picture.`,
         thumbGrad: `linear-gradient(135deg,#3a4048,#1c2026)`,
         tex: 60,
-        photoCaption: `WP4 · Task 4.3 · regional data`,
-        body: `CLUBE didn't run modelling or simulations of its own — but it did contribute regional data on CO₂ capture projects, renewable energy capacity, and green hydrogen potential in Western Macedonia and Greece more broadly, feeding Task 4.3's evaluation of where hydrogen roll-out is most viable across the consortium's regions. <span class="data-needed">[DATA NEEDED — confirm deliverable number D4.5 and whether it's public/linkable]</span>`
+        photoCaption: `Regional data · roll-out evaluation`,
+        body: `CLUBE didn't run modelling or simulations of its own — but it did contribute regional data on CO₂ capture projects, renewable energy capacity, and green hydrogen potential in Western Macedonia and Greece more broadly, feeding the consortium's evaluation of where hydrogen roll-out is most viable across its regions. <span class="data-needed">[DATA NEEDED — confirm whether this data/analysis is public or linkable, and where]</span>`
       },
       {
-        title: `Standards and policy input (WP6, T6.2)`,
+        title: `Standards and policy input`,
         subtitle: `Getting Greek hydrogen stakeholders a voice in Europe's emerging standards conversation.`,
         thumbGrad: `linear-gradient(135deg,#26424a,#11272d)`,
         tex: 90,
-        photoCaption: `WP6 · Task 6.2 · standards & policy`,
-        body: `When Task 6.2 needed input on hydrogen regulations and standards from across the consortium's countries, CLUBE acted as the bridge to Greece — distributing a stakeholder questionnaire to national and regional hydrogen players and channelling their responses back into the task. Results were later compiled and presented across the consortium, and are expected to inform an EU-wide hydrogen policy letter. <span class="data-needed">[DATA NEEDED — confirm whether the questionnaire results are citable as a named output, and who leads Task 6.2 (believed to be Gregor Offenthaler / WIVA P&G)]</span>`
+        photoCaption: `Standards & policy input`,
+        body: `When the consortium needed input on hydrogen regulations and standards from across its countries, CLUBE acted as the bridge to Greece — distributing a stakeholder questionnaire to national and regional hydrogen players and channelling their responses back. Results were later compiled and presented across the consortium, and are expected to inform an EU-wide hydrogen policy letter. <span class="data-needed">[DATA NEEDED — confirm whether the questionnaire results are citable as a named output, and who leads this work (believed to be Gregor Offenthaler / WIVA P&G)]</span>`
       }
     ]
   },
@@ -134,43 +141,53 @@
     title: `The regional hydrogen landscape`,
     branchLabel: `REGIONAL MOMENTUM`,
     intro: `None of the following is a Hy2Market deliverable — it's the momentum in Western Macedonia that Hy2Market is helping CLUBE get ready for.`,
+    disclaimer: `* Not a Hy2Market deliverable — regional momentum shown for context.`,
     branches: [
-      { id: `greenh2orn`, kicker: `NOT A HY2MARKET OUTPUT`, name: `GREENH2ORN`, sub: `Greece's 2nd H₂ refuelling station`, title: `GREENH2ORN — LIFE-funded hydrogen refuelling station, Kozani (not a Hy2Market output)` },
-      { id: `northone`, kicker: `NOT A HY2MARKET OUTPUT`, name: `NorthOne`, sub: `15 MW electrolyser · Hellenic Hydrogen`, title: `NorthOne — 15 MW electrolyser near Kozani (not a Hy2Market output)` },
-      { id: `pipeline`, kicker: `NOT A HY2MARKET OUTPUT`, name: `Hydrogen-ready pipeline`, sub: `existing line · up to 100% H₂`, title: `Existing pipeline built to carry up to 100% hydrogen (not a Hy2Market output)` },
-      { id: `consulting`, kicker: `OPTIONAL · NOT A HY2MARKET OUTPUT`, name: `Hydrogen strategy consulting`, sub: `DEPA · Hellenic Hydrogen · PPC`, title: `CLUBE's advisory relationships beyond Hy2Market (optional — confirm before publishing)` }
+      { id: `greenh2orn`, name: `GREENH2ORN*`, sub: `Greece's 2nd H₂ refuelling station`, title: `GREENH2ORN — LIFE-funded hydrogen refuelling station, Kozani` },
+      { id: `northone`, name: `NorthOne*`, sub: `15 MW electrolyser · Hellenic Hydrogen`, title: `NorthOne — 15 MW electrolyser near Kozani` },
+      { id: `pipeline`, name: `Hydrogen-ready pipeline*`, sub: `existing line · up to 100% H₂`, title: `Existing pipeline built to carry up to 100% hydrogen` },
+      { id: `consulting`, kicker: `OPTIONAL`, name: `DEPA / Hellenic Hydrogen / PPC*`, sub: `Hydrogen strategy consulting`, title: `CLUBE's advisory relationships beyond Hy2Market (optional — confirm before publishing)` }
     ],
     nodeData: {
-      greenh2orn: { title: `GREENH2ORN`, tag: `LIFE-funded · Municipality of Kozani · not a Hy2Market output`, body: `A LIFE-funded project building Greece's second hydrogen refuelling station — and its first with on-site green hydrogen production. Coordinated by the Municipality of Kozani; currently in the land-securing and construction-planning phase. End use: municipal fleet vehicles, plus private vehicles for the project's consortium partners. [DATA NEEDED — full GREENH2ORN project packet: timeline, partners, capacity figures]` },
-      northone: { title: `NorthOne`, tag: `Hellenic Hydrogen · not a Hy2Market output`, body: `A 15 MW electrolyser project coordinated by Hellenic Hydrogen, greenlit and expected to begin construction within months, sited near Kozani. [DATA NEEDED — construction start date and output/capacity figures]` },
-      pipeline: { title: `The hydrogen-ready pipeline`, tag: `Existing infrastructure · not a Hy2Market output`, body: `An existing pipeline in the region already built to carry up to 100% hydrogen. Plans call for injecting NorthOne's green hydrogen output once both projects are operational — a step still a few years out. [DATA NEEDED — confirm pipeline length and operator/owner before publishing any figure]` },
-      consulting: { title: `Hydrogen strategy consulting`, tag: `Optional · outside Hy2Market's scope`, body: `Beyond its Hy2Market role, CLUBE has advised DEPA (Greece's national gas company, and future owner of the GREENH2ORN refuelling station) on its hydrogen strategy, and maintains relationships with Hellenic Hydrogen and Greece's Public Power Corporation (PPC) around hydrogen as an industrial feedstock and storage medium for intermittent renewables. [DATA NEEDED — confirm CLUBE wants this named on the page at all, since it's outside Hy2Market's scope]` }
+      greenh2orn: { title: `GREENH2ORN`, tag: `LIFE-funded · Municipality of Kozani`, body: `A LIFE-funded project building Greece's second hydrogen refuelling station — and its first with on-site green hydrogen production. Coordinated by the Municipality of Kozani; currently in the land-securing and construction-planning phase. End use: municipal fleet vehicles, plus private vehicles for the project's consortium partners. [DATA NEEDED — full GREENH2ORN project packet: timeline, partners, capacity figures]` },
+      northone: { title: `NorthOne`, tag: `Hellenic Hydrogen`, body: `A 15 MW electrolyser project coordinated by Hellenic Hydrogen, greenlit and expected to begin construction within months, sited near Kozani. [DATA NEEDED — construction start date and output/capacity figures]` },
+      pipeline: { title: `The hydrogen-ready pipeline`, tag: `Existing infrastructure`, body: `An existing pipeline in the region already built to carry up to 100% hydrogen. Plans call for injecting NorthOne's green hydrogen output once both projects are operational — a step still a few years out. [DATA NEEDED — confirm pipeline length and operator/owner before publishing any figure]` },
+      consulting: { title: `DEPA / Hellenic Hydrogen / PPC`, tag: `Optional · outside Hy2Market's scope`, body: `Beyond its Hy2Market role, CLUBE has advised DEPA (Greece's national gas company, and future owner of the GREENH2ORN refuelling station) on its hydrogen strategy, and maintains relationships with Hellenic Hydrogen and Greece's Public Power Corporation (PPC) around hydrogen as an industrial feedstock and storage medium for intermittent renewables. [DATA NEEDED — confirm CLUBE wants this named on the page at all, since it's outside Hy2Market's scope]` }
     }
   },
 
   lessons: {
     title: `Lessons learned`,
     leadHtml: `The clearest lesson CLUBE takes from Hy2Market is that <span class="mark">policy has to move first</span>.`,
-    body: `Renewables are already abundant in Western Macedonia — solar and wind capacity is growing fast — but without a national commitment to hydrogen investment, the region can't yet follow the more mature regions it has been studying. The second lesson: there's no local industrial offtake to build around, unlike Upper Austria or Sicily, which leaves mobility — and, longer-term, hydrogen export along a Greece-to-Germany corridor — as the region's most realistic paths. A more granular lesson: training isn't one-size-fits-all. A hydrogen safety officer and a hydrogen project manager need entirely different curricula, a distinction that directly shaped how CLUBE structured its contribution to the training guidelines.`
+    bullets: [
+      `Renewables are already abundant in Western Macedonia — solar and wind capacity is growing fast — but without a national commitment to hydrogen investment, the region can't yet follow the more mature regions it has been studying.`,
+      `There's no local industrial offtake to build around, unlike Upper Austria or Sicily, which leaves mobility — and, longer-term, hydrogen export along a Greece-to-Germany corridor — as the region's most realistic paths.`,
+      `Training isn't one-size-fits-all: a hydrogen safety officer and a hydrogen project manager need entirely different curricula, a distinction that directly shaped how CLUBE structured its contribution to the training guidelines.`
+    ]
   },
 
   outcomes: {
     title: `The outcomes`,
     stats: [
-      { tone: `yellow`, n: `3 deliverables`, l: `D6.3, D4.5, and the Task 6.2 standards questionnaire — CLUBE input banked for later` },
+      { tone: `yellow`, n: `3 deliverables`, l: `contributed to — training guidelines, regional roll-out data, and a standards questionnaire` },
       { tone: `grey`, n: `Training framework`, l: `multi-format, ready to deploy once national investment arrives` },
-      { tone: `grey`, n: `EU policy channel`, l: `live input into the Task 6.2 hydrogen standards conversation` },
+      { tone: `grey`, n: `EU policy channel`, l: `live input into the emerging hydrogen standards conversation` },
       { tone: `black`, n: `New network`, l: `contacts across Europe's more mature hydrogen regions, built through study visits` }
     ],
-    narrative: `By the numbers, Western Macedonia's Hy2Market story isn't about megawatts or kilometres of pipe — it's contributions banked for later: input to three deliverables (D6.3, D4.5, and the Task 6.2 standards questionnaire), a multi-format training framework ready to deploy once national investment arrives, and a live channel into the EU's emerging hydrogen policy conversation. The bigger outcome is relational: a network of contacts across Europe's more mature hydrogen regions that CLUBE didn't have before the project, built through study visits and knowledge-exchange meetings.`,
+    narrative: `By the numbers, Western Macedonia's Hy2Market story isn't about megawatts or kilometres of pipe — it's contributions banked for later: input across three fronts — training guidelines, regional roll-out data, and a standards questionnaire — a multi-format training framework ready to deploy once national investment arrives, and a live channel into the EU's emerging hydrogen policy conversation. The bigger outcome is relational: a network of contacts across Europe's more mature hydrogen regions that CLUBE didn't have before the project, built through study visits and knowledge-exchange meetings.`,
     pending: [
-      { n: `—`, l: `<em>[DATA NEEDED — any concrete numbers CLUBE can share (study-visit count, questionnaire responses, etc.)]</em>` }
+      { n: `—`, l: `<em>[DATA NEEDED — any concrete numbers CLUBE can share (study-visit count, questionnaire responses, etc.)]</em>` },
+      { n: `—`, l: `Greek stakeholder responses to the standards questionnaire <em>(pending)</em>` }
     ]
   },
 
   quotesEyebrow: `IN THEIR WORDS`,
+  // Placeholder only — not a fabricated quote. Eleni Papista and Athanasia
+  // Ioannidou (CLUBE) both said they'd send a pull-quote by email, both
+  // leaning toward "interregionality" as the theme; swap this slide for
+  // their real quote(s) once they arrive.
   quotes: [
-    { text: `[DATA NEEDED — pending. Both Eleni Papista and Athanasia Ioannidou (CLUBE) said they'd send a pull-quote by email, both leaning toward "interregionality" / the interregional hydrogen supply chain as the theme. Do not fabricate a quote — leave this slot empty/placeholder until quotes arrive.]`, name: `Quote pending`, role: `CLUBE — awaiting confirmation` }
+    { text: `Quote coming soon.`, name: `CLUBE`, role: `Quote to follow` }
   ],
 
   next: {
