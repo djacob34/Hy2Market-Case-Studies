@@ -276,17 +276,21 @@
 
     outcomes: {
       title: 'The outcomes',
+      // Hy2Market's own, partner-sourced output metrics (kept separate from the
+      // pre-existing H2FUTURE baseline shown below). Figures come from the
+      // official Hy2Market Austria partner presentation.
       stats: [
-        { tone: 'yellow', n: 'Pilots integrated', l: 'into a live industrial steel site' },
-        { tone: 'grey', n: 'Use cases', l: 'industrial hydrogen analysed (AIT)' },
-        { tone: 'grey', n: 'Methanation', l: 'operated under real conditions' },
-        { tone: 'black', n: 'Transfer', l: 'role models & guidance shared with peers' }
+        { tone: 'yellow', n: '20 kW', l: 'methanation pilot operated under real industrial conditions (K1-MET / Montanuniversität Leoben)' },
+        { tone: 'grey', n: '5–7', l: 'industrial hydrogen use cases analysed (AIT, Deliverable D4.8)' },
+        { tone: 'grey', n: '5', l: 'public knowledge-exchange webinars delivered (Business Upper Austria)' },
+        { tone: 'black', n: '4', l: 'regions assessed for roll-out: Austria, Sicily, Asturias, W. Macedonia (K1-MET, Task 4.3)' }
       ],
-      narrative: 'Upper Austria’s added value is qualitative: it shows how Hy2Market can integrate, de-risk and connect activities around an established industrial hydrogen asset — and turn that experience into transferable role models for other regions.',
-      pending: [
-        { n: '—', l: 'Volumes distributed <em>(only if publicly evidenced)</em>' },
-        { n: '—', l: 'Offtaker count <em>(only if partner-approved)</em>' },
-        { n: '— t CO₂', l: 'CO₂ avoided <em>(only if publicly evidenced)</em>' }
+      narrative: 'The headline value is qualitative and structural: Hy2Market integrates, de-risks and connects activity around an established industrial hydrogen asset — operating a methanation pilot under real conditions, analysing real industrial use cases, and turning the experience into transferable role models. It builds on a substantial pre-existing base.',
+      baselineLabel: 'Built on the H2FUTURE base (pre-existing)',
+      baseline: [
+        { n: '6 MW', l: 'PEM electrolyser at voestalpine Linz · live since 2019' },
+        { n: '500+ t', l: 'green hydrogen already produced in H2FUTURE' },
+        { n: '~1,200 m³/h', l: 'peak green-hydrogen output' }
       ]
     },
 

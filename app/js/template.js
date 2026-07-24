@@ -408,15 +408,28 @@
     var stats = o.stats.map(function (s) {
       return '<div class="oc ' + esc(s.tone) + '"><div class="n">' + esc(s.n) + '</div><div class="l">' + esc(s.l) + '</div></div>';
     }).join('');
-    var pending = o.pending.map(function (pn) {
+    // Optional "built on" baseline row: solid (not dashed) context tiles for
+    // pre-existing figures a region builds on, kept visually distinct from the
+    // region's own headline outcomes above.
+    var baseline = (o.baseline || []).map(function (b) {
+      return '<div class="baseline"><div class="n">' + esc(b.n) + '</div><div class="l">' + b.l + '</div></div>';
+    }).join('');
+    var baselineHtml = baseline
+      ? '<div class="baseline-label">' + esc(o.baselineLabel || 'Built on') + '</div>' +
+        '<div class="baseline-row">' + baseline + '</div>'
+      : '';
+    // pending is optional — only rendered when a region still has figures to confirm.
+    var pending = (o.pending || []).map(function (pn) {
       return '<div class="pending"><div class="n">' + esc(pn.n) + '</div><div class="l">' + pn.l + '</div></div>';
     }).join('');
+    var pendingHtml = pending ? '<div class="pending-row">' + pending + '</div>' : '';
     return '' +
     '<section id="toc-outcomes" class="section mt-block" data-reveal>' +
       secHead(o.title) +
       '<div class="outcome-stats">' + stats + '</div>' +
       '<p class="outcome-narrative">' + esc(o.narrative) + '</p>' +
-      '<div class="pending-row">' + pending + '</div>' +
+      baselineHtml +
+      pendingHtml +
     '</section>';
   }
 
