@@ -283,7 +283,7 @@
         { tone: 'yellow', n: '20 kW', l: 'methanation pilot operated under real industrial conditions (K1-MET / Montanuniversität Leoben)' },
         { tone: 'grey', n: '5–7', l: 'industrial hydrogen use cases analysed (AIT, Deliverable D4.8)' },
         { tone: 'grey', n: '5', l: 'public knowledge-exchange webinars delivered (Business Upper Austria)' },
-        { tone: 'black', n: '4', l: 'regions assessed for roll-out: Austria, Sicily, Asturias, W. Macedonia (K1-MET, Task 4.3)' }
+        { tone: 'black', n: '4', l: 'regions assessed for roll-out potential: Austria, Sicily, Asturias, Western Macedonia (K1-MET, Task 4.3)' }
       ],
       narrative: 'The headline value is qualitative and structural: Hy2Market integrates, de-risks and connects activity around an established industrial hydrogen asset — operating a methanation pilot under real conditions, analysing real industrial use cases, and turning the experience into transferable role models. It builds on a substantial pre-existing base.',
       baselineLabel: 'Built on the H2FUTURE base (pre-existing)',
