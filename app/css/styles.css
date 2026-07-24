@@ -4,6 +4,23 @@
    Layout is region-agnostic; content is injected from a data object.
    ========================================================================= */
 
+/* review/draft banner (only rendered when a study defines data.banner) */
+.review-banner {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  background: #0A5C2E; color: #fff;
+  padding: 10px 22px; font-size: 13px; line-height: 1.3;
+}
+.review-banner-tag {
+  font-weight: 700; letter-spacing: 0.08em; font-size: 11px;
+  background: #FFED00; color: #0A3D1F; padding: 3px 9px; white-space: nowrap;
+}
+.review-banner-text { flex: 1; min-width: 200px; }
+.review-banner-link {
+  color: #fff; font-weight: 600; text-decoration: underline;
+  text-underline-offset: 2px; white-space: nowrap;
+}
+.review-banner-link:hover { color: #FFED00; }
+
 :root {
   /* brand */
   --yellow: #FFED00;
