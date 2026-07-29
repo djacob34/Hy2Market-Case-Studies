@@ -101,7 +101,7 @@
     intro: `Hy2Market's clearest value for Western Macedonia has been the people it put CLUBE in a room with.`,
     cards: [
       { dir: `in`, arrow: `←`, label: `LEARNING FROM`, region: `Médio Tejo`, country: `· Portugal`, text: `An informal exchange comparing notes on mobility pilots — CLUBE is looking at Médio Tejo's hydrogen bus experience for lessons it can apply once its own refuelling station comes online.` },
-      { dir: `in`, arrow: `↔`, label: `IN PROGRESS`, region: `Netherlands & Austria partners`, country: ``, text: `CLUBE is in active conversations with hydrogen partners in the Netherlands and Austria about waste-to-hydrogen — turning sludge and other residues into hydrogen feedstock. It's a genuinely different production route from the electrolysis-based pathways elsewhere in the consortium, and a natural fit for a region where CLUBE already brings real bioeconomy expertise to the table.` }
+      { dir: `in`, arrow: `↔`, label: `IN PROGRESS`, region: `Netherlands & Austria partners`, country: ``, text: `CLUBE is in active conversations with hydrogen partners in the Netherlands and Austria about waste-to-hydrogen — turning sludge and other residues into hydrogen feedstock.` }
     ]
   },
 
