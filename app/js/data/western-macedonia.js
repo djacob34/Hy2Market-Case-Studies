@@ -52,8 +52,8 @@
       id: `clube`, name: `CLUBE`,
       role: `CLUBE — Cluster of Bioeconomy and Environment of Western Macedonia. The region's sole Hy2Market partner, and its link to the wider European hydrogen knowledge exchange.`,
       bodyHtml: `<p>A nonprofit cluster organization based in Kozani, driving bioeconomy and green hydrogen innovation across Western Macedonia through research, training, and business development. CLUBE represents the region as its only Hy2Market partner.</p>` +
-        `<p class="data-needed">[DATA NEEDED — CLUBE to confirm/refine this wording, send a logo file, and say whether they want a team/office photo]</p>`,
-      dataNeeded: `[DATA NEEDED — CLUBE to confirm/refine this wording, send a logo file, and say whether they want a team/office photo]`,
+        `<p class="data-needed">[DATA NEEDED — add CLUBE's logo file to the repo (provided by CLUBE, see assets/logos/clube.png); confirm/refine this wording. No team/office photo — CLUBE's logo is the visual for this section.]</p>`,
+      dataNeeded: `[DATA NEEDED — add CLUBE's logo file to the repo (provided by CLUBE, see assets/logos/clube.png); confirm/refine this wording]`,
       logoHtml: `<span class="logo-word">CLUBE</span>`
     }
   ],
@@ -100,8 +100,8 @@
     title: `Knowledge exchange`,
     intro: `Hy2Market's clearest value for Western Macedonia has been the people it put CLUBE in a room with.`,
     cards: [
-      { dir: `in`, arrow: `←`, label: `LEARNING FROM`, region: `Médio Tejo`, country: `· Portugal`, text: `An informal exchange comparing notes on mobility pilots — CLUBE is looking at Médio Tejo's hydrogen bus experience for lessons it can apply once its own refuelling station comes online. [DATA NEEDED — confirm whether CLUBE wants the Médio Tejo exchange named explicitly]` },
-      { dir: `in`, arrow: `↔`, label: `IN PROGRESS`, region: `Netherlands & Austria partners`, country: ``, text: `CLUBE has opened early conversations with hydrogen partners in the Netherlands and Austria around waste-to-hydrogen — turning sludge and other residues into feedstock. It's a newer thread than the Médio Tejo exchange, with more detail expected to follow as the conversation develops.` }
+      { dir: `in`, arrow: `←`, label: `LEARNING FROM`, region: `Médio Tejo`, country: `· Portugal`, text: `An informal exchange comparing notes on mobility pilots — CLUBE is looking at Médio Tejo's hydrogen bus experience for lessons it can apply once its own refuelling station comes online.` },
+      { dir: `in`, arrow: `↔`, label: `IN PROGRESS`, region: `Netherlands & Austria partners`, country: ``, text: `CLUBE is in active conversations with hydrogen partners in the Netherlands and Austria about waste-to-hydrogen — turning sludge and other residues into hydrogen feedstock. It's a genuinely different production route from the electrolysis-based pathways elsewhere in the consortium, and a natural fit for a region where CLUBE already brings real bioeconomy expertise to the table.` }
     ]
   },
 
