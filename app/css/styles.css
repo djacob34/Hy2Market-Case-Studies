@@ -4,6 +4,23 @@
    Layout is region-agnostic; content is injected from a data object.
    ========================================================================= */
 
+/* review/draft banner (only rendered when a study defines data.banner) */
+.review-banner {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  background: #0A5C2E; color: #fff;
+  padding: 10px 22px; font-size: 13px; line-height: 1.3;
+}
+.review-banner-tag {
+  font-weight: 700; letter-spacing: 0.08em; font-size: 11px;
+  background: #FFED00; color: #0A3D1F; padding: 3px 9px; white-space: nowrap;
+}
+.review-banner-text { flex: 1; min-width: 200px; }
+.review-banner-link {
+  color: #fff; font-weight: 600; text-decoration: underline;
+  text-underline-offset: 2px; white-space: nowrap;
+}
+.review-banner-link:hover { color: #FFED00; }
+
 :root {
   /* brand */
   --yellow: #FFED00;
@@ -513,6 +530,20 @@ a:focus-visible, button:focus-visible {
 .oc.black .n { color: var(--yellow); }
 .oc.black .l { color: rgba(255,255,255,0.65); font-weight: 400; }
 .outcome-narrative { font-size: 20px; line-height: 1.45; font-weight: 400; margin: 0 0 24px; max-width: 64ch; }
+/* baseline / "built on" context row — solid muted tiles, distinct from the
+   dashed "pending" tiles and from the region's own headline outcomes */
+.baseline-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted-2); margin: 4px 0 12px;
+}
+.baseline-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+.baseline {
+  flex: 1; min-width: 200px; padding: 18px; background: var(--panel);
+  border-left: 3px solid var(--line-3);
+}
+.baseline .n { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); line-height: 1; }
+.baseline .l { font-size: 12px; color: var(--muted-3); margin-top: 6px; }
+
 .pending-row { display: flex; gap: 14px; flex-wrap: wrap; }
 .pending { flex: 1; min-width: 200px; border: 1px dashed #d0d0cc; padding: 18px; background: var(--panel-2); }
 .pending .n { font-size: 22px; font-weight: 600; color: #b0b0b0; }

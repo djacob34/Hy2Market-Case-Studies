@@ -240,7 +240,7 @@
           '<div class="map-grid"></div>' +
           '<svg class="shape" viewBox="0 0 100 86" fill="none" preserveAspectRatio="none" aria-hidden="true">' +
             '<path d="M14,40 C24,24 44,18 58,24 C70,29 84,26 90,40 C94,52 82,62 70,60 C60,58 50,70 38,66 C24,61 8,54 14,40 Z" fill="rgba(255,237,0,0.16)" stroke="#cfcfca" stroke-width="0.5"/>' +
-            '<path d="M28,50 L52,42 L74,48" stroke="#000" stroke-width="0.5" stroke-dasharray="2 2"/>' +
+            (r.map.pins.length > 1 ? '<path d="M28,50 L52,42 L74,48" stroke="#000" stroke-width="0.5" stroke-dasharray="2 2"/>' : '') +
           '</svg>' +
           pins +
           '<span class="map-caption">' + esc(r.map.caption) + '</span>' +
@@ -408,15 +408,28 @@
     var stats = o.stats.map(function (s) {
       return '<div class="oc ' + esc(s.tone) + '"><div class="n">' + esc(s.n) + '</div><div class="l">' + esc(s.l) + '</div></div>';
     }).join('');
-    var pending = o.pending.map(function (pn) {
+    // Optional "built on" baseline row: solid (not dashed) context tiles for
+    // pre-existing figures a region builds on, kept visually distinct from the
+    // region's own headline outcomes above.
+    var baseline = (o.baseline || []).map(function (b) {
+      return '<div class="baseline"><div class="n">' + esc(b.n) + '</div><div class="l">' + b.l + '</div></div>';
+    }).join('');
+    var baselineHtml = baseline
+      ? '<div class="baseline-label">' + esc(o.baselineLabel || 'Built on') + '</div>' +
+        '<div class="baseline-row">' + baseline + '</div>'
+      : '';
+    // pending is optional — only rendered when a region still has figures to confirm.
+    var pending = (o.pending || []).map(function (pn) {
       return '<div class="pending"><div class="n">' + esc(pn.n) + '</div><div class="l">' + pn.l + '</div></div>';
     }).join('');
+    var pendingHtml = pending ? '<div class="pending-row">' + pending + '</div>' : '';
     return '' +
     '<section id="toc-outcomes" class="section mt-block" data-reveal>' +
       secHead(o.title) +
       '<div class="outcome-stats">' + stats + '</div>' +
       '<p class="outcome-narrative">' + esc(o.narrative) + '</p>' +
-      '<div class="pending-row">' + pending + '</div>' +
+      baselineHtml +
+      pendingHtml +
     '</section>';
   }
 
@@ -592,6 +605,20 @@
     'system', 'process', 'lessons', 'outcomes', 'knowledge'
   ];
 
+  // Optional draft/review banner at the very top of a case study, rendered
+  // only when the region defines data.banner (e.g. a partner-review draft).
+  function reviewBanner(d) {
+    var b = d.banner;
+    var link = b.link
+      ? '<a class="review-banner-link" href="' + esc(b.link.href) + '">' + esc(b.link.label) + '</a>'
+      : '';
+    return '<div class="review-banner">' +
+      '<span class="review-banner-tag">' + esc(b.tag || 'DRAFT') + '</span>' +
+      '<span class="review-banner-text">' + esc(b.text || '') + '</span>' +
+      link +
+    '</div>';
+  }
+
   function renderCaseStudy(d) {
     var order = d.sectionOrder || DEFAULT_SECTION_ORDER;
     var mainHtml = order.map(function (key) {
@@ -599,6 +626,7 @@
       return render ? render(d) : '';
     }).join('');
     return '' +
+      (d.banner ? reviewBanner(d) : '') +
       hero(d) +
       partners(d) +
       '<div class="body-wrap"><div class="body-grid">' +
