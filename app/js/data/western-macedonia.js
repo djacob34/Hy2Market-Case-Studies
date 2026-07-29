@@ -140,7 +140,7 @@
   system: {
     title: `The regional hydrogen landscape`,
     branchLabel: `REGIONAL MOMENTUM`,
-    intro: `None of the following is a Hy2Market deliverable — it's the momentum in Western Macedonia that Hy2Market is helping CLUBE get ready for.`,
+    intro: `A second hydrogen refuelling station, a 15 MW electrolyser, a hydrogen-ready pipeline, and the industry relationships CLUBE has built around them — the real momentum in Western Macedonia that Hy2Market's work is preparing the region to meet.`,
     disclaimer: `* Not a Hy2Market deliverable — regional momentum shown for context.`,
     branches: [
       { id: `greenh2orn`, name: `GREENH2ORN*`, sub: `Greece's 2nd H₂ refuelling station`, title: `GREENH2ORN — LIFE-funded hydrogen refuelling station, Kozani` },
