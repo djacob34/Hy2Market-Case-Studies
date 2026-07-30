@@ -142,7 +142,7 @@
         { id: 'intercity', name: 'Inter-city route', sub: 'Tomar → 6 cities', title: 'Inter-city route based in Tomar' },
         { id: 'fleet', name: 'Fleet expansion', sub: 'Rodoviária Tejo', title: 'Fleet expansion at Rodoviária Tejo' },
         { id: 'capacitation', name: 'Capacitation project', sub: 'industrial sector', title: 'Regional industrial capacitation project' },
-        { id: 'exchange', name: 'Knowledge exchange', sub: 'Upper Austria', title: 'Knowledge exchange with Upper Austria' }
+        { id: 'exchange', name: 'Knowledge exchange', sub: 'WP5 mobility regions', title: 'Knowledge exchange across the WP5 mobility regions' }
       ],
       nodeData: {
         supply: { title: 'Green hydrogen supply', tag: 'Delivered to the portable HRS', body: 'Green hydrogen is delivered to the portable refuelling station, the input that keeps the bus in daily service across both duty cycles.' },
@@ -153,7 +153,7 @@
         intercity: { title: 'Inter-city route · Tomar', tag: 'Apr – Aug 2024', body: 'The second duty cycle: a longer inter-city route based in Tomar, including student-transport routes to spread awareness of the technology.' },
         fleet: { title: 'Fleet expansion', tag: 'Rodoviária Tejo · 3 buses', body: 'Convinced by nine fault-free months, Rodoviária Tejo is pursuing national funding for a three-bus fleet — the pilot doing the persuading a brochure could not.' },
         capacitation: { title: 'Capacitation project', tag: 'Regional industrial sector', body: 'A regional knowledge-sharing programme carrying the pilot’s learnings to Médio Tejo’s wider industrial sector. (Stated by IrRADIARE; not yet corroborated publicly.)' },
-        exchange: { title: 'Knowledge exchange', tag: 'With Upper Austria', body: 'Médio Tejo shares mobility-demonstration know-how with Upper Austria — cited directly in Upper Austria’s own case study — and draws production and renewable-capacity expertise in return.' }
+        exchange: { title: 'Knowledge exchange', tag: 'WP5 · mobility regions', body: 'As WP5 lead, Médio Tejo shares its proven pilot playbook with the other mobility regions — Aragón, Asturias and Constanța — while the cluster pools barriers, standards and refuelling-infrastructure lessons into a shared demonstration report (D5.2).' }
       }
     },
 
@@ -194,10 +194,12 @@
 
     knowledge: {
       title: 'Knowledge exchange',
-      intro: 'As a region proving mobility demonstration in practice, Médio Tejo both shares hard-won operational expertise and draws on more industrially advanced regions for production know-how — knowledge flows in both directions across the Hy2Market network.',
+      intro: 'Médio Tejo leads WP5 (Hydrogen Mobility) — the work package where Hy2Market’s mobility regions share what they learn from putting hydrogen vehicles into real service. Its completed nine-month bus pilot is the reference the other regions’ demonstrations build on, while barriers, standards and refuelling know-how flow back across the cluster.',
       cards: [
-        { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Upper Austria', country: '· Austria', text: 'Mobility-demonstration know-how — cited directly in Upper Austria’s own Hy2Market case study as a leading example of hydrogen mobility in practice.' },
-        { dir: 'in', arrow: '←', label: 'LEARNING FROM', region: 'Upper Austria', country: '· Austria', text: 'Production and renewable-capacity expertise, in exchange for Médio Tejo’s mobility-demonstration know-how.' }
+        { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Aragón', country: '· Spain', text: 'A parallel fuel-cell bus pilot led by FHa on a strategic Huesca route — Technology Park, Logistics Platform, University Campus and CEEI Aragón. Médio Tejo’s fault-free nine months and relocatable-HRS approach feed straight into Aragón’s demonstration plan.' },
+        { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Asturias', country: '· Spain', text: 'ALSA is running a Toyota/CaetanoBus fuel-cell bus on real lines at 200–300 km/day over a 36-month test. Médio Tejo’s duty-cycle results and ~6.8 kg H₂/100 km consumption give a fleet operator a proven benchmark for a longer-duration trial.' },
+        { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Constanța', country: '· Romania', text: 'MEDGreen and IAC Special Projects are designing an innovative 100 kW fuel-cell minibus. Médio Tejo’s real-world operating experience helps de-risk the vehicle concept before a wheel is built.' },
+        { dir: 'in', arrow: '↔', label: 'POOLED ACROSS WP5', region: 'The mobility network', country: '', text: 'Lessons flow back too: RAVEN SR (Aragón) maps Europe’s H₂ trucking routes and heavy-transport hubs, Constanța coordinates the pilots into a shared demonstration report (D5.2), and Northern Netherlands and Western Macedonia add regulatory and roll-out perspective.' }
       ]
     },
 
