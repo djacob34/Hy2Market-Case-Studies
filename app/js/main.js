@@ -28,7 +28,14 @@
     document.title = (data.breadcrumb && data.breadcrumb.here ? data.breadcrumb.here + ' — ' : '') +
       'Hy2Market Case Study';
 
-    mount.innerHTML = window.CaseStudyTemplate.renderCaseStudy(data);
+    // If the server already rendered this region's markup into the mount
+    // (see server.js), it's identical to what we'd produce here — skip the
+    // redundant re-render and go straight to wiring up behavior. Falls back
+    // to a full client render when there's nothing there yet (e.g. served
+    // as a plain static file with no SSR in front of it).
+    if (!mount.children.length) {
+      mount.innerHTML = window.CaseStudyTemplate.renderCaseStudy(data);
+    }
 
     if (window.CaseStudyInteractions) {
       window.CaseStudyInteractions.initInteractions(mount, data);

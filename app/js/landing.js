@@ -8,8 +8,12 @@
    card stays in sync with its case study automatically. A region may override
    any card field via an optional `card` object on its data:
      card: { kicker, title, blurb, tags: [..], accent: '#RRGGBB' }
+
+   cardHtml is a pure function (no DOM access), so server.js requires this
+   file directly to render the same card markup server-side — see the
+   typeof document guard below and the module.exports at the bottom.
    ========================================================================= */
-(function () {
+(function (root) {
   'use strict';
 
   function esc(s) {
@@ -49,6 +53,10 @@
   function boot() {
     var grid = document.getElementById('cs-grid');
     if (!grid) return;
+    // Server-rendered cards (see server.js) are identical to what this
+    // would produce — skip the redundant re-render.
+    if (grid.children.length) return;
+
     var registry = window.CASE_STUDIES || {};
     var studies = Object.keys(registry).map(function (k) { return registry[k]; });
 
@@ -59,9 +67,14 @@
     grid.innerHTML = studies.map(cardHtml).join('');
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
-  } else {
-    boot();
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
   }
-})();
+
+  var api = { cardHtml: cardHtml, esc: esc };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof window !== 'undefined' ? window : this);

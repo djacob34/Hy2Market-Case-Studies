@@ -73,9 +73,13 @@
   ],
 
   // Knowledge exchange promoted ahead of "how CLUBE contributed" — see template.js note above.
-  // video reinstated (below the fold, same slot as every other region's
-  // default order) once a real clip was supplied — see the video block below.
-  sectionOrder: [`overview`, `video`, `region`, `knowledge`, `solutions`, `system`, `lessons`, `outcomes`],
+  // No video: the only clip supplied turned out to be about a different
+  // project, so this region has nothing to show here for now. The
+  // video-embed capability itself (template.js/interactions.js) is real and
+  // stays available for whenever a genuine Western Macedonia clip exists —
+  // just add a `video: { caption, youtubeId }` block and 'video' back into
+  // this order (its normal slot is right after 'overview').
+  sectionOrder: [`overview`, `region`, `knowledge`, `solutions`, `system`, `lessons`, `outcomes`],
 
   downloadHref: `#`,
 
@@ -84,11 +88,6 @@
     { tone: `black`, label: `THE APPROACH`, text: `Rather than building infrastructure of its own within Hy2Market's timeframe, CLUBE used the project to get Western Macedonia ready to move fast once the moment comes: mapping training needs across the hydrogen value chain, contributing regional data to help the consortium evaluate where roll-out makes sense, feeding into Europe-wide standards and policy work, and building a network of contacts across more mature hydrogen regions through study visits and knowledge exchange.` },
     { tone: `black`, label: `THE OUTCOME`, text: `A region that entered the project with no hydrogen infrastructure now has a training framework ready to deploy, a channel into the EU's hydrogen standards conversation, and direct relationships with the partners and regions it will need as its own projects — a second Greek hydrogen refuelling station, an electrolyser with an initial capacity of 50 MW (expandable to 200 MW), a hydrogen-ready pipeline — move from planning toward construction.` }
   ],
-
-  video: {
-    caption: `CLUBE — Western Macedonia's hydrogen story. [DATA NEEDED — confirm speaker name/role and this caption's wording; the video itself wasn't reachable from this environment to verify]`,
-    youtubeId: `-IBHErcQSPc`
-  },
 
   region: {
     title: `The region`,

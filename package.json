@@ -1,0 +1,16 @@
+{
+  "name": "hy2market-case-studies",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Hy2Market regional case studies — server-rendered so every page is real, crawlable HTML on first response.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
