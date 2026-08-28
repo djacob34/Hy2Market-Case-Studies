@@ -20,8 +20,18 @@
     Each region's content lives in one data file under js/data/. Register a new
     region by adding its <script> below (and in index.html); it then becomes
     selectable by slug and appears as a card on the landing page.
+
+    #case-study-root starts with server-rendered fallback markup (via
+    Caddy's `templates` directive, see Caddyfile) matching whichever
+    ?region= was requested — the same fallback default (upper-austria) as
+    main.js below. This is only so non-JS clients (crawlers, link-preview
+    bots, raw-HTML fetchers) see real content; main.js overwrites it with
+    the live render as soon as JS runs, on every browser. Regenerate the
+    included files with `node app/scripts/prerender.js` after editing
+    anything under js/data/ or js/template.js — this markup goes stale
+    otherwise.
   -->
-  <div id="case-study-root" aria-live="polite"></div>
+  <div id="case-study-root" aria-live="polite">{{ if eq (.Req.URL.Query.Get "region") "netherlands" }}{{ include "prerendered/netherlands.html" }}{{ else if eq (.Req.URL.Query.Get "region") "medio-tejo" }}{{ include "prerendered/medio-tejo.html" }}{{ else if eq (.Req.URL.Query.Get "region") "asturias" }}{{ include "prerendered/asturias.html" }}{{ else if eq (.Req.URL.Query.Get "region") "western-macedonia" }}{{ include "prerendered/western-macedonia.html" }}{{ else if eq (.Req.URL.Query.Get "region") "upper-austria-revised" }}{{ include "prerendered/upper-austria-revised.html" }}{{ else }}{{ include "prerendered/upper-austria.html" }}{{ end }}</div>
 
   <!-- ▼ region content — one file per region (keep in sync with index.html) -->
   <script src="./js/data/upper-austria.js"></script>

@@ -4,5 +4,10 @@
 	# Always revalidate so content updates show immediately (ETag makes this cheap).
 	header Cache-Control "no-cache"
 	try_files {path} {path}/ /index.html
+	# Renders {{ }} actions in case-study.html so non-JS clients (crawlers,
+	# link-preview bots, tools that fetch raw HTML) get real per-region
+	# content in #case-study-root instead of an empty shell. See
+	# app/scripts/prerender.js for how app/prerendered/*.html is built.
+	templates
 	file_server
 }
