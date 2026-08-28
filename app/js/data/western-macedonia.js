@@ -43,17 +43,21 @@
     titleHtml: `Watch, Learn, Prepare: Western Macedonia's <span class="hl">Hydrogen</span> Readiness`,
     lead: `Most Hy2Market regions are proving a working hydrogen value chain. Western Macedonia is proving something else: how a region with no hydrogen infrastructure of its own yet turns a knowledge-exchange project into a running start — through training, standards work, and study visits to hydrogen frontrunners across Europe.`,
     tags: [`Just Transition`, `Knowledge Exchange`, `Training & Reskilling`, `Standards & Policy`, `Replication`],
-    mediaCaption: `Kozani, Western Macedonia — regional capital and CLUBE's home base. [DATA NEEDED — CLUBE to send a representative photo]`
+    // three photos CLUBE supplied for the region's energy landscape, auto-rotating
+    // in place of a single hero shot — see hero() / .hero-slideshow in template.js.
+    slideshow: [
+      { src: `./assets/hero/western-macedonia-lignite.jpg`, caption: `Lignite mines and power plants, Western Macedonia` },
+      { src: `./assets/hero/western-macedonia-pv-park.jpg`, caption: `PV Park, Kozani, Western Macedonia · toposol.gr` },
+      { src: `./assets/hero/western-macedonia-wind-farm.jpg`, caption: `Askio onshore wind farm complex, Kozani, Western Macedonia · Iberdrola` }
+    ]
     // no hero.stats: no confirmed figures for a padded 3-tile grid.
   },
 
   partners: [
     {
-      id: `clube`, name: `CLUBE`,
+      id: `clube`, name: `CLUBE`, logo: `clube.png`,
       role: `CLUBE — Cluster of Bioeconomy and Environment of Western Macedonia. The region's sole Hy2Market partner, and its link to the wider European hydrogen knowledge exchange.`,
-      bodyHtml: `<p>A nonprofit cluster organization based in Kozani, driving bioeconomy and green hydrogen innovation across Western Macedonia through research, training, and business development. CLUBE represents the region as its only Hy2Market partner.</p>` +
-        `<p class="data-needed">[DATA NEEDED — add CLUBE's logo file to the repo (provided by CLUBE, see assets/logos/clube.png); confirm/refine this wording. No team/office photo — CLUBE's logo is the visual for this section.]</p>`,
-      dataNeeded: `[DATA NEEDED — add CLUBE's logo file to the repo (provided by CLUBE, see assets/logos/clube.png); confirm/refine this wording]`,
+      bodyHtml: `<p>A nonprofit cluster organization based in Kozani, driving bioeconomy and green hydrogen innovation across Western Macedonia through research, training, and business development. CLUBE represents the region as its only Hy2Market partner.</p>`,
       logoHtml: `<span class="logo-word">CLUBE</span>`
     }
   ],

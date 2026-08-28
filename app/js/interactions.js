@@ -24,6 +24,26 @@
       requestAnimationFrame(function () { els.forEach(function (el) { io.observe(el); }); });
     })();
 
+    /* ---------- hero slideshow (auto-rotating background photos) ---------- */
+    (function () {
+      var stack = container.querySelector('[data-hero-slideshow]');
+      if (!stack) return;
+      var slides = Array.prototype.slice.call(stack.querySelectorAll('.hero-slide'));
+      if (slides.length < 2) return;
+      var captionEl = container.querySelector('[data-hero-caption]');
+      var i = 0;
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setInterval(function () {
+        slides[i].classList.remove('is-active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('is-active');
+        if (captionEl) {
+          var cap = slides[i].getAttribute('data-caption');
+          if (cap) captionEl.textContent = cap;
+        }
+      }, reduceMotion ? 6000 : 5500);
+    })();
+
     /* ---------- solutions accordion (single-open) ---------- */
     (function () {
       var drawers = Array.prototype.slice.call(container.querySelectorAll('[data-drawer]'));

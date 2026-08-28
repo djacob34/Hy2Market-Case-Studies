@@ -49,6 +49,23 @@
     }).join('') : '';
     var tags = h.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('');
     var bc = d.breadcrumb;
+    // slideshow is a third media option alongside video / the plain grain
+    // fallback — an auto-rotating set of background photos for a region with
+    // no single hero shot (or footage) to build the cover around. Cycling is
+    // handled by interactions.js; this just renders the slide stack.
+    var hasSlideshow = !h.video && h.slideshow && h.slideshow.length;
+    var mediaCls = (h.video ? ' has-video' : '') + (hasSlideshow ? ' has-slideshow' : '');
+    var mediaInner = h.video
+      ? '<video class="hero-video" autoplay muted loop playsinline preload="auto"' +
+          (h.poster ? ' poster="' + esc(h.poster) + '"' : '') + '>' +
+          '<source src="' + esc(h.video) + '" type="video/mp4"></video>'
+      : hasSlideshow
+        ? '<div class="hero-slideshow" data-hero-slideshow>' + h.slideshow.map(function (s, i) {
+            return '<div class="hero-slide' + (i === 0 ? ' is-active' : '') + '" style="background-image:url(\'' + esc(s.src) + '\');" data-caption="' + esc(s.caption || '') + '"></div>';
+          }).join('') + '</div>'
+        : '<div class="media-grain"></div><div class="light-streak"></div><div class="light-streak thin"></div>';
+    var mediaCaption = hasSlideshow ? (h.slideshow[0].caption || '') : h.mediaCaption;
+    var showArc = !h.video && !hasSlideshow;
     return '' +
     '<header class="hero">' +
       ARC_TL +
@@ -73,15 +90,10 @@
             '<div class="tags">' + tags + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="hero-media' + (h.video ? ' has-video' : '') + '">' +
-          (h.video
-            ? '<video class="hero-video" autoplay muted loop playsinline preload="auto"' +
-                (h.poster ? ' poster="' + esc(h.poster) + '"' : '') + '>' +
-                '<source src="' + esc(h.video) + '" type="video/mp4"></video>'
-            : '<div class="media-grain"></div>' +
-              '<div class="light-streak"></div><div class="light-streak thin"></div>') +
-          '<div class="media-caption">' + esc(h.mediaCaption) + '</div>' +
-          (h.video ? '' : ARC_TR) +
+        '<div class="hero-media' + mediaCls + '">' +
+          mediaInner +
+          '<div class="media-caption"' + (hasSlideshow ? ' data-hero-caption' : '') + '>' + esc(mediaCaption) + '</div>' +
+          (showArc ? ARC_TR : '') +
         '</div>' +
       '</div>' +
       '<div class="hero-stats">' + stats + '</div>' +
