@@ -218,15 +218,26 @@
 
   /* ---- VIDEO ---- */
   function video(d) {
+    var v = d.video;
+    // youtubeId is optional: without it this stays the plain decorative
+    // placeholder (grain + inert play icon) every region has always had.
+    // With it, the play button becomes real — a click-to-load facade that
+    // swaps in an actual YouTube embed (interactions.js), using YouTube's
+    // own thumbnail as the poster so nothing loads from YouTube until
+    // the visitor actually asks to play it.
+    var yt = v.youtubeId;
+    var frameAttrs = yt ? ' data-youtube="' + esc(yt) + '"' : '';
+    var frameStyle = yt ? ' style="background-image:url(\'https://img.youtube.com/vi/' + esc(yt) + '/maxresdefault.jpg\');"' : '';
+    var frameCls = 'video-frame' + (yt ? ' has-thumb' : '');
     return '' +
     '<section class="video" data-reveal>' +
-      '<div class="video-frame">' +
-        '<div class="video-grain"></div>' +
+      '<div class="' + frameCls + '"' + frameAttrs + frameStyle + '>' +
+        (yt ? '' : '<div class="video-grain"></div>') +
         '<button type="button" class="video-play" aria-label="Play video">' +
           '<svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M8 5v14l11-7z"/></svg>' +
         '</button>' +
       '</div>' +
-      '<p class="video-caption">' + esc(d.video.caption) + '</p>' +
+      '<p class="video-caption">' + esc(v.caption) + '</p>' +
     '</section>';
   }
 

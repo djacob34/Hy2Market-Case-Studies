@@ -147,6 +147,26 @@
       });
     })();
 
+    /* ---------- YouTube video (click-to-load embed) ---------- */
+    (function () {
+      var frame = container.querySelector('.video-frame[data-youtube]');
+      if (!frame) return;
+      var btn = frame.querySelector('.video-play');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var id = frame.getAttribute('data-youtube');
+        var iframe = document.createElement('iframe');
+        iframe.className = 'video-embed';
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+        iframe.title = 'YouTube video player';
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('allowfullscreen', '');
+        frame.innerHTML = '';
+        frame.appendChild(iframe);
+      });
+    })();
+
     /* ---------- process carousel (advance one item per click) ---------- */
     (function () {
       var el = container.querySelector('[data-carousel]');
