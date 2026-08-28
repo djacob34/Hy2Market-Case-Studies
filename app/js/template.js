@@ -47,6 +47,7 @@
         '<div class="stat-num">' + esc(s.num) + '</div>' +
         '<div class="stat-label">' + esc(s.label) + '</div></div>';
     }).join('') : '';
+    var heroStatsClass = 'hero-stats' + (hasStats && h.stats.length === 4 ? ' hero-stats--4' : '');
     var tags = h.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('');
     var bc = d.breadcrumb;
     return '' +
@@ -84,7 +85,7 @@
           (h.video ? '' : ARC_TR) +
         '</div>' +
       '</div>' +
-      '<div class="hero-stats">' + stats + '</div>' +
+      '<div class="' + heroStatsClass + '">' + stats + '</div>' +
     '</header>';
   }
 
@@ -423,10 +424,11 @@
       return '<div class="pending"><div class="n">' + esc(pn.n) + '</div><div class="l">' + pn.l + '</div></div>';
     }).join('');
     var pendingHtml = pending ? '<div class="pending-row">' + pending + '</div>' : '';
+    var statsGridClass = 'outcome-stats' + (o.stats.length === 6 ? ' outcome-stats--6' : '');
     return '' +
     '<section id="toc-outcomes" class="section mt-block" data-reveal>' +
       secHead(o.title) +
-      '<div class="outcome-stats">' + stats + '</div>' +
+      '<div class="' + statsGridClass + '">' + stats + '</div>' +
       '<p class="outcome-narrative">' + esc(o.narrative) + '</p>' +
       baselineHtml +
       pendingHtml +
