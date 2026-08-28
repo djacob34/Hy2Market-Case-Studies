@@ -191,7 +191,7 @@
     ],
     narrative: `By the numbers, Western Macedonia's Hy2Market story isn't about megawatts or kilometres of pipe — it's contributions banked for later: input across three fronts — training guidelines, regional roll-out data, and a standards questionnaire — a multi-format training framework ready to deploy once national investment arrives, and a live channel into the EU's emerging hydrogen policy conversation. The bigger outcome is relational: a network of contacts across Europe's more mature hydrogen regions that CLUBE didn't have before the project, built through study visits and knowledge-exchange meetings.`,
     pending: [
-      { n: `—`, l: `<em>[DATA NEEDED — any concrete numbers CLUBE can share (study-visit count, questionnaire responses, etc.)]</em>` },
+      { n: `371`, l: `A total number of 371 participants were engaged across six training programmes implemented by CluBE in Western Macedonia in the frame of GreenSkillsforH2` },
       { n: `29`, l: `Greek hydrogen stakeholders and industrial companies the regulations and standards questionnaire was sent to for their input` }
     ]
   },
