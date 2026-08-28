@@ -189,7 +189,11 @@
         { tone: 'grey', n: '~11,000 litres', l: 'diesel avoided' },
         { tone: 'black', n: '3 buses', l: 'fleet expansion now underway' }
       ],
-      narrative: 'Médio Tejo now offers the rest of the consortium a working, real-world answer to the question every rural or hilly region asks before investing: does a hydrogen bus survive daily service? Nine months of real-world evidence are now powering a permanent fleet transition and inspiring wider adoption across the public transport sector.'
+      narrative: 'Médio Tejo now offers the rest of the consortium a working, real-world answer to the question every rural or hilly region asks before investing: does a hydrogen bus survive daily service? Nine months of real-world evidence are now powering a permanent fleet transition and inspiring wider adoption across the public transport sector.',
+      pending: [
+        { n: '— passengers', l: 'Passengers carried <em>(not tracked during the pilot)</em>' },
+        { n: '— TRL', l: 'TRL change for the mobility technology <em>(pending)</em>' }
+      ]
     },
 
     knowledge: {
