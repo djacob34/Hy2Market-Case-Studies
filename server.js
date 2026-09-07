@@ -83,6 +83,16 @@ function renderCaseStudyHtml(regionSlug) {
   let html = readShell('case-study.html');
   if (!data) return html;
 
+  // Mirrors main.js's own fixup exactly: a region's breadcrumb.href is often
+  // left as '#' in its data file, relying on this to point it at the
+  // landing page. main.js only gets a chance to apply this when it actually
+  // re-renders — which it now skips whenever server-rendered markup is
+  // already present (see main.js) — so it has to happen here too, or the
+  // "View all case studies" link and breadcrumb both go nowhere.
+  if (data.breadcrumb && (!data.breadcrumb.href || data.breadcrumb.href === '#')) {
+    data.breadcrumb.href = './index.html';
+  }
+
   const rendered = CaseStudyTemplate.renderCaseStudy(data);
   html = html.replace(
     /(<div id="case-study-root"[^>]*>)[\s\S]*?(<\/div>)/,
