@@ -176,7 +176,7 @@
     lessons: {
       title: 'Lessons learned',
       leadHtml: 'Demonstrating hydrogen mobility in real public transport conditions provides the operational evidence needed to guide future investment and broader deployment.',
-      body: 'Médio Tejo’s pilot has already become a reference point inside Hy2Market — Upper Austria’s own case study names Médio Tejo as a leading example of hydrogen mobility in practice. Nine months of fault-free operation and proven route performance gave Rodoviária do Tejo the confidence to apply for national funding for a permanent fleet.'
+      body: 'Nine months of fault-free operation and proven route performance gave Rodoviária do Tejo the confidence to apply for national funding for a permanent fleet.'
     },
 
     outcomes: {
@@ -198,7 +198,6 @@
       cards: [
         { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Asturias', country: '· Spain', text: 'ALSA is running a Toyota/CaetanoBus fuel-cell bus on real lines at 200–300 km/day over a 36-month test. Médio Tejo’s duty-cycle results and 5.37 kg H₂/100 km consumption give a fleet operator a proven benchmark for a longer-duration trial.' },
         { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Constanța', country: '· Romania', text: 'MEDGreen and IAC Special Projects are designing an innovative 100 kW fuel-cell minibus. Médio Tejo’s real-world operating experience helps de-risk the vehicle concept before a wheel is built.' },
-        { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Upper Austria', country: '· Austria', text: 'Upper Austria’s own case study names Médio Tejo as a leading example of hydrogen mobility in practice, citing its nine-month, fault-free pilot as proof that hydrogen buses hold up in daily public service.' },
         { dir: 'in', arrow: '↔', label: 'POOLED ACROSS WP5', region: 'The mobility network', country: '', text: 'Lessons flow back too: Constanța coordinates the regional pilots into a shared demonstration report (D5.2), while Northern Netherlands and Western Macedonia add regulatory and roll-out perspective from the barriers-and-standards work (Task 5.1).' }
       ]
     },
@@ -217,7 +216,7 @@
         href: './case-study.html?region=upper-austria',
         kicker: 'CASE STUDY · PRODUCTION',
         title: 'Upper Austria: from steel to a green hydrogen value chain',
-        lead: 'The production partner that cites Médio Tejo in its own story. See how Hy2Market extended a working 6 MW electrolyser in Linz into a complete value chain.',
+        lead: 'See how Hy2Market extended a working 6 MW electrolyser in Linz into a complete value chain.',
         chips: ['Austria', 'Electrolysis', 'Steel'],
         caption: 'voestalpine steel plant · Linz · H2FUTURE electrolyser'
       },
