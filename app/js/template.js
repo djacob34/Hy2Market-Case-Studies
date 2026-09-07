@@ -129,7 +129,23 @@
           '<span class="spotlight-cta">Learn more<span class="arrow"> →</span></span>' +
         '</button>' +
       '</div>' +
+      partnerDetailsHtml([p]) +
     '</section>';
+  }
+
+  // Full partner bios, in the DOM from first load (the same text the
+  // partner-modal popup shows on click) but visually hidden — so crawlers,
+  // search engines and screen readers can read every partner's role without
+  // needing to open the interactive modal. Single source: reads the same
+  // `body`/`bodyHtml` fields interactions.js uses to populate that modal.
+  function partnerDetailsHtml(list) {
+    var entries = list.map(function (p) {
+      var body = p.bodyHtml ? p.bodyHtml : (p.body ? '<p>' + esc(p.body) + '</p>' : '');
+      if (!body) return '';
+      return '<div><dt>' + esc(p.name) + (p.role ? ' — ' + esc(p.role) : '') + '</dt>' +
+        '<dd>' + body + '</dd></div>';
+    }).join('');
+    return entries ? '<dl class="sr-only">' + entries + '</dl>' : '';
   }
 
   /* ---- PARTNER BAND ---- */
@@ -150,6 +166,7 @@
         '<span class="partners-label">PROJECT PARTNERS</span>' +
         '<div class="partner-logos">' + logos + '</div>' +
       '</div>' +
+      partnerDetailsHtml(list) +
     '</section>';
   }
 
@@ -329,6 +346,22 @@
     '</section>';
   }
 
+  // Full system-node descriptions, in the DOM from first load (the same text
+  // the node-popup modal shows on click) but visually hidden. Single source:
+  // reads the same `system.nodeData` map interactions.js uses for the modal.
+  function nodeDetailsHtml(s) {
+    var nodeData = s.nodeData || {};
+    var order = (s.chain || []).concat(s.branches || []);
+    var entries = order.map(function (n) {
+      var nd = nodeData[n.id];
+      if (!nd) return '';
+      return '<div><dt>' + esc(nd.title) + '</dt>' +
+        (nd.tag ? '<dd>' + esc(nd.tag) + '</dd>' : '') +
+        '<dd>' + esc(nd.body) + '</dd></div>';
+    }).join('');
+    return entries ? '<dl class="sr-only">' + entries + '</dl>' : '';
+  }
+
   /* ---- SYSTEM DIAGRAM ---- */
   function system(d) {
     var s = d.system;
@@ -367,6 +400,7 @@
         branchLabel +
         '<div class="branches">' + branches + '</div>' +
         disclaimer +
+        nodeDetailsHtml(s) +
       '</div>' +
     '</section>';
   }
@@ -510,9 +544,22 @@
   }
 
   /* ---- QUOTES ---- */
+  // All quotes render as real markup from first load — only the first is
+  // visually shown (the rest carry `hidden`); interactions.js just toggles
+  // that attribute instead of injecting text, so the full set is always in
+  // the source for crawlers/screen readers even though only one is on screen.
   function quotes(d) {
     var dots = d.quotes.map(function (_, i) {
       return '<button type="button" class="qdot' + (i === 0 ? ' active' : '') + '" data-quote-dot="' + i + '" aria-label="Go to quote ' + (i + 1) + '"></button>';
+    }).join('');
+    var blocks = d.quotes.map(function (q, i) {
+      return '<div class="quote-block"' + (i === 0 ? '' : ' hidden') + ' data-quote-index="' + i + '">' +
+        '<blockquote class="quote-text">' + esc(q.text) + '</blockquote>' +
+        '<div class="quote-attr"><span class="rule"></span><div>' +
+          '<div class="quote-name">' + esc(q.name) + '</div>' +
+          '<div class="quote-role">' + esc(q.role) + '</div>' +
+        '</div></div>' +
+      '</div>';
     }).join('');
     return '' +
     '<section class="quotes" aria-label="Quotes">' +
@@ -520,13 +567,7 @@
         '<p class="eyebrow"><span class="dash"></span>' + esc(d.quotesEyebrow) + '</p>' +
         '<div class="quote-grid">' +
           '<span class="quote-mark" aria-hidden="true">“</span>' +
-          '<div>' +
-            '<blockquote class="quote-text" data-quote-text></blockquote>' +
-            '<div class="quote-attr"><span class="rule"></span><div>' +
-              '<div class="quote-name" data-quote-name></div>' +
-              '<div class="quote-role" data-quote-role></div>' +
-            '</div></div>' +
-          '</div>' +
+          '<div>' + blocks + '</div>' +
         '</div>' +
         '<div class="quote-controls">' +
           '<div class="quote-dots">' + dots + '</div>' +

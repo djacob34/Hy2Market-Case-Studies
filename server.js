@@ -60,7 +60,7 @@ function readShell(file) {
   return fs.readFileSync(path.join(APP_DIR, file), 'utf8');
 }
 
-function renderIndexHtml() {
+function renderIndexHtml(baseUrl) {
   const registry = loadCaseStudies();
   const studies = Object.keys(registry).map((k) => registry[k]);
   const cardsHtml = studies.length
@@ -72,10 +72,17 @@ function renderIndexHtml() {
     /(<main id="cs-grid"[^>]*>)[\s\S]*?(<\/main>)/,
     '$1' + cardsHtml + '$2'
   );
+  if (baseUrl) {
+    html = html.replace('</head>', '<link rel="canonical" href="' + esc(baseUrl + '/') + '">\n</head>');
+  }
   return html;
 }
 
-function renderCaseStudyHtml(regionSlug) {
+function stripTags(s) {
+  return String(s == null ? '' : s).replace(/<[^>]+>/g, '');
+}
+
+function renderCaseStudyHtml(regionSlug, baseUrl) {
   const registry = loadCaseStudies();
   const slug = regionSlug || 'upper-austria';
   const data = registry[slug] || registry['upper-austria'] || Object.values(registry)[0];
@@ -110,10 +117,39 @@ function renderCaseStudyHtml(regionSlug) {
     '<meta name="description" content="' + esc(description) + '">'
   );
 
+  // Canonical link + JSON-LD: supplementary metadata for crawlers/search
+  // engines, generated from the same region data as the visible page —
+  // never a substitute for the content already in the HTML body above.
+  if (baseUrl) {
+    const canonicalUrl = baseUrl + '/case-study.html?region=' + encodeURIComponent(slug);
+    const headline = stripTags((data.hero && data.hero.titleHtml) || pageTitle);
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: headline,
+      description: description,
+      url: canonicalUrl,
+      inLanguage: 'en'
+    };
+    const headExtra =
+      '<link rel="canonical" href="' + esc(canonicalUrl) + '">\n' +
+      '  <script type="application/ld+json">' + JSON.stringify(jsonLd).replace(/</g, '\\u003c') + '</script>\n';
+    html = html.replace('</head>', headExtra + '</head>');
+  }
+
   return html;
 }
 
 const app = express();
+
+// Trust the platform's proxy (Railway et al. terminate TLS upstream) so
+// req.protocol/req.get('host') reflect the real public URL, not an internal
+// http://localhost hop — needed to build a correct canonical link.
+app.set('trust proxy', true);
+
+function baseUrlFor(req) {
+  return req.protocol + '://' + req.get('host');
+}
 
 // Always revalidate — matches the old Caddyfile's intent ("content updates
 // show immediately"), which matters more here than on most static sites
@@ -124,12 +160,12 @@ app.use((req, res, next) => {
 });
 
 app.get(['/', '/index.html'], (req, res) => {
-  res.type('html').send(renderIndexHtml());
+  res.type('html').send(renderIndexHtml(baseUrlFor(req)));
 });
 
 app.get('/case-study.html', (req, res) => {
   const region = typeof req.query.region === 'string' ? req.query.region : undefined;
-  res.type('html').send(renderCaseStudyHtml(region));
+  res.type('html').send(renderCaseStudyHtml(region, baseUrlFor(req)));
 });
 
 // Everything else that's a real file (css, js, images, fonts) — served as-is.
@@ -138,7 +174,7 @@ app.use(express.static(APP_DIR, { index: false }));
 // SPA-style fallback for anything unmatched, mirroring the old Caddyfile's
 // `try_files {path} {path}/ /index.html`.
 app.use((req, res) => {
-  res.type('html').send(renderIndexHtml());
+  res.type('html').send(renderIndexHtml(baseUrlFor(req)));
 });
 
 const PORT = process.env.PORT || 8080;

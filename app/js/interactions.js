@@ -184,27 +184,23 @@
     })();
 
     /* ---------- quote carousel ---------- */
+    // Every quote is already rendered in the DOM (template.js); this just
+    // toggles which `.quote-block` is visible, rather than injecting text —
+    // so the full set stays readable in the page source without JS.
     (function () {
-      var quotes = (data && data.quotes) || [];
-      if (!quotes.length) return;
-      var textEl = container.querySelector('[data-quote-text]');
-      var nameEl = container.querySelector('[data-quote-name]');
-      var roleEl = container.querySelector('[data-quote-role]');
+      var blocks = Array.prototype.slice.call(container.querySelectorAll('[data-quote-index]'));
+      if (!blocks.length) return;
       var dots = Array.prototype.slice.call(container.querySelectorAll('[data-quote-dot]'));
       var i = 0;
       function render() {
-        var q = quotes[i];
-        if (textEl) textEl.textContent = q.text;
-        if (nameEl) nameEl.textContent = q.name;
-        if (roleEl) roleEl.textContent = q.role;
+        blocks.forEach(function (b, bi) { b.hidden = bi !== i; });
         dots.forEach(function (d, di) { d.classList.toggle('active', di === i); });
       }
       var prev = container.querySelector('[data-quote-prev]');
       var nextBtn = container.querySelector('[data-quote-next]');
-      if (prev) prev.addEventListener('click', function () { i = (i - 1 + quotes.length) % quotes.length; render(); });
-      if (nextBtn) nextBtn.addEventListener('click', function () { i = (i + 1) % quotes.length; render(); });
+      if (prev) prev.addEventListener('click', function () { i = (i - 1 + blocks.length) % blocks.length; render(); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { i = (i + 1) % blocks.length; render(); });
       dots.forEach(function (d, di) { d.addEventListener('click', function () { i = di; render(); }); });
-      render();
     })();
 
     /* ---------- TOC scroll-spy (deterministic, click-locked) ---------- */
