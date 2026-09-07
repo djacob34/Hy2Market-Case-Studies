@@ -111,7 +111,7 @@
           subtitle: 'Two duty cycles, one bus, nine months.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
           photoCaption: 'Urban circuit, Abrantes → inter-city, Tomar',
-          body: 'The bus averaged 200 km a day across circuits serving all 11 municipalities. Urban route based in <strong>Abrantes</strong> (Nov 2023–Apr 2024), then an inter-city route based in <strong>Tomar</strong> (Apr–Aug 2024), deliberately including student-transport routes to help spread awareness of the technology.',
+          body: 'The bus averaged 200 km a day across circuits serving all 11 municipalities. Urban route based in <strong>Abrantes</strong> (Nov 2023–Apr 2024), then an inter-city route based in <strong>Tomar</strong> (Apr 2024–Jul 2024), deliberately including student-transport routes to help spread awareness of the technology.',
           stats: [
             { n: '200 km', l: 'average daily distance' },
             { n: '11', l: 'municipalities served' }
@@ -189,7 +189,11 @@
         { tone: 'grey', n: '~11,000 litres', l: 'diesel avoided' },
         { tone: 'black', n: '3 buses', l: 'fleet expansion now underway' }
       ],
-      narrative: 'Médio Tejo now offers the rest of the consortium a working, real-world answer to the question every rural or hilly region asks before investing: does a hydrogen bus survive daily service? Nine months of real-world evidence are now powering a permanent fleet transition and inspiring wider adoption across the public transport sector.'
+      narrative: 'Médio Tejo now offers the rest of the consortium a working, real-world answer to the question every rural or hilly region asks before investing: does a hydrogen bus survive daily service? Nine months of real-world evidence are now powering a permanent fleet transition and inspiring wider adoption across the public transport sector.',
+      pending: [
+        { n: '— passengers', l: 'Passengers carried <em>(not tracked during the pilot)</em>' },
+        { n: '— TRL', l: 'TRL change for the mobility technology <em>(pending)</em>' }
+      ]
     },
 
     knowledge: {
