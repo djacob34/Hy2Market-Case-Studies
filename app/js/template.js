@@ -429,7 +429,11 @@
   function outcomes(d) {
     var o = d.outcomes;
     var stats = o.stats.map(function (s) {
-      return '<div class="oc ' + esc(s.tone) + '"><div class="n">' + esc(s.n) + '</div><div class="l">' + esc(s.l) + '</div></div>';
+      // Most values are short and punchy ("150 MW", "371") and want the big
+      // headline size; an unusually long one (a phrase rather than a figure)
+      // gets a smaller size instead of overflowing its column.
+      var nCls = 'n' + (s.n && s.n.length > 20 ? ' n-long' : '');
+      return '<div class="oc ' + esc(s.tone) + '"><div class="' + nCls + '">' + esc(s.n) + '</div><div class="l">' + esc(s.l) + '</div></div>';
     }).join('');
     // Optional "built on" baseline row: solid (not dashed) context tiles for
     // pre-existing figures a region builds on, kept visually distinct from the
