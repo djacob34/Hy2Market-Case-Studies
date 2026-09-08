@@ -1,11 +1,21 @@
 /* =========================================================================
    test/ssr.test.js — every region in app/js/data/ must be crawlable: its
    first HTTP response (no JS run) has to already contain that region's
-   real headline and body copy, not the empty #case-study-root shell.
+   real headline and body copy, not the empty #case-study-root shell. Also
+   covers the routing layer around that: the legacy ?region= URLs redirect
+   to the canonical clean path, robots.txt/sitemap.xml are correct, and
+   response headers are conventional (public, cacheable — not no-store).
 
    Regions come from the same fs.readdirSync(DATA_DIR) scan server.js uses
    to build its registry — nothing here is a manually maintained list, so a
    new region file is covered automatically the moment it's added.
+
+   This only proves the app itself serves full SSR HTML with sane headers.
+   It runs against an in-process server, not the public Railway domain, so
+   it cannot catch a problem introduced between Railway's edge and this
+   process (CDN, proxy, DNS) — see .github/workflows/deploy-check.yml for
+   that half of the picture, which runs from GitHub's network against the
+   live URL.
 
    Run: npm test  (node --test)
    ========================================================================= */
@@ -43,12 +53,12 @@ test.after(() => {
   server.close();
 });
 
-test('every case-study region renders full content in the initial HTML response', async () => {
+test('every case-study region renders full content at its clean /case-studies/<slug>/ URL', async () => {
   const regions = loadAllRegions();
   assert.ok(regions.length > 0, 'no region data files found under app/js/data/ — test setup is broken');
 
   for (const region of regions) {
-    const res = await fetch(baseUrl + '/case-study.html?region=' + encodeURIComponent(region.slug));
+    const res = await fetch(baseUrl + '/case-studies/' + encodeURIComponent(region.slug) + '/');
     const html = await res.text();
 
     assert.equal(res.status, 200, region.slug + ': expected HTTP 200, got ' + res.status);
@@ -98,4 +108,62 @@ test('every case-study region renders full content in the initial HTML response'
     // None of this depended on running any JS — fetch() above never
     // executed app/js/main.js or interactions.js.
   }
+});
+
+test('legacy ?region= URLs 301-redirect to the clean /case-studies/<slug>/ route', async () => {
+  const regions = loadAllRegions();
+  for (const region of regions) {
+    const res = await fetch(
+      baseUrl + '/case-study.html?region=' + encodeURIComponent(region.slug),
+      { redirect: 'manual' }
+    );
+    assert.equal(res.status, 301, region.slug + ': expected a 301 redirect, got ' + res.status);
+    assert.equal(
+      res.headers.get('location'),
+      '/case-studies/' + encodeURIComponent(region.slug) + '/',
+      region.slug + ': redirected to the wrong location'
+    );
+  }
+});
+
+test('/case-study.html with no region redirects to the default region', async () => {
+  const res = await fetch(baseUrl + '/case-study.html', { redirect: 'manual' });
+  assert.equal(res.status, 301);
+  assert.equal(res.headers.get('location'), '/case-studies/upper-austria/');
+});
+
+test('/case-studies/<slug> (no trailing slash) redirects to the trailing-slash form', async () => {
+  const res = await fetch(baseUrl + '/case-studies/asturias', { redirect: 'manual' });
+  assert.equal(res.status, 301);
+  assert.equal(res.headers.get('location'), '/case-studies/asturias/');
+});
+
+test('robots.txt allows crawling and points to the sitemap', async () => {
+  const res = await fetch(baseUrl + '/robots.txt');
+  const body = await res.text();
+  assert.equal(res.status, 200);
+  assert.match(body, /Allow:\s*\//);
+  assert.match(body, /Sitemap:\s*\S+\/sitemap\.xml/);
+});
+
+test('sitemap.xml lists every published region and excludes draft/review ones', async () => {
+  const regions = loadAllRegions();
+  const res = await fetch(baseUrl + '/sitemap.xml');
+  const body = await res.text();
+  assert.equal(res.status, 200);
+  for (const region of regions) {
+    const loc = '/case-studies/' + region.slug + '/';
+    if (region.banner) {
+      assert.ok(!body.includes(loc), region.slug + ': draft region should not be in the sitemap');
+    } else {
+      assert.ok(body.includes(loc), region.slug + ': published region missing from the sitemap');
+    }
+  }
+});
+
+test('a case-study response advertises a public, cacheable Cache-Control', async () => {
+  const res = await fetch(baseUrl + '/case-studies/upper-austria/');
+  const cc = res.headers.get('cache-control') || '';
+  assert.match(cc, /public/);
+  assert.doesNotMatch(cc, /no-store|private/);
 });

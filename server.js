@@ -16,7 +16,13 @@
 
    Replaces the previous Caddy-only static file server (see git history for
    the old Caddyfile) — Caddy had no way to vary a response by query string
-   (?region=<slug>), which is exactly what every case-study URL depends on.
+   (?region=<slug>), which is exactly what every case-study URL depended on.
+
+   Canonical URLs are now clean paths, /case-studies/<slug>/, not query
+   strings — a plain path is the shape every HTTP cache, CDN and crawler
+   handles most predictably. The legacy /case-study.html?region=<slug> URLs
+   still work, but now 301-redirect to the clean path instead of rendering
+   inline, so there's exactly one canonical URL per region.
    ========================================================================= */
 'use strict';
 
@@ -82,13 +88,27 @@ function stripTags(s) {
   return String(s == null ? '' : s).replace(/<[^>]+>/g, '');
 }
 
+// Published regions: every registered slug except draft/review pages
+// (data.banner) — the same set that's safe to publicly link/index. Used by
+// the sitemap; kept slug-agnostic and data-driven like everything else here.
+function publishedSlugs() {
+  const registry = loadCaseStudies();
+  return Object.keys(registry).filter((slug) => !registry[slug].banner).sort();
+}
+
 function renderCaseStudyHtml(regionSlug, baseUrl) {
   const registry = loadCaseStudies();
-  const slug = regionSlug || 'upper-austria';
-  const data = registry[slug] || registry['upper-austria'] || Object.values(registry)[0];
+  const requestedSlug = regionSlug || 'upper-austria';
+  const data = registry[requestedSlug] || registry['upper-austria'] || Object.values(registry)[0];
 
   let html = readShell('case-study.html');
   if (!data) return html;
+
+  // The region actually being rendered — not necessarily requestedSlug, if
+  // that slug was unknown and this fell back to upper-austria/first-found.
+  // Canonical/JSON-LD below must describe the region on the page, not the
+  // (possibly wrong) slug that was asked for.
+  const slug = data.slug || requestedSlug;
 
   // Mirrors main.js's own fixup exactly: a region's breadcrumb.href is often
   // left as '#' in its data file, relying on this to point it at the
@@ -134,7 +154,7 @@ function renderCaseStudyHtml(regionSlug, baseUrl) {
   // engines, generated from the same region data as the visible page —
   // never a substitute for the content already in the HTML body above.
   if (baseUrl) {
-    const canonicalUrl = baseUrl + '/case-study.html?region=' + encodeURIComponent(slug);
+    const canonicalUrl = baseUrl + '/case-studies/' + encodeURIComponent(slug) + '/';
     const headline = stripTags((data.hero && data.hero.titleHtml) || pageTitle);
     const jsonLd = {
       '@context': 'https://schema.org',
@@ -171,15 +191,26 @@ const app = express();
 // http://localhost hop — needed to build a correct canonical link.
 app.set('trust proxy', true);
 
+// Without this, Express treats '/case-studies/asturias' and
+// '/case-studies/asturias/' as the same route and both just render (200) —
+// two URLs for one page. Strict routing makes them genuinely distinct, so
+// the no-slash route below can actually 301 to the canonical trailing-slash
+// form instead of silently serving duplicate content at both.
+app.set('strict routing', true);
+
 function baseUrlFor(req) {
   return req.protocol + '://' + req.get('host');
 }
 
-// Always revalidate — matches the old Caddyfile's intent ("content updates
-// show immediately"), which matters more here than on most static sites
-// since these pages are actively being edited/reviewed.
+// A short, conventional public cache window — plain "public, max-age" is
+// the least likely cache-control value to confuse an intermediary proxy or
+// CDN sitting in front of Railway. Content is actively edited, so this
+// stays short (5 min) rather than the no-cache this used to send; no-cache
+// still forces a full revalidation round-trip on every request, which is
+// exactly the kind of thing worth ruling out if a fetcher somewhere in the
+// path is behaving oddly around caching.
 app.use((req, res, next) => {
-  res.set('Cache-Control', 'no-cache');
+  res.set('Cache-Control', 'public, max-age=300');
   next();
 });
 
@@ -187,9 +218,46 @@ app.get(['/', '/index.html'], (req, res) => {
   res.type('html').send(renderIndexHtml(baseUrlFor(req)));
 });
 
+// Canonical, clean, path-based URL for every region — no query string, so
+// no fetcher/proxy/CDN in the path can drop or mis-key on `?region=`.
+// Rendered directly here: this calls CaseStudyTemplate.renderCaseStudy()
+// (via renderCaseStudyHtml) and sends the complete HTML in the response,
+// exactly like the legacy route always has — nothing bot-specific, no
+// separate code path for crawlers vs. browsers.
+app.get('/case-studies/:slug/', (req, res) => {
+  res.type('html').send(renderCaseStudyHtml(req.params.slug, baseUrlFor(req)));
+});
+
+// No-trailing-slash variant: redirect to the canonical trailing-slash form
+// instead of rendering twice at two URLs (duplicate-content footgun).
+app.get('/case-studies/:slug', (req, res) => {
+  res.redirect(301, '/case-studies/' + encodeURIComponent(req.params.slug) + '/');
+});
+
+// Legacy query-string URLs (still in circulation / already indexed) permanently
+// redirect to the clean path route rather than rendering inline, so there is
+// exactly one canonical URL per region and old links keep working.
 app.get('/case-study.html', (req, res) => {
-  const region = typeof req.query.region === 'string' ? req.query.region : undefined;
-  res.type('html').send(renderCaseStudyHtml(region, baseUrlFor(req)));
+  const region = typeof req.query.region === 'string' ? req.query.region : 'upper-austria';
+  res.redirect(301, '/case-studies/' + encodeURIComponent(region) + '/');
+});
+
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain').send(
+    'User-agent: *\n' +
+    'Allow: /\n' +
+    'Sitemap: ' + baseUrlFor(req) + '/sitemap.xml\n'
+  );
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  const base = baseUrlFor(req);
+  const urls = ['/'].concat(publishedSlugs().map((slug) => '/case-studies/' + encodeURIComponent(slug) + '/'));
+  const body = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    urls.map((u) => '  <url><loc>' + esc(base + u) + '</loc></url>').join('\n') + '\n' +
+    '</urlset>\n';
+  res.type('application/xml').send(body);
 });
 
 // Everything else that's a real file (css, js, images, fonts) — served as-is.
