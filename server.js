@@ -150,6 +150,17 @@ function renderCaseStudyHtml(regionSlug, baseUrl) {
     html = html.replace('</head>', headExtra + '</head>');
   }
 
+  // Draft/review pages (identified by the same `data.banner` flag that
+  // renders the "REVISED DRAFT"-style banner on the page itself, e.g.
+  // upper-austria-revised) stay fully server-rendered and reachable — a
+  // reviewer's link has to keep working — but are marked noindex so they
+  // aren't treated as a public, canonical case study alongside the real
+  // regions. Driven by the same flag the content already uses, not a
+  // hardcoded slug, so any future draft page gets this automatically.
+  if (data.banner) {
+    html = html.replace('</head>', '<meta name="robots" content="noindex, nofollow">\n</head>');
+  }
+
   return html;
 }
 

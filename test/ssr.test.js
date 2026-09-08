@@ -74,6 +74,27 @@ test('every case-study region renders full content in the initial HTML response'
       assert.ok(html.includes(region.hero.lead), region.slug + ': missing hero lead paragraph');
     }
 
+    // Substantive overall: guard against a region that passes every string
+    // check above via just the hero, but has an otherwise-truncated or
+    // failed render for the rest of the page (overview, solutions, system,
+    // outcomes, etc.). 20KB is comfortably below every current region's
+    // actual size (30KB+) but well above a hero-only fragment.
+    assert.ok(
+      html.length > 20000,
+      region.slug + ': response is only ' + html.length + ' bytes — looks truncated, not a full page'
+    );
+
+    // Draft/review regions (flagged via data.banner, e.g. the "REVISED
+    // DRAFT" partner-review page) must stay fully server-rendered and
+    // reachable, but marked noindex so they aren't picked up as a public,
+    // canonical case study. Published regions must NOT carry that tag.
+    const hasNoindex = /<meta name="robots" content="noindex/.test(html);
+    if (region.banner) {
+      assert.ok(hasNoindex, region.slug + ': draft region (has data.banner) should be marked noindex');
+    } else {
+      assert.ok(!hasNoindex, region.slug + ': published region should not be marked noindex');
+    }
+
     // None of this depended on running any JS — fetch() above never
     // executed app/js/main.js or interactions.js.
   }

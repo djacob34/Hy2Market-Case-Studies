@@ -1,0 +1,22 @@
+name: SSR crawlability regression test
+
+# Runs the per-region SSR test (test/ssr.test.js) on every push and PR
+# against main, so a region that stops rendering full server-side HTML
+# fails CI before it ever reaches production/Railway.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm test
