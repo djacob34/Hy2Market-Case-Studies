@@ -280,10 +280,9 @@
 
     knowledge: {
       title: 'Knowledge exchange',
-      intro: 'As a "more developed" region, Upper Austria both shares hard-won expertise and learns from its peers — knowledge flows in both directions across the Hy2Market network.',
+      intro: 'As a "more developed" region, Upper Austria shares hard-won expertise with its peers across the Hy2Market network.',
       cards: [
-        { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Constanța', country: '· Romania', text: 'WIVA P&G advised on feasibility studies for a Danube hydrogen hub — steering the region to confirm demand before building infrastructure.' },
-        { dir: 'in', arrow: '←', label: 'LEARNING FROM', region: 'Médio Tejo', country: '· Portugal', text: 'Mobility demonstration know-how — in exchange for Upper Austria’s production and renewable-capacity expertise.' }
+        { dir: 'out', arrow: '→', label: 'SHARING TO', region: 'Constanța', country: '· Romania', text: 'WIVA P&G advised on feasibility studies for a Danube hydrogen hub — steering the region to confirm demand before building infrastructure.' }
       ]
     },
 
