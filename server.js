@@ -100,7 +100,20 @@ function renderCaseStudyHtml(regionSlug, baseUrl) {
     data.breadcrumb.href = './index.html';
   }
 
-  const rendered = CaseStudyTemplate.renderCaseStudy(data);
+  // A render failure must be loud, not a silent fallback to the empty
+  // shell — an empty shell for one region and full content for every other
+  // one looks exactly like "this region just has no content" to whoever's
+  // debugging it, when it's actually a crash. Log it and blow up the
+  // request instead so it shows up as a 500, not quietly-missing copy.
+  let rendered;
+  try {
+    rendered = CaseStudyTemplate.renderCaseStudy(data);
+  } catch (renderErr) {
+    console.error('[server] SSR render failed for region "' + slug + '":', renderErr);
+    const wrapped = new Error('SSR render failed for region "' + slug + '": ' + renderErr.message);
+    wrapped.status = 500;
+    throw wrapped;
+  }
   html = html.replace(
     /(<div id="case-study-root"[^>]*>)[\s\S]*?(<\/div>)/,
     '$1' + rendered + '$2'
@@ -177,7 +190,24 @@ app.use((req, res) => {
   res.type('html').send(renderIndexHtml(baseUrlFor(req)));
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log('Hy2Market case studies server listening on :' + PORT);
+// Must be last, and take 4 args, for Express to treat it as an error
+// handler. A thrown SSR error lands here as a visible 500 with the region
+// and cause logged server-side — never the silent empty shell.
+app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+  console.error('[server] request failed:', req.originalUrl, err);
+  res.status(err.status || 500).type('text/plain').send(
+    'Server error rendering this page' + (err.message ? ': ' + err.message : '') + '.\n' +
+    'This has been logged — it does not mean the region has no content.'
+  );
 });
+
+// Exporting `app` (without starting it) lets tests spin up their own
+// ephemeral-port instance instead of fighting over a fixed PORT.
+module.exports = app;
+
+if (require.main === module) {
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log('Hy2Market case studies server listening on :' + PORT);
+  });
+}
