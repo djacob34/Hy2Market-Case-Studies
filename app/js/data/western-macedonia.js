@@ -6,18 +6,19 @@
    Registered as window.CASE_STUDIES['western-macedonia'] — view at case-study.html?region=western-macedonia
 
    Content synced against CluBE's own reviewed content-collection document (2026-09-07), which flagged
-   specific sections for revision via Word comments — those revisions are applied verbatim below, minus
-   internal deliverable/task/work-package codes (see the note below) which the source document still
-   used in a few places. Two renames apply throughout, per explicit review comments: "CLUBE" -> "CluBE",
-   and the North-1 project's node/references from "NorthOne" -> "North-1".
+   specific sections for revision via Word comments — those revisions are applied verbatim below. Two
+   renames apply throughout, per explicit review comments: "CLUBE" -> "CluBE", and the North-1 project's
+   node/references from "NorthOne" -> "North-1".
 
    As of this sync, every item that document flagged has a confirmed answer, so there are no
    remaining visitor-facing "[DATA NEEDED — ...]" markers on this page. If a future round reopens
    one, mark it the same way and keep it visible until it has a confirmed source.
 
-   Visible copy is deliberately free of internal WP/deliverable/task codes (e.g. "WP6", "D6.3",
-   "Task 4.3") — those are consortium-internal shorthand, not something a public visitor needs, even
-   where CluBE's own source wording included them.
+   The training, roll-out and standards drawers under "How CluBE contributed" name their specific
+   deliverable/task identifiers (D6.3, Task 4.3, D4.5, Task 6.2, D6.2, WIVA P&G) verbatim, per
+   explicit partner instruction, rather than the internal-code-free phrasing used elsewhere on this
+   page — and keep the source's cautious, not-yet-public framing for D4.5 and D6.2 rather than
+   stating either as a confirmed fact.
 
    Structural notes (see template.js for the supporting, backward-compatible changes):
    - hero.stats is omitted — no confirmed figures for a padded 3-tile grid; hero.slideshow (three
@@ -66,7 +67,7 @@
   partners: [
     {
       id: `clube`, name: `CluBE`, logo: `clube.png`,
-      role: `CluBE — Cluster of Bioeconomy and Environment of Western Macedonia. The region's sole Hy2Market partner, and its link to the wider European hydrogen knowledge exchange.`,
+      role: `Cluster of Bioeconomy and Environment of Western Macedonia. The region's sole Hy2Market partner, and its link to the wider European hydrogen knowledge exchange.`,
       bodyHtml: `<p>A non-profit regional cluster based in Kozani, established by local actors and stakeholders to promote synergies, driving bioeconomy and green hydrogen innovation across Western Macedonia through collaboration, research, training, stakeholder engagement, capacity building, knowledge transfer, R&amp;D and business development. CluBE is appointed as the official national contact point for Greece in the European Hydrogen Observatory and a member of Hydrogen Europe. CluBE represents the region as its only Hy2Market partner.</p>`,
       logoHtml: `<span class="logo-word">CluBE</span>`
     }
@@ -129,7 +130,7 @@
         thumbGrad: `linear-gradient(135deg,#2c3138,#15171b)`,
         tex: 120,
         photoCaption: `Training guidelines · knowledge exchange`,
-        body: `CluBE contributed to Hy2Market's training guidelines and its accompanying whitepaper — desk research mapping the hydrogen skills landscape and training opportunities across some of the consortium's regions, benchmarked against Western Macedonia's own, developing key insights and practical recommendations for hydrogen training and analyzing consortium insights on hydrogen skills development. CluBE drew directly on its experience as a partner in the GreenSkillsforH2 (European Hydrogen Skills Alliance) Erasmus+ project — including the successful organization and implementation of four annual Hydrogen Summer ScH2ools and other training formats, such as masterclasses and technical seminars, in Western Macedonia — to help define the different training formats the guidelines recommend, tailored to what different hydrogen professions actually need, from safety officers and technical staff to project managers.` +
+        body: `CluBE contributed to Hy2Market's training guidelines Deliverable (D6.3) and Whitepaper — desk research mapping the hydrogen skills landscape and training opportunities across some of the consortium's regions, benchmarked against Western Macedonia's own, developing key insights and practical recommendations for hydrogen training and analyzing consortium insights on hydrogen skills development. CluBE drew directly on its experience as a partner in the GreenSkillsforH2 (European Hydrogen Skills Alliance) Erasmus+ project — including the successful organization and implementation of four annual Hydrogen Summer ScH2ools and other training formats, such as masterclasses and technical seminars, in Western Macedonia — to help define the different training formats the guidelines recommend, tailored to what different hydrogen professions actually need, from safety officers and technical staff to project managers.` +
           `<ul style="font-size:17px;line-height:1.6;color:var(--ink);margin:18px 0;padding-left:20px;">` +
             `<li style="margin:0 0 6px;">Masterclass "One-Day Hydrogen": 70 participants</li>` +
             `<li style="margin:0 0 6px;">Hydrogen Summer ScH2ool: 78 participants</li>` +
@@ -149,7 +150,7 @@
         thumbGrad: `linear-gradient(135deg,#3a4048,#1c2026)`,
         tex: 60,
         photoCaption: `Regional data · roll-out evaluation`,
-        body: `CluBE's contribution focused on supplying regional data and supporting roll-out evaluation rather than conducting standalone modelling or simulations. CluBE contributed to Hy2Market's evaluation and roll-out work by providing regional technical data and sharing plans and projects regarding CO₂ capture and utilization, renewable energy capacity, and green hydrogen potential in Western Macedonia and Greece more broadly, feeding the consortium's evaluation of where hydrogen roll-out is most viable across its regions. This data isn't publicly published yet — it feeds into a consortium-wide roll-out report expected later in 2026.`
+        body: `CluBE's contribution focused on supplying regional data and supporting roll-out evaluation rather than conducting standalone modelling or simulations. As part of Task 4.3 – Evaluation and Roll-out, CluBE contributed to Hy2Market's evaluation and roll-out work by providing regional technical data and sharing plans and projects regarding CO₂ capture and utilization, renewable energy capacity, and green hydrogen potential in Western Macedonia and Greece more broadly, feeding the consortium's evaluation of where hydrogen roll-out is most viable across its regions. This data feeds into Deliverable D4.5 – Report Roll-out. D4.5 is due in October 2026 (M45) and is not expected to be public yet.`
       },
       {
         title: `Standards and policy input`,
@@ -157,7 +158,7 @@
         thumbGrad: `linear-gradient(135deg,#26424a,#11272d)`,
         tex: 90,
         photoCaption: `Standards & policy input`,
-        body: `When the consortium needed input on hydrogen regulations and standards from across its countries, CluBE acted as the bridge to Greece — distributing the questionnaire on hydrogen regulations and standards to national and regional hydrogen players, industries and stakeholders. Results gathered by all countries were later compiled and presented across the consortium, and are expected to inform a strategy paper that will be presented to the European Commission and EU policy makers, as well as national and regional authorities, at the end of the project to accelerate the implementation of hydrogen solutions in Europe. This strategy paper is not yet publicly available.`
+        body: `When the consortium needed input on hydrogen regulations and standards from across its countries, CluBE acted as the bridge to Greece — distributing the questionnaire on hydrogen regulations and standards to national and regional hydrogen players, industries and stakeholders, as part of Task 6.2 – Standardisation and Regulation, led by WIVA P&amp;G. Results gathered by all countries were later compiled and presented across the consortium. The work is expected to feed into Deliverable D6.2, due in December 2026 (M47) — a strategy paper to be presented to the European Commission and EU policy makers, as well as national and regional authorities, to accelerate the implementation of hydrogen solutions in Europe. D6.2 is due in December 2026 (M47), and the output is not expected to be publicly citable yet.`
       }
     ]
   },
@@ -183,9 +184,8 @@
 
   lessons: {
     title: `Lessons learned`,
-    leadHtml: `The clearest lesson CluBE takes from Hy2Market is that <span class="mark">interregional collaboration is essential</span>.`,
+    leadHtml: `The clearest lesson CluBE takes from Hy2Market is that <span class="mark">interregional collaboration is essential</span>. It allows emerging and less developed hydrogen regions such as Western Macedonia to learn from more mature regions through knowledge exchange, best practices and proven approaches to hydrogen deployment.`,
     bullets: [
-      `It allows emerging and less developed hydrogen regions such as Western Macedonia to learn from more mature regions through knowledge exchange, best practices and proven approaches to hydrogen deployment.`,
       `Renewables are already abundant in Western Macedonia — solar and wind capacity is growing fast — but without a national commitment to hydrogen investment, the region can't yet follow the more mature regions it has been studying.`,
       `There's no local industrial offtake to build around, unlike Upper Austria or Sicily, which leaves mobility — and, longer-term, hydrogen export along a Greece-to-Germany corridor — as the region's most realistic paths.`,
       `Training isn't one-size-fits-all: a hydrogen safety officer and a hydrogen project manager need entirely different curricula, a distinction that directly shaped how CluBE structured its contribution to the training guidelines.`
@@ -195,14 +195,14 @@
   outcomes: {
     title: `The outcomes`,
     stats: [
-      { tone: `yellow`, n: `3 deliverables`, l: `contributed to — training guidelines, regional roll-out data, and a standards questionnaire` },
+      { tone: `yellow`, n: `Contribution to three deliverables/activities`, l: `contributed to — training guidelines, regional roll-out data, and a standards questionnaire` },
       { tone: `grey`, n: `Training framework`, l: `multi-format, ready-to-deploy for different target audiences (students, occupational profiles)` },
       { tone: `grey`, n: `EU policy channel`, l: `live input into the emerging hydrogen standards conversation` },
       { tone: `black`, n: `Interregional hydrogen connections & synergies`, l: `contacts across Europe's more mature hydrogen regions, built through study visits and exchanges` }
     ],
     narrative: `By the numbers, Western Macedonia's Hy2Market story isn't about megawatts or kilometres of pipe — it's contributions banked for later: input across three fronts — training guidelines, regional roll-out data, and a standards questionnaire — a multi-format training framework ready to deploy once national investment arrives, and a live channel into the EU's emerging hydrogen policy conversation. The bigger outcome is relational: a network of contacts across Europe's more mature hydrogen regions that CluBE enriched and strengthened through the project, built through study visits and knowledge-exchange meetings.`,
     pending: [
-      { n: `371`, l: `A total number of 371 participants were engaged across six training programmes implemented by CluBE in Western Macedonia in the frame of GreenSkillsforH2` },
+      { n: `371`, l: `A total number of 371 participants were engaged across six training programmes implemented by CluBE in Western Macedonia in the frame of GreenSkillsforH2 and H2VE projects` },
       { n: `29`, l: `Greek hydrogen stakeholders and industrial companies provided with Hy2Market's regulations and standards questionnaire for their input` }
     ]
   },
