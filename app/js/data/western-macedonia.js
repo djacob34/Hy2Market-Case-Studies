@@ -47,7 +47,7 @@
     title: `Western Macedonia, Greece`,
     blurb: `Western Macedonia does not yet have a mature or fully established hydrogen infrastructure, but it has strong potential to develop a regional hydrogen ecosystem as part of its wider energy transition. The region is helping to lay the foundations for future hydrogen deployment by building knowledge and skills, and learning from more advanced hydrogen regions though Hy2Market and other hydrogen projects. CluBE supports this process by connecting regional needs and opportunities with relevant European experience, networks and developments.`
   },
-  breadcrumb: { label: `Case studies`, href: `./index.html`, here: `Western Macedonia` },
+  breadcrumb: { label: `Case studies`, href: `/`, here: `Western Macedonia` },
 
   hero: {
     eyebrow: `KNOWLEDGE EXCHANGE · WESTERN MACEDONIA`,
@@ -57,9 +57,9 @@
     // three photos CluBE supplied for the region's energy landscape, auto-rotating
     // in place of a single hero shot — see hero() / .hero-slideshow in template.js.
     slideshow: [
-      { src: `./assets/hero/western-macedonia-lignite.jpg`, caption: `Lignite mines and power plants, Western Macedonia` },
-      { src: `./assets/hero/western-macedonia-pv-park.jpg`, caption: `PV Park, Kozani, Western Macedonia · toposol.gr` },
-      { src: `./assets/hero/western-macedonia-wind-farm.jpg`, caption: `Askio onshore wind farm complex, Kozani, Western Macedonia · Iberdrola` }
+      { src: `/assets/hero/western-macedonia-lignite.jpg`, caption: `Lignite mines and power plants, Western Macedonia` },
+      { src: `/assets/hero/western-macedonia-pv-park.jpg`, caption: `PV Park, Kozani, Western Macedonia · toposol.gr` },
+      { src: `/assets/hero/western-macedonia-wind-farm.jpg`, caption: `Askio onshore wind farm complex, Kozani, Western Macedonia · Iberdrola` }
     ]
     // no hero.stats: no confirmed figures for a padded 3-tile grid.
   },
@@ -215,9 +215,9 @@
 
   next: {
     eyebrow: `CONTINUE THE STORY`,
-    allHref: `./index.html`,
+    allHref: `/`,
     featured: {
-      href: `./case-study.html?region=medio-tejo`,
+      href: `/case-study.html?region=medio-tejo`,
       kicker: `CASE STUDY · MOBILITY`,
       title: `Médio Tejo: proving hydrogen mobility in daily public service`,
       lead: `The region Western Macedonia is watching most closely for mobility lessons. See how Médio Tejo put a hydrogen bus into nine months of real public routes.`,
@@ -225,9 +225,9 @@
       caption: `Caetano H2.City Gold · Médio Tejo`
     },
     others: [
-      { href: `./case-study.html?region=upper-austria`, k: `PRODUCTION`, region: `Upper Austria`, country: `· Austria`, d: `A working electrolyser extended into a regional hydrogen network.` },
-      { href: `./case-study.html?region=asturias`, k: `PRODUCTION`, region: `Asturias`, country: `· Spain`, d: `A 150 MW hub built around a coal-era power plant.` },
-      { href: `./case-study.html?region=netherlands`, k: `TRANSPORT`, region: `Netherlands`, country: `· NL`, d: `A flexible composite hydrogen pipeline, laid in ~two months.` }
+      { href: `/case-study.html?region=upper-austria`, k: `PRODUCTION`, region: `Upper Austria`, country: `· Austria`, d: `A working electrolyser extended into a regional hydrogen network.` },
+      { href: `/case-study.html?region=asturias`, k: `PRODUCTION`, region: `Asturias`, country: `· Spain`, d: `A 150 MW hub built around a coal-era power plant.` },
+      { href: `/case-study.html?region=netherlands`, k: `TRANSPORT`, region: `Netherlands`, country: `· NL`, d: `A flexible composite hydrogen pipeline, laid in ~two months.` }
     ]
   },
 

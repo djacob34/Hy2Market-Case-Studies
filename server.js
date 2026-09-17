@@ -117,7 +117,7 @@ function renderCaseStudyHtml(regionSlug, baseUrl) {
   // already present (see main.js) — so it has to happen here too, or the
   // "View all case studies" link and breadcrumb both go nowhere.
   if (data.breadcrumb && (!data.breadcrumb.href || data.breadcrumb.href === '#')) {
-    data.breadcrumb.href = './index.html';
+    data.breadcrumb.href = '/';
   }
 
   // A render failure must be loud, not a silent fallback to the empty

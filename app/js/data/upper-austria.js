@@ -296,7 +296,7 @@
       eyebrow: 'CONTINUE THE STORY',
       allHref: '#',
       featured: {
-        href: './case-study.html?region=asturias',
+        href: '/case-study.html?region=asturias',
         kicker: 'NEXT CASE STUDY · PRODUCTION',
         title: 'Asturias: scaling green hydrogen in Spain’s industrial north',
         lead: 'Upper Austria’s sister production region. See how Asturias pairs heavy industry with large-scale electrolysis to decarbonise steel, fertiliser and refining.',
@@ -305,7 +305,7 @@
       },
       others: [
         { href: '#', k: 'STORAGE', region: 'Gampern', country: '· Austria', d: 'World-first geological underground hydrogen storage.' },
-        { href: './case-study.html?region=medio-tejo', k: 'MOBILITY', region: 'Médio Tejo', country: '· Portugal', d: 'Fuel-cell mobility demonstration and refuelling.' },
+        { href: '/case-study.html?region=medio-tejo', k: 'MOBILITY', region: 'Médio Tejo', country: '· Portugal', d: 'Fuel-cell mobility demonstration and refuelling.' },
         { href: '#', k: 'DISTRIBUTION', region: 'Constanța', country: '· Romania', d: 'Building a Danube hydrogen hub from feasibility up.' }
       ]
     },
