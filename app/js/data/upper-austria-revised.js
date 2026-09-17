@@ -30,7 +30,7 @@
     banner: {
       tag: 'REVISED DRAFT',
       text: 'Partner-review revision of the Upper Austria case study — not yet the published version.',
-      link: { href: './case-study.html?region=upper-austria', label: 'View the original →' }
+      link: { href: '/case-study.html?region=upper-austria', label: 'View the original →' }
     },
 
     hero: {
@@ -310,7 +310,7 @@
       eyebrow: 'CONTINUE THE STORY',
       allHref: '#',
       featured: {
-        href: './case-study.html?region=asturias',
+        href: '/case-study.html?region=asturias',
         kicker: 'NEXT CASE STUDY · PRODUCTION',
         title: 'Asturias: scaling green hydrogen in Spain’s industrial north',
         lead: 'Upper Austria’s sister production region. See how Asturias pairs heavy industry with large-scale electrolysis to decarbonise steel, fertiliser and refining.',
@@ -318,8 +318,8 @@
         caption: 'Asturias · Spain · industrial electrolysis'
       },
       others: [
-        { href: './case-study.html?region=netherlands', k: 'TRANSPORT', region: 'Northern Netherlands', country: '· NL', d: 'Flexible non-metallic pipelines that move the molecule.' },
-        { href: './case-study.html?region=medio-tejo', k: 'MOBILITY', region: 'Médio Tejo', country: '· Portugal', d: 'A hydrogen bus in nine months of real public service.' }
+        { href: '/case-study.html?region=netherlands', k: 'TRANSPORT', region: 'Northern Netherlands', country: '· NL', d: 'Flexible non-metallic pipelines that move the molecule.' },
+        { href: '/case-study.html?region=medio-tejo', k: 'MOBILITY', region: 'Médio Tejo', country: '· Portugal', d: 'A hydrogen bus in nine months of real public service.' }
       ]
     },
 

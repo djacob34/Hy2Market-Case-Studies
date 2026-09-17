@@ -8,7 +8,7 @@
   var data = {
   slug: `asturias`,
   card: { title: `Asturias, Spain` },
-  breadcrumb: { label: `Case studies`, href: `./index.html`, here: `Asturias` },
+  breadcrumb: { label: `Case studies`, href: `/`, here: `Asturias` },
 
   hero: {
     eyebrow: `PRODUCTION · ASTURIAS`,
@@ -210,9 +210,9 @@
 
   next: {
     eyebrow: `CONTINUE THE STORY`,
-    allHref: `./index.html`,
+    allHref: `/`,
     featured: {
-      href: `./case-study.html?region=upper-austria`,
+      href: `/case-study.html?region=upper-austria`,
       kicker: `CASE STUDY · PRODUCTION`,
       title: `Upper Austria: from steel to a green hydrogen value chain`,
       lead: `The other end of the production axis. See how Hy2Market extended a working 6 MW electrolyser in Linz into a complete value chain — the region Asturias exchanges know-how with.`,
@@ -220,8 +220,8 @@
       caption: `voestalpine steel plant · Linz · H2FUTURE electrolyser`
     },
     others: [
-      { href: `./case-study.html?region=medio-tejo`, k: `MOBILITY`, region: `Médio Tejo`, country: `Portugal`, d: `A hydrogen bus in everyday public service.` },
-      { href: `./case-study.html?region=netherlands`, k: `TRANSPORT`, region: `Netherlands`, country: `· NL`, d: `Flexible composite pipe — under a canal and a railway.` }
+      { href: `/case-study.html?region=medio-tejo`, k: `MOBILITY`, region: `Médio Tejo`, country: `Portugal`, d: `A hydrogen bus in everyday public service.` },
+      { href: `/case-study.html?region=netherlands`, k: `TRANSPORT`, region: `Netherlands`, country: `· NL`, d: `Flexible composite pipe — under a canal and a railway.` }
     ]
   },
 

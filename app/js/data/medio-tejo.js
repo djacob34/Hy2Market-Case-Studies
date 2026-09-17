@@ -12,7 +12,7 @@
   var data = {
     slug: 'medio-tejo',
     card: { title: 'Médio Tejo, Portugal' },
-    breadcrumb: { label: 'Case studies', href: './index.html', here: 'Médio Tejo' },
+    breadcrumb: { label: 'Case studies', href: '/', here: 'Médio Tejo' },
 
     hero: {
       eyebrow: 'MOBILITY · MÉDIO TEJO',
@@ -215,9 +215,9 @@
 
     next: {
       eyebrow: 'CONTINUE THE STORY',
-      allHref: './index.html',
+      allHref: '/',
       featured: {
-        href: './case-study.html?region=upper-austria',
+        href: '/case-study.html?region=upper-austria',
         kicker: 'CASE STUDY · PRODUCTION',
         title: 'Upper Austria: from steel to a green hydrogen value chain',
         lead: 'See how Hy2Market extended a working 6 MW electrolyser in Linz into a complete value chain.',
@@ -225,8 +225,8 @@
         caption: 'voestalpine steel plant · Linz · H2FUTURE electrolyser'
       },
       others: [
-        { href: './case-study.html?region=upper-austria', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'A working electrolyser extended into a regional hydrogen network.' },
-        { href: './case-study.html?region=netherlands', k: 'TRANSPORT', region: 'Deventer', country: '· Netherlands', d: 'A flexible composite hydrogen pipeline, laid in ~two months.' }
+        { href: '/case-study.html?region=upper-austria', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'A working electrolyser extended into a regional hydrogen network.' },
+        { href: '/case-study.html?region=netherlands', k: 'TRANSPORT', region: 'Deventer', country: '· Netherlands', d: 'A flexible composite hydrogen pipeline, laid in ~two months.' }
       ]
     },
 

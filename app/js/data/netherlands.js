@@ -8,7 +8,7 @@
 (function (root) {
   var data = {
   slug: `netherlands`,
-  breadcrumb: { label: `Case studies`, href: `./index.html`, here: `Netherlands` },
+  breadcrumb: { label: `Case studies`, href: `/`, here: `Netherlands` },
 
   hero: {
     eyebrow: `TRANSPORT · NETHERLANDS`,
@@ -211,9 +211,9 @@
 
   next: {
     eyebrow: `CONTINUE THE STORY`,
-    allHref: `./index.html`,
+    allHref: `/`,
     featured: {
-      href: `./case-study.html?region=upper-austria`,
+      href: `/case-study.html?region=upper-austria`,
       kicker: `PRODUCTION · UPPER AUSTRIA`,
       title: `From Steel to Green`,
       lead: `How Upper Austria built an end-to-end hydrogen value chain around Europe's largest industrial green-hydrogen pilot.`,
@@ -221,9 +221,9 @@
       caption: `voestalpine · Linz`
     },
     others: [
-      { href: `./case-study.html?region=medio-tejo`, k: `MOBILITY`, region: `Médio Tejo`, country: `Portugal`, d: `A hydrogen bus in everyday public service.` },
-      { href: `./case-study.html?region=asturias`, k: `PRODUCTION`, region: `Asturias`, country: `Spain`, d: `Green hydrogen for industry and buses.` },
-      { href: `./case-study.html?region=aragon`, k: `MOBILITY`, region: `Aragon`, country: `Spain`, d: `Spain's first hydrogen taxi service.` }
+      { href: `/case-study.html?region=medio-tejo`, k: `MOBILITY`, region: `Médio Tejo`, country: `Portugal`, d: `A hydrogen bus in everyday public service.` },
+      { href: `/case-study.html?region=asturias`, k: `PRODUCTION`, region: `Asturias`, country: `Spain`, d: `Green hydrogen for industry and buses.` },
+      { href: `/case-study.html?region=aragon`, k: `MOBILITY`, region: `Aragon`, country: `Spain`, d: `Spain's first hydrogen taxi service.` }
     ]
   },
 

@@ -105,7 +105,7 @@
   // logoHtml lockup. Shared by the partner band and the modal.
   function partnerLogo(p) {
     return p.logo
-      ? '<img class="logo-img" src="./assets/logos/' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">'
+      ? '<img class="logo-img" src="/assets/logos/' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy">'
       : (p.logoHtml || '');
   }
 

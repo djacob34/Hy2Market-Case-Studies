@@ -22,7 +22,7 @@
 
     // "Case studies" breadcrumb links back to the landing page.
     if (data.breadcrumb && (!data.breadcrumb.href || data.breadcrumb.href === '#')) {
-      data.breadcrumb.href = './index.html';
+      data.breadcrumb.href = '/';
     }
 
     document.title = (data.breadcrumb && data.breadcrumb.here ? data.breadcrumb.here + ' — ' : '') +
