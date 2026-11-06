@@ -12,7 +12,17 @@
 
     var registry = window.CASE_STUDIES || {};
     var params = new URLSearchParams(window.location.search);
-    var slug = params.get('region') || 'upper-austria';
+    // Region slug comes from ?region=<slug> (legacy links) OR, on the clean
+    // URLs the server actually serves, the /case-studies/<slug>/ path. Without
+    // the path fallback every clean URL defaulted to upper-austria, so behavior
+    // (node + partner popups, the quote carousel, the page title) was wired to
+    // the wrong region's data even though the server-rendered content was right.
+    var slug = params.get('region');
+    if (!slug) {
+      var m = window.location.pathname.match(/\/case-studies\/([^\/]+)/);
+      if (m) slug = decodeURIComponent(m[1]);
+    }
+    slug = slug || 'upper-austria';
     var data = registry[slug] || registry['upper-austria'] || Object.values(registry)[0];
 
     if (!data || !window.CaseStudyTemplate) {
