@@ -177,7 +177,7 @@
         { date: 'Early 2026', text: 'The bus concept is reassessed after practical challenges with refuelling, site access for large vehicles and creating a new public route. FHA begins evaluating alternative mobility applications.' },
         { date: 'Mid 2026', text: 'A hydrogen taxi demonstration is selected as the preferred approach. FHA brings together Huesca City Council, local taxi associations and Toyota Spain to develop the pilot.' },
         { date: 'September 2026', text: 'Following an information session and selection process, the pilot taxi driver is chosen. The Toyota Mirai undergoes the final approval required to operate as a licensed taxi.' },
-        { date: 'November 2026 · You are here', current: true, text: 'Hydrogen taxi operations are scheduled to begin — launching Aragón’s first public hydrogen taxi demonstration, with three months of real-world service planned until January 2027.' }
+        { date: 'November 2026', text: 'Hydrogen taxi operations are scheduled to begin — launching Aragón’s first public hydrogen taxi demonstration, with three months of real-world service planned until January 2027.' }
       ]
     },
 
