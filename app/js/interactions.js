@@ -175,8 +175,9 @@
       var nextBtn = container.querySelector('[data-carousel-next]');
       var stepSize = function () {
         var track = el.firstElementChild;
-        // timeline is a 6-column grid; one item = track width / columns
-        var cols = 6;
+        // one item = track width / number of steps (defaults to 6 if the
+        // track isn't countable yet), so paging works for any step count
+        var cols = (track && track.querySelectorAll('.tl-step').length) || 6;
         return track ? track.getBoundingClientRect().width / cols : 270;
       };
       if (prev) prev.addEventListener('click', function () { el.scrollBy({ left: -stepSize(), behavior: 'smooth' }); });

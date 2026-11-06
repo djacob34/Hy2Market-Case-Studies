@@ -508,6 +508,9 @@ a:focus-visible, button:focus-visible {
 .branch-label .btxt { font-size: 12px; letter-spacing: 0.14em; font-weight: 600; color: rgba(255,255,255,0.55); }
 .branch-label .bline { flex: 1; height: 1px; background: rgba(255,255,255,0.14); }
 .branches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+/* node-count modifiers — match the grid tracks to the number of branch nodes */
+.branches--3 { grid-template-columns: repeat(3, 1fr); }
+.branches--4 { grid-template-columns: repeat(4, 1fr); }
 .branches .node { min-height: 108px; padding: 16px; }
 .branches .node .nname { font-size: 15px; line-height: 1.15; }
 .branches .node .nsub { margin-top: 6px; }
@@ -524,6 +527,9 @@ a:focus-visible, button:focus-visible {
 .carousel { overflow-x: auto; padding: 8px 0 18px; scrollbar-width: none; }
 .carousel::-webkit-scrollbar { display: none; }
 .timeline { position: relative; min-width: 1620px; display: grid; grid-template-columns: repeat(6, 1fr); }
+/* step-count modifiers — the grid tracks match the number of timeline steps */
+.timeline--5 { min-width: 1350px; grid-template-columns: repeat(5, 1fr); }
+.timeline--7 { min-width: 1890px; grid-template-columns: repeat(7, 1fr); }
 .timeline-base { position: absolute; left: 13px; right: 13px; top: 12px; height: 2px; background: var(--line-3); }
 .timeline-fill { position: absolute; left: 13px; top: 12px; height: 2px; background: #000; width: 83.4%; }
 .tl-step { position: relative; padding: 0 34px 0 0; }

@@ -399,7 +399,10 @@
         '<p class="system-intro">' + esc(s.intro) + '</p>' +
         '<div class="chain">' + chain.join('') + '</div>' +
         branchLabel +
-        '<div class="branches">' + branches + '</div>' +
+        // branches grid is 5 columns by default; a region with a different
+        // number of input/output nodes gets a count modifier so they fill the
+        // row instead of leaving empty tracks.
+        '<div class="branches' + ((s.branches && s.branches.length && s.branches.length !== 5) ? ' branches--' + s.branches.length : '') + '">' + branches + '</div>' +
         disclaimer +
         nodeDetailsHtml(s) +
       '</div>' +
@@ -434,7 +437,10 @@
         '</div>' +
       '</div>' +
       '<div class="carousel" data-carousel>' +
-        '<div class="timeline">' +
+        // The grid is 6 columns by default; a region with a different number
+        // of steps gets a count modifier (e.g. timeline--7), same pattern as
+        // hero-stats--4 / outcome-stats--6, so the track still fits its steps.
+        '<div class="timeline' + (p.steps.length === 6 ? '' : ' timeline--' + p.steps.length) + '">' +
           '<div class="timeline-base"></div>' +
           '<div class="timeline-fill" style="width:' + esc(p.fillPercent) + ';"></div>' +
           steps +
