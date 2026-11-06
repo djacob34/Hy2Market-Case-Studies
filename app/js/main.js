@@ -1,7 +1,11 @@
 /* =========================================================================
    main.js — bootstrap: pick the region's data, render it, wire behavior.
-   The region is chosen by the ?region=<slug> query param; the landing page
-   (index.html) links here. Defaults to upper-austria.
+   The region is read from the canonical clean path /case-studies/<slug>/
+   (what server.js serves and SSRs), falling back to the legacy ?region=<slug>
+   query param and then upper-austria. Reading the path matters: the clean URLs
+   carry no query string, so without it every page wired its interactions
+   (node/partner modals, quote carousel) to the default region's data instead
+   of its own.
    ========================================================================= */
 (function () {
   'use strict';
@@ -12,7 +16,9 @@
 
     var registry = window.CASE_STUDIES || {};
     var params = new URLSearchParams(window.location.search);
-    var slug = params.get('region') || 'upper-austria';
+    var pathMatch = window.location.pathname.match(/\/case-studies\/([^\/?#]+)/);
+    var slug = (pathMatch && decodeURIComponent(pathMatch[1])) ||
+      params.get('region') || 'upper-austria';
     var data = registry[slug] || registry['upper-austria'] || Object.values(registry)[0];
 
     if (!data || !window.CaseStudyTemplate) {
