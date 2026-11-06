@@ -31,6 +31,24 @@
   var BRAND =
     '<span class="brand-lockup">Hy<span class="two">2</span>Market</span>';
 
+  // Primary navigation, mirroring hy2market.eu: centred Hy2Market logo with
+  // the same menu split on either side, linking to the live main-site pages.
+  // Kept identical to the landing page's nav (index.html) so the whole
+  // microsite shares one nav bar with the main site.
+  var SITE_NAV =
+    '<nav class="site-nav" aria-label="Primary">' +
+      '<div class="site-nav-group site-nav-left">' +
+        '<a href="https://hy2market.eu/about-us/">About Us</a>' +
+        '<a href="https://hy2market.eu/partners/">Partners</a>' +
+        '<a href="https://hy2market.eu/news/">News</a>' +
+      '</div>' +
+      '<a class="brand-lockup site-nav-logo" href="https://hy2market.eu/" aria-label="Hy2Market — hy2market.eu">Hy<span class="two">2</span>Market</a>' +
+      '<div class="site-nav-group site-nav-right">' +
+        '<a href="https://hy2market.eu/results/">Results</a>' +
+        '<a href="https://hy2market.eu/contact/">Contact</a>' +
+      '</div>' +
+    '</nav>';
+
   function chevron(dir) {
     var d = dir === 'left' ? 'M15 18l-6-6 6-6' : 'M9 18l6-6-6-6';
     return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="' + d + '"/></svg>';
@@ -70,15 +88,10 @@
     return '' +
     '<header class="hero">' +
       ARC_TL +
-      '<div class="topbar">' +
-        '<div class="topbar-left">' +
-          '<a class="hero-back" href="' + esc(bc.href) + '">' +
-            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>' +
-            'View all case studies</a>' +
-          BRAND +
-        '</div>' +
+      SITE_NAV +
+      '<div class="sub-nav">' +
         '<nav class="breadcrumb" aria-label="Breadcrumb">' +
-          '<a href="' + esc(bc.href) + '">' + esc(bc.label) + '</a><span>/</span>' +
+          '<a href="' + esc(bc.href) + '"><span class="back-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>' + esc(bc.label) + '</a><span>/</span>' +
           '<span class="here">' + esc(bc.here) + '</span>' +
         '</nav>' +
       '</div>' +
