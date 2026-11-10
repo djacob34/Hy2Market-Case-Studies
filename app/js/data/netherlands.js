@@ -97,8 +97,7 @@
         stats: [
           { n: `52 bar`, l: `certified hydrogen MOP` },
           { n: `≥75%`, l: `lower carbon footprint vs. steel` }
-        ],
-        cta: { label: `How SoluForce certifies pipe for hydrogen`, href: `#` }
+        ]
       },
       {
         title: `Laid from a spool — and pulled under obstacles`,
@@ -110,8 +109,7 @@
         stats: [
           { n: `First-of-its-kind`, l: `pulled under a canal · <span class="tc">rail crossing to confirm</span>` },
           { n: `~70%`, l: `lower installation cost vs. steel` }
-        ],
-        cta: { label: `Why weld-free, flexible pipe unlocks hard routes`, href: `#` }
+        ]
       },
       {
         title: `Two deployments, one material`,
@@ -123,8 +121,7 @@
         stats: [
           { n: `2 × 120 m`, l: `Deventer connector installed` },
           { n: `>2,000 kg/day`, l: `Delfzijl hub capacity (scaling to ~4,000)` }
-        ],
-        cta: { label: `Explore both Dutch deployments`, href: `#` }
+        ]
       }
     ]
   },
@@ -195,9 +192,8 @@
 
   knowledge: {
     title: `Knowledge exchange`,
-    intro: `What these Dutch deployments offer the consortium — and what the partners exchanged with each other.`,
+    intro: `What the partners exchanged with each other across the two Dutch deployments.`,
     cards: [
-      { dir: `out`, arrow: `→`, label: `SHARING WITH`, region: `Hy2Market regions`, country: `Europe`, text: `A weld-free, low-cost transport blueprint — including how to cross canals and railways — that other regions can copy to connect their own producers and off-takers.` },
       { dir: `in`, arrow: `↔`, label: `EXCHANGED`, region: `Operators ↔ SoluForce`, country: `Netherlands`, text: `Firan and HyEnergy TransStore learned the pipe's safety, pressure and installation envelope; SoluForce learned Dutch permitting, contractors and infrastructure-crossing practice.` }
     ]
   },
