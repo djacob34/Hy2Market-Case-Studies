@@ -26,6 +26,10 @@
       lead: 'For three months, Fundación Hidrógeno Aragón will power Spain’s first hydrogen taxi with renewable hydrogen produced from Pyrenean water — demonstrating how hydrogen can help decarbonise light public transport while bringing the technology closer to taxi operators and citizens.',
       tags: ['Hydrogen mobility', 'Public transport', 'First H₂ taxi in Spain', 'Fuel-cell taxi', 'Decarbonisation'],
       mediaCaption: 'Toyota Mirai fuel-cell taxi · Huesca · Walqa Technology Park',
+      // Single-photo hero via the slideshow mechanism (one slide = static image).
+      slideshow: [
+        { src: '/assets/media/aragon/hero.jpg', caption: 'A second-generation Toyota Mirai in taxi service — the same model FHA is adapting for Huesca · Photo: Damian B Oh, CC BY-SA 4.0, via Wikimedia Commons' }
+      ],
       stats: [
         { num: '+10,000 km', label: 'to be driven by the fuel-cell taxi (estimation)' },
         { num: '+1,500 kg', label: 'CO₂ / GHG emissions avoided' },
@@ -107,7 +111,8 @@
           title: 'The vehicle',
           subtitle: 'A Toyota Mirai adapted for professional taxi service.',
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
-          photoCaption: 'Toyota Mirai 2nd generation · fuel-cell electric vehicle',
+          photo: '/assets/media/aragon/vehicle.jpg',
+          photoCaption: 'Toyota Mirai 2nd generation · fuel-cell electric vehicle · Photo: Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons',
           body: 'The pilot uses a <strong>second-generation Toyota Mirai</strong> fuel-cell electric vehicle adapted for taxi service. Hydrogen stored on board is converted into electricity through a fuel cell, powering the vehicle with no tailpipe emissions other than water vapour. Its combination of long driving range and fast refuelling makes it particularly suitable for intensive daily operation.',
           stats: [
             { n: 'Up to 650 km', l: 'zero-emission driving range' },
@@ -118,7 +123,8 @@
           title: 'The route',
           subtitle: 'Real mobility for everyday users.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
-          photoCaption: 'The hydrogen taxi will operate across Huesca and surrounding municipalities',
+          photo: '/assets/media/aragon/route.jpg',
+          photoCaption: 'The Hoya de Huesca, where the taxi links the city with surrounding towns and villages · Photo: Kvardek du, CC BY-SA 3.0, via Wikimedia Commons',
           body: 'The hydrogen taxi will operate as a regular transport service, providing both urban and interurban journeys — connecting Huesca with nearby municipalities while serving residents, students and patients travelling to access key services. This combination of short city trips and longer regional journeys creates a demanding operating profile that reflects real mobility needs.',
           stats: [
             { n: 'Urban + interurban', l: 'Huesca &amp; nearby municipalities' },
@@ -129,7 +135,8 @@
           title: 'The refuelling',
           subtitle: 'Renewable hydrogen produced and dispensed on site.',
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
-          photoCaption: 'FHA’s hydrogen production and refuelling facilities · Walqa Technology Park',
+          photo: '/assets/media/aragon/refuelling.png',
+          photoCaption: 'Walqa Technology Park, home to FHA’s hydrogen production and 700 bar refuelling station · Image: Gobierno de Aragón, CC BY 4.0, via Wikimedia Commons',
           body: 'The taxi is refuelled at Fundación Hidrógeno Aragón’s facilities in <strong>Walqa Technology Park</strong>, where renewable hydrogen is produced on site using solar electricity and an alkaline electrolyser. The station can dispense hydrogen at up to 700 bar, allowing the vehicle to be refuelled in less than five minutes, while a second 350-bar station provides additional operational flexibility — connecting production, refuelling and mobility within a single location.',
           stats: [
             { n: '700 bar', l: 'refuelling pressure' },

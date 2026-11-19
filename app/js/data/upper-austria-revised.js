@@ -195,7 +195,8 @@
           title: 'Production, handling & site integration',
           subtitle: 'Conditioning and integrating hydrogen at a live industrial site.',
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
-          photoCaption: 'Hydrogen handling · voestalpine Linz',
+          photo: '/assets/media/upper-austria-revised/h2future.jpg',
+          photoCaption: 'Hydrogen infrastructure at voestalpine Linz (pre-existing H2FUTURE asset) · Copyright: voestalpine AG, Source: voestalpine.com',
           body: 'voestalpine and Verbund Green Hydrogen integrate purification, compression, storage and handling equipment around the existing electrolyser — conditioning the hydrogen for demanding downstream uses. The focus is integration into an operating steel site, not building a new plant.',
           stats: [
             { n: 'On-site', l: 'integration at an operating site' },
@@ -207,7 +208,8 @@
           title: 'Mobile methanation',
           subtitle: 'A pilot converting hydrogen and CO₂ into synthetic methane.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
-          photoCaption: 'Methanation pilot · industrial conditions',
+          photo: '/assets/media/upper-austria-revised/methanation.jpg',
+          photoCaption: 'Methanation pilot · industrial conditions (illustrative) · Photo: iSawRed on Unsplash',
           body: 'K1-MET and Montanuniversität Leoben implement and operate an industrial methanation pilot at the Linz site, converting green hydrogen and captured CO₂ into synthetic natural gas under real process conditions — a Hy2Market activity that raises the maturity of the technology.',
           stats: [
             { n: 'Pilot plant', l: 'real industrial conditions' },
@@ -219,7 +221,8 @@
           title: 'Modelling, use cases & knowledge transfer',
           subtitle: 'Analysis, process models and consortium-wide exchange.',
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
-          photoCaption: 'Modelling · use cases · knowledge exchange',
+          photo: '/assets/media/upper-austria-revised/modelling.jpg',
+          photoCaption: 'Modelling · use cases · knowledge exchange · Photo: Ngital on Unsplash',
           body: 'AIT develops industrial hydrogen use cases with techno-economic analysis, Prozess Optimal builds process-simulation models, and WIVA P&G and Business Upper Austria lead regulation, standardisation and knowledge-exchange activities across the consortium.',
           stats: [
             { n: 'Use cases', l: 'industrial hydrogen (AIT)' },

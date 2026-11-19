@@ -16,6 +16,9 @@
     lead: `Everyone argues about how to make green hydrogen — but someone has to move the molecule. In the Netherlands, SoluForce's non-metallic flexible pipe is doing exactly that: a distribution connector laid with Firan in Deventer in about two months, and a hub line planned in Delfzijl that will cross beneath a canal and a national railway.`,
     tags: [`Hydrogen transport`, `Flexible composite pipe`, `Reinforced thermoplastic`, `First-of-its-kind crossing`, `Distribution grid`, `Transport`],
     mediaCaption: `SoluForce flexible composite pipe · Delfzijl canal & rail crossing · Deventer grid`,
+    slideshow: [
+      { src: `/assets/media/netherlands/hero.jpg`, caption: `The Deventer hydrogen connector under construction · Photo: Jacques Tillmanns / Foto Focus` }
+    ],
     stats: [
       { num: `Canal + rail`, label: `first-of-its-kind dual crossing planned for the Delfzijl hub line` },
       { num: `52 bar`, label: `certified hydrogen MOP · 4″ and 6″ · fully non-metallic` },
@@ -92,7 +95,8 @@
         subtitle: `From steel's embrittlement problem to a fully composite line.`,
         thumbGrad: `linear-gradient(135deg,#2c3138,#15171b)`,
         tex: 120,
-        photoCaption: `SoluForce reinforced thermoplastic pipe`,
+        photo: `/assets/media/netherlands/pipe.jpg`,
+        photoCaption: `SoluForce reinforced thermoplastic pipe · Photo: Hy2Market`,
         body: `SoluForce's flexible composite pipe is entirely non-metallic — hydrogen never touches metal, eliminating the embrittlement that dogs steel. It is certified for hydrogen to a maximum operating pressure of 52 bar (up to 65 °C), in 4″ and 6″ diameters, with a polymer core wrapped in high-strength reinforcement, and is hydrogen-tight (permeation-free). 6″ and 8″ hydrogen versions are in development.`,
         stats: [
           { n: `52 bar`, l: `certified hydrogen MOP` },
@@ -104,7 +108,8 @@
         subtitle: `Weld-free installation that goes where steel can't.`,
         thumbGrad: `linear-gradient(135deg,#3a3320,#17140b)`,
         tex: 120,
-        photoCaption: `400 m spool · bore-pull beneath canal & railway`,
+        photo: `/assets/media/netherlands/spool-still.jpg`,
+        photoCaption: `A 400 m spool of SoluForce pipe ready to be pulled beneath the canal and railway at Delfzijl · Photo: Hy2Market`,
         body: `The pipe is delivered on 400-metre spools and installed in long continuous sections joined by electrofusion, not welding — smaller crews, fewer joints, and lower groundwork and welding costs. Because it is flexible, it can be pulled through a pre-made bore. In Delfzijl, the line is designed to pass beneath the Oosterhornkanaal and a ProRail railway inside a protective casing, with the drilling method agreed with the owners of both assets.`,
         stats: [
           { n: `First-of-its-kind`, l: `canal and rail crossing · Delfzijl` },
@@ -116,7 +121,8 @@
         subtitle: `A distribution connector in Deventer, a hub pipeline in Delfzijl.`,
         thumbGrad: `linear-gradient(135deg,#20302c,#0b1714)`,
         tex: 120,
-        photoCaption: `Deventer connector · Delfzijl H2 hub`,
+        photo: `/assets/media/netherlands/connector.jpg`,
+        photoCaption: `Laying the Deventer connector · Photo: Jacques Tillmanns / Foto Focus`,
         body: `In Deventer, 2 × 120 m connects a tube-trailer bay and a future 2.5 MW electrolyser <span class="tc">(status to confirm)</span> to Nefit Bosch at 9.5 bar, with a planned 16 bar local grid — phase zero of an open network. In Delfzijl, the pipe will carry hydrogen from Nobian's site to the hub, where it is purified and compressed for HyPlanet's bulk trailer-filling station. The hub targets an initial capacity above 2,000 kg/day.`,
         stats: [
           { n: `2 × 120 m`, l: `Deventer connector installed` },

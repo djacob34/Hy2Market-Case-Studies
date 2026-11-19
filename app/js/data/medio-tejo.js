@@ -20,6 +20,9 @@
       lead: 'While much of the hydrogen conversation is about plants and pipelines, Médio Tejo deployed the technology somewhere people actually experience it — on a public bus, running real routes, carrying real passengers, across 11 municipalities, for nine months straight.',
       tags: ['Hydrogen mobility', 'Public transport', 'Fuel-cell bus', 'Decarbonisation', 'Rural mobility', 'Mobility'],
       mediaCaption: 'Caetano H2.City Gold hydrogen bus · Médio Tejo · urban route, Abrantes, Tomar',
+      slideshow: [
+        { src: '/assets/media/medio-tejo/hero.jpg', caption: 'Caetano H2.City Gold hydrogen bus · Médio Tejo · urban route, Abrantes, Tomar · Photo: CIM Médio Tejo / Hy2Market (confirm)' }
+      ],
       stats: [
         { num: '32,612 km', label: 'driven in real public service' },
         { num: '28 tonnes', label: 'CO₂ / GHG emissions avoided' },
@@ -99,7 +102,8 @@
           title: 'The vehicle',
           subtitle: 'A 64-passenger fuel-cell bus built for daily service.',
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
-          photoCaption: 'Caetano H2.City Gold',
+          photo: '/assets/media/medio-tejo/bus-still.jpg',
+          photoCaption: 'Caetano H2.City Gold · Photo: CIM Médio Tejo / Hy2Market (confirm)',
           body: 'CaetanoBus H2.City Gold, developed and manufactured by Portuguese bus manufacturer CaetanoBus, uses hydrogen fuel-cell technology to generate electricity on board and power its electric drivetrain. The batteries, hydrogen tanks and fuel cell are mounted on the roof, optimizing interior space.',
           stats: [
             { n: '64', l: 'passenger capacity' },
@@ -110,7 +114,8 @@
           title: 'The route',
           subtitle: 'Two duty cycles, one bus, nine months.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
-          photoCaption: 'Urban circuit, Abrantes → inter-city, Tomar',
+          photo: '/assets/media/medio-tejo/tomar.jpg',
+          photoCaption: 'Tomar, the inter-city end of the bus route · Photo: Christopher John Pratt on Unsplash',
           body: 'The bus averaged 200 km a day across circuits serving all 11 municipalities. Urban route based in <strong>Abrantes</strong> (Nov 2023–Apr 2024), then an inter-city route based in <strong>Tomar</strong> (Apr 2024–Jul 2024), deliberately including student-transport routes to help spread awareness of the technology.',
           stats: [
             { n: '200 km', l: 'average daily distance' },
@@ -121,7 +126,8 @@
           title: 'The refuelling',
           subtitle: 'One portable station, two sites.',
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
-          photoCaption: 'PRF portable HRS · relocated Abrantes → Tomar',
+          photo: '/assets/media/medio-tejo/prf-hrs.jpg',
+          photoCaption: 'PRF portable HRS · relocated Abrantes → Tomar · Photo: PRF',
           body: 'A mobile hydrogen refuelling station from <strong>PRF – Gas Solutions</strong> relocated from the Municipal Shipyard in Abrantes to the Central Bus Terminal in Tomar partway through the pilot — no permanent build required at either site.',
           stats: [
             { n: 'Mobile', l: 'hydrogen refuelling station' },

@@ -15,6 +15,9 @@
     lead: `Much of the hydrogen conversation stops at the electrolyser. Asturias goes further — pairing a planned 150 MW production hub with the industry that will consume its hydrogen, on the site of the Aboño power plant: a former coal plant whose Unit 2 now runs on natural gas, through burners built to take hydrogen too. It is a full-stack answer, built on the bones of the region's fossil-fuel past.`,
     tags: [`Green hydrogen`, `Industrial decarbonisation`, `Electrolysis`, `Power-plant retrofit`, `Just transition`, `Production`],
     mediaCaption: `Aboño thermal power plant, Unit 2 chimney · Gijón · Asturias`,
+    slideshow: [
+      { src: `/assets/media/asturias/hero.jpg`, caption: `Aboño thermal power plant · Gijón · Asturias · Photo: Borvan53, CC BY-SA 4.0, via Wikimedia Commons` }
+    ],
     stats: [
       { num: `150 MW`, label: `planned first-phase electrolyser capacity` },
       { num: `~20,000 t`, label: `green hydrogen a year, by design` },
@@ -89,7 +92,8 @@
         subtitle: `A 150 MW electrolyser sized around real demand.`,
         thumbGrad: `linear-gradient(135deg,#2c3138,#15171b)`,
         tex: 120,
-        photoCaption: `Asturias H2 Valley · 150 MW electrolyser`,
+        photo: `/assets/media/asturias/electrolyser.jpg`,
+        photoCaption: `Electrolyser modules like this will be scaled up to 150 MW in the Asturias H2 Valley (illustrative) · Photo: Bubble60, CC BY-SA 4.0, via Wikimedia Commons`,
         body: `The Asturias H2 Valley's first phase is a <strong>150 MW</strong> green-hydrogen plant beside the Aboño site, backed by EDP Renewables' generation and part-funded through the EU Innovation Fund and Spain's IPCEI Hy2Use programme. It is designed to produce roughly 20,000 tonnes of renewable hydrogen a year and to cut greenhouse-gas emissions by 99.98% versus the fossil fuels it displaces.`,
         stats: [
           { n: `150 MW`, l: `first-phase capacity` },
@@ -102,7 +106,8 @@
         subtitle: `Hydrogen built for industry, not just for show.`,
         thumbGrad: `linear-gradient(135deg,#3a4048,#1c2026)`,
         tex: 60,
-        photoCaption: `Industrial cluster · methanol & ammonia`,
+        photo: `/assets/media/asturias/cluster.jpg`,
+        photoCaption: `Industrial cluster · methanol & ammonia (illustrative) · Photo: Red Shuheart on Unsplash`,
         body: `The hub's main purpose is to supply nearby industrial companies that will use the hydrogen directly, or convert it into carriers such as <strong>methanol and ammonia</strong>. EDP is also exploring co-transport of hydrogen, oxygen, ammonia and heat to those customers — treating the whole industrial cluster, not a single plant, as the offtaker.`,
         stats: [
           { n: `Methanol · Ammonia`, l: `target carriers` },
@@ -115,7 +120,8 @@
         subtitle: `A converted boiler ready to burn hydrogen.`,
         thumbGrad: `linear-gradient(135deg,#26424a,#11272d)`,
         tex: 90,
-        photoCaption: `Aboño Unit 2 · converted to natural gas and hydrogen`,
+        photo: `/assets/media/asturias/abono-still.jpg`,
+        photoCaption: `Aboño Unit 2 · converted to natural gas and hydrogen · Photo: Hy2Market / EDP`,
         body: `In 2025 Aboño's Unit 2 was converted from coal: all 30 coal burners were replaced with burners designed to run on natural gas and hydrogen, and the unit came back online in July 2025. Once the hub is producing, the plan is to replace around <strong>10%</strong> of the natural gas in the boiler with hydrogen — turning a coal-transition asset into a first, on-site consumer of the hub's own hydrogen.`,
         stats: [
           { n: `~10%`, l: `planned hydrogen share of the boiler fuel` },

@@ -335,16 +335,25 @@
       }).join('');
       var cta = dr.cta ? '<a class="cta-pill" href="' + esc(dr.cta.href) + '">' + esc(dr.cta.label) + ' <span class="arrow">→</span></a>' : '';
       var panelId = 'drawer-panel-' + i;
+      // A drawer can carry a real photo (dr.photo = image path). When present it
+      // fills both the small thumbnail and the expanded panel image as a
+      // cover-fitted background; the gradient + diagonal-line texture is the
+      // fallback for drawers that still have no photo. Keeps the same markup so
+      // no CSS change is needed.
+      var thumbBg = dr.photo ? "#15171b url('" + esc(dr.photo) + "') center/cover no-repeat" : dr.thumbGrad;
+      var photoBg = dr.photo ? "#15171b url('" + esc(dr.photo) + "') center/cover no-repeat" : dr.thumbGrad;
+      var thumbTex = dr.photo ? '' : '<div class="tex" style="background:' + tex + ';"></div>';
+      var photoTex = dr.photo ? '' : '<div class="tex" style="background:' + texBig + ';"></div>';
       return '' +
       '<div class="drawer" data-drawer="' + i + '" aria-expanded="false">' +
         '<button type="button" class="drawer-btn" aria-expanded="false" aria-controls="' + panelId + '">' +
-          '<div class="drawer-thumb" style="background:' + dr.thumbGrad + ';"><div class="tex" style="background:' + tex + ';"></div></div>' +
+          '<div class="drawer-thumb" style="background:' + thumbBg + ';">' + thumbTex + '</div>' +
           '<div class="drawer-meta"><div class="drawer-title">' + dr.title + '</div>' +
             '<div class="drawer-sub">' + esc(dr.subtitle) + '</div></div>' +
           '<span class="drawer-toggle" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>' +
         '</button>' +
         '<div class="drawer-panel" id="' + panelId + '" role="region">' +
-          '<div class="drawer-photo" style="background:' + dr.thumbGrad + ';"><div class="tex" style="background:' + texBig + ';"></div>' +
+          '<div class="drawer-photo" style="background:' + photoBg + ';">' + photoTex +
             '<span class="cap">' + esc(dr.photoCaption) + '</span></div>' +
           '<p class="drawer-body">' + dr.body + '</p>' +
           '<div class="stat-boxes">' + stats + '</div>' +

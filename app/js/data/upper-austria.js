@@ -180,7 +180,8 @@
           title: 'Compression',
           subtitle: 'Lifting low-pressure hydrogen to usable, transportable pressures.',
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
-          photoCaption: 'Compressor station · tube-trailer charging',
+          photo: '/assets/media/upper-austria/compressor.jpg',
+          photoCaption: 'Compressor station · tube-trailer charging (illustrative) · Photo: Reza Setiawan on Unsplash',
           body: 'The electrolyser outputs hydrogen at low pressure. Multi-stage compressor stations fill medium-pressure storage tanks and charge tube trailers up to 500 bar, with VERBUND as partner alongside voestalpine.',
           stats: [
             { n: '500 bar', l: 'trailer-fill pressure' },
@@ -192,7 +193,8 @@
           title: 'Purification',
           subtitle: 'From industrial-grade to mobility-grade hydrogen.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
-          photoCaption: 'Purification skid · fuel-cell-quality polishing',
+          photo: '/assets/media/upper-austria/purification.jpg',
+          photoCaption: 'Hydrogen production equipment at voestalpine Linz · Copyright: voestalpine AG, Source: voestalpine.com',
           body: 'Purification upgrades the hydrogen to <strong>fuel cell quality (99.999%)</strong>, required for fuel-cell mobility and sensitive industrial uses — opening offtake markets the raw electrolyser output could never serve.',
           stats: [
             { n: '99.999%', l: 'fuel cell quality' },
@@ -204,7 +206,8 @@
           title: 'Distribution',
           subtitle: 'A trailer filling station and a fleet of tube trailers.',
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
-          photoCaption: 'Trailer filling station · tube-trailer fleet',
+          photo: '/assets/media/upper-austria/tube-trailer.jpg',
+          photoCaption: 'A hydrogen tube trailer of the type used to distribute hydrogen from Linz (illustrative) · Photo: Privateconfidential1970, CC BY-SA 4.0, via Wikimedia Commons',
           body: 'The trailer filling station enables the distribution of hydrogen to offtakers across Austria and beyond — converting a single plant into a distribution hub.',
           stats: [
             { n: 'Filling station', l: 'trailer loading' },
