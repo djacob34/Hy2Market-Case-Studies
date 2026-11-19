@@ -47,7 +47,7 @@
   downloadHref: `#`,
 
   overview: [
-    { tone: `yellow`, label: `THE CHALLENGE`, text: `Green hydrogen is only useful if it can travel from where it is made to where it is used. Conventional steel pipelines are slow to permit, expensive to weld and lay, and vulnerable to hydrogen embrittlement — a poor fit for the short, distributed and obstacle-crossing routes a regional hydrogen network actually needs.` },
+    { tone: `yellow`, label: `THE CHALLENGE`, text: `Green hydrogen is only useful if it can travel from where it is made to where it is used. Steel pipelines are the state-of-the-art backbone for hydrogen transport, and every material has its trade-offs — for the short, distributed and obstacle-crossing routes a regional network needs, a flexible non-metallic pipe can be a complementary option that installs quickly without welding.` },
     { tone: `black`, label: `THE INNOVATION`, text: `One material, two deployments. The SoluForce reinforced thermoplastic pipe (RTP) is in use worldwide, with over 4,500 km installed since 2000 across oil & gas, water, mining and hydrogen. Here its non-metallic, hydrogen-certified pipe — laid from 400 m spools, joined without welding — is used as a distribution connector in Deventer (built as phase zero of an open grid with Firan) and specified for the HyEnergy TransStore hub pipeline in Delfzijl, designed to cross beneath the Oosterhornkanaal and a ProRail railway in a first-of-its-kind dual crossing.` },
     { tone: `black`, label: `THE OUTCOME`, text: `In Deventer, a hydrogen line from production to off-taker Nefit Bosch, in the ground in roughly two months. In Delfzijl, a hub pipeline designed through detailed engineering, including a first-of-its-kind canal and rail crossing. Together they establish reinforced thermoplastic pipe as a fast, embrittlement-free building block for the Dutch hydrogen network.` }
   ],
@@ -74,7 +74,7 @@
 
   opportunity: {
     title: `The opportunity`,
-    leadHtml: `Green hydrogen is only useful if it can travel — and steel is a <span class="hl">slow, costly, embrittlement-prone</span> way to move it over short, awkward routes.`,
+    leadHtml: `Green hydrogen is only useful if it can travel — and over short, awkward routes a <span class="hl">flexible non-metallic pipe</span> opens up a fast, weld-free option.`,
     body: `SoluForce's non-metallic pipe changes that calculus, and Hy2Market gave it two live proving grounds. Dutch standards written for natural gas typically limit non-metallic pipe to below 16 bar, so each project builds its own case through certification, a project-specific risk assessment and engineering calculations. In Deventer, Firan chose the connector as the first section of a local hydrogen backbone after an earlier project in Emmen could not proceed; Firan and SoluForce, originally in different work packages, came together when the consortium flagged the need for RTP demonstrators. In Delfzijl, the same pipe is the enabling technology for a hydrogen hub whose route passes beneath a canal and a ProRail railway, a crossing suited to a flexible line pulled through a bore.`,
     startLabel: `STARTING POSITION`,
     startStats: [
@@ -85,15 +85,15 @@
 
   solutions: {
     title: `The solutions`,
-    intro: `Three things make this work: a hydrogen-ready material, an installation method that goes where steel can't, and two real deployments proving it.`,
+    intro: `Three things make this work: a hydrogen-ready material, an installation method suited to tight and obstacle-crossing routes, and two real deployments proving it.`,
     drawers: [
       {
         title: `A pipe built for hydrogen`,
-        subtitle: `From steel's embrittlement problem to a fully composite line.`,
+        subtitle: `A fully non-metallic line, engineered for hydrogen service.`,
         thumbGrad: `linear-gradient(135deg,#2c3138,#15171b)`,
         tex: 120,
         photoCaption: `SoluForce reinforced thermoplastic pipe`,
-        body: `SoluForce's reinforced thermoplastic pipe (RTP) is entirely non-metallic — hydrogen never touches metal, so the embrittlement that plagues steel simply doesn't arise, and the system is maintenance-free. It is certified for hydrogen to a maximum operating pressure of 52 bar (up to 65 °C), in 4″ and 6″ diameters, with a polymer core wrapped in high-strength reinforcement, and is hydrogen-tight (permeation-free).`,
+        body: `SoluForce's reinforced thermoplastic pipe (RTP) is entirely non-metallic — hydrogen never touches metal, so hydrogen embrittlement isn't a design consideration, and the system is maintenance-free. It is certified for hydrogen to a maximum operating pressure of 52 bar (up to 65 °C), in 4″ and 6″ diameters, with a polymer core wrapped in high-strength reinforcement, and is hydrogen-tight (permeation-free).`,
         stats: [
           { n: `52 bar`, l: `certified hydrogen MOP` },
           { n: `4″ / 6″`, l: `hydrogen-certified diameters` }
@@ -101,7 +101,7 @@
       },
       {
         title: `Laid from a spool — and pulled under obstacles`,
-        subtitle: `Weld-free installation that goes where steel can't.`,
+        subtitle: `Weld-free installation for tight, obstacle-crossing routes.`,
         thumbGrad: `linear-gradient(135deg,#3a3320,#17140b)`,
         tex: 120,
         photoCaption: `400 m spool · bore-pull beneath canal & railway`,
@@ -182,7 +182,7 @@
       { tone: `grey`, n: `>2,000 kg/day`, l: `Delfzijl hub initial capacity target` },
       { tone: `black`, n: `2 × 120 m`, l: `Deventer connector in the ground` }
     ],
-    narrative: `Across two deployments, the Dutch pilots demonstrate how a proven solution can be effectively deployed in new applications and environments. SoluForce's reinforced thermoplastic pipe let Firan lay a distribution connector in Deventer in weeks, and gives HyEnergy TransStore a route for its hub pipeline beneath a canal and a national railway in Delfzijl. Together they show regional hydrogen transport doesn't have to wait on slow, costly infrastructure, and hand the consortium a replicable playbook for connecting producers to off-takers.`
+    narrative: `Across two deployments, the Dutch pilots demonstrate how a proven solution can be effectively deployed in new applications and environments. SoluForce's reinforced thermoplastic pipe let Firan lay a distribution connector in Deventer in weeks, and gives HyEnergy TransStore a route for its hub pipeline beneath a canal and a national railway in Delfzijl. Together they show how regional hydrogen transport can be connected quickly and flexibly, and hand the consortium a replicable playbook for connecting producers to off-takers.`
   },
 
   knowledge: {
