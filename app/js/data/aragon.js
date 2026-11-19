@@ -24,7 +24,7 @@
       // {hl} marks the yellow-underlined word
       titleHtml: 'From Pyrenean Water to Spain’s First Hydrogen <span class="hl">Taxi</span>',
       lead: 'For three months, Fundación Hidrógeno Aragón will power Spain’s first hydrogen taxi with renewable hydrogen produced from Pyrenean water — demonstrating how hydrogen can help decarbonise light public transport while bringing the technology closer to taxi operators and citizens.',
-      tags: ['Hydrogen mobility', 'Public transport', 'First H₂ taxi in Spain', 'Fuel-cell taxi', 'Decarbonisation'],
+      tags: ['Hydrogen mobility', 'Public transport', 'First public H₂ taxi in Spain', 'H₂ fuel-cell taxi', 'Decarbonisation'],
       mediaCaption: 'Toyota Mirai fuel-cell taxi · Huesca · Walqa Technology Park',
       // Single-photo hero via the slideshow mechanism (one slide = static image).
       slideshow: [
@@ -37,21 +37,15 @@
       ]
     },
 
-    // Each partner: a bespoke logo lockup (logoHtml) + modal content.
+    // Fundación Hidrógeno Aragón is the sole Hy2Market partner on this pilot.
+    // (RAVEN SR Iberia, though based in the region, did not work on this
+    // mobility case study — removed per FHA's review.)
     partners: [
       {
         id: 'fha', name: 'Fundación Hidrógeno de Aragón (FHA)',
         role: 'Coordinator · Aragón pilot delivery',
         body: 'Fundación Hidrógeno Aragón (FHA) coordinates Spain’s first hydrogen taxi demonstration. For three months, the fuel-cell taxi will operate as a regular taxi service across Huesca province, allowing the technology to be tested under real operating conditions while providing transport services to local citizens. A professional taxi driver was selected from several candidates to carry out the demonstration and gather practical experience with the vehicle in daily operation. The taxi will be refuelled primarily at FHA’s facilities in Walqa Technology Park, where the foundation operates two hydrogen refuelling stations.',
-        col: true,
-        logoHtml: '<span style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#0a8a4f;color:#fff;font-weight:700;font-size:12px;">H₂</span><span style="font-weight:700;font-size:15px;color:#1a1a1a;letter-spacing:0.01em;">FHA <span style="color:#0a8a4f;font-weight:600;">Aragón</span></span>'
-      },
-      {
-        id: 'raven', name: 'RAVEN SR Iberia',
-        role: 'Task 5.1 coordinator · standardisation, barriers analysis & replication',
-        body: 'RAVEN SR Iberia coordinates Task 5.1 — identifying the limitations, constraints and barriers to hydrogen mobility across the consortium’s regions, and mapping the major trucking routes and hubs for heavy hydrogen transport in the EU — alongside the standardisation and replication analysis that supports scale-up across the other Hy2Market regions.',
-        gap: '8px',
-        logoHtml: '<span style="font-weight:800;font-size:18px;color:#1a1a1a;letter-spacing:-0.02em;">RAVEN</span><span style="font-weight:500;font-size:11px;color:#666;letter-spacing:0.12em;text-transform:uppercase;">SR Iberia</span>'
+        logo: 'fha.png'
       }
     ],
 
