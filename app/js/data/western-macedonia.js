@@ -103,6 +103,7 @@
       `What comes next for the region is still being written, and CluBE is one of the organizations working to make sure hydrogen is part of the answer.`
     ],
     map: {
+      image: `/assets/maps/western-macedonia.png`,
       caption: `Western Macedonia · getting ready`,
       pins: [
         { left: `46%`, top: `48%`, color: `yellow`, label: `Kozani`, sub: `· CluBE HQ` },

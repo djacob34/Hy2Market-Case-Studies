@@ -169,6 +169,7 @@
         'The activity draws on a wider Austrian partner network — coordination, research institutes and universities, a regional development agency and engineering partners — that provides the expertise base around the Linz demonstration site.'
       ],
       map: {
+        image: '/assets/maps/upper-austria.png',
         caption: 'Linz · demonstration site',
         pins: [
           { left: '40%', top: '52%', color: 'black', label: 'Linz', sub: '· demonstration site' }

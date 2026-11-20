@@ -77,6 +77,7 @@
         'Through its hydrogen strategy and the work of organisations such as <strong>Fundación Hidrógeno Aragón</strong>, the region has become a reference point for new hydrogen applications. As transport remains one of the hardest sectors to decarbonise, Aragón is using real-world mobility projects to explore how hydrogen can complement other zero-emission technologies in demanding day-to-day operations.'
       ],
       map: {
+        image: '/assets/maps/aragon.png',
         caption: 'Huesca · hydrogen operating area',
         pins: [
           { left: '30%', top: '52%', color: 'black', label: 'Huesca', sub: '· urban service' },

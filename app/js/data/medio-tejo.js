@@ -75,6 +75,7 @@
         'The Médio Tejo region has developed a hydrogen strategy as part of its energy transition. In 2019, the region presented the <strong>HyTagus Valley</strong> initiative, aimed at developing a regional hydrogen value chain and promoting hydrogen applications across different sectors, including transport.'
       ],
       map: {
+        image: '/assets/maps/medio-tejo.png',
         caption: 'Médio Tejo · hydrogen mobility corridor',
         pins: [
           { left: '30%', top: '56%', color: 'black', label: 'Abrantes', sub: '· urban route' },

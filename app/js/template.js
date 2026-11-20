@@ -285,12 +285,15 @@
         '<span class="marker ' + (p.color === 'yellow' ? 'yellow' : 'black') + '"></span>' +
         '<span class="' + labelCls + '">' + label + '</span></div>';
     }).join('');
-    return '' +
-    '<section id="toc-region" class="section mt-block" data-reveal>' +
-      secHead(r.title) +
-      '<div class="region-grid">' +
-        '<div>' + paras + '</div>' +
-        '<div class="map">' +
+    // A region can supply a finished map image (map.image) — e.g. the
+    // designed regional maps exported from Figma — which replaces the
+    // decorative generated shape + pins. The gradient/pins path stays as the
+    // fallback for any region without an image.
+    var mapHtml = r.map.image
+      ? '<figure class="map map--image">' +
+          '<img class="map-img" src="' + esc(r.map.image) + '" alt="' + esc(r.map.alt || (d.breadcrumb.here + ' — region map')) + '" loading="lazy" width="1600" height="1200">' +
+        '</figure>'
+      : '<div class="map">' +
           '<div class="map-grid"></div>' +
           '<svg class="shape" viewBox="0 0 100 86" fill="none" preserveAspectRatio="none" aria-hidden="true">' +
             '<path d="M14,40 C24,24 44,18 58,24 C70,29 84,26 90,40 C94,52 82,62 70,60 C60,58 50,70 38,66 C24,61 8,54 14,40 Z" fill="rgba(255,237,0,0.16)" stroke="#cfcfca" stroke-width="0.5"/>' +
@@ -298,7 +301,13 @@
           '</svg>' +
           pins +
           '<span class="map-caption">' + esc(r.map.caption) + '</span>' +
-        '</div>' +
+        '</div>';
+    return '' +
+    '<section id="toc-region" class="section mt-block" data-reveal>' +
+      secHead(r.title) +
+      '<div class="region-grid">' +
+        '<div>' + paras + '</div>' +
+        mapHtml +
       '</div>' +
     '</section>';
   }

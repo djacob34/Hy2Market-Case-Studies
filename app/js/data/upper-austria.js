@@ -152,6 +152,7 @@
         'Activity now spreads across the region: <strong>Linz</strong> for production, <strong>Gampern</strong> for world-first geological underground storage, and <strong>Leoben</strong> for methanation research. Together they form a compact, end-to-end hydrogen corridor inside a single federal state.'
       ],
       map: {
+        image: '/assets/maps/upper-austria.png',
         caption: 'Upper Austria · hydrogen corridor',
         pins: [
           { left: '26%', top: '54%', color: 'black', label: 'Linz', sub: '· production' },

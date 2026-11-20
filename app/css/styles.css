@@ -451,6 +451,10 @@ a:focus-visible, button:focus-visible {
 .pin .plabel.right { left: auto; right: 18px; text-align: right; }
 .pin .plabel .sub { color: #8a8a8a; font-weight: 400; }
 .map-caption { position: absolute; left: 14px; bottom: 12px; font-size: 11px; color: var(--muted-2); font-weight: 500; }
+/* Finished map image (Figma regional maps): let the image set the height
+   and drop the generated-map chrome; keep a light frame to match the card. */
+.map--image { aspect-ratio: auto; background: transparent; margin: 0; line-height: 0; }
+.map-img { display: block; width: 100%; height: auto; }
 
 /* --- opportunity --- */
 .opp-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: start; }

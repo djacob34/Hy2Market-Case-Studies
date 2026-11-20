@@ -112,6 +112,7 @@
         'Duferco’s gas-fired peaker turbine at Giammoro is one of them: <strong>Terna</strong>, the operator of Italy’s electricity grid, calls it into operation to steady the Sicilian system. The hydrogen plant is the first in the region to blend green hydrogen into a peaker turbine’s fuel — and part of a wider reconversion of the site, alongside solar, battery storage and a new container terminal, that turns the old steelworks towards clean energy.'
       ],
       map: {
+        image: '/assets/maps/sicily.png',
         caption: 'Sicily · Giammoro, province of Messina',
         pins: [
           { left: '72%', top: '28%', color: 'yellow', label: 'Giammoro', sub: '· Duferco site' },
