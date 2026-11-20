@@ -136,7 +136,8 @@
         subtitle: `Turning years of hands-on hydrogen training experience into a Europe-wide playbook.`,
         thumbGrad: `linear-gradient(135deg,#2c3138,#15171b)`,
         tex: 120,
-        photoCaption: `Training guidelines · knowledge exchange`,
+        photo: `/assets/media/western-macedonia/training.jpg`,
+        photoCaption: `Training guidelines · knowledge exchange · Photo: Quilia on Unsplash`,
         body: `CluBE helped shape Hy2Market's training guidelines and its whitepaper — mapping the region's hydrogen skills gaps and needs, drawing on its own GreenSkillsforH2 programme, including four annual Hydrogen Summer Schools reaching hundreds of participants.` +
           `<ul style="font-size:17px;line-height:1.6;color:var(--ink);margin:18px 0;padding-left:20px;">` +
             `<li style="margin:0 0 6px;">1st Hydrogen Summer ScH2ool: 78 participants</li>` +
@@ -154,7 +155,8 @@
         subtitle: `Feeding Western Macedonia's numbers into the consortium's Europe-wide roll-out picture.`,
         thumbGrad: `linear-gradient(135deg,#3a4048,#1c2026)`,
         tex: 60,
-        photoCaption: `Regional data · roll-out evaluation`,
+        photo: `/assets/media/western-macedonia/data.jpg`,
+        photoCaption: `Regional data · roll-out evaluation · Photo: Gorilla ROI Data Connector on Unsplash`,
         body: `CluBE's role was supplying regional data, not modelling: sharing figures on CO₂ capture, renewable capacity and green hydrogen potential in Western Macedonia and Greece. That data feeds a roll-out report due across the whole consortium in late 2026, not yet public.`
       },
       {
@@ -162,7 +164,8 @@
         subtitle: `Getting Greek hydrogen stakeholders a voice in Europe's emerging standards conversation.`,
         thumbGrad: `linear-gradient(135deg,#26424a,#11272d)`,
         tex: 90,
-        photoCaption: `Standards & policy input`,
+        photo: `/assets/media/western-macedonia/standards.jpg`,
+        photoCaption: `Standards & policy input · Photo: paws and prints on Unsplash`,
         body: `CluBE acted as Greece's bridge on hydrogen standards — distributing an EU-wide questionnaire on regulations to Greek stakeholders and industry. Results feed a strategy paper for EU policymakers and national authorities, due late 2026 and not yet public.`
       }
     ]
@@ -230,7 +233,7 @@
       caption: `Caetano H2.City Gold · Médio Tejo`
     },
     others: [
-      { href: `/case-study.html?region=upper-austria`, k: `PRODUCTION`, region: `Upper Austria`, country: `· Austria`, d: `A working electrolyser extended into a regional hydrogen network.` },
+      { href: `/case-study.html?region=upper-austria`, k: `PRODUCTION`, region: `Upper Austria`, country: `· Austria`, d: `Commissioning new hydrogen handling and piloting methanation around the H2FUTURE electrolyser in Linz.` },
       { href: `/case-study.html?region=asturias`, k: `PRODUCTION`, region: `Asturias`, country: `· Spain`, d: `A 150 MW hub built around a coal-era power plant.` },
       { href: `/case-study.html?region=netherlands`, k: `TRANSPORT`, region: `Netherlands`, country: `· NL`, d: `A flexible composite hydrogen pipeline, laid in ~two months.` }
     ]

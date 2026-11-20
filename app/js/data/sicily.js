@@ -26,6 +26,9 @@
       lead: 'At Duferco’s site in Giammoro, Hy2Market built a green hydrogen plant with a 1 MW electrolyser beside an existing 58 MW peaker turbine. The plant is designed to blend hydrogen made on site into the turbine’s natural gas at up to 15% by volume, cutting the emissions of the power that covers Italy’s demand peaks. Results from testing the blend are expected in 2027.',
       tags: ['Green hydrogen', 'Electrolysis', 'Hydrogen blending', 'Peaker turbine', 'Grid balancing', 'Decarbonisation'],
       mediaCaption: 'Green hydrogen plant beside the peaker turbine · Giammoro, Sicily',
+      slideshow: [
+        { src: '/assets/media/sicily/hero.jpg', caption: 'Green hydrogen plant beside the peaker turbine · Giammoro, Sicily · Photo: Hy2Market / CNR-ITAE (confirm)' }
+      ],
       stats: [
         { num: '1 MW', label: 'alkaline electrolyser supplied by De Nora' },
         { num: 'up to 15%', label: 'green hydrogen blended into the turbine’s natural gas, by volume' },
@@ -136,7 +139,8 @@
           title: 'The electrolyser',
           subtitle: '1 MW alkaline unit, containerised — around 20 kg of hydrogen an hour.',
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
-          photoCaption: 'De Nora’s 1 MW Dragonfly® alkaline electrolyser',
+          photo: '/assets/media/sicily/electrolyser.jpg',
+          photoCaption: 'Foundations for De Nora’s 1 MW Dragonfly® alkaline electrolyser at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
           body: 'De Nora built the electrolyser as a complete containerised system and factory-tested it in Milan before delivering it to Giammoro. It runs on demineralised water from an on-site well and on renewable electricity bought through a power purchase agreement, which guarantees the hydrogen’s green origin under EU rules (RED II and the EU taxonomy).',
           stats: [
             { n: '1 MW', l: 'electrolyser capacity' },
@@ -147,7 +151,8 @@
           title: 'Compression and storage',
           subtitle: '200 bar · about an hour of full-load running on the blend.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
-          photoCaption: 'Hydrogen storage cylinders and their protective bunker at Giammoro',
+          photo: '/assets/media/sicily/storage.jpg',
+          photoCaption: 'Hydrogen storage cylinders and their protective bunker at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
           body: 'Power Evolution designed and installed the hydrogen compressor and storage. The hydrogen is compressed to 200 bar and kept in cylinders inside a protective bunker, as Italian regulations require. The storage is sized to run the turbine for about an hour at full load on a 15% blend — the length of a typical demand peak — and the electrolyser refills it in around ten hours.',
           stats: [
             { n: '200 bar', l: 'storage pressure' },
@@ -158,7 +163,8 @@
           title: 'The peaker turbine',
           subtitle: '58 MW · switched on by Terna to cover demand peaks.',
           thumbGrad: 'linear-gradient(135deg,#4a4a4a,#272727)', tex: 100,
-          photoCaption: 'Duferco’s 58 MW peaker turbine at Giammoro',
+          photo: '/assets/media/sicily/turbine.jpg',
+          photoCaption: 'Duferco’s 58 MW peaker turbine at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
           body: 'Duferco’s gas turbine is a peaker: Terna, the operator of Italy’s electricity grid, switches it on when demand peaks, typically for one to two hours a day. Running on a blend of up to 15% hydrogen called for some retrofit of the burner and injectors and a re-tuned control system, while keeping the turbine able to run normally on natural gas alone. Its water-and-steam cooling of the combustion chamber is expected to keep nitrogen oxide emissions in check.',
           stats: [
             { n: '58 MW', l: 'turbine capacity' },
@@ -169,7 +175,8 @@
           title: 'The model',
           subtitle: 'The whole chain modelled before it was built — in three electricity markets.',
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
-          photoCaption: 'Model output / system diagram',
+          photo: '/assets/media/sicily/diagram.png',
+          photoCaption: 'How the Giammoro pilot links electrolysis, storage and the peaker turbine · Diagram: CNR-ITAE / Hy2Market',
           body: 'The plant was modelled before it was built. CNR-ITAE modelled how a hydrogen blend changes the turbine’s emissions, using computational fluid dynamics to check for nitrogen oxides. With Summit Engineering and DEMCON, the team also modelled the entire value chain across scenarios for renewable energy availability and electricity prices in Italy, Spain and the Netherlands. The same approach can be adapted to other regions, markets and industrial hydrogen uses to test techno-economic feasibility.',
           stats: [
             { n: '~30%', l: 'modelled cut in carbon monoxide emissions at a 15% blend' },
@@ -272,8 +279,8 @@
       featured: {
         href: '/case-studies/upper-austria/',
         kicker: 'NEXT CASE STUDY · PRODUCTION',
-        title: 'Upper Austria: an end-to-end green-hydrogen value chain',
-        lead: 'Sicily’s sister production region. See how Upper Austria builds a complete green-hydrogen value chain around a working industrial electrolyser — the production experience Hy2Market’s industrial regions share with one another.',
+        title: 'Upper Austria: adding value at the source at voestalpine Linz',
+        lead: 'Sicily’s sister production region. See how Upper Austria’s partners build on a working industrial electrolyser — commissioning new hydrogen handling and piloting methanation — the production experience Hy2Market’s industrial regions share with one another.',
         chips: ['Austria', 'Production', 'Electrolysis'],
         caption: 'Upper Austria · Austria · green-hydrogen production'
       },
