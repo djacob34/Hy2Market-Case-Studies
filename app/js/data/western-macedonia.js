@@ -132,7 +132,7 @@
         photo: `/assets/media/western-macedonia/training.jpg`,
         photoCaption: `Training guidelines · knowledge exchange · Photo: Quilia on Unsplash`,
         body: `CluBE contributed to Hy2Market's training guidelines Deliverable (D6.3) and Whitepaper — desk research mapping the hydrogen skills landscape and training opportunities across some of the consortium's regions, benchmarked against Western Macedonia's own, developing key insights and practical recommendations for hydrogen training and analyzing consortium insights on hydrogen skills development. CluBE drew directly on its experience as a partner in the GreenSkillsforH2 (European Hydrogen Skills Alliance) Erasmus+ project — including the successful organization and implementation of four annual Hydrogen Summer ScH2ools and other training formats, such as masterclasses and technical seminars, in Western Macedonia — to help define the different training formats the guidelines recommend, tailored to what different hydrogen professions actually need, from safety officers and technical staff to project managers.` +
-          `<ul style="font-size:17px;line-height:1.6;color:var(--ink);margin:18px 0;padding-left:20px;">` +
+          `<ul style="line-height:1.6;margin:18px 0;padding-left:20px;">` +
             `<li style="margin:0 0 6px;">Masterclass "One-Day Hydrogen": 70 participants</li>` +
             `<li style="margin:0 0 6px;">Hydrogen Summer ScH2ool: 78 participants</li>` +
             `<li style="margin:0 0 6px;">"Engineering our Future: Developing Hydrogen Skills" technical seminar: 36 participants</li>` +
@@ -141,9 +141,11 @@
             `<li style="margin:0 0 6px;">4th Hydrogen Summer ScH2ool: 78 participants</li>` +
             `<li><strong>Total: 371 participants across six training programmes</strong></li>` +
           `</ul>` +
-          `<p style="font-size:17px;line-height:1.5;color:var(--ink);margin:0 0 22px;">These trainings were delivered through the GreenSkillsforH2 (European Hydrogen Skills Alliance) project — more information at <a href="https://greenskillsforhydrogen.eu/" target="_blank" rel="noopener">greenskillsforhydrogen.eu</a>.</p>` +
-          `<a class="cta-pill" href="https://hy2market.eu/wp-content/uploads/2026/01/Hydrogen-Skills-and-Workforce-Insights-Hy2Market-White-Paper.pdf" target="_blank" rel="noopener">Read the whitepaper <span class="arrow">→</span></a>`,
-        cta: { label: `Read the training guidelines`, href: `https://hy2market.eu/wp-content/uploads/2025/11/D6.3-Final-Training-Guidelines.pdf` }
+          `<p style="margin:0;">These trainings were delivered through the GreenSkillsforH2 (European Hydrogen Skills Alliance) project — more information at <a href="https://greenskillsforhydrogen.eu/" target="_blank" rel="noopener">greenskillsforhydrogen.eu</a>.</p>`,
+        ctas: [
+          { label: `Read the training guidelines (D6.3)`, href: `https://hy2market.eu/wp-content/uploads/2025/11/D6.3-Final-Training-Guidelines.pdf` },
+          { label: `Read the whitepaper`, href: `https://hy2market.eu/wp-content/uploads/2026/01/Hydrogen-Skills-and-Workforce-Insights-Hy2Market-White-Paper.pdf` }
+        ]
       },
       {
         title: `Regional data for roll-out evaluation`,

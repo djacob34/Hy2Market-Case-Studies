@@ -97,6 +97,7 @@
         tex: 120,
         photo: `/assets/media/netherlands/pipe.jpg`,
         photoCaption: `SoluForce reinforced thermoplastic pipe · Photo: Hy2Market`,
+        cta: { label: `Read the pipeline testing report (D3.1)`, href: `https://hy2market.eu/wp-content/uploads/2024/08/hy2market_WP3.1-D3.1-public-V2-30072024.pdf` },
         body: `SoluForce's reinforced thermoplastic pipe (RTP) is entirely non-metallic — hydrogen never touches metal, so hydrogen embrittlement isn't a design consideration, and the system is maintenance-free. It is certified for hydrogen to a maximum operating pressure of 52 bar (up to 65 °C), in 4″ and 6″ diameters, with a polymer core wrapped in high-strength reinforcement, and is hydrogen-tight (permeation-free).`,
         stats: [
           { n: `52 bar`, l: `certified hydrogen MOP` },
@@ -110,6 +111,7 @@
         tex: 120,
         photo: `/assets/media/netherlands/spool-still.jpg`,
         photoCaption: `A 400 m spool of SoluForce pipe ready to be pulled beneath the canal and railway at Delfzijl · Photo: Hy2Market`,
+        cta: { label: `Crossing canal and rail at Delfzijl`, href: `https://hy2market.eu/crossing-canal-and-rail-a-pioneering-hydrogen-link-in-the-northern-netherlands/` },
         body: `The pipe is delivered on 400-metre spools and installed in long continuous sections joined by electrofusion, not welding — smaller crews, fewer joints, and lower groundwork and welding costs. Because it is flexible, it can be pulled through a pre-made bore. In Delfzijl, the line is designed to pass beneath the Oosterhornkanaal and a ProRail railway inside a protective casing, with the drilling method agreed with the owners of both assets.`,
         stats: [
           { n: `First-of-its-kind`, l: `canal and rail crossing · Delfzijl` },
@@ -123,6 +125,7 @@
         tex: 120,
         photo: `/assets/media/netherlands/connector.jpg`,
         photoCaption: `Laying the Deventer connector · Photo: Jacques Tillmanns / Foto Focus`,
+        cta: { label: `Hydrogen pipeline installed in Deventer`, href: `https://hy2market.eu/hydrogen-pipeline-installed-in-deventer-netherlands/` },
         body: `In Deventer, 2 × 120 m connects a tube-trailer bay and a future 2.5 MW electrolyser <span class="tc">(status to confirm)</span> to Nefit Bosch at 9.5 bar, with a planned 16 bar local grid — phase zero of an open network. In Delfzijl, the pipe will carry hydrogen from Nobian's site to the hub, where it is purified and compressed for HyPlanet's bulk trailer-filling station. The hub targets an initial capacity above 2,000 kg/day.`,
         stats: [
           { n: `2 × 120 m`, l: `Deventer connector installed` },

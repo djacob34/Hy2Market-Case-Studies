@@ -333,7 +333,14 @@
       var stats = (dr.stats || []).map(function (st) {
         return '<div class="stat-box"><div class="n">' + esc(st.n) + '</div><div class="l">' + st.l + '</div></div>';
       }).join('');
-      var cta = dr.cta ? '<a class="cta-pill" href="' + esc(dr.cta.href) + '">' + esc(dr.cta.label) + ' <span class="arrow">→</span></a>' : '';
+      // CTAs are optional and only set where a published Hy2Market deliverable
+      // or news item covers the drawer's topic. `ctas` (array) or `cta` (one).
+      // External links open in a new tab.
+      var ctaList = dr.ctas || (dr.cta ? [dr.cta] : []);
+      var cta = ctaList.length ? '<div class="drawer-ctas">' + ctaList.map(function (c) {
+        var ext = /^https?:/.test(c.href) ? ' target="_blank" rel="noopener"' : '';
+        return '<a class="cta-pill" href="' + esc(c.href) + '"' + ext + '>' + esc(c.label) + ' <span class="arrow">→</span></a>';
+      }).join('') + '</div>' : '';
       var panelId = 'drawer-panel-' + i;
       // A drawer can carry a real photo (dr.photo = image path). When present it
       // fills both the small thumbnail and the expanded panel image as a
@@ -353,10 +360,14 @@
           '<span class="drawer-toggle" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>' +
         '</button>' +
         '<div class="drawer-panel" id="' + panelId + '" role="region">' +
-          '<div class="drawer-photo" style="background:' + photoBg + ';">' + photoTex +
-            '<span class="cap">' + esc(dr.photoCaption) + '</span></div>' +
-          '<div class="drawer-text">' +
-            '<p class="drawer-body">' + dr.body + '</p>' +
+          // Two columns: media (16:9 photo + caption) | text (body, stat
+          // tiles, CTAs). Below 860px they stack in that same order.
+          '<figure class="drawer-col drawer-figure">' +
+            '<div class="drawer-photo" style="background:' + photoBg + ';">' + photoTex + '</div>' +
+            (dr.photoCaption ? '<figcaption class="drawer-cap">' + esc(dr.photoCaption) + '</figcaption>' : '') +
+          '</figure>' +
+          '<div class="drawer-col drawer-text">' +
+            '<div class="drawer-body">' + dr.body + '</div>' +
             (stats ? '<div class="stat-boxes">' + stats + '</div>' : '') +
             cta +
           '</div>' +

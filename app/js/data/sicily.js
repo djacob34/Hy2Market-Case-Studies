@@ -141,6 +141,7 @@
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
           photo: '/assets/media/sicily/electrolyser.jpg',
           photoCaption: 'Foundations for De Nora’s 1 MW Dragonfly® alkaline electrolyser at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
+          cta: { label: 'Sicily’s pilot takes shape at Duferco', href: 'https://hy2market.eu/sicilys-green-hydrogen-pilot-takes-shape-at-the-duferco-plant/' },
           body: 'De Nora built the electrolyser as a complete containerised system and factory-tested it in Milan before delivering it to Giammoro. It runs on demineralised water from an on-site well and on renewable electricity bought through a power purchase agreement, which guarantees the hydrogen’s green origin under EU rules (RED II and the EU taxonomy).',
           stats: [
             { n: '1 MW', l: 'electrolyser capacity' },
@@ -177,6 +178,7 @@
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
           photo: '/assets/media/sicily/diagram.png',
           photoCaption: 'How the Giammoro pilot links electrolysis, storage and the peaker turbine · Diagram: CNR-ITAE / Hy2Market',
+          cta: { label: 'Read the Sicily integration report (D2.5)', href: 'https://hy2market.eu/wp-content/uploads/2026/04/Deliverable-2.5-Integration-of-Green-Hydrogen-into-Existing-Industrial-Energy-System-in-Sicily.pdf' },
           body: 'The plant was modelled before it was built. CNR-ITAE modelled how a hydrogen blend changes the turbine’s emissions, using computational fluid dynamics to check for nitrogen oxides. With Summit Engineering and DEMCON, the team also modelled the entire value chain across scenarios for renewable energy availability and electricity prices in Italy, Spain and the Netherlands. The same approach can be adapted to other regions, markets and industrial hydrogen uses to test techno-economic feasibility.',
           stats: [
             { n: '~30%', l: 'modelled cut in carbon monoxide emissions at a 15% blend' },
@@ -250,10 +252,7 @@
         { tone: 'grey', n: 'Stable', l: 'turbine operation maintained in the model, with nitrogen oxides expected to hold steady' },
         { tone: 'black', n: '~20 kg/h', l: 'green hydrogen produced on site (design value)' }
       ],
-      narrative: 'These are modelled, not measured, figures — on-site testing reports in 2027 and will replace them. The Sicily pilot’s result within Hy2Market is the plant itself: a full hydrogen chain designed, built and integrated next to a working power turbine. The modelling points to meaningful emission cuts at a 15% blend without destabilising the turbine, and testing will show how closely the plant matches the model.',
-      pending: [
-        { n: 'TRL', l: 'Technology readiness of the integrated plant — confirmed after testing' }
-      ]
+      narrative: 'These are modelled, not measured, figures — on-site testing reports in 2027 and will replace them. The Sicily pilot’s result within Hy2Market is the plant itself: a full hydrogen chain designed, built and integrated next to a working power turbine. The modelling points to meaningful emission cuts at a 15% blend without destabilising the turbine, and testing will show how closely the plant matches the model.'
     },
 
     knowledge: {

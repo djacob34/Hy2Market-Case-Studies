@@ -196,10 +196,7 @@
         { tone: 'grey', n: '1 taxi', l: 'first public hydrogen taxi in Aragón & Spain' },
         { tone: 'black', n: 'Nov 2026', l: 'demonstration start' }
       ],
-      narrative: 'Results will be published once the demonstration concludes and operational data has been evaluated.',
-      pending: [
-        { n: 'Pending', l: 'Results to be reported after pilot completion' }
-      ]
+      narrative: 'Results will be published once the demonstration concludes and operational data has been evaluated.'
     },
 
     knowledge: {

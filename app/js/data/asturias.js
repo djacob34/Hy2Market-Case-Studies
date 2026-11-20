@@ -99,7 +99,7 @@
           { n: `150 MW`, l: `first-phase capacity` },
           { n: `~20,000 t/yr`, l: `green hydrogen` }
         ],
-        cta: { label: `Inside the Asturias H2 Valley`, href: `#` }
+        cta: { label: `Read the Asturias regional highlight`, href: `https://hy2market.eu/hy2market-regional-highlight-asturias-spain/` }
       },
       {
         title: `The offtake`,
@@ -112,8 +112,7 @@
         stats: [
           { n: `Methanol · Ammonia`, l: `target carriers` },
           { n: `H₂ · O₂ · NH₃ · heat`, l: `co-transport under study` }
-        ],
-        cta: { label: `Who takes the hydrogen`, href: `#` }
+        ]
       },
       {
         title: `The retrofit`,
@@ -127,7 +126,7 @@
           { n: `~10%`, l: `planned hydrogen share of the boiler fuel` },
           { n: `Unit 2`, l: `repurposed, not retired` }
         ],
-        cta: { label: `How the boiler retrofit works`, href: `#` }
+        cta: { label: `Teaching a coal power plant to burn hydrogen`, href: `https://hy2market.eu/teaching-a-coal-power-plant-to-burn-hydrogen/` }
       }
     ]
   },
@@ -188,13 +187,7 @@
       { tone: `grey`, n: `99.98%`, l: `design GHG reduction vs. displaced fossil fuels` },
       { tone: `black`, n: `500 MW`, l: `scale-up under feasibility study` }
     ],
-    narrative: `Asturias offers the consortium a full-stack production answer — electrolyser, industrial offtake and a retrofitted power plant, permitted and heading to construction on the site of a former coal asset. With the environmental, access and urban permits granted and the EPC contract now at tender, the question shifts from "will it be allowed?" to "how fast can it scale?" — and a feasibility study is already looking past the first 150 MW toward 500.`,
-    pending: [
-      { n: `—`, l: `Industrial offtakers with signed supply agreements <em>(pending confirmation)</em>` },
-      { n: `— t/yr`, l: `Methanol / ammonia carrier volumes <em>(pending)</em>` },
-      { n: `— TRL`, l: `TRL change for production + retrofit technology <em>(pending)</em>` },
-      { n: `20XX`, l: `First-phase operational start date <em>(pending confirmation)</em>` }
-    ]
+    narrative: `Asturias offers the consortium a full-stack production answer — electrolyser, industrial offtake and a retrofitted power plant, permitted and heading to construction on the site of a former coal asset. With the environmental, access and urban permits granted and the EPC contract now at tender, the question shifts from "will it be allowed?" to "how fast can it scale?" — and a feasibility study is already looking past the first 150 MW toward 500.`
   },
 
   knowledge: {
