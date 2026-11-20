@@ -355,9 +355,11 @@
         '<div class="drawer-panel" id="' + panelId + '" role="region">' +
           '<div class="drawer-photo" style="background:' + photoBg + ';">' + photoTex +
             '<span class="cap">' + esc(dr.photoCaption) + '</span></div>' +
-          '<p class="drawer-body">' + dr.body + '</p>' +
-          '<div class="stat-boxes">' + stats + '</div>' +
-          cta +
+          '<div class="drawer-text">' +
+            '<p class="drawer-body">' + dr.body + '</p>' +
+            (stats ? '<div class="stat-boxes">' + stats + '</div>' : '') +
+            cta +
+          '</div>' +
         '</div>' +
       '</div>';
     }).join('');

@@ -483,12 +483,26 @@ a:focus-visible, button:focus-visible {
   display: flex; align-items: center; justify-content: center; transition: transform .3s ease;
 }
 .drawer[aria-expanded="true"] .drawer-toggle { transform: rotate(45deg); }
-.drawer-panel { display: none; padding: 0 20px 24px 20px; }
-.drawer[aria-expanded="true"] .drawer-panel { display: block; }
-.drawer-photo { height: 200px; position: relative; overflow: hidden; margin-bottom: 20px; }
+/* Expanded panel: landscape 16:9 photo on the left, text column on the right.
+   Stacks (photo above text) on narrow screens — see the 860px breakpoint. */
+.drawer-panel { display: none; padding: 4px 20px 24px 20px; }
+.drawer[aria-expanded="true"] .drawer-panel {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start;
+}
+.drawer-photo { aspect-ratio: 16 / 9; width: 100%; position: relative; overflow: hidden; }
+.drawer-text { min-width: 0; container-type: inline-size; }
+/* Stat tiles sit in a half-width column now — shrink the figure so long
+   word values ("Commissioning") fit, and let a tile drop to its own row. */
+.drawer-text .stat-box { min-width: 0; flex-basis: 200px; }
+.drawer-text .stat-box .n { font-size: 26px; overflow-wrap: break-word; hyphens: auto; }
+@container (max-width: 480px) { .drawer-text .stat-box .n { font-size: 23px; } }
+.drawer-text > :last-child { margin-bottom: 0; }
 .drawer-photo .tex { position: absolute; inset: 0; }
 .drawer-photo .cap { position: absolute; left: 16px; bottom: 14px; color: rgba(255,255,255,0.55); font-size: 12px; }
 .drawer-body { font-size: 17px; line-height: 1.5; color: var(--ink); margin: 0 0 22px; max-width: 62ch; }
+@media (max-width: 860px) {
+  .drawer[aria-expanded="true"] .drawer-panel { grid-template-columns: 1fr; gap: 20px; }
+}
 .drawer-body strong { font-weight: 600; }
 .stat-boxes { display: flex; gap: 14px; flex-wrap: wrap; }
 .stat-box { flex: 1; min-width: 180px; border: 1px solid var(--line-3); padding: 18px; }
