@@ -8,8 +8,22 @@
 
    Revised per the Upper Austria "Communication-Focused Revision" brief:
    public / high-level / partner-approved information only, with pre-existing
-   H2FUTURE assets, Hy2Market activities and parallel H2FUTURE Follow-up
-   investments kept clearly separate.
+   H2FUTURE assets, Hy2Market activities and the H2FUTURE Follow-up
+   investment kept clearly separate.
+
+   Partner feedback (WIVA P&G, Nov 2026) applied:
+   - H2FUTURE Follow-up (EUR 16.4M) is CAPEX only; Hy2Market's focus is the
+     commissioning and testing of the compressors (plus tests and R&D the
+     Follow-up budget does not cover).
+   - D2.10-D2.12 rescheduled to end of 2026 after installation/commissioning
+     delays; quality target is now ISO 14687 Grade D (fuel cell). Pressure
+     and 99.999% figures are NOT published (not reconfirmed).
+   - Trailer filling station: all components installed and connected,
+     testing pending.
+   - Constanta / Medio Tejo exchange claims: not confirmed -> kept out.
+   - Quotes: still pending -> kept out.
+   - VERBUND role drawn from VERBUND's slide in the AT partner presentation;
+     the approved one-liner (sent to Gregor) should replace it when received.
    ========================================================================= */
 (function (root) {
   var data = {
@@ -37,7 +51,7 @@
       eyebrow: 'PRODUCTION · UPPER AUSTRIA',
       // {hl} marks the yellow-underlined word
       titleHtml: 'Adding Value at the Source: Integrating Green <span class="hl">Hydrogen</span> at voestalpine Linz',
-      lead: 'At the voestalpine site in Linz, a 6 MW PEM electrolyser has produced green hydrogen since 2019. Hy2Market builds on that established industrial base: eight Austrian partners connect hydrogen production and handling, run an industrial methanation pilot, and add modelling, use-case analysis, regulation and knowledge exchange around a live steel site.',
+      lead: 'At the voestalpine site in Linz, a 6 MW PEM electrolyser has produced green hydrogen since 2019. Hy2Market builds on that established industrial base: eight Austrian partners commission and test new hydrogen compression, purification and trailer-filling equipment, run an industrial methanation pilot, and add modelling, use-case analysis, regulation and knowledge exchange around a live steel site.',
       tags: ['Green hydrogen', 'Industrial integration', 'Methanation', 'Modelling', 'Knowledge exchange', 'Production'],
       // Cover animation of the voestalpine Linz site (muted, autoplay, looped)
       video: 'https://cdn.voestalpine.com/asset-47186e19-9647-41ac-b81f-9ee9d798085a/AnimationReal%20Linz%20Neues%20Ending%20EN%2019-10-23.mp4',
@@ -57,18 +71,20 @@
       {
         id: 'voest', logo: 'voest.png', name: 'voestalpine',
         role: 'Site host · production & handling (WP2)',
-        body: 'voestalpine hosts the Linz site where the existing electrolyser and hydrogen-handling equipment are integrated, and contributes to production and management in WP2.',
+        body: 'voestalpine hosts the Linz site, where new compression, purification, storage and trailer-filling equipment around the existing electrolyser is being commissioned and tested in WP2.',
         bodyHtml: '<p>voestalpine, a globally leading technology group, hosts the industrial site in Linz where the 6 MW PEM electrolyser — pre-existing, from the H2FUTURE pilot — is integrated with additional hydrogen-handling equipment.</p>' +
-          '<p><strong>WP2 — Green Hydrogen Production &amp; Management:</strong> integrating purification, compression, storage and handling equipment at the operating site so hydrogen can be conditioned and made available for onward use.</p>' +
+          '<p><strong>WP2 — Green Hydrogen Production &amp; Management:</strong> the compression, purification and storage equipment itself is financed as CAPEX through the separate H2FUTURE Follow-up investment by voestalpine and VERBUND. Hy2Market’s focus is on <strong>commissioning and testing</strong> — above all of the compressors — so the hydrogen can be conditioned and made available for onward use.</p>' +
           '<p>Also co-involved in the industrial-use work (hydrogen as feedstock), supporting Montanuniversität Leoben and K1-MET on catalytic methanation at the Linz site, plus project roll-out reporting and the final-conference site tour.</p>',
         logoHtml: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 4l9 16 9-16" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lg" style="font-weight:600;font-size:16px;color:#1a1a1a;">voestalpine</span>'
       },
       {
         id: 'verbund', logo: 'verbund.png', name: 'VERBUND',
-        role: 'Electrolyser & renewable-power partner',
-        body: 'VERBUND (through Verbund Green Hydrogen) partners with voestalpine on the electrolyser system and its renewable power supply.',
+        role: 'Hydrogen purification & trailer filling (WP2)',
+        body: 'VERBUND (through Verbund Green Hydrogen) works with voestalpine on purification pilot tests and the commissioning and operation of the trailer filling station in Linz.',
         bodyHtml: '<p>VERBUND coordinated the original H2FUTURE pilot (pre-existing context) and supplies renewable power to the electrolyser.</p>' +
-          '<p>Under Hy2Market, <strong>Verbund Green Hydrogen</strong> works with voestalpine on the hydrogen-handling upgrade at the Linz site — purification and drying, compression and storage — raising the hydrogen towards fuel cell quality for demanding downstream uses.</p>',
+          '<p><strong>Task 2.2 — Purification:</strong> with voestalpine, adding a purification and drying unit to the 6 MW PEM electrolyser system to remove residual oxygen and moisture and reach fuel cell quality (ISO 14687 Grade D). Pilot tests analyse how operating conditions affect the purity of the hydrogen produced. Most of VERBUND’s Hy2Market budget covers the operating costs of producing hydrogen from electricity.</p>' +
+          '<p><strong>D2.11 — Trailer filling station:</strong> commissioning and operation of a trailer filling station for hydrogen produced at the Linz industrial site. All components are installed and connected; testing is pending.</p>' +
+          '<p>Also contributes to Task 4.3 (roll-out evaluation and challenges for public authorities, D4.5).</p>',
         gap: '9px',
         logoHtml: '<svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M8 0L16 18H0z" fill="#0a5c46"/></svg><span style="font-weight:700;font-size:15px;color:#0a5c46;letter-spacing:0.06em;">VERBUND</span>'
       },
@@ -156,8 +172,8 @@
 
     overview: [
       { tone: 'yellow', label: 'THE EXISTING BASE', text: 'voestalpine Linz has operated a 6 MW PEM electrolyser since 2019 (the H2FUTURE pilot) — giving Austria a working industrial hydrogen asset and years of operating experience to build on.' },
-      { tone: 'black', label: 'HY2MARKET’S CONTRIBUTION', text: 'Eight Austrian partners integrate hydrogen production and handling at the live site, run an industrial methanation pilot, and add modelling, use-case analysis, regulation and knowledge exchange — connecting and accelerating activity rather than building a new plant.' },
-      { tone: 'black', label: 'RESULT TO DATE', text: 'Pilots integrated into a working steel site, transferable industrial use cases and process models produced, and lessons shared across the Hy2Market consortium.' }
+      { tone: 'black', label: 'HY2MARKET’S CONTRIBUTION', text: 'Eight Austrian partners commission and test new hydrogen compression, purification and trailer-filling equipment at the live site, run an industrial methanation pilot, and add modelling, use-case analysis, regulation and knowledge exchange — the equipment CAPEX sits with the separate H2FUTURE Follow-up investment.' },
+      { tone: 'black', label: 'RESULT TO DATE', text: 'Trailer-filling components installed and connected (testing pending), a methanation pilot operated under real industrial conditions, transferable use cases and process models produced, and lessons shared across the consortium.' }
     ],
 
     video: { caption: 'voestalpine Linz — the demonstration site for Hy2Market’s Austrian activities.' },
@@ -178,12 +194,12 @@
 
     opportunity: {
       title: 'The opportunity',
-      leadHtml: 'Hy2Market’s advantage here is that it <span class="mark">builds on H2FUTURE and complements wider follow-up activity</span> — integrating and accelerating, rather than creating the electrolyser or the whole expansion.',
-      body: 'The H2FUTURE pilot — coordinated by VERBUND with voestalpine, Siemens Energy, K1-MET, Austrian Power Grid and TNO — gave the region a working electrolyser and years of green-hydrogen operating experience. Separate H2FUTURE Follow-up investments continue in parallel. Hy2Market’s role is narrower and complementary: connecting hydrogen production and handling on site, adding an industrial methanation pilot, and bringing modelling, use-case analysis, regulation and knowledge exchange so these activities can transfer to other regions.',
+      leadHtml: 'Hy2Market’s advantage here is that it <span class="mark">builds on H2FUTURE and complements the H2FUTURE Follow-up investment</span> — commissioning, testing and learning from new equipment, rather than paying for the electrolyser or the expansion hardware.',
+      body: 'The H2FUTURE pilot — coordinated by VERBUND with voestalpine, Siemens Energy, K1-MET, Austrian Power Grid and TNO — gave the region a working electrolyser and years of green-hydrogen operating experience. In July 2025 voestalpine and VERBUND announced the H2FUTURE Follow-up: a €16.4 million CAPEX investment in compression, purification and hydrogen storage at Linz. Hy2Market’s role is complementary and covers what that budget does not: commissioning and testing the new equipment — above all the compressors — plus pilot tests and further R&D, an industrial methanation pilot, and bringing modelling, use-case analysis, regulation and knowledge exchange so these activities can transfer to other regions.',
       startLabel: 'STARTING POSITION',
       startStats: [
         { num: 'H2FUTURE', sub: 'working 6 MW electrolyser, live since 2019' },
-        { num: 'Follow-up', sub: 'parallel H2FUTURE investments continue' }
+        { num: '€16.4M', sub: 'H2FUTURE Follow-up CAPEX — compression, purification, storage' }
       ]
     },
 
@@ -197,10 +213,10 @@
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
           photo: '/assets/media/upper-austria-revised/h2future.jpg',
           photoCaption: 'Hydrogen infrastructure at voestalpine Linz (pre-existing H2FUTURE asset) · Copyright: voestalpine AG, Source: voestalpine.com',
-          body: 'voestalpine and Verbund Green Hydrogen integrate purification, compression, storage and handling equipment around the existing electrolyser — conditioning the hydrogen for demanding downstream uses. The focus is integration into an operating steel site, not building a new plant.',
+          body: 'New compression, purification, storage and trailer-filling equipment around the existing electrolyser is financed by the H2FUTURE Follow-up investment. Under Hy2Market, voestalpine and Verbund Green Hydrogen commission and test it at the operating steel site — with a focus on the compressors — and run pilot tests on hydrogen purity. All trailer-filling components are installed and connected, with testing pending; results are due by the end of 2026.',
           stats: [
-            { n: 'On-site', l: 'integration at an operating site' },
-            { n: 'Fuel cell quality', l: 'purification target <span class="tc">(detailed specs partner-approved only)</span>' }
+            { n: 'Commissioning', l: 'and testing at an operating site · results due end 2026' },
+            { n: 'ISO 14687', l: 'Grade D purity target — fuel cell quality' }
           ],
           cta: { label: 'About the production & handling work', href: '#' }
         },
@@ -239,7 +255,7 @@
       chain: [
         { id: 'power', kicker: 'PRE-EXISTING', name: 'Renewable power', sub: 'Hydro + wind', title: 'Renewable hydro + wind feeds the electrolyser (pre-existing)' },
         { id: 'electrolyser', kicker: 'PRE-EXISTING · H2FUTURE', name: '6 MW PEM electrolyser', sub: 'live since 2019', core: true, title: '6 MW PEM electrolyser, live since 2019 (H2FUTURE)' },
-        { id: 'handling', kicker: 'HY2MARKET', name: 'Production & handling', sub: 'purification · compression · storage', title: 'On-site hydrogen production & handling (Hy2Market)' }
+        { id: 'handling', kicker: 'FOLLOW-UP CAPEX · HY2MARKET TESTING', name: 'Compression, purification & trailer filling', sub: 'commissioning · testing', title: 'Equipment financed by the H2FUTURE Follow-up; commissioned and tested under Hy2Market' }
       ],
       branches: [
         { id: 'steel', name: 'Steelmaking trials', sub: 'H2FUTURE · pre-existing', title: 'Green H₂ trialled in steelmaking (H2FUTURE, pre-existing)' },
@@ -250,7 +266,7 @@
       nodeData: {
         power: { title: 'Renewable power', tag: 'Pre-existing · hydro + wind', body: 'Renewable electricity from Austria’s hydro and wind capacity feeds the electrolyser, making the hydrogen green from the first electron. Pre-existing context, not a Hy2Market investment.' },
         electrolyser: { title: '6 MW PEM electrolyser', tag: 'Pre-existing · H2FUTURE · since 2019', body: 'A 6 MW PEM electrolyser at the voestalpine steel plant in Linz, operational since 2019 as part of the H2FUTURE pilot. This is the established industrial base Hy2Market builds on — not a Hy2Market asset.' },
-        handling: { title: 'Production & handling', tag: 'Hy2Market contribution', body: 'Under Hy2Market, purification, compression, storage and handling equipment are integrated around the existing electrolyser at the operating site, conditioning the hydrogen for demanding downstream uses. Detailed specifications are shared only where partner-approved.' },
+        handling: { title: 'Compression, purification & trailer filling', tag: 'Follow-up CAPEX · Hy2Market commissioning & testing', body: 'Compression, purification, storage and trailer-filling equipment around the existing electrolyser is financed as CAPEX by the H2FUTURE Follow-up investment (voestalpine and VERBUND). Hy2Market covers commissioning and testing — especially of the compressors — and pilot tests on purity, targeting fuel cell quality to ISO 14687 Grade D. Trailer-filling components are installed and connected, with testing pending; results are due by the end of 2026.' },
         steel: { title: 'Steelmaking trials', tag: 'Pre-existing · H2FUTURE', body: 'During the H2FUTURE pilot, green hydrogen from the electrolyser was trialled in steelmaking at voestalpine’s Linz plant — an early industrial test, part of the pre-existing baseline rather than a Hy2Market result.' },
         methanation: { title: 'Methanation pilot', tag: 'Hy2Market · K1-MET / MU Leoben', body: 'K1-MET and Montanuniversität Leoben operate an industrial methanation pilot that converts green hydrogen and captured CO₂ into synthetic natural gas under real process conditions — a Hy2Market activity.' },
         usecases: { title: 'Industrial use cases', tag: 'Hy2Market · AIT', body: 'AIT develops industrial hydrogen use cases across steel, chemicals, polymers and fertilisers, with techno-economic analysis identifying the best decarbonisation concept for each — a Hy2Market activity.' },
@@ -265,16 +281,16 @@
       steps: [
         { date: '2019', badge: true, dateMuted: '· H2FUTURE baseline', text: '6 MW PEM electrolyser online at voestalpine Linz; green-hydrogen production begins (pre-existing).' },
         { date: '2023', dateMuted: '· Hy2Market start', text: 'Austrian partners begin integration, methanation and analysis activities around the live site.' },
-        { date: '2023–25', dateMuted: '· Hy2Market', text: 'Production and handling integrated on site; industrial methanation pilot operated under real conditions.' },
+        { date: '2023–25', dateMuted: '· Hy2Market', text: 'Industrial methanation pilot operated under real conditions; July 2025: voestalpine and VERBUND announce the €16.4M H2FUTURE Follow-up for compression, purification and storage.' },
         { date: '2024–26', dateMuted: '· Hy2Market', text: 'Industrial hydrogen use cases, process simulations and regulation / standardisation work developed.' },
-        { date: '2026 · You are here', current: true, text: 'Learning and output phase: results, lessons and guidance consolidated and shared; final conference in Linz.' }
+        { date: '2026 · You are here', current: true, text: 'Trailer-filling components installed and connected; commissioning and testing under way, with results due by end of 2026. Lessons and guidance consolidated and shared; final conference in Linz.' }
       ]
     },
 
     lessons: {
       title: 'Lessons learned',
       leadHtml: 'Upper Austria’s central lesson is about integration: <span class="mark">the hard part is fitting new pilots into a live industrial site, not the technology itself.</span>',
-      body: 'Working around an operating steel plant put permitting, safety and coordination at the centre — aligning eight partners, and integrating methanation and hydrogen-handling equipment into a running site, mattered as much as the engineering. Careful measurement and documentation under real industrial conditions is what makes results credible and transferable, and structured knowledge exchange is what turns a single site’s experience into role models other regions can reuse.'
+      body: 'Working around an operating steel plant put permitting, safety and coordination at the centre — aligning eight partners, and integrating methanation and hydrogen-handling equipment into a running site, mattered as much as the engineering. Installation and commissioning took longer than planned, and the compression, purification and trailer-filling results were rescheduled to the end of 2026. Careful measurement and documentation under real industrial conditions is what makes results credible and transferable, and structured knowledge exchange is what turns a single site’s experience into role models other regions can reuse.'
     },
 
     outcomes: {
