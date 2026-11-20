@@ -206,7 +206,8 @@
       { tone: `black`, n: `Interregional hydrogen connections & synergies`, l: `contacts across Europe's more mature hydrogen regions, built through study visits and exchanges` }
     ],
     narrative: `By the numbers, Western Macedonia's Hy2Market story isn't about megawatts or kilometres of pipe — it's contributions banked for later: input across three fronts — training guidelines, regional roll-out data, and a standards questionnaire — a multi-format training framework ready to deploy once national investment arrives, and a live channel into the EU's emerging hydrogen policy conversation. The bigger outcome is relational: a network of contacts across Europe's more mature hydrogen regions that CluBE enriched and strengthened through the project, built through study visits and knowledge-exchange meetings.`,
-    pending: [
+    baselineLabel: `By the numbers`,
+    baseline: [
       { n: `371`, l: `A total number of 371 participants were engaged across six training programmes implemented by CluBE in Western Macedonia in the frame of GreenSkillsforH2 and H2VE projects` },
       { n: `29`, l: `Greek hydrogen stakeholders and industrial companies provided with Hy2Market's regulations and standards questionnaire for their input` }
     ]
