@@ -21,7 +21,7 @@
    - Trailer filling station: all components installed and connected,
      testing pending.
    - Constanta / Medio Tejo exchange claims: not confirmed -> kept out.
-   - Quotes: still pending -> kept out.
+   - Quotes: WIVA P&G verbatim quote added; voestalpine / VERBUND pending.
    - VERBUND role drawn from VERBUND's slide in the AT partner presentation;
      the approved one-liner (sent to Gregor) should replace it when received.
    ========================================================================= */
@@ -322,8 +322,12 @@
       ]
     },
 
-    // Quotes removed pending verbatim, partner-approved statements from
-    // voestalpine, VERBUND and WIVA P&G (per revision brief item 12).
+    // Verbatim, partner-supplied quote from WIVA P&G (Nov 2026). Quotes from
+    // voestalpine and VERBUND still pending — add them here when approved.
+    quotesEyebrow: 'IN THEIR WORDS',
+    quotes: [
+      { text: 'Hy2Market has helped us turn promising hydrogen concepts into practical solutions for industrial decarbonisation. By testing innovative technologies under real industrial conditions, evaluating their technical and economic potential, and learning from implementation challenges, we have strengthened the foundation for future hydrogen business cases. Most importantly, the project has generated valuable knowledge on how to scale these solutions, improve their competitiveness and accelerate their deployment across Europe.', name: 'WIVA P&G', role: 'Coordinator of Hy2Market’s Austrian activities' }
+    ],
 
     next: {
       eyebrow: 'CONTINUE THE STORY',
