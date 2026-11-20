@@ -152,8 +152,10 @@
           title: 'Compression and storage',
           subtitle: '200 bar · about an hour of full-load running on the blend.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
-          photo: '/assets/media/sicily/storage.jpg',
-          photoCaption: 'Hydrogen storage cylinders and their protective bunker at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
+          photo: '/assets/media/sicily/compressor.jpg',
+          photoCaption: 'Power Evolution’s hydrogen compressor skid at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
+          photo2: '/assets/media/sicily/storage.jpg',
+          photo2Caption: 'Hydrogen storage cylinders and their protective bunker · Photo: Hy2Market / CNR-ITAE (confirm)',
           body: 'Power Evolution designed and installed the hydrogen compressor and storage. The hydrogen is compressed to 200 bar and kept in cylinders inside a protective bunker, as Italian regulations require. The storage is sized to run the turbine for about an hour at full load on a 15% blend — the length of a typical demand peak — and the electrolyser refills it in around ten hours.',
           stats: [
             { n: '200 bar', l: 'storage pressure' },

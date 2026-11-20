@@ -492,6 +492,11 @@ a:focus-visible, button:focus-visible {
 .drawer-photo { height: 200px; position: relative; overflow: hidden; margin-bottom: 20px; }
 .drawer-photo .tex { position: absolute; inset: 0; }
 .drawer-photo .cap { position: absolute; left: 16px; bottom: 14px; color: rgba(255,255,255,0.55); font-size: 12px; }
+/* Two photos in one drawer, side by side (e.g. compressor + storage). */
+.drawer-photos { display: grid; gap: 10px; margin-bottom: 20px; }
+.drawer-photos--2 { grid-template-columns: 1fr 1fr; }
+.drawer-photos .drawer-photo { margin-bottom: 0; }
+@media (max-width: 640px) { .drawer-photos--2 { grid-template-columns: 1fr; } }
 .drawer-body { font-size: 17px; line-height: 1.5; color: var(--ink); margin: 0 0 22px; max-width: 62ch; }
 .drawer-body strong { font-weight: 600; }
 .stat-boxes { display: flex; gap: 14px; flex-wrap: wrap; }

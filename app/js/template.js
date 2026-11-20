@@ -353,6 +353,14 @@
       var photoBg = dr.photo ? "#15171b url('" + esc(dr.photo) + "') center/cover no-repeat" : dr.thumbGrad;
       var thumbTex = dr.photo ? '' : '<div class="tex" style="background:' + tex + ';"></div>';
       var photoTex = dr.photo ? '' : '<div class="tex" style="background:' + texBig + ';"></div>';
+      // A drawer with a second photo (dr.photo2) shows the two side by side.
+      var photoBlock = dr.photo2
+        ? '<div class="drawer-photos drawer-photos--2">' +
+            '<div class="drawer-photo" style="background:' + photoBg + ';"><span class="cap">' + esc(dr.photoCaption) + '</span></div>' +
+            '<div class="drawer-photo" style="background:#15171b url(\'' + esc(dr.photo2) + '\') center/cover no-repeat;"><span class="cap">' + esc(dr.photo2Caption || '') + '</span></div>' +
+          '</div>'
+        : '<div class="drawer-photo" style="background:' + photoBg + ';">' + photoTex +
+            '<span class="cap">' + esc(dr.photoCaption) + '</span></div>';
       return '' +
       '<div class="drawer" data-drawer="' + i + '" aria-expanded="false">' +
         '<button type="button" class="drawer-btn" aria-expanded="false" aria-controls="' + panelId + '">' +
@@ -362,8 +370,7 @@
           '<span class="drawer-toggle" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>' +
         '</button>' +
         '<div class="drawer-panel" id="' + panelId + '" role="region">' +
-          '<div class="drawer-photo" style="background:' + photoBg + ';">' + photoTex +
-            '<span class="cap">' + esc(dr.photoCaption) + '</span></div>' +
+          photoBlock +
           '<p class="drawer-body">' + dr.body + '</p>' +
           '<div class="stat-boxes">' + stats + '</div>' +
           cta +
