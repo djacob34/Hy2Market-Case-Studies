@@ -220,7 +220,7 @@
     featured: {
       href: `/case-study.html?region=upper-austria`,
       kicker: `CASE STUDY · PRODUCTION`,
-      title: `Upper Austria: from steel to a green hydrogen value chain`,
+      title: `Upper Austria: adding value at the source at voestalpine Linz`,
       lead: `The other end of the production axis — where Hy2Market partners piloted methanation and new hydrogen use cases alongside voestalpine's H2FUTURE electrolyser in Linz. The region Asturias exchanges know-how with.`,
       chips: [`Austria`, `Electrolysis`, `Steel`],
       caption: `voestalpine steel plant · Linz · H2FUTURE electrolyser`

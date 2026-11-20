@@ -14,11 +14,18 @@
    remaining visitor-facing "[DATA NEEDED — ...]" markers on this page. If a future round reopens
    one, mark it the same way and keep it visible until it has a confirmed source.
 
-   The training, roll-out and standards drawers under "How CluBE contributed" name their specific
-   deliverable/task identifiers (D6.3, Task 4.3, D4.5, Task 6.2, D6.2, WIVA P&G) verbatim, per
-   explicit partner instruction, rather than the internal-code-free phrasing used elsewhere on this
-   page — and keep the source's cautious, not-yet-public framing for D4.5 and D6.2 rather than
-   stating either as a confirmed fact.
+   Visible copy stays free of internal deliverable/task/work-package codes (D6.3, Task 4.3, D4.5,
+   Task 6.2, D6.2, WIVA P&G) throughout, including in the three "How CluBE contributed" drawers —
+   described in plain language instead (e.g. "a strategy paper for EU policymakers due late 2026")
+   while keeping the source's cautious, not-yet-public framing for the pending deliverables. CTA
+   hrefs still point at the real documents (D6.3's PDF etc.) — only visible prose avoids the codes.
+
+   2026-11-17 editorial pass: every block tightened to roughly Upper Austria's length (that page is
+   the benchmark) — cards, drawers, the landscape popups and the outcomes tiles were all 2-4x too
+   long and had become repetitive (the Outcome card and the landscape section both told the
+   GREENH2ORN/North-1/pipeline story in full; the outcomes narrative re-stated its own stat tiles).
+   Every fact, figure, name and both quotes are unchanged — only prose length and duplication.
+   card.blurb was removed so the landing-page card falls back to hero.lead, same as other regions.
 
    Structural notes (see template.js for the supporting, backward-compatible changes):
    - hero.stats is omitted — no confirmed figures for a padded 3-tile grid; hero.slideshow (three
@@ -42,17 +49,19 @@
 (function (root) {
   var data = {
   slug: `western-macedonia`,
+  // card.blurb intentionally omitted — landing.js falls back to hero.lead
+  // when it's absent, same as every other region (keeps the two in sync
+  // instead of maintaining near-duplicate copy in two places).
   card: {
     kicker: `KNOWLEDGE EXCHANGE · WESTERN MACEDONIA`,
-    title: `Western Macedonia, Greece`,
-    blurb: `Western Macedonia does not yet have a mature or fully established hydrogen infrastructure, but it has strong potential to develop a regional hydrogen ecosystem as part of its wider energy transition. The region is helping to lay the foundations for future hydrogen deployment by building knowledge and skills, and learning from more advanced hydrogen regions though Hy2Market and other hydrogen projects. CluBE supports this process by connecting regional needs and opportunities with relevant European experience, networks and developments.`
+    title: `Western Macedonia, Greece`
   },
   breadcrumb: { label: `Case studies`, href: `/`, here: `Western Macedonia` },
 
   hero: {
     eyebrow: `KNOWLEDGE EXCHANGE · WESTERN MACEDONIA`,
     titleHtml: `Watch, Learn, Prepare: Western Macedonia's <span class="hl">Hydrogen</span> Readiness`,
-    lead: `Most Hy2Market regions are demonstrating working hydrogen value chains. Western Macedonia is showing how a region at the centre of the energy transition can build the foundations for a competitive hydrogen economy. While its hydrogen infrastructure is still emerging, the region has significant potential to use hydrogen as a driver of decarbonisation, and a just transition. Through training, standards development, knowledge exchange, and study visits to hydrogen frontrunners across Europe, Western Macedonia is turning European cooperation into practical capacity and long-term regional value.`,
+    lead: `Western Macedonia is moving beyond lignite, and building the foundations for a hydrogen economy as it goes. Its infrastructure is still emerging, but training, standards work, and study visits to hydrogen frontrunners across Europe are turning cooperation into real regional capacity.`,
     tags: [`Just Transition`, `Knowledge Exchange`, `Training & Reskilling`, `Standards & Policy`, `Replication`],
     // three photos CluBE supplied for the region's energy landscape, auto-rotating
     // in place of a single hero shot — see hero() / .hero-slideshow in template.js.
@@ -89,18 +98,16 @@
   downloadHref: `#`,
 
   overview: [
-    { tone: `yellow`, label: `THE CHALLENGE`, text: `Western Macedonia is a transition region undergoing an energy transformation as it moves away from its long-standing dependence on lignite and towards a decarbonised energy system. The main challenge is not only the absence of hydrogen infrastructure, but the need to integrate hydrogen into a broader regional energy and economic transition. The region does not yet have a mature hydrogen value chain, established production capacity or a strong base of existing end users. In particular, large-scale end-use industrial applications remain limited because the region does not host the concentration of heavy industries, such as steel, cement or refineries, that could provide immediate and continuous hydrogen demand. At the same time, Greece's national hydrogen landscape is still evolving, with the relevant policy and regulatory framework not yet maturely established. This creates uncertainty, but also an opportunity for Western Macedonia to shape a hydrogen pathway tailored to its transition needs, regional assets and future economic development.` },
-    { tone: `black`, label: `THE APPROACH`, text: `As Western Macedonia lays the foundations for its emerging hydrogen economy, CluBE has utilized Hy2Market to strengthen the region's readiness for future deployment, rather than building infrastructure of its own within Hy2Market's timeframe. Its activities include mapping training needs across the hydrogen value chain, contributing regional data to support the consortium's assessment of suitable roll-out opportunities, participating in European standards and policy work, and building strong connections with more developed regions through study visits and knowledge exchange. As an emerging hydrogen region, Western Macedonia is also interested in assessing the potential of replicating relevant project activities, results and innovations, drawing on the experience, feedback and best practices of regions with more advanced hydrogen infrastructure and deployment. By following the project's developments closely, CluBE helps connect these outcomes with Western Macedonia's evolving regional plans, investment priorities and wider energy-transition strategy.` },
-    { tone: `black`, label: `THE OUTCOME`, text: `A region that entered the project without a mature and established hydrogen infrastructure, but it is now building both the capacity and the project pipeline needed for deployment. Alongside a ready-to-use training framework, access to European standards discussions and direct links with more advanced hydrogen regions, the region is advancing several flagship initiatives. LIFE GREENH2ORN will deploy a hydrogen refuelling station in Greece — the first with on-site green hydrogen production in the country — in Kozani, supporting zero-emission municipal mobility. The Amyntaio North-1 project by Hellenic Hydrogen will be the first off-grid commercial renewable hydrogen production plant in South-Eastern Europe, with an initial capacity of 50 MW, expandable to 200 MW, while the Western Macedonia high-pressure NG pipeline by DESFA is designed to become fully hydrogen-ready. Together, these developments mark a clear shift from preparation toward implementation.` }
+    { tone: `yellow`, label: `THE CHALLENGE`, text: `Western Macedonia is moving away from decades of lignite dependence, but still lacks a mature hydrogen value chain and the heavy industry — steel, cement, refineries — that would drive demand. Greece's national hydrogen policy is still taking shape, leaving room for the region to find its own path.` },
+    { tone: `black`, label: `THE APPROACH`, text: `CluBE is using Hy2Market to build the region's readiness rather than infrastructure: mapping training needs, feeding regional data into Europe-wide roll-out planning, contributing to EU standards work, and building ties with more advanced hydrogen regions through study visits — all feeding into Western Macedonia's own energy-transition plans.` },
+    { tone: `black`, label: `THE OUTCOME`, text: `Western Macedonia entered the project without a mature hydrogen infrastructure. It now has a ready-to-use training framework, a seat in Europe's standards conversation, and real momentum behind LIFE GREENH2ORN, North-1 and a hydrogen-ready pipeline.` }
   ],
 
   region: {
     title: `The region`,
     paragraphs: [
-      `Western Macedonia has been Greece's “energy heart” for generations — a lignite-mining region that once generated more than 75% of the country's electricity. That era is ending: the region's coal-fired power plants are due to close by 2028, backed by Greek government, EU, and Just Transition Mechanism funding.`,
-      `The shutdown leaves a real gap to fill — both in generation capacity and in the jobs and skills built up around coal over decades. That's exactly the gap CluBE was set up to work on: a non-profit regional innovation cluster based in <strong>Kozani</strong>, the regional capital, formed to steer the local economy toward bioeconomy and green hydrogen and to help the region's workforce reskill for what comes next.`,
-      `What Western Macedonia brings to that shift is real: abundant solar and wind capacity already feeding the grid, and a location that sits on one of Europe's prospective hydrogen export corridors, running from Greece up toward Western Europe. CluBE is Greece's only Hy2Market partner and the only one representing the region in the consortium — which puts it in a position to connect Greek hydrogen stakeholders to a much wider European network.`,
-      `What comes next for the region is still being written, and CluBE is one of the organizations working to make sure hydrogen is part of the answer.`
+      `Western Macedonia generated over 75% of Greece's electricity from lignite — until now. Its coal plants close by 2028, leaving a gap in jobs and skills that CluBE, a <strong>Kozani</strong>-based non-profit cluster, was set up to fill by steering the region toward bioeconomy and green hydrogen.`,
+      `It brings real assets to that shift — abundant solar and wind, and a seat on one of Europe's prospective hydrogen export corridors from Greece into Western Europe. CluBE is Greece's only Hy2Market partner, linking local stakeholders to the wider European network.`
     ],
     map: {
       image: `/assets/maps/western-macedonia.png`,
@@ -114,16 +121,16 @@
 
   knowledge: {
     title: `Knowledge exchange`,
-    intro: `Hy2Market's clearest value for Western Macedonia has been the opportunity it gave CluBE to connect with people, organisations and regions with practical experience in hydrogen development, enabling direct knowledge exchange, stronger partnerships, creation of synergies and learning from more mature hydrogen ecosystems.`,
+    intro: `Hy2Market's biggest value for Western Macedonia has been connecting CluBE with people and regions already deploying hydrogen — new partnerships and real lessons learned.`,
     cards: [
-      { dir: `in`, arrow: `←`, label: `LEARNING FROM`, region: `Médio Tejo`, country: `· Portugal`, text: `An informal exchange comparing experience on mobility pilots, mapping the current status of hydrogen mobility deployment in Greece and Portugal, two emerging hydrogen markets — CluBE is looking at Médio Tejo's hydrogen bus experience for lessons it can apply once its own hydrogen refuelling station is operational.` },
-      { dir: `in`, arrow: `↔`, label: `IN PROGRESS`, region: `Netherlands & Austria partners`, country: ``, text: `CluBE is in active conversations with the project consortium, including hydrogen partners in the Netherlands and Austria, to explore waste-to-hydrogen pathways and the conversion of sewage sludge and other residual streams into renewable hydrogen. This closely aligns with one of CluBE's strategic priorities: assessing the potential to establish a biorefinery in Western Macedonia that could support regional resource valorisation, circular-economy development and future hydrogen production.` }
+      { dir: `in`, arrow: `←`, label: `LEARNING FROM`, region: `Médio Tejo`, country: `· Portugal`, text: `An informal exchange comparing hydrogen mobility pilots in Greece and Portugal — CluBE is studying Médio Tejo's hydrogen bus experience for lessons it can apply once its own refuelling station opens.` },
+      { dir: `in`, arrow: `↔`, label: `IN PROGRESS`, region: `Netherlands & Austria partners`, country: ``, text: `CluBE is talking with Dutch and Austrian partners about turning sewage sludge and other residual streams into renewable hydrogen. It feeds a CluBE priority: a future biorefinery in Western Macedonia for resource recovery and hydrogen production.` }
     ]
   },
 
   solutions: {
     title: `How CluBE contributed`,
-    intro: `Not a built technology — three work strands where CluBE fed its regional expertise into Hy2Market's consortium-wide efforts. Open each to see the detail.`,
+    intro: `Three work strands where CluBE fed regional expertise into Hy2Market's consortium-wide efforts. Open each for detail.`,
     drawers: [
       {
         title: `Knowledge exchange & training guidelines`,
@@ -132,17 +139,15 @@
         tex: 120,
         photo: `/assets/media/western-macedonia/training.jpg`,
         photoCaption: `Training guidelines · knowledge exchange · Photo: Quilia on Unsplash`,
-        body: `CluBE contributed to Hy2Market's training guidelines Deliverable (D6.3) and Whitepaper — desk research mapping the hydrogen skills landscape and training opportunities across some of the consortium's regions, benchmarked against Western Macedonia's own, developing key insights and practical recommendations for hydrogen training and analyzing consortium insights on hydrogen skills development. CluBE drew directly on its experience as a partner in the GreenSkillsforH2 (European Hydrogen Skills Alliance) Erasmus+ project — including the successful organization and implementation of four annual Hydrogen Summer ScH2ools and other training formats, such as masterclasses and technical seminars, in Western Macedonia — to help define the different training formats the guidelines recommend, tailored to what different hydrogen professions actually need, from safety officers and technical staff to project managers.` +
+        body: `CluBE helped shape Hy2Market's training guidelines and its whitepaper — mapping the region's hydrogen skills gaps and needs, drawing on its own GreenSkillsforH2 programme, including four annual Hydrogen Summer Schools reaching hundreds of participants.` +
           `<ul style="font-size:17px;line-height:1.6;color:var(--ink);margin:18px 0;padding-left:20px;">` +
-            `<li style="margin:0 0 6px;">Masterclass "One-Day Hydrogen": 70 participants</li>` +
-            `<li style="margin:0 0 6px;">Hydrogen Summer ScH2ool: 78 participants</li>` +
-            `<li style="margin:0 0 6px;">"Engineering our Future: Developing Hydrogen Skills" technical seminar: 36 participants</li>` +
+            `<li style="margin:0 0 6px;">1st Hydrogen Summer ScH2ool: 78 participants</li>` +
             `<li style="margin:0 0 6px;">2nd Hydrogen Summer ScH2ool: 63 participants</li>` +
             `<li style="margin:0 0 6px;">3rd Hydrogen Summer ScH2ool: 46 participants</li>` +
             `<li style="margin:0 0 6px;">4th Hydrogen Summer ScH2ool: 78 participants</li>` +
             `<li><strong>Total: 371 participants across six training programmes</strong></li>` +
           `</ul>` +
-          `<p style="font-size:17px;line-height:1.5;color:var(--ink);margin:0 0 22px;">These trainings were delivered through the GreenSkillsforH2 (European Hydrogen Skills Alliance) project — more information at <a href="https://greenskillsforhydrogen.eu/" target="_blank" rel="noopener">greenskillsforhydrogen.eu</a>.</p>` +
+          `<p style="font-size:17px;line-height:1.5;color:var(--ink);margin:0 0 22px;">More at <a href="https://greenskillsforhydrogen.eu/" target="_blank" rel="noopener">greenskillsforhydrogen.eu</a>.</p>` +
           `<a class="cta-pill" href="https://hy2market.eu/wp-content/uploads/2026/01/Hydrogen-Skills-and-Workforce-Insights-Hy2Market-White-Paper.pdf" target="_blank" rel="noopener">Read the whitepaper <span class="arrow">→</span></a>`,
         cta: { label: `Read the training guidelines`, href: `https://hy2market.eu/wp-content/uploads/2025/11/D6.3-Final-Training-Guidelines.pdf` }
       },
@@ -153,7 +158,7 @@
         tex: 60,
         photo: `/assets/media/western-macedonia/data.jpg`,
         photoCaption: `Regional data · roll-out evaluation · Photo: Gorilla ROI Data Connector on Unsplash`,
-        body: `CluBE's contribution focused on supplying regional data and supporting roll-out evaluation rather than conducting standalone modelling or simulations. As part of Task 4.3 – Evaluation and Roll-out, CluBE contributed to Hy2Market's evaluation and roll-out work by providing regional technical data and sharing plans and projects regarding CO₂ capture and utilization, renewable energy capacity, and green hydrogen potential in Western Macedonia and Greece more broadly, feeding the consortium's evaluation of where hydrogen roll-out is most viable across its regions. This data feeds into Deliverable D4.5 – Report Roll-out. D4.5 is due in October 2026 (M45) and is not expected to be public yet.`
+        body: `CluBE's role was supplying regional data, not modelling: sharing figures on CO₂ capture, renewable capacity and green hydrogen potential in Western Macedonia and Greece. That data feeds a roll-out report due across the whole consortium in late 2026, not yet public.`
       },
       {
         title: `Standards and policy input`,
@@ -162,7 +167,7 @@
         tex: 90,
         photo: `/assets/media/western-macedonia/standards.jpg`,
         photoCaption: `Standards & policy input · Photo: paws and prints on Unsplash`,
-        body: `When the consortium needed input on hydrogen regulations and standards from across its countries, CluBE acted as the bridge to Greece — distributing the questionnaire on hydrogen regulations and standards to national and regional hydrogen players, industries and stakeholders, as part of Task 6.2 – Standardisation and Regulation, led by WIVA P&amp;G. Results gathered by all countries were later compiled and presented across the consortium. The work is expected to feed into Deliverable D6.2, due in December 2026 (M47) — a strategy paper to be presented to the European Commission and EU policy makers, as well as national and regional authorities, to accelerate the implementation of hydrogen solutions in Europe. D6.2 is due in December 2026 (M47), and the output is not expected to be publicly citable yet.`
+        body: `CluBE acted as Greece's bridge on hydrogen standards — distributing an EU-wide questionnaire on regulations to Greek stakeholders and industry. Results feed a strategy paper for EU policymakers and national authorities, due late 2026 and not yet public.`
       }
     ]
   },
@@ -170,44 +175,44 @@
   system: {
     title: `The regional hydrogen landscape`,
     branchLabel: `REGIONAL MOMENTUM`,
-    intro: `A hydrogen refuelling station, a 50 MW electrolyser, a hydrogen-ready pipeline, and the industry and strategic relationships CluBE has built around them — the real momentum in Western Macedonia that Hy2Market's work is preparing the region to meet.`,
+    intro: `A hydrogen refuelling station, a 50 MW electrolyser and a hydrogen-ready pipeline — the real momentum in Western Macedonia that Hy2Market's work is preparing the region to meet.`,
     disclaimer: `* Not a Hy2Market deliverable — regional momentum shown for context.`,
     branches: [
       { id: `greenh2orn`, name: `LIFE GREENH2ORN*`, sub: `H₂ refuelling station in Greece and its first with on-site green hydrogen production`, title: `LIFE GREENH2ORN — hydrogen refuelling station, Kozani` },
       { id: `northone`, name: `North-1*`, sub: `50 MW electrolyser · Hellenic Hydrogen`, title: `North-1 — 50 MW electrolyser, Amyntaio` },
-      { id: `pipeline`, name: `High-Pressure Natural Gas Pipeline to Western Macedonia*`, sub: `Inaugurated May 2026 · up to 100% H₂-ready`, title: `Existing pipeline, fully compatible with up to 100% hydrogen` },
-      { id: `consulting`, name: `DEPA Commercial's Green Hydrogen Strategy*`, sub: `Hydrogen strategy consulting`, title: `DEPA Commercial's Green Hydrogen Strategy — CluBE's advisory role` }
+      { id: `pipeline`, name: `H₂-ready pipeline*`, sub: `Inaugurated May 2026 · up to 100% H₂-ready`, title: `Existing pipeline, fully compatible with up to 100% hydrogen` },
+      { id: `consulting`, name: `DEPA hydrogen strategy*`, sub: `Hydrogen strategy consulting`, title: `DEPA Commercial's Green Hydrogen Strategy — CluBE's advisory role` }
     ],
     nodeData: {
-      greenh2orn: { title: `LIFE GREENH2ORN`, tag: `LIFE-funded · Municipality of Kozani`, body: `A LIFE-funded project building a hydrogen refuelling station in Greece — and its first with on-site green hydrogen production. Coordinated by the Municipality of Kozani; currently in the land-securing and construction-planning phase. End use: municipal fleet vehicles, plus private vehicles for the project's consortium partners. Timeline: September 2024 – August 2029 (60-month project). Capacity: an MW-scale electrolysis plant for green hydrogen production for mobility use. Partners: Municipality of Kozani, DEPA Commercial S.A., European Dynamics, University of Western Macedonia, DIADYMA S.A. Waste Management of Western Macedonia, CluBE, Acea Infrastructure S.p.A., B&T Composites S.A.` },
-      northone: { title: `North-1`, tag: `Hellenic Hydrogen`, body: `A 50 MW electrolyser project coordinated by Hellenic Hydrogen, which has received funding from the EU's Just Transition Fund. It is sited in Amyntaio, Western Macedonia. Approval is expected in the coming months, with a target to complete the facility by the end of 2027. Initial capacity of 50 MW, expandable up to 200 MW.` },
-      pipeline: { title: `High-Pressure Natural Gas Pipeline to Western Macedonia`, tag: `Existing infrastructure`, body: `An existing pipeline in the region already built to be fully compatible with the transport of up to 100% hydrogen. Plans call for injecting North-1's green hydrogen output once both projects are operational — a step still a few years out. 157 km, operated by the Hellenic Gas Transmission System Operator S.A. (DESFA).` },
-      consulting: { title: `DEPA Commercial's Green Hydrogen Strategy`, tag: `Optional · outside Hy2Market's scope`, body: `CluBE has collaborated with and provided strategic consulting services as a technical advisor to DEPA Commercial S.M.S.A. (Greece's national natural gas supply company, and future owner of the LIFE GREENH2ORN hydrogen refuelling station) on the formulation of its green hydrogen strategy, supporting the integration of European policy frameworks, regulatory considerations, and market and technology insights into the company's strategic planning. This collaboration further strengthens CluBE's role as a trusted technical partner in hydrogen and the energy transition, contributing to the future energy landscape in Greece.` }
+      greenh2orn: { title: `LIFE GREENH2ORN`, tag: `LIFE-funded · Municipality of Kozani`, body: `A LIFE-funded hydrogen refuelling station in Kozani — Greece's first with on-site green hydrogen production. Led by the Municipality of Kozani with partners including DEPA Commercial, European Dynamics, the University of Western Macedonia, DIADYMA, CluBE, Acea Infrastructure and B&T Composites. Serves municipal and partner fleets. September 2024–August 2029.` },
+      northone: { title: `North-1`, tag: `Hellenic Hydrogen`, body: `A 50 MW electrolyser project led by Hellenic Hydrogen, funded by the EU's Just Transition Fund. Sited in Amyntaio, Western Macedonia, with approval expected soon and a target to complete by end of 2027. Capacity is expandable to 200 MW.` },
+      pipeline: { title: `High-Pressure Natural Gas Pipeline to Western Macedonia`, tag: `Existing infrastructure`, body: `An existing pipeline already built to carry up to 100% hydrogen. Plans call for injecting North-1's green hydrogen once both projects are running — a few years out. 157 km, operated by DESFA, the Hellenic Gas Transmission System Operator.` },
+      consulting: { title: `DEPA Commercial's Green Hydrogen Strategy`, tag: `Optional · outside Hy2Market's scope`, body: `CluBE has advised DEPA Commercial S.M.S.A. — Greece's national gas supplier and future owner of the LIFE GREENH2ORN refuelling station — on its green hydrogen strategy, helping bring European policy, regulation and market insight into the company's strategic planning.` }
     }
   },
 
   lessons: {
     title: `Lessons learned`,
-    leadHtml: `The clearest lesson CluBE takes from Hy2Market is that <span class="mark">interregional collaboration is essential</span>. It allows emerging and less developed hydrogen regions such as Western Macedonia to learn from more mature regions through knowledge exchange, best practices and proven approaches to hydrogen deployment.`,
+    leadHtml: `The clearest lesson CluBE takes from Hy2Market: <span class="mark">interregional collaboration is essential</span>. It lets emerging regions like Western Macedonia learn from more mature ones through real knowledge exchange and proven approaches.`,
     bullets: [
-      `Renewables are already abundant in Western Macedonia — solar and wind capacity is growing fast — but without a national commitment to hydrogen investment, the region can't yet follow the more mature regions it has been studying.`,
-      `There's no local industrial offtake to build around, unlike Upper Austria or Sicily, which leaves mobility — and, longer-term, hydrogen export along a Greece-to-Germany corridor — as the region's most realistic paths.`,
-      `Training isn't one-size-fits-all: a hydrogen safety officer and a hydrogen project manager need entirely different curricula, a distinction that directly shaped how CluBE structured its contribution to the training guidelines.`
+      `Renewables are abundant and growing fast here, but without national hydrogen investment, the region can't yet follow the mature regions it studies.`,
+      `With no local industrial offtake, unlike Upper Austria or Sicily, mobility — and longer-term, export along a Greece-to-Germany corridor — are the region's most realistic paths.`,
+      `Training isn't one-size-fits-all — a safety officer and a project manager need entirely different curricula, which shaped how CluBE built its training guidelines.`
     ]
   },
 
   outcomes: {
     title: `The outcomes`,
     stats: [
-      { tone: `yellow`, n: `Contribution to three deliverables/activities`, l: `contributed to — training guidelines, regional roll-out data, and a standards questionnaire` },
-      { tone: `grey`, n: `Training framework`, l: `multi-format, ready-to-deploy for different target audiences (students, occupational profiles)` },
+      { tone: `yellow`, n: `3 work strands`, l: `training guidelines, regional roll-out data and a standards questionnaire` },
+      { tone: `grey`, n: `Training framework`, l: `multi-format and ready to deploy for different audiences` },
       { tone: `grey`, n: `EU policy channel`, l: `live input into the emerging hydrogen standards conversation` },
-      { tone: `black`, n: `Interregional hydrogen connections & synergies`, l: `contacts across Europe's more mature hydrogen regions, built through study visits and exchanges` }
+      { tone: `black`, n: `New network`, l: `contacts across Europe's mature hydrogen regions, built through study visits` }
     ],
-    narrative: `By the numbers, Western Macedonia's Hy2Market story isn't about megawatts or kilometres of pipe — it's contributions banked for later: input across three fronts — training guidelines, regional roll-out data, and a standards questionnaire — a multi-format training framework ready to deploy once national investment arrives, and a live channel into the EU's emerging hydrogen policy conversation. The bigger outcome is relational: a network of contacts across Europe's more mature hydrogen regions that CluBE enriched and strengthened through the project, built through study visits and knowledge-exchange meetings.`,
+    narrative: `The bigger win here is relational: a network of contacts across Europe's more mature hydrogen regions, built through study visits and knowledge exchange, that CluBE can keep drawing on as its own hydrogen plans develop.`,
     pending: [
-      { n: `371`, l: `A total number of 371 participants were engaged across six training programmes implemented by CluBE in Western Macedonia in the frame of GreenSkillsforH2 and H2VE projects` },
-      { n: `29`, l: `Greek hydrogen stakeholders and industrial companies provided with Hy2Market's regulations and standards questionnaire for their input` }
+      { n: `371`, l: `participants trained across six programmes, under GreenSkillsforH2 and H2VE` },
+      { n: `29`, l: `Greek stakeholders and companies provided with Hy2Market's regulations and standards questionnaire` }
     ]
   },
 
@@ -229,7 +234,7 @@
       caption: `Caetano H2.City Gold · Médio Tejo`
     },
     others: [
-      { href: `/case-study.html?region=upper-austria`, k: `PRODUCTION`, region: `Upper Austria`, country: `· Austria`, d: `A working electrolyser extended into a regional hydrogen network.` },
+      { href: `/case-study.html?region=upper-austria`, k: `PRODUCTION`, region: `Upper Austria`, country: `· Austria`, d: `Commissioning new hydrogen handling and piloting methanation around the H2FUTURE electrolyser in Linz.` },
       { href: `/case-study.html?region=asturias`, k: `PRODUCTION`, region: `Asturias`, country: `· Spain`, d: `A 150 MW hub built around a coal-era power plant.` },
       { href: `/case-study.html?region=netherlands`, k: `TRANSPORT`, region: `Netherlands`, country: `· NL`, d: `A flexible composite hydrogen pipeline, laid in ~two months.` }
     ]

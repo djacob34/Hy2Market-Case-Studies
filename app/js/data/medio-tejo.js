@@ -226,13 +226,13 @@
       featured: {
         href: '/case-study.html?region=upper-austria',
         kicker: 'CASE STUDY · PRODUCTION',
-        title: 'Upper Austria: from steel to a green hydrogen value chain',
-        lead: 'See how Hy2Market extended a working 6 MW electrolyser in Linz into a complete value chain.',
+        title: 'Upper Austria: adding value at the source at voestalpine Linz',
+        lead: 'See how Hy2Market partners build on the H2FUTURE electrolyser in Linz — commissioning and testing new compression, purification and trailer-filling equipment, and piloting methanation under real industrial conditions.',
         chips: ['Austria', 'Electrolysis', 'Steel'],
         caption: 'voestalpine steel plant · Linz · H2FUTURE electrolyser'
       },
       others: [
-        { href: '/case-study.html?region=upper-austria', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'A working electrolyser extended into a regional hydrogen network.' },
+        { href: '/case-study.html?region=upper-austria', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'Commissioning new hydrogen handling and piloting methanation around the H2FUTURE electrolyser in Linz.' },
         { href: '/case-study.html?region=netherlands', k: 'TRANSPORT', region: 'Deventer', country: '· Netherlands', d: 'A flexible composite hydrogen pipeline, laid in ~two months.' }
       ]
     },

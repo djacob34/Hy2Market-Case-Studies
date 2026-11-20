@@ -171,8 +171,7 @@ function renderCaseStudyHtml(regionSlug, baseUrl) {
   }
 
   // Draft/review pages (identified by the same `data.banner` flag that
-  // renders the "REVISED DRAFT"-style banner on the page itself, e.g.
-  // upper-austria-revised) stay fully server-rendered and reachable — a
+  // renders the "REVISED DRAFT"-style banner on the page itself) stay fully server-rendered and reachable — a
   // reviewer's link has to keep working — but are marked noindex so they
   // aren't treated as a public, canonical case study alongside the real
   // regions. Driven by the same flag the content already uses, not a
@@ -224,6 +223,12 @@ app.get(['/', '/index.html'], (req, res) => {
 // (via renderCaseStudyHtml) and sends the complete HTML in the response,
 // exactly like the legacy route always has — nothing bot-specific, no
 // separate code path for crawlers vs. browsers.
+// The Upper Austria partner-review draft (upper-austria-revised) became the
+// published Upper Austria page; old reviewer links redirect there.
+app.get(['/case-studies/upper-austria-revised/', '/case-studies/upper-austria-revised'], (req, res) => {
+  res.redirect(301, '/case-studies/upper-austria/');
+});
+
 app.get('/case-studies/:slug/', (req, res) => {
   res.type('html').send(renderCaseStudyHtml(req.params.slug, baseUrlFor(req)));
 });
