@@ -232,7 +232,7 @@
         caption: 'Médio Tejo · Portugal · fuel-cell mobility'
       },
       others: [
-        { href: '/case-studies/upper-austria/', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'An end-to-end green-hydrogen value chain built around a working electrolyser.' },
+        { href: '/case-studies/upper-austria/', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'Commissioning new hydrogen handling and piloting methanation around the H2FUTURE electrolyser in Linz.' },
         { href: '/case-studies/asturias/', k: 'PRODUCTION', region: 'Asturias', country: '· Spain', d: 'Scaling green hydrogen in Spain’s industrial north.' },
         { href: '/case-studies/western-macedonia/', k: 'MOBILITY', region: 'Western Macedonia', country: '· Greece', d: 'A coal region turning to hydrogen for clean transport.' }
       ]

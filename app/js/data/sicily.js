@@ -279,8 +279,8 @@
       featured: {
         href: '/case-studies/upper-austria/',
         kicker: 'NEXT CASE STUDY · PRODUCTION',
-        title: 'Upper Austria: an end-to-end green-hydrogen value chain',
-        lead: 'Sicily’s sister production region. See how Upper Austria builds a complete green-hydrogen value chain around a working industrial electrolyser — the production experience Hy2Market’s industrial regions share with one another.',
+        title: 'Upper Austria: adding value at the source at voestalpine Linz',
+        lead: 'Sicily’s sister production region. See how Upper Austria’s partners build on a working industrial electrolyser — commissioning new hydrogen handling and piloting methanation — the production experience Hy2Market’s industrial regions share with one another.',
         chips: ['Austria', 'Production', 'Electrolysis'],
         caption: 'Upper Austria · Austria · green-hydrogen production'
       },

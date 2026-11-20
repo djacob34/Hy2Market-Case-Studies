@@ -213,9 +213,9 @@
     featured: {
       href: `/case-study.html?region=upper-austria`,
       kicker: `PRODUCTION · UPPER AUSTRIA`,
-      title: `From Steel to Green`,
-      lead: `How Upper Austria built an end-to-end hydrogen value chain around Europe's largest industrial green-hydrogen pilot.`,
-      chips: [`Production`, `Electrolysis`, `Storage`],
+      title: `Adding Value at the Source`,
+      lead: `See how Hy2Market partners build on the H2FUTURE electrolyser in Linz — commissioning and testing new compression, purification and trailer-filling equipment, and piloting methanation under real industrial conditions.`,
+      chips: [`Production`, `Electrolysis`, `Methanation`],
       caption: `voestalpine · Linz`
     },
     others: [

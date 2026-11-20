@@ -228,7 +228,7 @@
       caption: `Caetano H2.City Gold · Médio Tejo`
     },
     others: [
-      { href: `/case-study.html?region=upper-austria`, k: `PRODUCTION`, region: `Upper Austria`, country: `· Austria`, d: `A working electrolyser extended into a regional hydrogen network.` },
+      { href: `/case-study.html?region=upper-austria`, k: `PRODUCTION`, region: `Upper Austria`, country: `· Austria`, d: `Commissioning new hydrogen handling and piloting methanation around the H2FUTURE electrolyser in Linz.` },
       { href: `/case-study.html?region=asturias`, k: `PRODUCTION`, region: `Asturias`, country: `· Spain`, d: `A 150 MW hub built around a coal-era power plant.` },
       { href: `/case-study.html?region=netherlands`, k: `TRANSPORT`, region: `Netherlands`, country: `· NL`, d: `A flexible composite hydrogen pipeline, laid in ~two months.` }
     ]

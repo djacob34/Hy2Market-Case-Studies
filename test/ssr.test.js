@@ -167,3 +167,11 @@ test('a case-study response advertises a public, cacheable Cache-Control', async
   assert.match(cc, /public/);
   assert.doesNotMatch(cc, /no-store|private/);
 });
+
+test('retired Upper Austria draft slug 301-redirects to the published page', async () => {
+  for (const path of ['/case-studies/upper-austria-revised/', '/case-studies/upper-austria-revised']) {
+    const res = await fetch(baseUrl + path, { redirect: 'manual' });
+    assert.equal(res.status, 301, path);
+    assert.equal(res.headers.get('location'), '/case-studies/upper-austria/', path);
+  }
+});
