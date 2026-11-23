@@ -175,3 +175,17 @@ test('retired Upper Austria draft slug 301-redirects to the published page', asy
     assert.equal(res.headers.get('location'), '/case-studies/upper-austria/', path);
   }
 });
+
+test('local CSS/JS links carry a content-hash ?v= so a new deploy never pairs new HTML with cached old CSS', async () => {
+  for (const url of ['/', '/case-studies/upper-austria/']) {
+    const html = await (await fetch(baseUrl + url)).text();
+    const links = html.match(/(?:href|src)="\/(?:css|js)\/[^"]+"/g) || [];
+    assert.ok(links.length > 0, url + ' has local CSS/JS links');
+    for (const l of links) assert.match(l, /\?v=[0-9a-f]{10}"$/, url + ': ' + l + ' is versioned');
+    const css = html.match(/href="(\/css\/styles\.css\?v=[0-9a-f]+)"/);
+    assert.ok(css, url + ' links styles.css');
+    const res = await fetch(baseUrl + css[1]);
+    assert.equal(res.status, 200);
+    assert.match(res.headers.get('content-type') || '', /text\/css/);
+  }
+});
