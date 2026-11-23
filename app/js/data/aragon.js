@@ -106,7 +106,7 @@
           subtitle: 'A Toyota Mirai adapted for professional taxi service.',
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
           photo: '/assets/media/aragon/vehicle.jpg',
-          photoCaption: 'Toyota Mirai 2nd generation · fuel-cell electric vehicle · Photo: Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons',
+          photoCaption: 'The Huesca hydrogen taxi — a second-generation Toyota Mirai adapted for taxi service · Photo: Fundación Hidrógeno Aragón',
           body: 'The pilot uses a <strong>second-generation Toyota Mirai</strong> fuel-cell electric vehicle adapted for taxi service. Hydrogen stored on board is converted into electricity through a fuel cell, powering the vehicle with no tailpipe emissions other than water vapour. Its combination of long driving range and fast refuelling makes it particularly suitable for intensive daily operation.',
           stats: [
             { n: 'Up to 650 km', l: 'zero-emission driving range' },
@@ -129,8 +129,8 @@
           title: 'The refuelling',
           subtitle: 'Renewable hydrogen produced and dispensed on site.',
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
-          photo: '/assets/media/aragon/refuelling.png',
-          photoCaption: 'Walqa Technology Park, home to FHA’s hydrogen production and 700 bar refuelling station · Image: Gobierno de Aragón, CC BY 4.0, via Wikimedia Commons',
+          photo: '/assets/media/aragon/refuelling.jpg',
+          photoCaption: 'FHA’s hydrogen refuelling station (HRS) at Walqa Technology Park · Photo: Fundación Hidrógeno Aragón',
           body: 'The taxi is refuelled at Fundación Hidrógeno Aragón’s facilities in <strong>Walqa Technology Park</strong>, where renewable hydrogen is produced on site using solar electricity and an alkaline electrolyser. The station can dispense hydrogen at up to 700 bar, allowing the vehicle to be refuelled in less than five minutes, while a second 350-bar station provides additional operational flexibility — connecting production, refuelling and mobility within a single location.',
           stats: [
             { n: '700 bar', l: 'refuelling pressure' },
