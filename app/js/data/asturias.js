@@ -11,7 +11,7 @@
 
   hero: {
     eyebrow: `PRODUCTION · ASTURIAS`,
-    titleHtml: `Asturias: A Hydrogen Hub Built Around the <span class="hl">Industry That Will Use It</span>`,
+    titleHtml: `Asturias plans a 150 MW <span class="hl">hydrogen hub</span> for industry at Aboño`,
     lead: `Much of the hydrogen conversation stops at the electrolyser. Asturias goes further — pairing a planned 150 MW production hub with the industry that will consume its hydrogen, on the site of the Aboño power plant: a former coal plant whose Unit 2 now runs on natural gas, through burners built to take hydrogen too. It is a full-stack answer, built on the bones of the region's fossil-fuel past.`,
     tags: [`Green hydrogen`, `Industrial decarbonisation`, `Electrolysis`, `Power-plant retrofit`, `Just transition`, `Production`],
     mediaCaption: `Aboño thermal power plant, Unit 2 chimney · Gijón · Asturias`,

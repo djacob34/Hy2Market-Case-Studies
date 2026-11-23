@@ -674,7 +674,12 @@
     var n = d.next;
     var f = n.featured;
     var chips = f.chips.map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join('');
-    var fMedia = heroMedia(registry[slugFromHref(f.href)]);
+    var fData = registry[slugFromHref(f.href)];
+    var fMedia = heroMedia(fData);
+    // Featured title = the linked page's own hero title (one source of truth);
+    // the data file's f.title is only a fallback for an unknown region.
+    var fTitle = (fData && fData.hero && fData.hero.titleHtml)
+      ? String(fData.hero.titleHtml).replace(/<[^>]+>/g, '') : f.title;
     var others = n.others.map(function (o) {
       var oMedia = heroMedia(registry[slugFromHref(o.href)]);
       return '<a class="region-card" href="' + esc(regionHref(o.href)) + '">' +
@@ -696,7 +701,7 @@
         '<a class="featured" href="' + esc(regionHref(f.href)) + '">' +
           '<div class="featured-text">' +
             '<div class="featured-kicker"><span class="d"></span>' + esc(f.kicker) + '</div>' +
-            '<div><h2 class="featured-title">' + esc(f.title) + '</h2>' +
+            '<div><h2 class="featured-title">' + esc(fTitle) + '</h2>' +
               '<p class="featured-lead">' + esc(f.lead) + '</p></div>' +
             '<div class="featured-foot"><div class="chip-row">' + chips + '</div>' +
               '<span class="read-cta">Read case study <span class="circ">→</span></span></div>' +

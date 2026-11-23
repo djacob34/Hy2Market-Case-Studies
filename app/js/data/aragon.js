@@ -21,7 +21,7 @@
     hero: {
       eyebrow: 'MOBILITY · ARAGÓN',
       // {hl} marks the yellow-underlined word
-      titleHtml: 'From Pyrenean Water to Spain’s First Hydrogen <span class="hl">Taxi</span>',
+      titleHtml: 'Aragón puts Spain’s first public <span class="hl">hydrogen taxi</span> into service in Huesca',
       lead: 'For three months, Fundación Hidrógeno Aragón will power Spain’s first hydrogen taxi with renewable hydrogen produced from Pyrenean water — demonstrating how hydrogen can help decarbonise light public transport while bringing the technology closer to taxi operators and citizens.',
       tags: ['Hydrogen mobility', 'Public transport', 'First public H₂ taxi in Spain', 'H₂ fuel-cell taxi', 'Decarbonisation'],
       mediaCaption: 'Toyota Mirai fuel-cell taxi · Huesca · Walqa Technology Park',
