@@ -51,9 +51,9 @@
   transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.08);
 }
 .cs-card-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--yellow); z-index: 2; }
-/* Hero cover of the case study, full-bleed above the card text. */
+/* Hero cover of the case study, full-bleed above the card text, 16:9. */
 .cs-card-media {
-  display: block; margin: -30px -28px 22px; height: 184px;
+  display: block; margin: -30px -28px 22px; aspect-ratio: 16 / 9;
   background-size: cover; background-position: center; background-color: #15171b;
 }
 .cs-card-media--empty { background: linear-gradient(135deg, #2c3138, #15171b); }
