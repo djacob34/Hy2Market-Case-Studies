@@ -34,7 +34,7 @@
     hero: {
       eyebrow: 'PRODUCTION · UPPER AUSTRIA',
       // {hl} marks the yellow-underlined word
-      titleHtml: 'Upper Austria tests <span class="hl">hydrogen</span> handling and methanation at voestalpine Linz',
+      titleHtml: 'Upper Austria puts <span class="hl">green hydrogen</span> to work at voestalpine Linz',
       lead: 'At the voestalpine site in Linz, a 6 MW PEM electrolyser has produced green hydrogen since 2019. Hy2Market builds on that established industrial base: eight Austrian partners commission and test new hydrogen compression, purification and trailer-filling equipment, run an industrial methanation pilot, and add modelling, use-case analysis, regulation and knowledge exchange around a live steel site.',
       tags: ['Green hydrogen', 'Industrial integration', 'Methanation', 'Modelling', 'Knowledge exchange', 'Production'],
       // Cover animation of the voestalpine Linz site (muted, autoplay, looped)
