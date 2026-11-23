@@ -60,7 +60,7 @@
 
   hero: {
     eyebrow: `KNOWLEDGE EXCHANGE · WESTERN MACEDONIA`,
-    titleHtml: `Watch, Learn, Prepare: Western Macedonia's <span class="hl">Hydrogen</span> Readiness`,
+    titleHtml: `Western Macedonia builds the skills for its <span class="hl">hydrogen</span> future`,
     lead: `Western Macedonia is moving beyond lignite, and building the foundations for a hydrogen economy as it goes. Its infrastructure is still emerging, but training, standards work, and study visits to hydrogen frontrunners across Europe are turning cooperation into real regional capacity.`,
     tags: [`Just Transition`, `Knowledge Exchange`, `Training & Reskilling`, `Standards & Policy`, `Replication`],
     // three photos CluBE supplied for the region's energy landscape, auto-rotating

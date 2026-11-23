@@ -16,7 +16,7 @@
 
     hero: {
       eyebrow: 'MOBILITY · MÉDIO TEJO',
-      titleHtml: 'On the Road to Proof: How Médio Tejo Deployed a <span class="hl">Hydrogen</span> Bus Into Everyday Public Service',
+      titleHtml: 'A <span class="hl">hydrogen bus</span> proves itself on Médio Tejo’s public routes',
       lead: 'While much of the hydrogen conversation is about plants and pipelines, Médio Tejo deployed the technology somewhere people actually experience it — on a public bus, running real routes, carrying real passengers, across 11 municipalities, for nine months straight.',
       tags: ['Hydrogen mobility', 'Public transport', 'Fuel-cell bus', 'Decarbonisation', 'Rural mobility', 'Mobility'],
       mediaCaption: 'Caetano H2.City Gold hydrogen bus · Médio Tejo · urban route, Abrantes, Tomar',

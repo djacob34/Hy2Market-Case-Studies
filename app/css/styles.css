@@ -219,7 +219,9 @@ a:focus-visible, button:focus-visible {
   transform: translateY(0.52em);
 }
 .breadcrumb { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 500; color: var(--muted-2); }
-.breadcrumb a { color: var(--muted-2); text-decoration: none; transition: color .2s ease; }
+/* Breadcrumb items underlined in yellow (the separator is not). */
+.breadcrumb a, .breadcrumb .here { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.breadcrumb a { color: var(--muted-2); transition: color .2s ease; }
 .breadcrumb a:hover { color: #000; }
 .breadcrumb .here { color: #000; font-weight: 600; }
 
@@ -230,7 +232,7 @@ a:focus-visible, button:focus-visible {
   position: relative; z-index: 5;
   display: flex; align-items: center;
   padding: 24px var(--gutter) 11px;
-  background: transparent; border-bottom: 2px solid var(--yellow);
+  background: transparent;
 }
 .sub-nav .breadcrumb .back-ico { display: inline-flex; margin-right: 2px; }
 

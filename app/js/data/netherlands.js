@@ -12,7 +12,7 @@
 
   hero: {
     eyebrow: `TRANSPORT · NETHERLANDS`,
-    titleHtml: `Off the Spool, Under the Rails: Flexible <span class="hl">Hydrogen</span> Pipelines for the Netherlands`,
+    titleHtml: `The Netherlands lays flexible pipe to move <span class="hl">hydrogen</span> where it’s needed`,
     lead: `Everyone argues about how to make green hydrogen — but someone has to move the molecule. In the Netherlands, SoluForce's non-metallic flexible pipe is doing exactly that: a distribution connector laid with Firan in Deventer in about two months, and a hub line planned in Delfzijl that will cross beneath a canal and a national railway.`,
     tags: [`Hydrogen transport`, `Reinforced thermoplastic pipe`, `RTP`, `First-of-its-kind crossing`, `Distribution grid`, `Transport`],
     mediaCaption: `SoluForce reinforced thermoplastic pipe (RTP) · Delfzijl canal & rail crossing · Deventer grid`,
