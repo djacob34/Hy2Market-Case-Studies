@@ -57,23 +57,20 @@
   var BRAND =
     '<span class="brand-lockup">Hy<span class="two">2</span>Market</span>';
 
-  // Primary navigation, mirroring hy2market.eu: centred Hy2Market logo with
-  // the same menu split on either side, linking to the live main-site pages.
-  // Kept identical to the landing page's nav (index.html) so the whole
-  // microsite shares one nav bar with the main site.
+  // Primary header — a copy of hy2market.eu's header (same logo SVG, menu
+  // split, sizes and breakpoints; see .site-header in styles.css). Identical
+  // markup lives in index.html — keep the two in sync. "Case Studies" is
+  // this microsite, so it is the current item.
   var SITE_NAV =
-    '<nav class="site-nav" aria-label="Primary">' +
-      '<div class="site-nav-group site-nav-left">' +
-        '<a href="https://hy2market.eu/about-us/">About Us</a>' +
-        '<a href="https://hy2market.eu/partners/">Partners</a>' +
-        '<a href="https://hy2market.eu/news/">News</a>' +
-      '</div>' +
-      '<a class="brand-lockup site-nav-logo" href="https://hy2market.eu/" aria-label="Hy2Market — hy2market.eu">Hy<span class="two">2</span>Market</a>' +
-      '<div class="site-nav-group site-nav-right">' +
-        '<a href="https://hy2market.eu/results/">Results</a>' +
-        '<a href="https://hy2market.eu/contact/">Contact</a>' +
-      '</div>' +
-    '</nav>';
+    '<div class="site-header">' +
+    '<div class="site-header-inner">' +
+    '<a class="site-logo" href="https://hy2market.eu/"><img src="/assets/brand/hy2market-logo.svg" alt="Hy2Market" width="300" height="96"></a>' +
+    '<button type="button" class="site-burger" aria-label="Menu" aria-expanded="false" aria-controls="site-menu-mobile" onclick="var o=this.parentNode.classList.toggle(\'is-open\');this.setAttribute(\'aria-expanded\',o)"><svg viewBox="0 0 23 15" width="23" height="15" aria-hidden="true"><rect width="23" height="3"/><rect y="6" width="23" height="3"/><rect y="12" width="23" height="3"/></svg></button>' +
+    '<nav class="site-menu site-menu-mobile" id="site-menu-mobile" aria-label="Primary"><ul><li class="menu-item"><a href="https://hy2market.eu/about-us/">About Us</a></li><li class="menu-item"><a href="https://hy2market.eu/partners/">Partners</a></li><li class="menu-item"><a href="https://hy2market.eu/news/">News</a></li><li class="menu-item current-menu-item"><a href="/" aria-current="page">Case Studies</a></li><li class="menu-item"><a href="https://hy2market.eu/results/">Results</a></li><li class="menu-item"><a href="https://hy2market.eu/contact/">Contact</a></li></ul></nav>' +
+    '<nav class="site-menu site-menu-left" aria-label="Primary"><ul><li class="menu-item"><a href="https://hy2market.eu/about-us/">About Us</a></li><li class="menu-item"><a href="https://hy2market.eu/partners/">Partners</a></li><li class="menu-item"><a href="https://hy2market.eu/news/">News</a></li></ul></nav>' +
+    '<nav class="site-menu site-menu-right" aria-label="Primary (continued)"><ul><li class="menu-item current-menu-item"><a href="/" aria-current="page">Case Studies</a></li><li class="menu-item"><a href="https://hy2market.eu/results/">Results</a></li><li class="menu-item"><a href="https://hy2market.eu/contact/">Contact</a></li></ul></nav>' +
+    '</div>' +
+    '</div>';
 
   function chevron(dir) {
     var d = dir === 'left' ? 'M15 18l-6-6 6-6' : 'M9 18l6-6-6-6';
