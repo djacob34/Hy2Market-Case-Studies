@@ -66,7 +66,8 @@
     // three photos CluBE supplied for the region's energy landscape, auto-rotating
     // in place of a single hero shot — see hero() / .hero-slideshow in template.js.
     slideshow: [
-      { src: `/assets/hero/western-macedonia-lignite.jpg`, caption: `Lignite mines and power plants, Western Macedonia` },
+      { src: `/assets/hero/western-macedonia-lignite-mine.jpg`, caption: `Lignite mine, Western Macedonia` },
+      { src: `/assets/hero/western-macedonia-lignite-power-plant.jpg`, caption: `Lignite power plant, Western Macedonia` },
       { src: `/assets/hero/western-macedonia-pv-park.jpg`, caption: `PV Park, Kozani, Western Macedonia · toposol.gr` },
       { src: `/assets/hero/western-macedonia-wind-farm.jpg`, caption: `Askio onshore wind farm complex, Kozani, Western Macedonia · Iberdrola` }
     ]
