@@ -60,7 +60,8 @@
   // Primary header — a copy of hy2market.eu's header (same logo SVG, menu
   // split, sizes and breakpoints; see .site-header in styles.css). Identical
   // markup lives in index.html — keep the two in sync. "Case Studies" is
-  // this microsite, so it is the current item.
+  // this microsite, so it is the current item. The banner photo under the
+  // header appears only on the case-study index (index.html), not here.
   var SITE_NAV =
     '<div class="site-header">' +
     '<div class="site-header-inner">' +
@@ -70,7 +71,6 @@
     '<nav class="site-menu site-menu-left" aria-label="Primary"><ul><li class="menu-item"><a href="https://hy2market.eu/about-us/">About Us</a></li><li class="menu-item"><a href="https://hy2market.eu/partners/">Partners</a></li><li class="menu-item"><a href="https://hy2market.eu/news/">News</a></li></ul></nav>' +
     '<nav class="site-menu site-menu-right" aria-label="Primary (continued)"><ul><li class="menu-item current-menu-item"><a href="/" aria-current="page">Case Studies</a></li><li class="menu-item"><a href="https://hy2market.eu/results/">Results</a></li><li class="menu-item"><a href="https://hy2market.eu/contact/">Contact</a></li></ul></nav>' +
     '</div>' +
-    '<div class="site-banner"><img class="site-banner-img" src="/assets/brand/header-banner.jpg" alt="" width="1280" height="400"></div>' +
     '</div>';
 
   function chevron(dir) {

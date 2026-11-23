@@ -151,7 +151,7 @@ a:focus-visible, button:focus-visible {
 .site-menu-left { float: left; }
 .site-menu-right { float: right; }
 .site-menu-mobile, .site-burger { display: none; }
-/* Banner photo under the header — live inner pages' generic_header.jpg
+/* Banner photo under the header (case-study index only) — live inner pages' generic_header.jpg
    (1280x400): full column width, inline like the live <img> (so the line
    box adds the same ~10px below it), 48px gap to the content. It flows
    after the floated menus, so where the live menu wraps (~1000px) it is
