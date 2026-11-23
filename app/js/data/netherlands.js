@@ -17,7 +17,7 @@
     tags: [`Hydrogen transport`, `Reinforced thermoplastic pipe`, `RTP`, `First-of-its-kind crossing`, `Distribution grid`, `Transport`],
     mediaCaption: `SoluForce reinforced thermoplastic pipe (RTP) · Delfzijl canal & rail crossing · Deventer grid`,
     slideshow: [
-      { src: `/assets/media/netherlands/hero.jpg`, caption: `The Deventer hydrogen connector under construction · Photo: Jacques Tillmanns / Foto Focus` }
+      { src: `/assets/media/netherlands/hero.jpg`, caption: `Pulling the SoluForce reinforced thermoplastic pipe into the ground · Photo: SoluForce` }
     ],
     stats: [
       { num: `Canal + rail`, label: `first-of-its-kind dual crossing planned for the Delfzijl hub line` },
@@ -97,7 +97,7 @@
         thumbGrad: `linear-gradient(135deg,#2c3138,#15171b)`,
         tex: 120,
         photo: `/assets/media/netherlands/pipe.jpg`,
-        photoCaption: `SoluForce reinforced thermoplastic pipe · Photo: Hy2Market`,
+        photoCaption: `SoluForce® H2T — the non-metallic hydrogen pipe shown in cross-section · Image: SoluForce`,
         body: `SoluForce's reinforced thermoplastic pipe (RTP) is entirely non-metallic — hydrogen never touches metal, so hydrogen embrittlement isn't a design consideration, and the system is maintenance-free. It is certified for hydrogen to a maximum operating pressure of 52 bar (up to 65 °C), in 4″ and 6″ diameters, with a polymer core wrapped in high-strength reinforcement, and is hydrogen-tight (permeation-free).`,
         stats: [
           { n: `52 bar`, l: `certified hydrogen MOP` },
@@ -110,7 +110,7 @@
         thumbGrad: `linear-gradient(135deg,#3a3320,#17140b)`,
         tex: 120,
         photo: `/assets/media/netherlands/spool-still.jpg`,
-        photoCaption: `A 400 m spool of SoluForce pipe ready to be pulled beneath the canal and railway at Delfzijl · Photo: Hy2Market`,
+        photoCaption: `Reinforced thermoplastic pipe delivered on spools for weld-free installation · Photo: SoluForce`,
         body: `The pipe is delivered on 400-metre spools and installed in long continuous sections joined by electrofusion, not welding — smaller crews, fewer joints, and lower groundwork and welding costs. Because it is flexible, it can be pulled through a pre-made bore. In Delfzijl, the line is designed to pass beneath the Oosterhornkanaal and a ProRail railway inside a protective casing, with the drilling method agreed with the owners of both assets.`,
         stats: [
           { n: `First-of-its-kind`, l: `canal and rail crossing · Delfzijl` },
