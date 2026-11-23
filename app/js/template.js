@@ -70,6 +70,7 @@
     '<nav class="site-menu site-menu-left" aria-label="Primary"><ul><li class="menu-item"><a href="https://hy2market.eu/about-us/">About Us</a></li><li class="menu-item"><a href="https://hy2market.eu/partners/">Partners</a></li><li class="menu-item"><a href="https://hy2market.eu/news/">News</a></li></ul></nav>' +
     '<nav class="site-menu site-menu-right" aria-label="Primary (continued)"><ul><li class="menu-item current-menu-item"><a href="/" aria-current="page">Case Studies</a></li><li class="menu-item"><a href="https://hy2market.eu/results/">Results</a></li><li class="menu-item"><a href="https://hy2market.eu/contact/">Contact</a></li></ul></nav>' +
     '</div>' +
+    '<div class="site-banner"><img class="site-banner-img" src="/assets/brand/header-banner.jpg" alt="" width="1280" height="400"></div>' +
     '</div>';
 
   function chevron(dir) {
@@ -111,7 +112,6 @@
     return '' +
     '<header class="hero">' +
       ARC_TL +
-      SITE_NAV +
       '<div class="sub-nav">' +
         '<nav class="breadcrumb" aria-label="Breadcrumb">' +
           '<a href="' + esc(bc.href) + '"><span class="back-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>' + esc(bc.label) + '</a><span>/</span>' +
@@ -774,8 +774,12 @@
       var render = SECTION_RENDERERS[key];
       return render ? render(d) : '';
     }).join('');
+    // Header, then all page content in the same 1280px column as the header
+    // and footer (.site-content), as on hy2market.eu.
     return '' +
       (d.banner ? reviewBanner(d) : '') +
+      SITE_NAV +
+      '<div class="site-content">' +
       hero(d) +
       partners(d) +
       '<div class="body-wrap"><div class="body-grid">' +
@@ -787,6 +791,7 @@
       '</div></div>' +
       (d.quotes ? quotes(d) : '') +
       (d.next ? next(d, registry) : '') +
+      '</div>' +
       SITE_FOOTER;
   }
 

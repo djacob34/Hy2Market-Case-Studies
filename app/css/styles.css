@@ -136,7 +136,7 @@ a:focus-visible, button:focus-visible {
   font-family: 'Inter', sans-serif; font-weight: 300; line-height: 32px; color: #000;
 }
 .site-header-inner { position: relative; height: 150px; }
-.site-logo { position: absolute; top: 70px; left: 0; right: 0; width: 300px; margin: 0 auto; display: block; }
+.site-logo { position: absolute; top: 70px; left: 0; right: 0; width: 300px; margin: 0 auto; display: block; z-index: 2; } /* the yellow '2' sits over the banner, as on the live site */
 .site-logo img { display: block; width: 100%; height: auto; }
 .site-menu {
   position: relative; width: calc(50% - 200px); max-width: 400px; margin-top: 90px;
@@ -144,13 +144,35 @@ a:focus-visible, button:focus-visible {
 }
 .site-menu ul { list-style: none; margin: 0; padding: 0; width: 100%; display: flex; justify-content: space-between; }
 .site-menu .menu-item { display: block; padding: 12px; }
-.site-menu .menu-item a { color: #000; text-decoration: none; font-weight: 400; }
+.site-menu .menu-item a { color: #000; text-decoration: none; font-weight: 500; } /* one step heavier than live (400) */
 .site-menu .menu-item a:hover { color: #777; }
 .site-menu .current-menu-item { display: inline; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .site-menu .current-menu-item a { font-weight: 600; } /* live asks for 700 but only loads Inter up to 600 */
 .site-menu-left { float: left; }
 .site-menu-right { float: right; }
 .site-menu-mobile, .site-burger { display: none; }
+/* Banner photo under the header — live inner pages' generic_header.jpg
+   (1280x400): full column width, inline like the live <img> (so the line
+   box adds the same ~10px below it), 48px gap to the content. It flows
+   after the floated menus, so where the live menu wraps (~1000px) it is
+   pushed down exactly as on the live site. */
+.site-banner { position: relative; width: 100%; overflow: hidden; margin-bottom: 48px; }
+.site-banner-img { display: inline; width: 100%; height: auto; max-width: none; }
+/* Page content sits in the same column as the header and footer, like the
+   live site's .website_container: 1280px + 40px side padding, edge-to-edge
+   at 800px and below. Keeps the corner decorations clear of content. */
+.site-content { max-width: 1360px; margin: 0 auto; padding: 0 40px; }
+@media (max-width: 800px) { .site-content { padding: 0; } }
+/* Inside the column, text lines up with the column edges (no extra gutter),
+   like the live site's content. Sections that carry a background band keep
+   40px of inner padding so their text doesn't touch the band edge. */
+@media (min-width: 801px) {
+  .site-content { --gutter: 0px; }
+  .site-content .sub-nav,
+  .site-content .partners,
+  .site-content .quotes,
+  .site-content .next { padding-left: 40px; padding-right: 40px; }
+}
 @media (max-width: 1080px) { .site-menu { font-size: 11pt; } }
 @media (max-width: 980px) {
   .site-header-inner { height: 120px; }
@@ -176,6 +198,7 @@ a:focus-visible, button:focus-visible {
 }
 @media (max-width: 600px) {
   .site-header-inner { height: 80px; }
+  .site-banner { margin-top: 10px; } /* live mobile menu sits 90px down */
   .site-burger { margin-top: 32px; }
   .site-logo { top: 16px; width: 180px; margin: 0; left: 24px; right: auto; }
 }
@@ -867,17 +890,13 @@ a:focus-visible, button:focus-visible {
 
 /* Corner decorations from hy2market.eu, positioned against <body> like the
    live site's: top-left 440px tall, bottom-right 920px tall ending 200px
-   above the page bottom; shown only above 1540px, as on the live site. At
-   those widths the page gutter widens so content clears the arcs. */
+   above the page bottom; shown only above 1540px, as on the live site,
+   where they sit in the margin outside the .site-content column. */
 body { position: relative; }
 .site-deco { position: absolute; width: auto; max-width: none; z-index: 10; pointer-events: none; }
 .site-deco-tl { top: 0; left: 0; height: 440px; }
 .site-deco-br { bottom: 200px; right: 0; height: 920px; }
 @media (max-width: 1540px) { .site-deco { display: none; } }
-@media (min-width: 1541px) {
-  :root { --gutter: 120px; }
-  .hero .arc-tl { display: none; }
-}
 
 /* =========================================================================
    RESPONSIVE
