@@ -28,7 +28,7 @@
       mediaCaption: 'Toyota Mirai fuel-cell taxi · Huesca · Walqa Technology Park',
       // Single-photo hero via the slideshow mechanism (one slide = static image).
       slideshow: [
-        { src: '/assets/media/aragon/hero.jpg', caption: 'A second-generation Toyota Mirai in taxi service — the same model FHA is adapting for Huesca · Photo: Damian B Oh, CC BY-SA 4.0, via Wikimedia Commons' }
+        { src: '/assets/media/aragon/hero.jpg', caption: 'A second-generation Toyota Mirai in taxi service — the same model FHA is adapting for Huesca · Photo: Hy2Market' }
       ],
       stats: [
         { num: '+10,000 km', label: 'to be driven by the fuel-cell taxi (estimation)' },
