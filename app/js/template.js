@@ -738,11 +738,16 @@
     '</footer>' +
     '</div>';
 
+  // Embedded video blocks in the page body are hidden for now — the real
+  // videos come later. Region data keeps its `video` entries; set this back
+  // to true to show them again. (Hero background videos are unaffected.)
+  var SHOW_VIDEO_SECTIONS = false;
+
   // Each body section renders only when its data key is present, so a case
   // study can omit sections that don't apply to it (e.g. knowledge exchange).
   var SECTION_RENDERERS = {
     overview: function (d) { return d.overview ? overview(d) : ''; },
-    video: function (d) { return d.video ? video(d) : ''; },
+    video: function (d) { return SHOW_VIDEO_SECTIONS && d.video ? video(d) : ''; },
     region: function (d) { return d.region ? region(d) : ''; },
     opportunity: function (d) { return d.opportunity ? opportunity(d) : ''; },
     solutions: function (d) { return d.solutions ? solutions(d) : ''; },

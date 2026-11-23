@@ -220,3 +220,10 @@ test('every "continue the story" card shows the same image as that region\'s ind
     }
   }
 });
+
+test('embedded video blocks are hidden on every case-study page (for now)', async () => {
+  for (const d of loadAllRegions()) {
+    const html = await (await fetch(baseUrl + '/case-studies/' + d.slug + '/')).text();
+    assert.ok(!html.includes('<section class="video"'), d.slug + ' has no video section');
+  }
+});
