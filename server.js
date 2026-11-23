@@ -28,6 +28,7 @@
 
 const express = require('express');
 const fs = require('fs');
+const crypto = require('crypto');
 const path = require('path');
 
 const APP_DIR = path.join(__dirname, 'app');
@@ -62,8 +63,34 @@ function loadCaseStudies() {
   return registry;
 }
 
+// Cache-busting: every local stylesheet/script link in an HTML shell gets a
+// ?v=<content hash> suffix. HTML and assets are both cached for 5 minutes,
+// so without this a browser that fetched the new HTML right after a deploy
+// could pair it with the previous, still-cached CSS (new markup, old styles).
+// The hash changes only when the file's bytes do, so unchanged files keep
+// their cache. Hashes are memoised per file mtime.
+const assetHashes = new Map();
+function assetVersion(urlPath) {
+  const full = path.join(APP_DIR, urlPath);
+  if (!full.startsWith(APP_DIR + path.sep)) return null;
+  let stat;
+  try { stat = fs.statSync(full); } catch (e) { return null; }
+  const hit = assetHashes.get(full);
+  if (hit && hit.mtimeMs === stat.mtimeMs) return hit.v;
+  const v = crypto.createHash('sha1').update(fs.readFileSync(full)).digest('hex').slice(0, 10);
+  assetHashes.set(full, { mtimeMs: stat.mtimeMs, v });
+  return v;
+}
+function versionAssets(html) {
+  return html.replace(/(<(?:link|script)\b[^>]*?\s(?:href|src)=")(\/(?:css|js)\/[^"?#]+\.(?:css|js))(")/g,
+    (m, pre, url, post) => {
+      const v = assetVersion(url);
+      return v ? pre + url + '?v=' + v + post : m;
+    });
+}
+
 function readShell(file) {
-  return fs.readFileSync(path.join(APP_DIR, file), 'utf8');
+  return versionAssets(fs.readFileSync(path.join(APP_DIR, file), 'utf8'));
 }
 
 function renderIndexHtml(baseUrl) {

@@ -60,7 +60,8 @@
   // Primary header — a copy of hy2market.eu's header (same logo SVG, menu
   // split, sizes and breakpoints; see .site-header in styles.css). Identical
   // markup lives in index.html — keep the two in sync. "Case Studies" is
-  // this microsite, so it is the current item.
+  // this microsite, so it is the current item. The banner photo under the
+  // header appears only on the case-study index (index.html), not here.
   var SITE_NAV =
     '<div class="site-header">' +
     '<div class="site-header-inner">' +
@@ -111,7 +112,6 @@
     return '' +
     '<header class="hero">' +
       ARC_TL +
-      SITE_NAV +
       '<div class="sub-nav">' +
         '<nav class="breadcrumb" aria-label="Breadcrumb">' +
           '<a href="' + esc(bc.href) + '"><span class="back-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>' + esc(bc.label) + '</a><span>/</span>' +
@@ -709,32 +709,26 @@
   }
 
   /* ---- FOOTER ---- */
-  function footer(d) {
-    var f = d.footer;
-    var cols = f.cols.map(function (c) {
-      return '<div class="footer-col"><div class="h">' + esc(c.h) + '</div>' + c.html + '</div>';
-    }).join('');
-    var flinks = f.contact.links.map(function (l) {
-      return '<a href="' + esc(l.href) + '">' + esc(l.label) + '</a>';
-    }).join('');
-    return '' +
-    '<footer class="footer">' +
-      '<div class="footer-grid">' +
-        '<div>' + BRAND +
-          '<div class="eu">' +
-            '<svg width="46" height="32" viewBox="0 0 46 32" aria-hidden="true"><rect width="46" height="32" rx="2" fill="#003399"/><g fill="#FFCC00"><circle cx="23" cy="8" r="1.2"/><circle cx="27.5" cy="9.2" r="1.2"/><circle cx="30.8" cy="12.5" r="1.2"/><circle cx="32" cy="16" r="1.2"/><circle cx="30.8" cy="19.5" r="1.2"/><circle cx="27.5" cy="22.8" r="1.2"/><circle cx="23" cy="24" r="1.2"/><circle cx="18.5" cy="22.8" r="1.2"/><circle cx="15.2" cy="19.5" r="1.2"/><circle cx="14" cy="16" r="1.2"/><circle cx="15.2" cy="12.5" r="1.2"/><circle cx="18.5" cy="9.2" r="1.2"/></g></svg>' +
-            '<span class="eu-text">' + f.cofunded + '</span>' +
-          '</div>' +
-        '</div>' +
-        cols +
-        '<div class="footer-col"><div class="h">' + esc(f.contact.h) + '</div>' +
-          esc(f.contact.phone) + '<br>' +
-          '<a href="mailto:' + esc(f.contact.email) + '">' + esc(f.contact.email) + '</a>' +
-          '<div class="footer-links">' + flinks + '</div>' +
-        '</div>' +
-      '</div>' +
-    '</footer>';
-  }
+  // Footer — a copy of hy2market.eu's footer (same logos, addresses, contact
+  // and legal links; see .site-footer in styles.css), plus the main site's
+  // top-left / bottom-right corner decorations, which are positioned against
+  // <body>. Identical markup lives in index.html — keep the two in sync.
+  // Region data files' `footer` objects are no longer used.
+  var SITE_FOOTER =
+    '<img class="site-deco site-deco-tl" src="/assets/brand/decoration-topleft.svg" alt="" aria-hidden="true">' +
+    '<img class="site-deco site-deco-br" src="/assets/brand/decoration-bottomright.svg" alt="" aria-hidden="true">' +
+    '<div class="site-footer-wrap">' +
+    '<footer class="site-footer">' +
+    '<div class="site-footer-inner">' +
+    '<div class="site-footer-cols">' +
+    '<div class="site-footer-col site-footer-col1"><a href="https://hy2market.eu/"><img class="site-footer-logo" src="/assets/brand/hy2market-logo-footer.svg" alt="Hy2Market" width="256" height="82"></a><img class="site-footer-logo" src="/assets/brand/eu-cofunded.svg" alt="Co-funded by the European Union" width="256" height="54"></div>' +
+    '<div class="site-footer-col site-footer-col2"><p><strong>Visiting address:</strong><br>Nijenborgh 6<br>9747 AG Groningen<br>The Netherlands</p></div>' +
+    '<div class="site-footer-col site-footer-col3"><p><strong>Postal address:</strong><br>P.O. Box 70017<br>9704 AA Groningen<br>The Netherlands</p></div>' +
+    '<div class="site-footer-col site-footer-col4"><p><strong>Contact:</strong><br>+31 88 11 66 800<br><a href="mailto:info@hy2market.eu">info@hy2market.eu</a></p><div class="site-footer-spacer" aria-hidden="true"></div><p><a href="https://hy2market.eu/privacy-statement/">Privacy statement</a><br><a href="https://hy2market.eu/cookie-statement/">Cookie Statement</a><br><a href="https://hy2market.eu/disclaimer/">Disclaimer</a></p></div>' +
+    '</div>' +
+    '</div>' +
+    '</footer>' +
+    '</div>';
 
   // Each body section renders only when its data key is present, so a case
   // study can omit sections that don't apply to it (e.g. knowledge exchange).
@@ -780,8 +774,12 @@
       var render = SECTION_RENDERERS[key];
       return render ? render(d) : '';
     }).join('');
+    // Header, then all page content in the same 1280px column as the header
+    // and footer (.site-content), as on hy2market.eu.
     return '' +
       (d.banner ? reviewBanner(d) : '') +
+      SITE_NAV +
+      '<div class="site-content">' +
       hero(d) +
       partners(d) +
       '<div class="body-wrap"><div class="body-grid">' +
@@ -793,7 +791,8 @@
       '</div></div>' +
       (d.quotes ? quotes(d) : '') +
       (d.next ? next(d, registry) : '') +
-      footer(d);
+      '</div>' +
+      SITE_FOOTER;
   }
 
   var api = { renderCaseStudy: renderCaseStudy };
