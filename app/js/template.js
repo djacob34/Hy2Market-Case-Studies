@@ -285,12 +285,15 @@
         '<span class="marker ' + (p.color === 'yellow' ? 'yellow' : 'black') + '"></span>' +
         '<span class="' + labelCls + '">' + label + '</span></div>';
     }).join('');
-    return '' +
-    '<section id="toc-region" class="section mt-block" data-reveal>' +
-      secHead(r.title) +
-      '<div class="region-grid">' +
-        '<div>' + paras + '</div>' +
-        '<div class="map">' +
+    // A region can supply a finished map image (map.image) — e.g. the
+    // designed regional maps exported from Figma — which replaces the
+    // decorative generated shape + pins. The gradient/pins path stays as the
+    // fallback for any region without an image.
+    var mapHtml = r.map.image
+      ? '<figure class="map map--image">' +
+          '<img class="map-img" src="' + esc(r.map.image) + '" alt="' + esc(r.map.alt || (d.breadcrumb.here + ' — region map')) + '" loading="lazy" width="1600" height="1200">' +
+        '</figure>'
+      : '<div class="map">' +
           '<div class="map-grid"></div>' +
           '<svg class="shape" viewBox="0 0 100 86" fill="none" preserveAspectRatio="none" aria-hidden="true">' +
             '<path d="M14,40 C24,24 44,18 58,24 C70,29 84,26 90,40 C94,52 82,62 70,60 C60,58 50,70 38,66 C24,61 8,54 14,40 Z" fill="rgba(255,237,0,0.16)" stroke="#cfcfca" stroke-width="0.5"/>' +
@@ -298,7 +301,13 @@
           '</svg>' +
           pins +
           '<span class="map-caption">' + esc(r.map.caption) + '</span>' +
-        '</div>' +
+        '</div>';
+    return '' +
+    '<section id="toc-region" class="section mt-block" data-reveal>' +
+      secHead(r.title) +
+      '<div class="region-grid">' +
+        '<div>' + paras + '</div>' +
+        mapHtml +
       '</div>' +
     '</section>';
   }
@@ -351,6 +360,14 @@
       var photoBg = dr.photo ? "#15171b url('" + esc(dr.photo) + "') center/cover no-repeat" : dr.thumbGrad;
       var thumbTex = dr.photo ? '' : '<div class="tex" style="background:' + tex + ';"></div>';
       var photoTex = dr.photo ? '' : '<div class="tex" style="background:' + texBig + ';"></div>';
+      // Each photo is a 16:9 figure with its caption underneath. A drawer with
+      // a second photo (dr.photo2) stacks the two in the media column.
+      function fig(bg, texHtml, cap) {
+        return '<div class="drawer-shot"><div class="drawer-photo" style="background:' + bg + ';">' + texHtml + '</div>' +
+          (cap ? '<figcaption class="drawer-cap">' + esc(cap) + '</figcaption>' : '') + '</div>';
+      }
+      var photoBlock = fig(photoBg, photoTex, dr.photoCaption) +
+        (dr.photo2 ? fig("#15171b url('" + esc(dr.photo2) + "') center/cover no-repeat", '', dr.photo2Caption) : '');
       return '' +
       '<div class="drawer" data-drawer="' + i + '" aria-expanded="false">' +
         '<button type="button" class="drawer-btn" aria-expanded="false" aria-controls="' + panelId + '">' +
@@ -362,10 +379,7 @@
         '<div class="drawer-panel" id="' + panelId + '" role="region">' +
           // Two columns: media (16:9 photo + caption) | text (body, stat
           // tiles, CTAs). Below 860px they stack in that same order.
-          '<figure class="drawer-col drawer-figure">' +
-            '<div class="drawer-photo" style="background:' + photoBg + ';">' + photoTex + '</div>' +
-            (dr.photoCaption ? '<figcaption class="drawer-cap">' + esc(dr.photoCaption) + '</figcaption>' : '') +
-          '</figure>' +
+          '<figure class="drawer-col drawer-figure">' + photoBlock + '</figure>' +
           '<div class="drawer-col drawer-text">' +
             '<div class="drawer-body">' + dr.body + '</div>' +
             (stats ? '<div class="stat-boxes">' + stats + '</div>' : '') +

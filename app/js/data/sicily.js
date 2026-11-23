@@ -112,6 +112,7 @@
         'Duferco’s gas-fired peaker turbine at Giammoro is one of them: <strong>Terna</strong>, the operator of Italy’s electricity grid, calls it into operation to steady the Sicilian system. The hydrogen plant is the first in the region to blend green hydrogen into a peaker turbine’s fuel — and part of a wider reconversion of the site, alongside solar, battery storage and a new container terminal, that turns the old steelworks towards clean energy.'
       ],
       map: {
+        image: '/assets/maps/sicily.png',
         caption: 'Sicily · Giammoro, province of Messina',
         pins: [
           { left: '72%', top: '28%', color: 'yellow', label: 'Giammoro', sub: '· Duferco site' },
@@ -152,8 +153,10 @@
           title: 'Compression and storage',
           subtitle: '200 bar · about an hour of full-load running on the blend.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
-          photo: '/assets/media/sicily/storage.jpg',
-          photoCaption: 'Hydrogen storage cylinders and their protective bunker at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
+          photo: '/assets/media/sicily/compressor.jpg',
+          photoCaption: 'Power Evolution’s hydrogen compressor skid at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
+          photo2: '/assets/media/sicily/storage.jpg',
+          photo2Caption: 'Hydrogen storage cylinders and their protective bunker · Photo: Hy2Market / CNR-ITAE (confirm)',
           body: 'Power Evolution designed and installed the hydrogen compressor and storage. The hydrogen is compressed to 200 bar and kept in cylinders inside a protective bunker, as Italian regulations require. The storage is sized to run the turbine for about an hour at full load on a 15% blend — the length of a typical demand peak — and the electrolyser refills it in around ten hours.',
           stats: [
             { n: '200 bar', l: 'storage pressure' },

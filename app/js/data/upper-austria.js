@@ -169,6 +169,7 @@
         'The activity draws on a wider Austrian partner network — coordination, research institutes and universities, a regional development agency and engineering partners — that provides the expertise base around the Linz demonstration site.'
       ],
       map: {
+        image: '/assets/maps/upper-austria.png',
         caption: 'Linz · demonstration site',
         pins: [
           { left: '40%', top: '52%', color: 'black', label: 'Linz', sub: '· demonstration site' }
@@ -221,7 +222,7 @@
           subtitle: 'Analysis, process models and consortium-wide exchange.',
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
           photo: '/assets/media/upper-austria/modelling.jpg',
-          photoCaption: 'Modelling · use cases · knowledge exchange · Photo: Ngital on Unsplash',
+          photoCaption: 'Modelling · use cases · knowledge exchange · Photo: RONNAKORN TRIRAGANON on Unsplash',
           body: 'AIT develops industrial hydrogen use cases with techno-economic analysis, Prozess Optimal builds process-simulation models, and WIVA P&G and Business Upper Austria lead regulation, standardisation and knowledge-exchange activities across the consortium.',
           stats: [
             { n: 'Use cases', l: 'industrial hydrogen (AIT)' },

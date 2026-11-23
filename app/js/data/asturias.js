@@ -63,6 +63,7 @@
       `The <strong>Aboño thermal power plant</strong>, on the coast just outside Gijón, is emblematic of that shift. Built to burn coal, it is exactly the kind of asset a just transition has to reckon with — and exactly the kind of site EDP chose to build its hydrogen future on, rather than around. In July 2025 its Unit 2 came back online on natural gas, after all 30 coal burners were replaced with burners designed for natural gas and hydrogen. The region's advantage is that the customers, the infrastructure and the institutional will are already in the same place.`
     ],
     map: {
+      image: `/assets/maps/asturias.png`,
       caption: `Asturias · hydrogen production hub`,
       pins: [
         { left: `40%`, top: `40%`, color: `yellow`, label: `Aboño`, sub: `· hub + retrofit` },

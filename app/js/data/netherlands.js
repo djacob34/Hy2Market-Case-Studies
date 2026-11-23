@@ -66,6 +66,7 @@
       `Some 200 km north-east, near Delfzijl, HyEnergy TransStore is developing a pipeline from Nobian's production site to a new distribution hub, where hydrogen is purified and compressed before it is loaded into tube trailers. The route crosses the Oosterhornkanaal and a railway managed by ProRail. Both deployments run on the same SoluForce reinforced thermoplastic pipe.`
     ],
     map: {
+      image: `/assets/maps/netherlands.png`,
       caption: `Netherlands · two SoluForce deployments`,
       pins: [
         { left: `44%`, top: `48%`, color: `black`, label: `Deventer`, sub: `· connector` },
