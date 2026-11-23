@@ -229,7 +229,7 @@
         caption: 'voestalpine steel plant · Linz · H2FUTURE electrolyser'
       },
       others: [
-        { href: '/case-study.html?region=upper-austria', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'Commissioning new hydrogen handling and piloting methanation around the H2FUTURE electrolyser in Linz.' },
+        { href: '/case-studies/aragon/', k: 'MOBILITY', region: 'Aragón', country: '· Spain', d: 'Spain’s first public hydrogen taxi, in real service across Huesca.' },
         { href: '/case-study.html?region=netherlands', k: 'TRANSPORT', region: 'Deventer', country: '· Netherlands', d: 'A flexible composite hydrogen pipeline, laid in ~two months.' }
       ]
     },

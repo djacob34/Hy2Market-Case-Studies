@@ -18,17 +18,25 @@
   // reused on cards that link to it (the "next case study" block). Returns an
   // image (first slideshow frame) or a video, or null when a region has
   // neither (card then keeps its decorative fallback).
+  // Same rule as the index-page cards (landing.js cardMediaHtml): the hero's
+  // first slideshow photo, else the video's poster — so a region's preview
+  // image is identical everywhere it is linked.
   function heroMedia(d) {
     var h = (d && d.hero) || {};
-    if (h.video) return { video: h.video, poster: h.poster || '' };
-    if (h.slideshow && h.slideshow.length && h.slideshow[0] && h.slideshow[0].src) {
-      return { img: h.slideshow[0].src };
-    }
-    return null;
+    var src = (h.slideshow && h.slideshow.length && h.slideshow[0] && h.slideshow[0].src) || h.poster;
+    return src ? { img: src } : null;
   }
+  // Region slug from a link — the clean /case-studies/<slug>/ form or the
+  // legacy /case-study.html?region=<slug> form still used in some data files.
   function slugFromHref(href) {
-    var m = String(href == null ? '' : href).match(/case-studies\/([^\/?#]+)/);
+    var s = String(href == null ? '' : href);
+    var m = s.match(/case-studies\/([^\/?#]+)/) || s.match(/[?&]region=([^&#]+)/);
     return m ? decodeURIComponent(m[1]) : '';
+  }
+  // Canonical link for a region card (skips the legacy URL's 301 redirect).
+  function regionHref(href) {
+    var slug = slugFromHref(href);
+    return slug ? '/case-studies/' + encodeURIComponent(slug) + '/' : href;
   }
   // Cover markup for a card: a still of the linked region's hero — its first
   // slideshow frame, or a video hero's poster. '' when there's neither, so the
@@ -669,7 +677,7 @@
     var fMedia = heroMedia(registry[slugFromHref(f.href)]);
     var others = n.others.map(function (o) {
       var oMedia = heroMedia(registry[slugFromHref(o.href)]);
-      return '<a class="region-card" href="' + esc(o.href) + '">' +
+      return '<a class="region-card" href="' + esc(regionHref(o.href)) + '">' +
         cardMediaHtml(oMedia, 'region-card-media') +
         '<div class="region-card-body">' +
           '<div class="k">' + esc(o.k) + '</div>' +
@@ -685,7 +693,7 @@
           '<p class="eyebrow"><span class="dash"></span>' + esc(n.eyebrow) + '</p>' +
           '<a class="all-link" href="' + esc(n.allHref) + '">All case studies <span>→</span></a>' +
         '</div>' +
-        '<a class="featured" href="' + esc(f.href) + '">' +
+        '<a class="featured" href="' + esc(regionHref(f.href)) + '">' +
           '<div class="featured-text">' +
             '<div class="featured-kicker"><span class="d"></span>' + esc(f.kicker) + '</div>' +
             '<div><h2 class="featured-title">' + esc(f.title) + '</h2>' +

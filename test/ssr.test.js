@@ -189,3 +189,34 @@ test('local CSS/JS links carry a content-hash ?v= so a new deploy never pairs ne
     assert.match(res.headers.get('content-type') || '', /text\/css/);
   }
 });
+
+test('versioned assets: matching hash is long-cached, mismatched hash is never cached', async () => {
+  const html = await (await fetch(baseUrl + '/')).text();
+  const url = html.match(/href="(\/css\/styles\.css\?v=[0-9a-f]+)"/)[1];
+  const ok = await fetch(baseUrl + url);
+  assert.match(ok.headers.get('cache-control') || '', /immutable/);
+  const stale = await fetch(baseUrl + '/css/styles.css?v=0000000000');
+  assert.equal(stale.status, 200);
+  assert.match(stale.headers.get('cache-control') || '', /no-store/);
+});
+
+test('every "continue the story" card shows the same image as that region\'s index card', async () => {
+  const regions = loadAllRegions();
+  const bySlug = Object.fromEntries(regions.map((d) => [d.slug, d]));
+  const indexImg = (d) => {
+    const h = d.hero || {};
+    return (h.slideshow && h.slideshow[0] && h.slideshow[0].src) || h.poster || null;
+  };
+  for (const d of regions) {
+    if (!d.next) continue;
+    const html = await (await fetch(baseUrl + '/case-studies/' + d.slug + '/')).text();
+    const next = html.slice(html.indexOf('<section class="next"'));
+    const cards = [...next.matchAll(/<a class="(?:featured|region-card)" href="\/case-studies\/([^/]+)\/">([\s\S]*?)<\/a>/g)];
+    assert.equal(cards.length, 1 + d.next.others.length, d.slug + ': every next card links to a clean /case-studies/<slug>/ URL');
+    for (const [, slug, body] of cards) {
+      const want = indexImg(bySlug[slug]);
+      if (!want) continue;
+      assert.ok(body.includes("url('" + want + "')"), d.slug + ' → ' + slug + ' card uses ' + want);
+    }
+  }
+});

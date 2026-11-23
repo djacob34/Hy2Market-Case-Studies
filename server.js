@@ -292,6 +292,20 @@ app.get('/sitemap.xml', (req, res) => {
   res.type('application/xml').send(body);
 });
 
+// Versioned CSS/JS (?v=<hash> from versionAssets): if the hash matches this
+// server's copy, the URL is content-addressed, so it can be cached for a
+// long time. If it doesn't (during a rolling deploy the page can come from
+// the new instance and the asset from the old one, or vice versa), say
+// no-store so the mismatched file is never cached under the new URL.
+app.use((req, res, next) => {
+  const v = typeof req.query.v === 'string' ? req.query.v : null;
+  if (v && /^\/(css|js)\/.+\.(css|js)$/.test(req.path)) {
+    const current = assetVersion(req.path);
+    res.set('Cache-Control', current === v ? 'public, max-age=31536000, immutable' : 'no-store');
+  }
+  next();
+});
+
 // Everything else that's a real file (css, js, images, fonts) — served as-is.
 app.use(express.static(APP_DIR, { index: false }));
 
