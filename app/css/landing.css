@@ -1,7 +1,7 @@
 /* =========================================================================
    landing.css — styles for the case-study index (index.html) only.
    Reuses brand tokens and shared components (.brand-lockup, .tag, .hl,
-   .eyebrow, .footer) from styles.css; adds the top bar, hero and card grid.
+   .eyebrow, header/footer) from styles.css; adds the top bar, hero and card grid.
    ========================================================================= */
 
 .landing { background: var(--white); color: var(--black); }
