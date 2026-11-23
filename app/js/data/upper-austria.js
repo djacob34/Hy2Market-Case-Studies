@@ -202,8 +202,7 @@
           stats: [
             { n: 'Commissioning', l: 'and testing at an operating site · results due end 2026' },
             { n: 'ISO 14687', l: 'Grade D purity target — fuel cell quality' }
-          ],
-          cta: { label: 'About the production & handling work', href: '#' }
+          ]
         },
         {
           title: 'Mobile methanation',
@@ -216,7 +215,7 @@
             { n: 'Pilot plant', l: 'real industrial conditions' },
             { n: 'H₂ + CO₂ → CH₄', l: 'catalytic methanation' }
           ],
-          cta: { label: 'About the methanation pilot', href: '#' }
+          cta: { label: 'Methanation plant ready for operation', href: 'https://hy2market.eu/methanation-plant-ready-for-operation-in-upper-austria/' }
         },
         {
           title: 'Modelling, use cases & knowledge transfer',
@@ -229,7 +228,7 @@
             { n: 'Use cases', l: 'industrial hydrogen (AIT)' },
             { n: 'Models + exchange', l: 'simulation, regulation, transfer' }
           ],
-          cta: { label: 'About the analysis & transfer work', href: '#' }
+          cta: { label: 'The new power-to-methane process model', href: 'https://hy2market.eu/hy2market-completes-a-detailed-new-model-of-its-power-to-methane-process/' }
         }
       ]
     },

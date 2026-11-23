@@ -142,6 +142,7 @@
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
           photo: '/assets/media/sicily/electrolyser.jpg',
           photoCaption: 'De Nora’s 1 MW Dragonfly® alkaline electrolyser at Giammoro · Photo: De Nora',
+          cta: { label: 'Sicily’s pilot takes shape at Duferco', href: 'https://hy2market.eu/sicilys-green-hydrogen-pilot-takes-shape-at-the-duferco-plant/' },
           body: 'De Nora built the electrolyser as a complete containerised system and factory-tested it in Milan before delivering it to Giammoro. It runs on demineralised water from an on-site well and on electricity from Duferco Energia, drawn through the Duferco Travi e Profilati industrial site’s network. For the test campaign the supply is 100% renewable, documented through Guarantees of Origin (GoOs).',
           stats: [
             { n: '1 MW', l: 'electrolyser capacity' },
@@ -180,6 +181,7 @@
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
           photo: '/assets/media/sicily/diagram.png',
           photoCaption: 'How the Giammoro pilot links electrolysis, storage and the peaker turbine · Diagram: CNR-ITAE / Hy2Market',
+          cta: { label: 'Read the Sicily integration report (D2.5)', href: 'https://hy2market.eu/wp-content/uploads/2026/04/Deliverable-2.5-Integration-of-Green-Hydrogen-into-Existing-Industrial-Energy-System-in-Sicily.pdf' },
           body: 'The plant was modelled before it was built. CNR-ITAE modelled how a hydrogen blend changes the turbine’s emissions, using computational fluid dynamics to check for nitrogen oxides. With Summit Engineering and DEMCON, the team also modelled the entire value chain across scenarios for renewable energy availability and electricity prices in Italy, Spain and the Netherlands. The same approach can be adapted to other regions, markets and industrial hydrogen uses to test techno-economic feasibility.',
           stats: [
             { n: '~30%', l: 'modelled cut in carbon monoxide emissions at a 15% blend' },

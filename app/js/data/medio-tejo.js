@@ -105,6 +105,7 @@
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
           photo: '/assets/media/medio-tejo/bus-still.jpg',
           photoCaption: 'Caetano H2.City Gold · Photo: CIM Médio Tejo / Hy2Market (confirm)',
+          cta: { label: 'Pilot launch & final results', href: 'https://hy2market.eu/pilot-demonstration-in-medio-tejo-region-portugal-launches-a-hydrogen-powered-bus/' },
           body: 'CaetanoBus H2.City Gold, developed and manufactured by Portuguese bus manufacturer CaetanoBus, uses hydrogen fuel-cell technology to generate electricity on board and power its electric drivetrain. The batteries, hydrogen tanks and fuel cell are mounted on the roof, optimizing interior space.',
           stats: [
             { n: '64', l: 'passenger capacity' },
@@ -196,11 +197,7 @@
         { tone: 'grey', n: '~11,000 litres', l: 'diesel avoided' },
         { tone: 'black', n: '3 buses', l: 'fleet expansion now underway' }
       ],
-      narrative: 'Médio Tejo now offers the rest of the consortium a working, real-world answer to the question every rural or hilly region asks before investing: does a hydrogen bus survive daily service? Nine months of real-world evidence are now powering a permanent fleet transition and inspiring wider adoption across the public transport sector.',
-      pending: [
-        { n: '— passengers', l: 'Passengers carried <em>(not tracked during the pilot)</em>' },
-        { n: '— TRL', l: 'TRL change for the mobility technology <em>(pending)</em>' }
-      ]
+      narrative: 'Médio Tejo now offers the rest of the consortium a working, real-world answer to the question every rural or hilly region asks before investing: does a hydrogen bus survive daily service? Nine months of real-world evidence are now powering a permanent fleet transition and inspiring wider adoption across the public transport sector.'
     },
 
     knowledge: {
