@@ -25,10 +25,9 @@
       titleHtml: 'Sicily blends green hydrogen into the <span class="hl">turbine</span> that balances the grid',
       lead: 'At Duferco’s site in Giammoro, Hy2Market built a green hydrogen plant with a 1 MW electrolyser beside an existing 58 MW peaker turbine. The plant is designed to blend hydrogen made on site into the turbine’s natural gas at up to 15% by volume, cutting the emissions of the power that covers Italy’s demand peaks. Results from testing the blend are expected in 2027.',
       tags: ['Green hydrogen', 'Electrolysis', 'Hydrogen blending', 'Peaker turbine', 'Grid balancing', 'Decarbonisation'],
-      mediaCaption: 'Green hydrogen plant beside the peaker turbine · Giammoro, Sicily',
-      slideshow: [
-        { src: '/assets/media/sicily/hero.jpg', caption: 'Duferco’s green hydrogen plant beside the 58 MW peaker turbine · Giammoro, Sicily · Photo: Duferco Engineering' }
-      ],
+      mediaCaption: 'Duferco’s green hydrogen plant beside the 58 MW peaker turbine · Giammoro, Sicily · Video: Hy2Market',
+      video: '/assets/media/sicily/hero.mp4',
+      poster: '/assets/media/sicily/hero.jpg',
       stats: [
         { num: '1 MW', label: 'alkaline electrolyser supplied by De Nora' },
         { num: 'up to 15%', label: 'green hydrogen blended into the turbine’s natural gas, by volume' },
