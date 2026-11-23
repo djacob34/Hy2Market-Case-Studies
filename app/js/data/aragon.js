@@ -15,8 +15,7 @@
       kicker: 'MOBILITY · ARAGÓN',
       title: 'Aragón, Spain',
       blurb: 'Spain’s first public hydrogen taxi, running real service across Huesca on renewable hydrogen from Pyrenean water.',
-      tags: ['Hydrogen mobility', 'Public transport', 'Hydrogen taxi'],
-      accent: '#0a8a4f'
+      tags: ['Hydrogen mobility', 'Public transport', 'Hydrogen taxi']
     },
 
     hero: {

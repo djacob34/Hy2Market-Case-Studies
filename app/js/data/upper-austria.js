@@ -39,6 +39,7 @@
       tags: ['Green hydrogen', 'Industrial integration', 'Methanation', 'Modelling', 'Knowledge exchange', 'Production'],
       // Cover animation of the voestalpine Linz site (muted, autoplay, looped)
       video: 'https://cdn.voestalpine.com/asset-47186e19-9647-41ac-b81f-9ee9d798085a/AnimationReal%20Linz%20Neues%20Ending%20EN%2019-10-23.mp4',
+      poster: '/assets/media/upper-austria/h2future.jpg',
       mediaCaption: 'voestalpine Linz · Copyright: voestalpine AG, Source: voestalpine.com',
       stats: [
         { num: '6 MW', label: 'PEM electrolyser at voestalpine Linz — live since 2019 (H2FUTURE)' },

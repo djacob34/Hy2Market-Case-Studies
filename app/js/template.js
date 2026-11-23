@@ -14,6 +14,32 @@
       .replace(/"/g, '&quot;');
   }
 
+  // Hero cover for a region's data object — the same media its own hero uses,
+  // reused on cards that link to it (the "next case study" block). Returns an
+  // image (first slideshow frame) or a video, or null when a region has
+  // neither (card then keeps its decorative fallback).
+  function heroMedia(d) {
+    var h = (d && d.hero) || {};
+    if (h.video) return { video: h.video, poster: h.poster || '' };
+    if (h.slideshow && h.slideshow.length && h.slideshow[0] && h.slideshow[0].src) {
+      return { img: h.slideshow[0].src };
+    }
+    return null;
+  }
+  function slugFromHref(href) {
+    var m = String(href == null ? '' : href).match(/case-studies\/([^\/?#]+)/);
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  // Cover markup for a card: a still of the linked region's hero — its first
+  // slideshow frame, or a video hero's poster. '' when there's neither, so the
+  // caller keeps its decorative fallback. (Cards use a still, not a live
+  // <video>, to stay light and avoid a video's black intro frame as a thumb.)
+  function cardMediaHtml(media, cls) {
+    var src = media && (media.img || media.poster);
+    if (!src) return '';
+    return '<span class="' + cls + '" style="background-image:url(\'' + esc(src) + '\')"></span>';
+  }
+
   var ARC_TL =
     '<svg class="arc-tl" viewBox="0 0 400 400" fill="none" aria-hidden="true">' +
       '<path class="arc-draw" d="M398,2 A396,396 0 0 0 2,398" stroke="#FFED00" stroke-width="1.5" stroke-dasharray="1600"/>' +
@@ -638,16 +664,22 @@
   }
 
   /* ---- NEXT CASE STUDY ---- */
-  function next(d) {
+  function next(d, registry) {
+    registry = registry || {};
     var n = d.next;
     var f = n.featured;
     var chips = f.chips.map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join('');
+    var fMedia = heroMedia(registry[slugFromHref(f.href)]);
     var others = n.others.map(function (o) {
+      var oMedia = heroMedia(registry[slugFromHref(o.href)]);
       return '<a class="region-card" href="' + esc(o.href) + '">' +
-        '<div class="k">' + esc(o.k) + '</div>' +
-        '<div class="r">' + esc(o.region) + ' <span class="c">' + esc(o.country) + '</span></div>' +
-        '<div class="d">' + esc(o.d) + '</div>' +
-        '<span class="read">Read →</span></a>';
+        cardMediaHtml(oMedia, 'region-card-media') +
+        '<div class="region-card-body">' +
+          '<div class="k">' + esc(o.k) + '</div>' +
+          '<div class="r">' + esc(o.region) + ' <span class="c">' + esc(o.country) + '</span></div>' +
+          '<div class="d">' + esc(o.d) + '</div>' +
+          '<span class="read">Read →</span>' +
+        '</div></a>';
     }).join('');
     return '' +
     '<section class="next" aria-label="Next case study">' +
@@ -664,9 +696,9 @@
             '<div class="featured-foot"><div class="chip-row">' + chips + '</div>' +
               '<span class="read-cta">Read case study <span class="circ">→</span></span></div>' +
           '</div>' +
-          '<div class="featured-media">' +
-            '<div class="media-grain"></div>' +
-            '<div class="light-streak"></div>' +
+          '<div class="featured-media' + (fMedia ? ' featured-media--media' : '') + '">' +
+            cardMediaHtml(fMedia, 'featured-photo') +
+            (fMedia ? '' : '<div class="media-grain"></div><div class="light-streak"></div>') +
             '<svg class="arc" viewBox="0 0 420 420" fill="none" aria-hidden="true">' +
               '<path d="M410,10 A400,400 0 0 1 10,410" stroke="#FFED00" stroke-width="2.5"/>' +
               '<path d="M410,70 A340,340 0 0 1 70,410" stroke="rgba(255,237,0,0.35)" stroke-width="1.5"/>' +
@@ -744,7 +776,8 @@
     '</div>';
   }
 
-  function renderCaseStudy(d) {
+  function renderCaseStudy(d, registry) {
+    registry = registry || root.CASE_STUDIES || {};
     var order = d.sectionOrder || DEFAULT_SECTION_ORDER;
     var mainHtml = order.map(function (key) {
       var render = SECTION_RENDERERS[key];
@@ -762,7 +795,7 @@
         '</main>' +
       '</div></div>' +
       (d.quotes ? quotes(d) : '') +
-      (d.next ? next(d) : '') +
+      (d.next ? next(d, registry) : '') +
       footer(d);
   }
 

@@ -127,7 +127,7 @@ function renderCaseStudyHtml(regionSlug, baseUrl) {
   // request instead so it shows up as a 500, not quietly-missing copy.
   let rendered;
   try {
-    rendered = CaseStudyTemplate.renderCaseStudy(data);
+    rendered = CaseStudyTemplate.renderCaseStudy(data, registry);
   } catch (renderErr) {
     console.error('[server] SSR render failed for region "' + slug + '":', renderErr);
     const wrapped = new Error('SSR render failed for region "' + slug + '": ' + renderErr.message);

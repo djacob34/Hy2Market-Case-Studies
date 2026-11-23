@@ -22,6 +22,17 @@
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  // Card cover: a still of the case study's hero — its first slideshow frame,
+  // or a video hero's poster — or an empty placeholder as a fallback.
+  function cardMediaHtml(hero) {
+    var h = hero || {};
+    var src = (h.slideshow && h.slideshow.length && h.slideshow[0] && h.slideshow[0].src) || h.poster;
+    if (src) {
+      return '<span class="cs-card-media" style="background-image:url(\'' + esc(src) + '\')"></span>';
+    }
+    return '<span class="cs-card-media cs-card-media--empty"></span>';
+  }
+
   function cardHtml(d) {
     var c = d.card || {};
     var hero = d.hero || {};
@@ -40,6 +51,7 @@
     return '' +
       '<a class="cs-card" href="' + esc(href) + '">' +
         '<span class="cs-card-bar" style="background:' + esc(accent) + ';"></span>' +
+        cardMediaHtml(hero) +
         '<span class="cs-card-kicker">' + esc(kicker) + '</span>' +
         '<span class="cs-card-title">' + esc(title) + '</span>' +
         '<span class="cs-card-blurb">' + esc(blurb) + '</span>' +

@@ -149,8 +149,9 @@ a:focus-visible, button:focus-visible {
 }
 .brand-lockup .two {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 0.92em; height: 0.92em; background: var(--yellow); border-radius: 50%;
-  margin: 0 0.04em; font-size: 0.82em; line-height: 1;
+  width: 1.6em; height: 1.6em; background: var(--yellow); border-radius: 50%;
+  margin: 0 0.04em; font-size: 0.62em; line-height: 1; font-weight: 800;
+  transform: translateY(0.52em);
 }
 .breadcrumb { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 500; color: var(--muted-2); }
 .breadcrumb a { color: var(--muted-2); text-decoration: none; transition: color .2s ease; }
@@ -754,14 +755,26 @@ a:focus-visible, button:focus-visible {
 .featured-media { position: relative; overflow: hidden; background: linear-gradient(135deg, #4a4a4a 0%, #272727 55%, #111 100%); min-height: 260px; }
 .featured-media .light-streak { top: 64%; height: 12px; }
 .featured-media .arc { position: absolute; bottom: -90px; left: -90px; width: 340px; height: 340px; pointer-events: none; }
-.featured-media .cap { position: absolute; left: 30px; bottom: 30px; color: rgba(255,255,255,0.55); font-size: 12px; letter-spacing: 0.04em; }
+.featured-media .cap { position: absolute; left: 30px; bottom: 30px; color: rgba(255,255,255,0.55); font-size: 12px; letter-spacing: 0.04em; z-index: 2; }
+/* When the featured card shows the linked region's actual hero (image/video)
+   instead of the grain placeholder, cover the panel and keep the caption
+   legible with a soft bottom scrim. */
+.featured-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.featured-photo-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.featured-media--media { background: #111; }
+.featured-media--media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.6) 100%); pointer-events: none; }
+.featured-media--media .cap { color: rgba(255,255,255,0.92); }
 
 .other-regions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
 .region-card {
-  display: flex; flex-direction: column; gap: 10px; padding: 24px; background: #fff;
+  display: flex; flex-direction: column; background: #fff; overflow: hidden;
   border: 1px solid var(--line-2); text-decoration: none; color: #000;
   transition: border-color .3s ease, background .3s ease;
 }
+/* Hero cover of the region this card links to, sitting above its text. */
+.region-card-media { display: block; height: 128px; background-size: cover; background-position: center; background-color: #15171b; }
+.region-card-media-video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.region-card-body { display: flex; flex-direction: column; gap: 10px; padding: 22px 24px; flex: 1 1 auto; }
 .region-card:hover { border-color: var(--yellow); background: var(--yellow-tint); }
 .region-card .k { font-size: 11px; letter-spacing: 0.12em; font-weight: 600; color: var(--muted-2); }
 .region-card .r { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }

@@ -40,7 +40,7 @@
     // to a full client render when there's nothing there yet (e.g. served
     // as a plain static file with no SSR in front of it).
     if (!mount.children.length) {
-      mount.innerHTML = window.CaseStudyTemplate.renderCaseStudy(data);
+      mount.innerHTML = window.CaseStudyTemplate.renderCaseStudy(data, registry);
     }
 
     if (window.CaseStudyInteractions) {
