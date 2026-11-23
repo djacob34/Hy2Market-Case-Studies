@@ -140,16 +140,18 @@
         photo: `/assets/media/western-macedonia/training.jpg`,
         photoCaption: `Training guidelines · knowledge exchange · Photo: Quilia on Unsplash`,
         body: `CluBE helped shape Hy2Market's training guidelines and its whitepaper — mapping the region's hydrogen skills gaps and needs, drawing on its own GreenSkillsforH2 programme, including four annual Hydrogen Summer Schools reaching hundreds of participants.` +
-          `<ul style="font-size:17px;line-height:1.6;color:var(--ink);margin:18px 0;padding-left:20px;">` +
+          `<ul style="line-height:1.6;margin:18px 0;padding-left:20px;">` +
             `<li style="margin:0 0 6px;">1st Hydrogen Summer ScH2ool: 78 participants</li>` +
             `<li style="margin:0 0 6px;">2nd Hydrogen Summer ScH2ool: 63 participants</li>` +
             `<li style="margin:0 0 6px;">3rd Hydrogen Summer ScH2ool: 46 participants</li>` +
             `<li style="margin:0 0 6px;">4th Hydrogen Summer ScH2ool: 78 participants</li>` +
             `<li><strong>Total: 371 participants across six training programmes</strong></li>` +
           `</ul>` +
-          `<p style="font-size:17px;line-height:1.5;color:var(--ink);margin:0 0 22px;">More at <a href="https://greenskillsforhydrogen.eu/" target="_blank" rel="noopener">greenskillsforhydrogen.eu</a>.</p>` +
-          `<a class="cta-pill" href="https://hy2market.eu/wp-content/uploads/2026/01/Hydrogen-Skills-and-Workforce-Insights-Hy2Market-White-Paper.pdf" target="_blank" rel="noopener">Read the whitepaper <span class="arrow">→</span></a>`,
-        cta: { label: `Read the training guidelines`, href: `https://hy2market.eu/wp-content/uploads/2025/11/D6.3-Final-Training-Guidelines.pdf` }
+          `<p style="margin:0;">More at <a href="https://greenskillsforhydrogen.eu/" target="_blank" rel="noopener">greenskillsforhydrogen.eu</a>.</p>`,
+        ctas: [
+          { label: `Read the training guidelines (D6.3)`, href: `https://hy2market.eu/wp-content/uploads/2025/11/D6.3-Final-Training-Guidelines.pdf` },
+          { label: `Read the whitepaper`, href: `https://hy2market.eu/wp-content/uploads/2026/01/Hydrogen-Skills-and-Workforce-Insights-Hy2Market-White-Paper.pdf` }
+        ]
       },
       {
         title: `Regional data for roll-out evaluation`,
@@ -210,7 +212,8 @@
       { tone: `black`, n: `New network`, l: `contacts across Europe's mature hydrogen regions, built through study visits` }
     ],
     narrative: `The bigger win here is relational: a network of contacts across Europe's more mature hydrogen regions, built through study visits and knowledge exchange, that CluBE can keep drawing on as its own hydrogen plans develop.`,
-    pending: [
+    baselineLabel: `By the numbers`,
+    baseline: [
       { n: `371`, l: `participants trained across six programmes, under GreenSkillsforH2 and H2VE` },
       { n: `29`, l: `Greek stakeholders and companies provided with Hy2Market's regulations and standards questionnaire` }
     ]

@@ -6,9 +6,9 @@
    so modelled/design figures carry that caveat and will be replaced by
    measured results. Drafted from Sicily_Case_Study_Content_Collection.docx
    (prepared for Francesco Sergi, CNR-ITAE, 2026-10-13).
-   Still open for a later pass: hero/drawer photos, the Spanish knowledge-
-   exchange partner, a couple of partner job titles, the design-phase date,
-   and the plant's TRL before/after.
+   Photos and figures confirmed by CNR-ITAE (Nov 2026). Still open: a web-
+   optimised hero video clip (the raw clip is too large to serve as the hero
+   background) and the De Nora / Duferco quote job titles.
    ========================================================================= */
 (function (root) {
   var data = {
@@ -27,7 +27,7 @@
       tags: ['Green hydrogen', 'Electrolysis', 'Hydrogen blending', 'Peaker turbine', 'Grid balancing', 'Decarbonisation'],
       mediaCaption: 'Green hydrogen plant beside the peaker turbine · Giammoro, Sicily',
       slideshow: [
-        { src: '/assets/media/sicily/hero.jpg', caption: 'Green hydrogen plant beside the peaker turbine · Giammoro, Sicily · Photo: Hy2Market / CNR-ITAE (confirm)' }
+        { src: '/assets/media/sicily/hero.jpg', caption: 'Duferco’s green hydrogen plant beside the 58 MW peaker turbine · Giammoro, Sicily · Photo: Duferco Engineering' }
       ],
       stats: [
         { num: '1 MW', label: 'alkaline electrolyser supplied by De Nora' },
@@ -58,8 +58,8 @@
       },
       {
         id: 'power', name: 'Power Evolution',
-        role: 'Compression and storage',
-        body: 'Power Evolution, a Sicilian engineering company, designed and installed the hydrogen compression and storage that connect the electrolyser to the turbine.',
+        role: 'Compression, storage & control (SCADA)',
+        body: 'Power Evolution, a Sicilian engineering company, designed and installed the hydrogen compression and storage that connect the electrolyser to the turbine, and the SCADA system for control and automation of the entire pilot.',
         col: true,
         logoHtml: '<span style="font-weight:800;font-size:16px;color:#1a1a1a;letter-spacing:-0.01em;">Power</span><span style="font-weight:500;font-size:11px;color:#666;letter-spacing:0.1em;text-transform:uppercase;">Evolution</span>'
       },
@@ -99,7 +99,7 @@
 
     overview: [
       { tone: 'black', label: 'THE CHALLENGE', text: 'Peaker turbines keep the lights on when demand spikes: Terna, the operator of Italy’s electricity grid, calls the Giammoro turbine into operation for one to two hours a day. It burns natural gas. Green hydrogen could lower those emissions, but it costs several times more than hydrogen made from natural gas, and transporting it adds to the bill.' },
-      { tone: 'yellow', label: 'THE INNOVATION', text: 'A complete hydrogen chain on one site. A 1 MW alkaline electrolyser runs on renewable electricity bought through a power purchase agreement; the hydrogen is compressed, stored at 200 bar and blended into the turbine’s natural gas at up to 15% by volume. CNR-ITAE coordinated the pilot with Duferco, De Nora, Power Evolution and Snam, with modelling support from Summit Engineering and DEMCON, under the EU’s I3 (Interregional Innovation Investments) Instrument.' },
+      { tone: 'yellow', label: 'THE INNOVATION', text: 'A complete hydrogen chain on one site. A 1 MW alkaline electrolyser runs on renewable electricity supplied by Duferco Energia (documented through Guarantees of Origin); the hydrogen is compressed, stored at 200 bar and blended into the turbine’s natural gas at up to 15% by volume. CNR-ITAE coordinated the pilot with Duferco, De Nora, Power Evolution and Snam, with modelling support from Summit Engineering and DEMCON, under the EU’s I3 (Interregional Innovation Investments) Instrument.' },
       { tone: 'black', label: 'THE OUTCOME', text: 'Within Hy2Market the partners designed, built and integrated a complete green hydrogen plant beside a working peaker turbine. Modelling carried out in the project indicates that a 15% hydrogen blend can cut carbon monoxide emissions by nearly 30% and CO₂ emissions by around 9% while keeping turbine operation stable, with nitrogen oxide levels expected to hold steady. Results from on-site testing are expected in 2027.' }
     ],
 
@@ -141,8 +141,9 @@
           subtitle: '1 MW alkaline unit, containerised — around 20 kg of hydrogen an hour.',
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
           photo: '/assets/media/sicily/electrolyser.jpg',
-          photoCaption: 'Foundations for De Nora’s 1 MW Dragonfly® alkaline electrolyser at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
-          body: 'De Nora built the electrolyser as a complete containerised system and factory-tested it in Milan before delivering it to Giammoro. It runs on demineralised water from an on-site well and on renewable electricity bought through a power purchase agreement, which guarantees the hydrogen’s green origin under EU rules (RED II and the EU taxonomy).',
+          photoCaption: 'De Nora’s 1 MW Dragonfly® alkaline electrolyser at Giammoro · Photo: De Nora',
+          cta: { label: 'Sicily’s pilot takes shape at Duferco', href: 'https://hy2market.eu/sicilys-green-hydrogen-pilot-takes-shape-at-the-duferco-plant/' },
+          body: 'De Nora built the electrolyser as a complete containerised system and factory-tested it in Milan before delivering it to Giammoro. It runs on demineralised water from an on-site well and on electricity from Duferco Energia, drawn through the Duferco Travi e Profilati industrial site’s network. For the test campaign the supply is 100% renewable, documented through Guarantees of Origin (GoOs).',
           stats: [
             { n: '1 MW', l: 'electrolyser capacity' },
             { n: '~20 kg/h', l: 'hydrogen output' }
@@ -153,9 +154,9 @@
           subtitle: '200 bar · about an hour of full-load running on the blend.',
           thumbGrad: 'linear-gradient(135deg,#3a4048,#1c2026)', tex: 60,
           photo: '/assets/media/sicily/compressor.jpg',
-          photoCaption: 'Power Evolution’s hydrogen compressor skid at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
+          photoCaption: 'Power Evolution’s hydrogen compressor skid at Giammoro · Photo: Power Evolution',
           photo2: '/assets/media/sicily/storage.jpg',
-          photo2Caption: 'Hydrogen storage cylinders and their protective bunker · Photo: Hy2Market / CNR-ITAE (confirm)',
+          photo2Caption: 'Hydrogen storage cylinders in their protective bunker at Giammoro · Photo: Power Evolution',
           body: 'Power Evolution designed and installed the hydrogen compressor and storage. The hydrogen is compressed to 200 bar and kept in cylinders inside a protective bunker, as Italian regulations require. The storage is sized to run the turbine for about an hour at full load on a 15% blend — the length of a typical demand peak — and the electrolyser refills it in around ten hours.',
           stats: [
             { n: '200 bar', l: 'storage pressure' },
@@ -167,7 +168,7 @@
           subtitle: '58 MW · switched on by Terna to cover demand peaks.',
           thumbGrad: 'linear-gradient(135deg,#4a4a4a,#272727)', tex: 100,
           photo: '/assets/media/sicily/turbine.jpg',
-          photoCaption: 'Duferco’s 58 MW peaker turbine at Giammoro · Photo: Hy2Market / CNR-ITAE (confirm)',
+          photoCaption: 'Duferco’s 58 MW peaker turbine and the hydrogen plant at Giammoro · Photo: Duferco Engineering',
           body: 'Duferco’s gas turbine is a peaker: Terna, the operator of Italy’s electricity grid, switches it on when demand peaks, typically for one to two hours a day. Running on a blend of up to 15% hydrogen called for some retrofit of the burner and injectors and a re-tuned control system, while keeping the turbine able to run normally on natural gas alone. Its water-and-steam cooling of the combustion chamber is expected to keep nitrogen oxide emissions in check.',
           stats: [
             { n: '58 MW', l: 'turbine capacity' },
@@ -180,6 +181,7 @@
           thumbGrad: 'linear-gradient(135deg,#26424a,#11272d)', tex: 90,
           photo: '/assets/media/sicily/diagram.png',
           photoCaption: 'How the Giammoro pilot links electrolysis, storage and the peaker turbine · Diagram: CNR-ITAE / Hy2Market',
+          cta: { label: 'Read the Sicily integration report (D2.5)', href: 'https://hy2market.eu/wp-content/uploads/2026/04/Deliverable-2.5-Integration-of-Green-Hydrogen-into-Existing-Industrial-Energy-System-in-Sicily.pdf' },
           body: 'The plant was modelled before it was built. CNR-ITAE modelled how a hydrogen blend changes the turbine’s emissions, using computational fluid dynamics to check for nitrogen oxides. With Summit Engineering and DEMCON, the team also modelled the entire value chain across scenarios for renewable energy availability and electricity prices in Italy, Spain and the Netherlands. The same approach can be adapted to other regions, markets and industrial hydrogen uses to test techno-economic feasibility.',
           stats: [
             { n: '~30%', l: 'modelled cut in carbon monoxide emissions at a 15% blend' },
@@ -201,7 +203,7 @@
         { id: 'turbine', kicker: 'POWER', name: 'Peaker turbine', sub: '58 MW', title: 'Burns the blend and sends electricity to the grid' }
       ],
       branches: [
-        { id: 'renewable', name: 'Renewable electricity · water', sub: 'PPA + on-site well', title: 'Inputs to the electrolyser' },
+        { id: 'renewable', name: 'Renewable electricity · water', sub: 'Duferco Energia + on-site well', title: 'Inputs to the electrolyser' },
         { id: 'gas', name: 'Snam gas network', sub: '14–24 bar', title: 'Natural gas supply' },
         { id: 'stack', name: 'Stack', sub: 'emissions measured', title: 'Exhaust emissions measured in testing' }
       ],
@@ -212,7 +214,7 @@
         blending: { title: 'Blending point', tag: 'up to 15% by volume', body: 'Hydrogen joins the natural gas after the metering cabinet — up to about 200 kg an hour at full load.' },
         gascomp: { title: 'Fuel compressor', tag: '58 bar', body: 'Brings the blended fuel up to the turbine’s inlet pressure.' },
         turbine: { title: 'Peaker turbine', tag: '58 MW', body: 'Burns the blend and sends electricity to the grid when Terna calls it into operation.' },
-        renewable: { title: 'Renewable electricity & water', tag: 'PPA + on-site well', body: 'A power purchase agreement supplies renewable electricity; an on-site well supplies the water.' },
+        renewable: { title: 'Renewable electricity & water', tag: 'Duferco Energia + on-site well', body: 'Duferco Energia supplies the electricity through the industrial site’s network — 100% renewable for the test campaign, documented through Guarantees of Origin; an on-site well supplies the water.' },
         gas: { title: 'Snam gas network', tag: '14–24 bar', body: 'Natural gas arrives from Snam’s network through a fiscal metering cabinet and remains at least 85% of the fuel.' },
         stack: { title: 'Stack', tag: 'emissions measured', body: 'Testing measures CO₂, carbon monoxide and nitrogen oxides in the exhaust.' }
       }
@@ -220,15 +222,14 @@
 
     process: {
       title: 'The process',
-      fillPercent: '85.7%',
+      fillPercent: '50%',
       steps: [
-        { date: 'Design & modelling', text: 'The plant is designed and the full hydrogen chain modelled — including the effect of a hydrogen blend on the turbine’s emissions — before any construction begins.' },
-        { date: 'May–June 2026', text: 'The Sicily partners sign their collaboration agreement and submit the permits to the Sicilian Region, the municipality and other local authorities.' },
-        { date: 'End of June 2026', text: 'Construction starts in Giammoro: foundations, underground piping, platforms for the equipment and the pipe rack to the turbine.' },
-        { date: 'September 2026', text: 'De Nora completes and factory-tests the electrolyser in Milan and delivers it to Giammoro.' },
-        { date: 'Autumn 2026', text: 'Construction is completed while the regional authority reviews the plant’s integrated environmental authorisation.' },
-        { date: 'January 2027', text: 'Hy2Market closes with the plant built. Commissioning and testing follow once the environmental authorisation is in place.' },
-        { date: '2027 · You are here', current: true, text: 'Test results expected: hydrogen production first, then the turbine on a hydrogen blend.' }
+        { date: 'Sep 2024 – Jun 2026', text: 'Design and modelling of the full hydrogen chain, including the Fire Brigade permit application and submission of the Integrated Environmental Authorization (AIA).' },
+        { date: 'End of June 2026', text: 'Construction works begin at Giammoro: foundations, underground piping, platforms for the equipment and the pipe rack to the turbine.' },
+        { date: 'September 2026', text: 'The electrolyser — factory-tested by De Nora in Milan — is installed, together with the compression system and the hydrogen storage tanks.' },
+        { date: 'By December 2026 · You are here', current: true, text: 'Installation is completed, including pressure testing and PED (Pressure Equipment Directive) certification.' },
+        { date: 'January 2027', text: 'Commissioning and the on-site testing campaign begin.' },
+        { date: '2027', text: 'Test results expected: hydrogen production first, then the turbine on a hydrogen blend.' }
       ]
     },
 
@@ -253,10 +254,7 @@
         { tone: 'grey', n: 'Stable', l: 'turbine operation maintained in the model, with nitrogen oxides expected to hold steady' },
         { tone: 'black', n: '~20 kg/h', l: 'green hydrogen produced on site (design value)' }
       ],
-      narrative: 'These are modelled, not measured, figures — on-site testing reports in 2027 and will replace them. The Sicily pilot’s result within Hy2Market is the plant itself: a full hydrogen chain designed, built and integrated next to a working power turbine. The modelling points to meaningful emission cuts at a 15% blend without destabilising the turbine, and testing will show how closely the plant matches the model.',
-      pending: [
-        { n: 'TRL', l: 'Technology readiness of the integrated plant — confirmed after testing' }
-      ]
+      narrative: 'These are modelled, not measured, figures — the on-site testing campaign begins in 2027 and will replace them. The Sicily pilot’s result within Hy2Market is the plant itself: a full hydrogen chain designed, built and integrated next to a working power turbine, taking the integrated plant from TRL 6 to TRL 7 — a system prototype demonstrated in a real operational environment. The modelling points to meaningful emission cuts at a 15% blend without destabilising the turbine, and testing will show how closely the plant matches the model.'
     },
 
     knowledge: {
@@ -264,7 +262,7 @@
       intro: 'Sicily’s pilot was shaped with partners in other Hy2Market regions. Its hydrogen value chain was modelled together with engineering partners in the Netherlands, and the approach is built to travel: change the electricity market, the renewable resource and the industrial use, and it can test the feasibility of a hydrogen project elsewhere in Europe.',
       cards: [
         { dir: 'in', arrow: '⇄', label: 'WORKING WITH', region: 'Northern Netherlands', country: '· Netherlands', text: 'Summit Engineering in Groningen modelled the Sicily plant alongside CNR-ITAE and DEMCON, with weekly working sessions to compare results. Running more than one model on the same plant let the partners check one another’s findings before the investment was made.' },
-        { dir: 'in', arrow: '⇄', label: 'POOLED ACROSS HY2MARKET', region: 'Decision-support tool', country: '', text: 'CNR-ITAE also developed a decision-support tool in Hy2Market to help industry choose hydrogen production technologies, drawing on information gathered from the project’s industrial cases — Sicily among them.' }
+        { dir: 'in', arrow: '⇄', label: 'POOLED ACROSS HY2MARKET', region: 'Hy2L decision-support tool', country: '', text: 'CNR-ITAE developed Hy2L within Hy2Market: a decision-support tool for designing and assessing green-hydrogen plants. From hourly energy prices, renewable profiles and hydrogen demand, it sizes the plant’s components and optimises their hour-by-hour operation for the lowest levelised cost of hydrogen (LCOH) — drawing on the project’s industrial cases, Sicily among them.' }
       ]
     },
 
@@ -273,7 +271,7 @@
       { text: 'For Sicily, this project is more than a mere hydrogen plant development. It is a blueprint showing how renewable electricity, hydrogen production, storage and power generation work together to support both regional development and European decarbonisation goals.', name: 'Francesco Sergi', role: 'Lead Researcher · CNR-ITAE' },
       { text: 'De Nora supplied its 1 MW Dragonfly® alkaline electrolyzer, the core technology enabling renewable hydrogen production within the project. Beyond equipment delivery, it was an excellent opportunity to collaborate closely with partners across the hydrogen value chain — integrating hydrogen generation with downstream compression, storage and utilization.', name: 'Luca Vercellotti', role: 'De Nora' },
       { text: 'Hy2Market has given Duferco first-hand experience of the complexity of integrating hydrogen into an existing industrial energy site. This has provided valuable practical experience in managing the technical and regulatory challenges of introducing hydrogen into existing industrial assets.', name: 'Davide Baracchini', role: 'Duferco' },
-      { text: 'The design and installation of a 1 MW hydrogen plant represented a highly complex engineering challenge for Power Evolution, requiring the integration of multiple interconnected subsystems — production, compression, storage, distribution and control. This experience enabled Power Evolution to progress from laboratory-scale systems to the design, deployment and operation of industrial-scale hydrogen facilities.', name: 'Power Evolution', role: '' }
+      { text: 'The design and installation of a 1 MW hydrogen plant represented a highly complex engineering challenge for Power Evolution, requiring the integration of multiple interconnected subsystems — production, compression, storage, distribution and control. This experience enabled Power Evolution to progress from laboratory-scale systems to the design, deployment and operation of industrial-scale hydrogen facilities.', name: 'Agata Di Stefano', role: 'CEO · Power Evolution' }
     ],
 
     next: {

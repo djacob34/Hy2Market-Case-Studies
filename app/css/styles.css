@@ -470,7 +470,8 @@ a:focus-visible, button:focus-visible {
 /* --- solutions accordions --- */
 .intro { font-size: 18px; line-height: 1.5; color: var(--ink); margin: 0 0 28px; max-width: 60ch; }
 .mb-14 { margin-bottom: 14px; }
-.drawer { border: 1px solid var(--line-3); overflow: hidden; margin-bottom: 14px; }
+/* overflow: clip (not hidden) so the media column inside can be sticky */
+.drawer { border: 1px solid var(--line-3); overflow: clip; margin-bottom: 14px; }
 .drawer-btn {
   width: 100%; display: flex; align-items: center; gap: 20px; padding: 20px;
   background: var(--white); border: none; cursor: pointer; text-align: left; font-family: inherit;
@@ -487,17 +488,33 @@ a:focus-visible, button:focus-visible {
   display: flex; align-items: center; justify-content: center; transition: transform .3s ease;
 }
 .drawer[aria-expanded="true"] .drawer-toggle { transform: rotate(45deg); }
-.drawer-panel { display: none; padding: 0 20px 24px 20px; }
-.drawer[aria-expanded="true"] .drawer-panel { display: block; }
-.drawer-photo { height: 200px; position: relative; overflow: hidden; margin-bottom: 20px; }
+/* Expanded panel: two columns. Left: 16:9 landscape photo with its caption
+   underneath — sticky, so on long-copy drawers it stays in view while the
+   text scrolls. Right: body copy, stat tiles, CTAs. Stacks below 860px. */
+.drawer-panel { display: none; padding: 4px 20px 28px 20px; }
+.drawer[aria-expanded="true"] .drawer-panel {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start;
+}
+.drawer-col { min-width: 0; }
+.drawer-figure { margin: 0; position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.drawer-photo { aspect-ratio: 16 / 9; width: 100%; position: relative; overflow: hidden; }
 .drawer-photo .tex { position: absolute; inset: 0; }
-.drawer-photo .cap { position: absolute; left: 16px; bottom: 14px; color: rgba(255,255,255,0.55); font-size: 12px; }
-/* Two photos in one drawer, side by side (e.g. compressor + storage). */
-.drawer-photos { display: grid; gap: 10px; margin-bottom: 20px; }
-.drawer-photos--2 { grid-template-columns: 1fr 1fr; }
-.drawer-photos .drawer-photo { margin-bottom: 0; }
-@media (max-width: 640px) { .drawer-photos--2 { grid-template-columns: 1fr; } }
-.drawer-body { font-size: 17px; line-height: 1.5; color: var(--ink); margin: 0 0 22px; max-width: 62ch; }
+.drawer-cap { font-size: 12px; line-height: 1.45; color: var(--muted); margin-top: 8px; }
+.drawer-text { display: flex; flex-direction: column; gap: 20px; container-type: inline-size; }
+.drawer-body { font-size: 17px; line-height: 1.55; color: var(--ink); }
+.drawer-body > :first-child { margin-top: 0; }
+.drawer-body > :last-child { margin-bottom: 0; }
+.drawer-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.drawer-ctas .cta-pill { margin-top: 0; }
+.drawer-text .stat-boxes { gap: 12px; }
+.drawer-text .stat-box { min-width: 0; flex: 1 1 0; padding: 16px; }
+.drawer-text .stat-box .n { font-size: 22px; line-height: 1.15; }
+/* Too narrow for two whole-word figures side by side: one tile per row. */
+@container (max-width: 420px) { .drawer-text .stat-box { flex-basis: 100%; } }
+@media (max-width: 860px) {
+  .drawer[aria-expanded="true"] .drawer-panel { grid-template-columns: 1fr; gap: 20px; }
+  .drawer-figure { position: static; }
+}
 .drawer-body strong { font-weight: 600; }
 .stat-boxes { display: flex; gap: 14px; flex-wrap: wrap; }
 .stat-box { flex: 1; min-width: 180px; border: 1px solid var(--line-3); padding: 18px; }
