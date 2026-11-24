@@ -120,7 +120,6 @@
       '</div>' +
       '<div class="hero-grid">' +
         '<div class="hero-text">' +
-          '<p class="eyebrow hero-eyebrow"><span class="tick"></span>' + esc(h.eyebrow) + '</p>' +
           '<div>' +
             '<h1 class="hero-title">' + h.titleHtml + '</h1>' +
             '<p class="hero-lead">' + esc(h.lead) + '</p>' +

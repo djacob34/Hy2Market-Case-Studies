@@ -19,10 +19,9 @@
       titleHtml: 'On the Road to Proof: How Médio Tejo Deployed a <span class="hl">Hydrogen</span> Bus Into Everyday Public Service',
       lead: 'While much of the hydrogen conversation is about plants and pipelines, Médio Tejo deployed the technology somewhere people actually experience it — on a public bus, running real routes, carrying real passengers, across 11 municipalities, for nine months straight.',
       tags: ['Hydrogen mobility', 'Public transport', 'Fuel-cell bus', 'Decarbonisation', 'Rural mobility', 'Mobility'],
-      mediaCaption: 'Caetano H2.City Gold hydrogen bus · Médio Tejo · urban route, Abrantes, Tomar',
-      slideshow: [
-        { src: '/assets/media/medio-tejo/hero.jpg', caption: 'Caetano H2.City Gold hydrogen bus · Médio Tejo · urban route, Abrantes, Tomar · Photo: CIM Médio Tejo / Hy2Market (confirm)' }
-      ],
+      mediaCaption: 'Caetano H2.City Gold hydrogen bus in daily public service · Médio Tejo · Video: CIM Médio Tejo / Hy2Market (confirm)',
+      video: '/assets/media/medio-tejo/hero.mp4',
+      poster: '/assets/media/medio-tejo/hero.jpg',
       stats: [
         { num: '32,612 km', label: 'driven in real public service' },
         { num: '28 tonnes', label: 'CO₂ / GHG emissions avoided' },
@@ -103,8 +102,8 @@
           title: 'The vehicle',
           subtitle: 'A 64-passenger fuel-cell bus built for daily service.',
           thumbGrad: 'linear-gradient(135deg,#2c3138,#15171b)', tex: 120,
-          photo: '/assets/media/medio-tejo/bus-still.jpg',
-          photoCaption: 'Caetano H2.City Gold · Photo: CIM Médio Tejo / Hy2Market (confirm)',
+          photo: '/assets/media/medio-tejo/bus.jpg',
+          photoCaption: 'Caetano H2.City Gold hydrogen bus · Médio Tejo · Photo: CIM Médio Tejo / Hy2Market (confirm)',
           cta: { label: 'Pilot launch & final results', href: 'https://hy2market.eu/pilot-demonstration-in-medio-tejo-region-portugal-launches-a-hydrogen-powered-bus/' },
           body: 'CaetanoBus H2.City Gold, developed and manufactured by Portuguese bus manufacturer CaetanoBus, uses hydrogen fuel-cell technology to generate electricity on board and power its electric drivetrain. The batteries, hydrogen tanks and fuel cell are mounted on the roof, optimizing interior space.',
           stats: [
