@@ -175,3 +175,55 @@ test('retired Upper Austria draft slug 301-redirects to the published page', asy
     assert.equal(res.headers.get('location'), '/case-studies/upper-austria/', path);
   }
 });
+
+test('local CSS/JS links carry a content-hash ?v= so a new deploy never pairs new HTML with cached old CSS', async () => {
+  for (const url of ['/', '/case-studies/upper-austria/']) {
+    const html = await (await fetch(baseUrl + url)).text();
+    const links = html.match(/(?:href|src)="\/(?:css|js)\/[^"]+"/g) || [];
+    assert.ok(links.length > 0, url + ' has local CSS/JS links');
+    for (const l of links) assert.match(l, /\?v=[0-9a-f]{10}"$/, url + ': ' + l + ' is versioned');
+    const css = html.match(/href="(\/css\/styles\.css\?v=[0-9a-f]+)"/);
+    assert.ok(css, url + ' links styles.css');
+    const res = await fetch(baseUrl + css[1]);
+    assert.equal(res.status, 200);
+    assert.match(res.headers.get('content-type') || '', /text\/css/);
+  }
+});
+
+test('versioned assets: matching hash is long-cached, mismatched hash is never cached', async () => {
+  const html = await (await fetch(baseUrl + '/')).text();
+  const url = html.match(/href="(\/css\/styles\.css\?v=[0-9a-f]+)"/)[1];
+  const ok = await fetch(baseUrl + url);
+  assert.match(ok.headers.get('cache-control') || '', /immutable/);
+  const stale = await fetch(baseUrl + '/css/styles.css?v=0000000000');
+  assert.equal(stale.status, 200);
+  assert.match(stale.headers.get('cache-control') || '', /no-store/);
+});
+
+test('every "continue the story" card shows the same image as that region\'s index card', async () => {
+  const regions = loadAllRegions();
+  const bySlug = Object.fromEntries(regions.map((d) => [d.slug, d]));
+  const indexImg = (d) => {
+    const h = d.hero || {};
+    return (h.slideshow && h.slideshow[0] && h.slideshow[0].src) || h.poster || null;
+  };
+  for (const d of regions) {
+    if (!d.next) continue;
+    const html = await (await fetch(baseUrl + '/case-studies/' + d.slug + '/')).text();
+    const next = html.slice(html.indexOf('<section class="next"'));
+    const cards = [...next.matchAll(/<a class="(?:featured|region-card)" href="\/case-studies\/([^/]+)\/">([\s\S]*?)<\/a>/g)];
+    assert.equal(cards.length, 1 + d.next.others.length, d.slug + ': every next card links to a clean /case-studies/<slug>/ URL');
+    for (const [, slug, body] of cards) {
+      const want = indexImg(bySlug[slug]);
+      if (!want) continue;
+      assert.ok(body.includes("url('" + want + "')"), d.slug + ' → ' + slug + ' card uses ' + want);
+    }
+  }
+});
+
+test('embedded video blocks are hidden on every case-study page (for now)', async () => {
+  for (const d of loadAllRegions()) {
+    const html = await (await fetch(baseUrl + '/case-studies/' + d.slug + '/')).text();
+    assert.ok(!html.includes('<section class="video"'), d.slug + ' has no video section');
+  }
+});

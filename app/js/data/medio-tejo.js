@@ -16,7 +16,7 @@
 
     hero: {
       eyebrow: 'MOBILITY · MÉDIO TEJO',
-      titleHtml: 'On the Road to Proof: How Médio Tejo Deployed a <span class="hl">Hydrogen</span> Bus Into Everyday Public Service',
+      titleHtml: 'A <span class="hl">hydrogen bus</span> proves itself on Médio Tejo’s public routes',
       lead: 'While much of the hydrogen conversation is about plants and pipelines, Médio Tejo deployed the technology somewhere people actually experience it — on a public bus, running real routes, carrying real passengers, across 11 municipalities, for nine months straight.',
       tags: ['Hydrogen mobility', 'Public transport', 'Fuel-cell bus', 'Decarbonisation', 'Rural mobility', 'Mobility'],
       mediaCaption: 'Caetano H2.City Gold hydrogen bus in daily public service · Médio Tejo · Video: CIM Médio Tejo / Hy2Market (confirm)',
@@ -228,7 +228,7 @@
         caption: 'voestalpine steel plant · Linz · H2FUTURE electrolyser'
       },
       others: [
-        { href: '/case-study.html?region=upper-austria', k: 'PRODUCTION', region: 'Upper Austria', country: '· Austria', d: 'Commissioning new hydrogen handling and piloting methanation around the H2FUTURE electrolyser in Linz.' },
+        { href: '/case-studies/aragon/', k: 'MOBILITY', region: 'Aragón', country: '· Spain', d: 'Spain’s first public hydrogen taxi, in real service across Huesca.' },
         { href: '/case-study.html?region=netherlands', k: 'TRANSPORT', region: 'Deventer', country: '· Netherlands', d: 'A flexible composite hydrogen pipeline, laid in ~two months.' }
       ]
     },
